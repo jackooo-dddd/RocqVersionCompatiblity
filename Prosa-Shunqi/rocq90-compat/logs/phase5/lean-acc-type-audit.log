@@ -1,0 +1,16 @@
+Prosa-Shunqi/rocq90-compat/tests/phase5/AccTypeAudit.lean:12:0: warning: Definition `accIntroGuard` is a proposition; use `theorem` instead of `def`
+
+Note: This linter can be disabled with `set_option linter.defProp false`
+TYPE_DEF_EQ_OK target=Acc guard=Prosa.Validation.SafeAccMapping.accTypeGuard target_hash=4220343006 guard_hash=4220343006
+TYPE_DEF_EQ_OK target=Acc.intro guard=Prosa.Validation.SafeAccMapping.accIntroGuard target_hash=596666624 guard_hash=596666624
+TYPE_DEF_EQ_OK target=Acc.rec guard=Prosa.Validation.SafeAccMapping.accRecGuard target_hash=1491828646 guard_hash=2377927925
+@Acc : {α : Sort u_1} → (α → α → Prop) → α → Prop
+@Acc.intro : ∀ {α : Sort u_1} {r : α → α → Prop} (x : α), (∀ (y : α), r y x → Acc r y) → Acc r x
+@Acc.rec : {α : Sort u_2} →
+  {r : α → α → Prop} →
+    {motive : (a : α) → Acc r a → Sort u_1} →
+      ((x : α) → (h : ∀ (y : α), r y x → Acc r y) → ((y : α) → (a : r y x) → motive y ⋯) → motive x ⋯) →
+        {a : α} → (t : Acc r a) → motive a t
+'Prosa.Validation.SafeAccMapping.accTypeGuard' does not depend on any axioms
+'Prosa.Validation.SafeAccMapping.accIntroGuard' does not depend on any axioms
+'Prosa.Validation.SafeAccMapping.accRecGuard' does not depend on any axioms

@@ -1,0 +1,19 @@
+line 9: Nat
+Nat is predeclared
+line 50: Acc
+Acc is predeclared (standard Acc wrapper)
+line 110: Phase5.accDependentRecursorNegative
+
+
+Done!
+- 2 entries (3 possible instances).
+- 3 universe expressions
+- 24 names
+- 82 expression nodes
+Max universe instance length 1.
+0 inductives have non syntactically arity types.
+File "./ImportedAccDependentRecursorNegative.v", line 3, characters 0-47:
+Error:
+Error at line 110 (for Phase5.accDependentRecursorNegative): #DEF 19 69 81 
+Lean Acc.rec motive is not an explicit two-binder lambda; refusing the safe standard Rocq Acc_rect mapping
+

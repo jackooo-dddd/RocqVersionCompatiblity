@@ -1,0 +1,60 @@
+114:  assert (nparams = mib.mind_nparams_rec);
+222:let with_unsafe_univs f () = f ()
+459:- inductive landing in always >Prop (even when instantiated to all Prop) -> never squashed
+461:  + no constructor -> never squashed
+462:  + multi constructor -> always squashed
+465:      -> not squashed, special reduction
+468:      -> not squashed, basic reduction
+473:      -> not squashed, basic reduction
+476:      -> squashed
+489:- a non-Prop instantiation of possibly Prop types will never be squashed
+490:- non squashed possibly-Prop types at a Prop instantiation are squashed
+509:type squashy = {
+514:  lean_squashes : bool;
+519:let noprop = { maybe_prop = false; always_prop = false; lean_squashes = false }
+521:let pp_squashy { maybe_prop; always_prop; lean_squashes } =
+528:  if lean_squashes then str "and is squashed by Lean"
+529:  else str "and is not squashed by Lean"
+531:let coq_squashes graph (entry : Entries.mutual_inductive_entry) =
+844:let squash_info : squashy N.Map.t ref =
+845:  Summary.ref ~name:"lean-squash-info" N.Map.empty
+1637:  let mind, algs, ind_name, cnames, univs, squashy =
+1644:      let squashy =
+1645:        { maybe_prop = true; always_prop = true; lean_squashes = false }
+1657:      (mind, [], ind_name, [ cname ], univs, squashy)
+1667:      let squashy = N.Map.get n !squash_info in
+1668:      (mind, [], ind_name, cnames, UContext.empty, squashy)
+1789:      let squashy = N.Map.get n !squash_info in
+1790:      let coq_squashes =
+1791:        if squashy.maybe_prop then coq_squashes graph (entry Finite) else false
+1801:        if squashy.lean_squashes || not coq_squashes then act ()
+1802:        else with_unsafe_univs act ()
+1805:        squashy.lean_squashes
+1806:        || (Global.lookup_mind mind).mind_packets.(0).mind_squashed == None);
+1841:      (mind, algs, ind_name, cnames, univs, squashy)
+1892:    (* lean 4 change: always dep? was not squashy.always_prop*)
+1897:    if squashy.lean_squashes then [ ("_indl", SchemeSProp) ]
+1926:      if squashy.lean_squashes then i
+1942:(** Generate and add the squashy info *)
+1943:let squashify { name = n; params; ty; ctors; univs } =
+1967:    | [] -> { maybe_prop = true; always_prop; lean_squashes = false }
+1968:    | _ :: _ :: _ -> { maybe_prop = true; always_prop; lean_squashes = true }
+1999:      let lean_squashes, _, _ =
+2001:          (fun d (squashed, i, envT) ->
+2002:            let squashed =
+2003:              if squashed then true
+2016:            (squashed, i + 1, Environ.push_rel d envT))
+2020:      { maybe_prop = true; always_prop; lean_squashes }
+2022:let squashify ind =
+2023:  let s = squashify ind in
+2024:  squash_info := N.Map.add ind.name s !squash_info
+2092:  let () = squashify ind in
+2113:let { Goptions.get = print_squashes } =
+2150:  let squashes =
+2151:    if not (print_squashes ()) then Pp.mt ()
+2154:        (fun n s pp -> Pp.(pp ++ fnl () ++ N.pp n ++ spc () ++ pp_squashy s))
+2155:        !squash_info
+2173:      ++ squashes)
+2334:  let cache (pstatev, setsv, declaredv, entriesv, squash_infov, heightv) =
+2339:    squash_info := squash_infov;
+2383:  Lib.add_leaf (lean_obj (old_pstatev, !sets, !declared, !entries, !squash_info, !height_cache))

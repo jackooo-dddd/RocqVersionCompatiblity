@@ -1,0 +1,93 @@
+line 41: Acc
+Acc is predeclared
+line 134: Phase5.accRectSmoke
+
+
+Done!
+- 1 entries (2 possible instances).
+- 5 universe expressions
+- 32 names
+- 97 expression nodes
+Max universe instance length 1.
+0 inductives have non syntactically arity types.
+File "./ImportedAccRecursorSmoke.v", line 4, characters 0-35:
+Error:
+Error at line 134 (for Phase5.accRectSmoke): #DEF 15 56 96 4 17
+Anomaly "bad instance length on mutind."
+Please report at http://coq.inria.fr/bugs/.
+Raised at Exninfo.iraise in file "clib/exninfo.ml", line 79, characters 4-11
+Called from Inductive.type_of_inductive_gen in file "kernel/inductive.ml", line 288, characters 2-22
+Called from Inductive.type_of_inductive in file "kernel/inductive.ml" (inlined), line 303, characters 19-48
+Called from Inductiveops.e_type_of_inductive in file "pretyping/inductiveops.ml", line 37, characters 9-75
+Called from Retyping.retype.sort_of in file "pretyping/retyping.ml", line 329, characters 51-66
+Called from Retyping.retype.sort_of in file "pretyping/retyping.ml", line 324, characters 17-64
+Called from Retyping.retype.sort_of in file "pretyping/retyping.ml", line 324, characters 17-64
+Called from Retyping.anomaly_on_error in file "pretyping/retyping.ml", line 59, characters 5-8
+Called from Retyping.relevance_of_type in file "pretyping/retyping.ml", line 508, characters 10-33
+Called from Lean.to_annot in file "src/lean.ml", line 546, characters 4-174
+Called from Lean.to_constr.to_annot in file "src/lean.ml", line 1157, characters 31-49
+Called from Lean.to_constr.(>>=) in file "src/lean.ml", line 1152, characters 19-26
+Called from Lean.to_constr.(>>=) in file "src/lean.ml", line 1152, characters 19-26
+Called from Lean.to_constr.(>>=) in file "src/lean.ml", line 1152, characters 19-26
+Called from Lean.to_constr.(>>=) in file "src/lean.ml", line 1152, characters 19-26
+Called from Lean.to_constr.(>>=) in file "src/lean.ml", line 1152, characters 19-26
+Called from Lean.to_constr.(>>=) in file "src/lean.ml", line 1152, characters 19-26
+Called from Lean.declare_def in file "src/lean.ml", line 1371, characters 22-50
+Called from Lean.declare_def.(fun) in file "src/lean.ml", line 1938, characters 37-56
+Called from Lean.declare_instances.loop in file "src/lean.ml", line 1932, characters 15-20
+Called from Lean.add_entry in file "src/lean.ml", line 1954, characters 17-32
+Called from Lean.do_input in file "src/lean.ml", line 2151, characters 15-30
+
+Raised at Exninfo.iraise in file "clib/exninfo.ml", line 79, characters 4-11
+Called from Flags.with_modified_ref in file "lib/flags.ml", line 17, characters 14-17
+Re-raised at Exninfo.iraise in file "clib/exninfo.ml", line 81, characters 4-38
+Called from Flags.silently in file "lib/flags.ml", line 65, characters 19-40
+Called from Vernactypes.vtdefault.(fun) in file "vernac/vernactypes.ml", line 173, characters 34-38
+Called from Vernactypes.typed_vernac.(fun) in file "vernac/vernactypes.ml", line 170, characters 65-71
+Called from Vernactypes.run.(fun) in file "vernac/vernactypes.ml", line 164, characters 15-32
+Called from Vernactypes.combine_runners.(fun) in file "vernac/vernactypes.ml", line 126, characters 16-23
+Called from Vernactypes.OpaqueAccess.runner.(fun) in file "vernac/vernactypes.ml", line 114, characters 30-34
+Called from Vernactypes.combine_runners.(fun) in file "vernac/vernactypes.ml", line 125, characters 14-100
+Called from Vernactypes.combine_runners.(fun) in file "vernac/vernactypes.ml", line 126, characters 16-23
+Called from Vernactypes.Proof.runner.(fun) in file "vernac/vernactypes.ml", line 69, characters 30-34
+Called from Vernactypes.combine_runners.(fun) in file "vernac/vernactypes.ml", line 125, characters 14-100
+Called from Vernactypes.Prog.runner.(fun) in file "vernac/vernactypes.ml", line 27, characters 30-34
+Called from Vernactypes.combine_runners.(fun) in file "vernac/vernactypes.ml", line 124, characters 12-173
+Called from Vernactypes.combine_runners.(fun) in file "vernac/vernactypes.ml", line 124, characters 12-173
+Called from Vernactypes.run in file "vernac/vernactypes.ml", line 163, characters 14-96
+Called from Vernacinterp.interp_expr_core in file "vernac/vernacinterp.ml", line 80, characters 60-157
+Called from Vernacinterp.interp_expr in file "vernac/vernacinterp.ml", line 49, characters 19-121
+Called from VernacControl.under_control in file "vernac/vernacControl.ml", line 203, characters 14-18
+Called from Vernacinterp.interp_control_gen in file "vernac/vernacinterp.ml", line 36, characters 4-137
+Called from Util.try_finally in file "lib/util.ml", line 133, characters 16-19
+Re-raised at Exninfo.iraise in file "clib/exninfo.ml", line 81, characters 4-38
+Called from Util.try_finally in file "lib/util.ml", line 137, characters 6-32
+Called from Flags.with_modified_ref in file "lib/flags.ml", line 17, characters 14-17
+Re-raised at Exninfo.iraise in file "clib/exninfo.ml", line 81, characters 4-38
+Called from Vernacinterp.interp_gen in file "vernac/vernacinterp.ml", line 151, characters 16-41
+Re-raised at Exninfo.iraise in file "clib/exninfo.ml", line 81, characters 4-38
+Called from Vernacinterp.interp in file "vernac/vernacinterp.ml", line 165, characters 15-115
+Called from Stm.Reach.known_state.reach.(fun) in file "stm/stm.ml", line 2034, characters 16-43
+Called from Stm.State.define in file "stm/stm.ml", line 963, characters 6-10
+Re-raised at Exninfo.iraise in file "clib/exninfo.ml", line 81, characters 4-38
+Called from Stm.Reach.known_state.reach in file "stm/stm.ml", line 2203, characters 4-105
+Called from Stm.observe in file "stm/stm.ml", line 2295, characters 4-60
+Re-raised at Exninfo.iraise in file "clib/exninfo.ml", line 81, characters 4-38
+Called from Vernac.interp_vernac in file "toplevel/vernac.ml", line 83, characters 29-50
+Re-raised at Exninfo.iraise in file "clib/exninfo.ml", line 81, characters 4-38
+Called from Flags.with_modified_ref in file "lib/flags.ml", line 17, characters 14-17
+Re-raised at Exninfo.iraise in file "clib/exninfo.ml", line 81, characters 4-38
+Called from Util.try_finally in file "lib/util.ml", line 133, characters 16-19
+Re-raised at Exninfo.iraise in file "clib/exninfo.ml", line 81, characters 4-38
+Called from Util.try_finally in file "lib/util.ml", line 137, characters 6-32
+Called from Vernac.load_vernac_core.loop in file "toplevel/vernac.ml", line 127, characters 8-774
+Called from Vernac.load_vernac_core in file "toplevel/vernac.ml", line 150, characters 6-19
+Re-raised at Exninfo.iraise in file "clib/exninfo.ml", line 81, characters 4-38
+Called from Vernac.load_vernac in file "toplevel/vernac.ml", line 227, characters 30-83
+Called from Ccompile.compile in file "toplevel/ccompile.ml", line 68, characters 18-78
+Called from Ccompile.compile in file "toplevel/ccompile.ml" (inlined), line 107, characters 2-59
+Called from Ccompile.compile_file in file "toplevel/ccompile.ml", line 116, characters 4-61
+Called from Coqc.coqc_main in file "toplevel/coqc.ml", line 38, characters 2-100
+Called from Coqc.coqc_run in file "toplevel/coqc.ml", line 54, characters 4-36
+
+

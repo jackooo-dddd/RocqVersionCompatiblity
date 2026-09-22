@@ -1,0 +1,18 @@
+Acc
+     : forall A : Type@{Well_founded.u0}, (A -> A -> Prop) -> A -> Prop
+Acc_intro
+     : forall (A : Type@{Well_founded.u0}) (R : A -> A -> Prop) (x : A),
+       (forall y : A, R y x -> Acc R y) -> Acc R x
+Acc_rect
+     : forall (A : Type@{Well_founded.u0}) (R : A -> A -> Prop)
+         (P : A -> Type@{Acc_rect.u0}),
+       (forall x : A,
+        (forall y : A, R y x -> Acc R y) ->
+        (forall y : A, R y x -> P y) -> P x) ->
+       forall x : A, Acc R x -> P x
+well_founded
+     : forall A : Type@{Well_founded.u0}, (A -> A -> Prop) -> Prop
+Closed under the global context
+Closed under the global context
+Closed under the global context
+Closed under the global context

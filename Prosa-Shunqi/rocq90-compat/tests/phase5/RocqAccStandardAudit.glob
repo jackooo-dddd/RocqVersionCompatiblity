@@ -1,0 +1,105 @@
+DIGEST 0c5deb2f872280f82b38292801f843e0
+FRocqAccStandardAudit
+R27:33 Stdlib.Init.Wf <> <> lib
+def 100:118 <> rocq_acc_type_guard
+binder 129:129 <> A:1
+R149:152 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R148:148 RocqAccStandardAudit <> A:1 var
+R154:157 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R153:153 RocqAccStandardAudit <> A:1 var
+binder 144:144 <> R:2
+R169:169 RocqAccStandardAudit <> A:1 var
+binder 165:165 <> a:3
+R184:186 Corelib.Init.Wf <> Acc ind
+R190:190 RocqAccStandardAudit <> a:3 var
+R188:188 RocqAccStandardAudit <> R:2 var
+def 205:224 <> rocq_acc_intro_guard
+binder 235:235 <> A:4
+R255:258 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R254:254 RocqAccStandardAudit <> A:4 var
+R260:263 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R259:259 RocqAccStandardAudit <> A:4 var
+binder 250:250 <> R:5
+R275:275 RocqAccStandardAudit <> A:4 var
+binder 271:271 <> a:6
+binder 294:294 <> b:7
+R302:305 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R297:297 RocqAccStandardAudit <> R:5 var
+R301:301 RocqAccStandardAudit <> a:6 var
+R299:299 RocqAccStandardAudit <> b:7 var
+R306:308 Corelib.Init.Wf <> Acc ind
+R312:312 RocqAccStandardAudit <> b:7 var
+R310:310 RocqAccStandardAudit <> R:5 var
+binder 283:283 <> h:8
+R317:319 Corelib.Init.Wf <> Acc ind
+R323:323 RocqAccStandardAudit <> a:6 var
+R321:321 RocqAccStandardAudit <> R:5 var
+R331:339 Corelib.Init.Wf <> Acc_intro constr
+R341:341 RocqAccStandardAudit <> A:4 var
+R343:343 RocqAccStandardAudit <> R:5 var
+R345:345 RocqAccStandardAudit <> a:6 var
+R347:347 RocqAccStandardAudit <> h:8 var
+def 362:380 <> rocq_acc_rect_guard
+binder 393:393 <> A:9
+R413:416 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R412:412 RocqAccStandardAudit <> A:9 var
+R418:421 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R417:417 RocqAccStandardAudit <> A:9 var
+binder 408:408 <> R:10
+R438:441 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R437:437 RocqAccStandardAudit <> A:9 var
+binder 433:433 <> P:11
+R477:477 RocqAccStandardAudit <> A:9 var
+binder 473:473 <> a:12
+binder 492:492 <> b:13
+R500:503 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R495:495 RocqAccStandardAudit <> R:10 var
+R499:499 RocqAccStandardAudit <> a:12 var
+R497:497 RocqAccStandardAudit <> b:13 var
+R504:506 Corelib.Init.Wf <> Acc ind
+R510:510 RocqAccStandardAudit <> b:13 var
+R508:508 RocqAccStandardAudit <> R:10 var
+binder 481:481 <> h:14
+R520:520 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R554:558 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R533:533 RocqAccStandardAudit <> A:9 var
+binder 529:529 <> b:15
+R543:543 RocqAccStandardAudit <> R:10 var
+R547:547 RocqAccStandardAudit <> a:12 var
+R545:545 RocqAccStandardAudit <> b:15 var
+binder 537:539 <> hba:16
+R551:551 RocqAccStandardAudit <> P:11 var
+R553:553 RocqAccStandardAudit <> b:15 var
+R559:559 RocqAccStandardAudit <> P:11 var
+R561:561 RocqAccStandardAudit <> a:12 var
+binder 457:461 <> intro:17
+R582:582 RocqAccStandardAudit <> A:9 var
+binder 578:578 <> a:18
+R590:592 Corelib.Init.Wf <> Acc ind
+R596:596 RocqAccStandardAudit <> a:18 var
+R594:594 RocqAccStandardAudit <> R:10 var
+binder 586:586 <> h:19
+R600:600 RocqAccStandardAudit <> P:11 var
+R602:602 RocqAccStandardAudit <> a:18 var
+R610:617 Corelib.Init.Wf <> Acc_rect scheme
+R619:619 RocqAccStandardAudit <> A:9 var
+R621:621 RocqAccStandardAudit <> R:10 var
+R623:623 RocqAccStandardAudit <> P:11 var
+R625:629 RocqAccStandardAudit <> intro:17 var
+def 644:666 <> rocq_well_founded_guard
+binder 677:677 <> A:20
+R697:700 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R696:696 RocqAccStandardAudit <> A:20 var
+R702:705 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R701:701 RocqAccStandardAudit <> A:20 var
+binder 692:692 <> R:21
+R724:735 Corelib.Init.Wf <> well_founded def
+R737:737 RocqAccStandardAudit <> R:21 var
+R748:750 Corelib.Init.Wf <> Acc ind
+R760:768 Corelib.Init.Wf <> Acc_intro constr
+R778:785 Corelib.Init.Wf <> Acc_rect scheme
+R795:806 Corelib.Init.Wf <> well_founded def
+R828:846 RocqAccStandardAudit <> rocq_acc_type_guard def
+R867:886 RocqAccStandardAudit <> rocq_acc_intro_guard def
+R907:925 RocqAccStandardAudit <> rocq_acc_rect_guard def
+R946:968 RocqAccStandardAudit <> rocq_well_founded_guard def

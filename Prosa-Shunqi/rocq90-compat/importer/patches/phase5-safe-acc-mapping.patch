@@ -1,0 +1,473 @@
+--- a/src/Lean.v
++++ b/src/Lean.v
+@@ -1,4 +1,5 @@
+ From Stdlib Require ZArith NArith Lia ZifyBool Uint63.
++From Stdlib Require Import Init.Wf.
+ Declare ML Module "coq-lean-import.plugin".
+ 
+ Set Universe Polymorphism.
+@@ -127,9 +128,86 @@
+ Record And@{} (a a0 : SProp) : SProp := And_intro
+   { left : a;  right : a0 }.
+ Register And as lean.And.
++
++(** Lean propositions are represented by [SProp] in the importer, whereas the
++    relation parameter of Rocq's standard [Acc] lives in [Prop].  This record
++    is the checked, assumption-free bridge used in the standard relation. *)
++Record Lean_SPropBox (P : SProp) : Prop := Lean_SPropBox_intro
++  { Lean_SPropBox_out : P }.
++
++(** Canonical image of Lean's first computational universe.  The lower and
++    upper bounds are ordinary checked Rocq constraints; the latter is exactly
++    the elimination ceiling of the standard [Acc_rect]. *)
++Monomorphic Universe Lean_import_set1.
++Monomorphic Constraint Set < Lean_import_set1.
++Monomorphic Constraint Lean_import_set1 <= Acc_rect.u0.
++Definition Lean_import_set1_marker : Type@{Lean_import_set1} := nat.
++Register Lean_import_set1_marker as lean.Set1.
++Definition Lean_wf_carrier_ceiling_marker : Type@{Well_founded.u0} := nat.
++Register Lean_wf_carrier_ceiling_marker as lean.WfCarrierCeiling.
++Definition Lean_acc_motive_ceiling_marker : Type@{Acc_rect.u0} := nat.
++Register Lean_acc_motive_ceiling_marker as lean.AccMotiveCeiling.
++
++(** Reuse the standard Prop-based accessibility tree.  This is a transparent
++    wrapper, not a second inductive declaration.  Rocq records the necessary
++    [carrier <= Well_founded.u0] universe constraint. *)
++Definition Lean_Acc@{carrier} (A : Type@{carrier})
++    (R : A -> A -> SProp) (x : A) : Prop :=
++  @Acc A (fun y x => Lean_SPropBox (R y x)) x.
++
++Definition Lean_Acc_intro@{carrier} (A : Type@{carrier})
++    (R : A -> A -> SProp) (x : A)
++    (h : forall y, R y x -> Lean_Acc A R y) : Lean_Acc A R x :=
++  @Acc_intro A (fun y x => Lean_SPropBox (R y x)) x
++    (fun y boxed => h y (@Lean_SPropBox_out (R y x) boxed)).
++
++Register Lean_Acc as lean.Acc.cumul.
++Register Lean_Acc_intro as lean.Acc_intro.cumul.
++
++Definition Lean_WellFounded@{carrier} (A : Type@{carrier})
++    (R : A -> A -> SProp) : Prop :=
++  @well_founded A (fun y x => Lean_SPropBox (R y x)).
++
++Definition Lean_WellFounded_intro@{carrier} (A : Type@{carrier})
++    (R : A -> A -> SProp)
++    (apply : forall x, Lean_Acc A R x) : Lean_WellFounded A R := apply.
++
++Definition Lean_WellFounded_apply@{carrier} (A : Type@{carrier})
++    (R : A -> A -> SProp) (wf : Lean_WellFounded A R) :
++    forall x, Lean_Acc A R x := wf.
++
++Register Lean_WellFounded as lean.WellFounded.cumul.
++Register Lean_WellFounded_intro as lean.WellFounded_intro.cumul.
++Register Lean_WellFounded_apply as lean.WellFounded_apply.
++
++(** Safe non-dependent fragment of Lean's [Acc.rec].  The explicit universe
++    order follows Lean ([motive], then [carrier]); the body is exactly Rocq's
++    standard [Acc_rect].  The importer uses this only after checking that the
++    compiled Lean motive does not depend on the accessibility proof. *)
++Definition Lean_Acc_rec_nondep@{motive carrier}
++    (A : Type@{carrier}) (R : A -> A -> SProp)
++    (P : A -> Type@{motive})
++    (intro : forall (x : A) (h : forall y, R y x -> Lean_Acc A R y),
++      (forall (y : A) (hxy : R y x), P y) -> P x)
++    (x : A) (a : Lean_Acc A R x) : P x :=
++  @Acc_rect A (fun y x => Lean_SPropBox (R y x)) P
++    (fun x h ih =>
++       intro x
++         (fun y hxy => h y (@Lean_SPropBox_intro (R y x) hxy))
++         (fun y hxy => ih y (@Lean_SPropBox_intro (R y x) hxy)))
++    x a.
++
++Register Lean_Acc_rec_nondep as lean.Acc_rec.nondep.
+ 
+ Inductive sEmpty : SProp := .
++Register sEmpty as lean.False.
++
++Definition Lean_absurd_prop (a : SProp) (b : Prop)
++    (h : a) (not_h : a -> sEmpty) : b :=
++  match not_h h with end.
+ 
++Register Lean_absurd_prop as lean.absurd.prop.
++
+ Section nat_notation.
+   Import ZifyClasses ZArith NArith.
+   Fixpoint nat_of_Nat (n : Nat) : nat :=
+--- a/src/lean.ml
++++ b/src/lean.ml
+@@ -296,6 +296,17 @@
+ let sets : Level.t Int.Map.t ref =
+   Summary.ref ~name:"lean-set-surrogates" Int.Map.empty
+ 
++let registered_universe_level registration =
++  match Rocqlib.lib_ref registration with
++  | ConstRef c ->
++    let cb = Global.lookup_constant c in
++    let sort = Constr.destSort cb.Declarations.const_type in
++    (match univ_of_sort sort with
++    | Some u ->
++      (match Universe.level u with Some l -> l | None -> assert false)
++    | None -> assert false)
++  | _ -> assert false
++
+ type uconv = {
+   map : extended_level N.Map.t;  (** Map from lean names to Coq universes *)
+   levels : Level.t Universe.Map.t;
+@@ -362,6 +373,11 @@
+   else
+     try (uconv, Int.Map.find n !sets)
+     with Not_found ->
++      if n = 1 then begin
++        let l = registered_universe_level "lean.Set1" in
++        sets := Int.Map.add n l !sets;
++        (uconv, l)
++      end else
+       let uconv, p = level_of_sets uconv (n - 1) in
+       let l =
+         if lean_fancy_univs () then level_of_universe_core [ (Level.set, n) ]
+@@ -628,6 +644,12 @@
+   in
+   let kept = Level.Set.add Level.set uset in
+   let kept = Int.Map.fold (fun _ -> Level.Set.add) !sets kept in
++  let kept =
++    Level.Set.add (registered_universe_level "lean.WfCarrierCeiling") kept
++  in
++  let kept =
++    Level.Set.add (registered_universe_level "lean.AccMotiveCeiling") kept
++  in
+   let csts = UGraph.constraints_for ~kept graph in
+   let csts =
+     Constraints.filter
+@@ -710,9 +732,19 @@
+     | exception _ -> None
+   else None
+ 
+-type predeclared_ind_kind = Eq | Nat | Nat_le | Or | And | Fin | UInt32 | BitVec | Char
+-type predeclared_def_kind = UInt32_size | Add | Mult | Pow | Nat_isValidChar | Char_ofNatAux
+-type predeclared_ind_as_def_kind = ULift_cumul
++type predeclared_ind_kind =
++  | Eq
++  | Nat
++  | Nat_le
++  | Or
++  | And
++  | False
++  | Fin
++  | UInt32
++  | BitVec
++  | Char
++type predeclared_def_kind = UInt32_size | Add | Mult | Pow | Nat_isValidChar | Char_ofNatAux | WellFounded_apply
++type predeclared_ind_as_def_kind = ULift_cumul | Acc_cumul | WellFounded_cumul
+ 
+ let get_predeclared_cnames (k : predeclared_ind_kind) n =
+   match k with
+@@ -721,6 +753,7 @@
+   | Nat_le -> [ N.append n "refl"; N.append n "step" ]
+   | Or -> [ N.append n "inl"; N.append n "inr" ]
+   | And -> [ N.append n "intro" ]
++  | False -> []
+   | Fin -> [ N.append n "mk" ]
+   | UInt32 -> [ N.append n "ofBitVec" ]
+   | BitVec -> [ N.append n "ofFin" ]
+@@ -736,6 +769,7 @@
+       (Nat_le, [ "Nat"; "le" ]);
+       (Or, [ "Or" ]);
+       (And, [ "And" ]);
++      (False, [ "False" ]);
+       (Fin, [ "Fin" ]);
+       (UInt32, [ "UInt32" ]);
+       (BitVec, [ "BitVec" ]);
+@@ -756,6 +790,8 @@
+       get_predeclared_ind_as_def h n i |> Option.map (fun x -> (k, h, x)))
+     [
+       (ULift_cumul, [ "ULift" ]);
++      (Acc_cumul, [ "Acc" ]);
++      (WellFounded_cumul, [ "WellFounded" ]);
+     ]
+ 
+ let get_predeclared_ind_as_def_some n i =
+@@ -777,6 +813,7 @@
+       (Pow, [ "Nat" ; "pow" ]);
+       (Nat_isValidChar, [ "Nat"; "isValidChar" ]);
+       (Char_ofNatAux, [ "Char"; "ofNatAux" ]);
++      (WellFounded_apply, [ "WellFounded"; "apply" ]);
+     ]
+ 
+ let get_predeclared_def_some n i =
+@@ -1076,7 +1113,71 @@
+ 
+ let line_msg name =
+   Feedback.msg_info Pp.(str "line " ++ int !lcnt ++ str ": " ++ N.pp name)
++
++let acc_rec_name = N.append (N.append N.anon "Acc") "rec"
++let acc_name = N.append N.anon "Acc"
++let absurd_name = N.append N.anon "absurd"
++
++let rec lean_decompose_app e args =
++  match e with
++  | App (f, a) -> lean_decompose_app f (a :: args)
++  | head -> (head, args)
++
++let lean_is_acc_type e =
++  match lean_decompose_app e [] with
++  | Const (n, _), _ -> N.equal n acc_name
++  | _ -> false
++
++exception DependentAccMotive
++
++(** Remove the innermost binder at [cutoff].  Encountering that binder means
++    the expression genuinely depends on the accessibility proof, in which
++    case the standard Rocq [Acc_rect] is not a valid implementation. *)
++let rec remove_acc_proof_binder cutoff = function
++  | Bound i when i = cutoff -> raise_notrace DependentAccMotive
++  | Bound i when i > cutoff -> Bound (i - 1)
++  | Bound i -> Bound i
++  | Sort u -> Sort u
++  | Const (n, us) -> Const (n, us)
++  | App (f, a) ->
++    App
++      ( remove_acc_proof_binder cutoff f,
++        remove_acc_proof_binder cutoff a )
++  | Let { name; ty; v; rest } ->
++    Let
++      {
++        name;
++        ty = remove_acc_proof_binder cutoff ty;
++        v = remove_acc_proof_binder cutoff v;
++        rest = remove_acc_proof_binder (cutoff + 1) rest;
++      }
++  | Lam (bk, n, ty, body) ->
++    Lam
++      ( bk,
++        n,
++        remove_acc_proof_binder cutoff ty,
++        remove_acc_proof_binder (cutoff + 1) body )
++  | Pi (bk, n, ty, body) ->
++    Pi
++      ( bk,
++        n,
++        remove_acc_proof_binder cutoff ty,
++        remove_acc_proof_binder (cutoff + 1) body )
++  | Proj (n, field, c) ->
++    Proj (n, field, remove_acc_proof_binder cutoff c)
++  | Nat n -> Nat n
++  | String s -> String s
+ 
++let acc_nondependent_motive = function
++  | Lam (bk, n, carrier, Lam (_, _, _, body)) ->
++    (try Lam (bk, n, carrier, remove_acc_proof_binder 0 body)
++     with DependentAccMotive ->
++       CErrors.user_err
++         Pp.(str "Lean Acc.rec motive depends on the Acc proof; the safe standard Rocq Acc_rect mapping only accepts proof-independent motives"))
++  | _ ->
++    CErrors.user_err
++      Pp.(str "Lean Acc.rec motive is not an explicit two-binder lambda; refusing the safe standard Rocq Acc_rect mapping")
++
+ let rec to_constr =
+   let open Constr in
+   let ( >>= ) x f uconv =
+@@ -1091,10 +1192,49 @@
+     | Bound i -> ret (mkRel (i + 1))
+     | Sort univ ->
+       to_univ_level' univ >>= fun u -> ret (mkSort (sort_of_level u))
++    | Const (n, _) when N.equal n acc_rec_name ->
++      CErrors.user_err
++        Pp.(str "Lean Acc.rec must be fully applied before the safe standard Rocq Acc_rect mapping can validate its motive")
+     | Const (n, univs) -> instantiate n univs
+-    | App (a, b) ->
+-      to_constr env a >>= fun a ->
+-      to_constr env b >>= fun b -> ret (mkApp (a, [| b |]))
++    | App (_, _) as e ->
++      (match lean_decompose_app e [] with
++      | Const (n, _), [ source; target; proof; contradiction ]
++        when N.equal n absurd_name && lean_is_acc_type target ->
++        let absurd =
++          Constr.mkRef
++            (Rocqlib.lib_ref "lean.absurd.prop", UVars.Instance.empty)
++        in
++        to_constr env source >>= fun source ->
++        to_constr env target >>= fun target ->
++        to_constr env proof >>= fun proof ->
++        to_constr env contradiction >>= fun contradiction ->
++        ret
++          (mkApp
++             ( absurd,
++               [| source; target; proof; contradiction |] ))
++      | Const (n, univs), [ carrier; relation; motive; step; point; proof ]
++        when N.equal n acc_rec_name ->
++        let motive = acc_nondependent_motive motive in
++        instantiate n univs >>= fun recursor ->
++        to_constr env carrier >>= fun carrier ->
++        to_constr env relation >>= fun relation ->
++        to_constr env motive >>= fun motive ->
++        to_constr env step >>= fun step ->
++        to_constr env point >>= fun point ->
++        to_constr env proof >>= fun proof ->
++        ret
++          (mkApp
++             ( recursor,
++               [| carrier; relation; motive; step; point; proof |] ))
++      | Const (n, _), _ when N.equal n acc_rec_name ->
++        CErrors.user_err
++          Pp.(str "Lean Acc.rec must have exactly six arguments for the safe standard Rocq Acc_rect mapping")
++      | _ ->
++        (match e with
++        | App (a, b) ->
++          to_constr env a >>= fun a ->
++          to_constr env b >>= fun b -> ret (mkApp (a, [| b |]))
++        | _ -> assert false))
+     | Let { name; ty; v; rest } ->
+       to_constr env ty >>= fun ty ->
+       to_annot env name ty >>= fun name ->
+@@ -1227,8 +1367,103 @@
+ and instantiate n univs uconv =
+   assert (List.length univs < Sys.int_size);
+   (* TODO what happens when is_large_elim and the motive is instantiated with Prop? *)
+-  let univs = List.map (to_universe uconv.map) univs in
+-  let i, univs = int_of_univs univs in
++  let lean_univs = univs in
++  let translated_univs = List.map (to_universe uconv.map) lean_univs in
++  let i, ordinary_univs = int_of_univs translated_univs in
++  let safe_acc_name = N.append N.anon "Acc" in
++  let safe_acc_intro_name = N.append safe_acc_name "intro" in
++  let safe_acc_rec_name = N.append safe_acc_name "rec" in
++  let safe_wf_name = N.append N.anon "WellFounded" in
++  let safe_wf_intro_name = N.append safe_wf_name "intro" in
++  let safe_wf_apply_name = N.append safe_wf_name "apply" in
++  let safe_wf_fixf_name = N.append safe_wf_name "fixF" in
++  let safe_wf_fix_name = N.append safe_wf_name "fix" in
++  let is_safe_acc_mapping =
++    N.equal n safe_acc_name || N.equal n safe_acc_intro_name ||
++    N.equal n safe_acc_rec_name || N.equal n safe_wf_name ||
++    N.equal n safe_wf_intro_name || N.equal n safe_wf_apply_name
++  in
++  let is_safe_wf_fix =
++    N.equal n safe_wf_fixf_name || N.equal n safe_wf_fix_name
++  in
++  let carrier_universe = function
++    | LeanExpr.U.Succ LeanExpr.U.Prop -> Universe.type0
++    | LeanExpr.U.Succ u ->
++      (match univ_of_sort (to_universe uconv.map u) with
++      | Some u -> u
++      | None -> assert false)
++    | u ->
++      (match univ_of_sort (to_universe uconv.map u) with
++      | Some u -> u
++      | None ->
++        CErrors.user_err
++          Pp.(str "Safe standard Acc mapping cannot use an SProp carrier"))
++  in
++  (* Lean universe arguments denote [Sort] levels.  The transparent Rocq
++     wrappers quantify their carriers/results as [Type@{u}], whose explicit
++     instance is the predecessor for a syntactic successor.  A named Lean
++     [Sort u] instance already denotes the imported carrier level directly. *)
++  let univs =
++    if N.equal n safe_acc_rec_name then
++      (match lean_univs, ordinary_univs with
++      | [ _motive; carrier ], [ motive; _carrier ] ->
++        [ motive; carrier_universe carrier ]
++      | _ ->
++        CErrors.user_err
++          Pp.(str "Safe standard Acc.rec mapping expected motive and carrier universes"))
++    else if is_safe_acc_mapping then
++      List.map carrier_universe lean_univs
++    else ordinary_univs
++  in
++  let enforce_upper u upper graph =
++    if UGraph.check_leq graph u (Universe.make upper) then graph
++    else
++      match Universe.level u with
++      | Some l -> UGraph.enforce_constraint (l, Le, upper) graph
++      | None ->
++        CErrors.user_err
++          Pp.(str "Safe standard Acc mapping requires a level universe for its checked upper bound")
++  in
++  let uconv =
++    if N.equal n safe_acc_rec_name then
++      (match univs with
++      | [ motive; carrier ] ->
++        let graph =
++          enforce_upper motive
++            (registered_universe_level "lean.AccMotiveCeiling") uconv.graph
++        in
++        let graph =
++          enforce_upper carrier
++            (registered_universe_level "lean.WfCarrierCeiling") graph
++        in
++        { uconv with graph }
++      | _ -> assert false)
++    else if is_safe_wf_fix then
++      (match ordinary_univs with
++      | [ carrier; motive ] ->
++        let graph =
++          enforce_upper carrier
++            (registered_universe_level "lean.WfCarrierCeiling") uconv.graph
++        in
++        let graph =
++          enforce_upper motive
++            (registered_universe_level "lean.AccMotiveCeiling") graph
++        in
++        { uconv with graph }
++      | _ ->
++        CErrors.user_err
++          Pp.(str "Safe WellFounded.fix mapping expected carrier and motive universes"))
++    else if is_safe_acc_mapping then
++      let graph =
++        List.fold_left
++          (fun graph carrier ->
++            enforce_upper carrier
++              (registered_universe_level "lean.WfCarrierCeiling") graph)
++          uconv.graph univs
++      in
++      { uconv with graph }
++    else uconv
++  in
+   let inst = ensure_exists n i in
+   let subst l =
+     let u =
+@@ -1267,7 +1502,7 @@
+ and declare_def { name = n; ty; body; univs; hint; kernel_opaque } i =
+   let ref, algs =
+     match get_predeclared_def_some n i with
+-    | Some ((UInt32_size | Add | Mult | Pow | Nat_isValidChar | Char_ofNatAux), _, (def_name, c)) ->
++    | Some ((UInt32_size | Add | Mult | Pow | Nat_isValidChar | Char_ofNatAux | WellFounded_apply), _, (def_name, c)) ->
+       (* Hack to let the user predeclare some constants
+          TODO make a more general Register-like API? *)
+       Feedback.msg_info Pp.(Id.print def_name ++ str " is predeclared");
+@@ -1343,6 +1578,27 @@
+   (* Handle inductives predeclared as definitions (e.g., ULift with cumulativity).
+      We check if there's a cumul registration for this specific instance. *)
+   match get_predeclared_ind_as_def_some n i with
++  | Some (WellFounded_cumul, _, (def_name, wf)) ->
++    Feedback.msg_info Pp.(Id.print def_name ++ str " is predeclared (standard well_founded wrapper)");
++    let cumul_reg nm = "lean." ^ Id.to_string (name_for_core nm i) ^ ".cumul" in
++    let inst = { ref = GlobRef.ConstRef wf; algs = [] } in
++    add_declared n i inst;
++    let cname = N.append n "intro" in
++    add_declared cname i
++      { ref = Rocqlib.lib_ref (cumul_reg cname); algs = [] };
++    inst
++  | Some (Acc_cumul, _, (def_name, acc)) ->
++    Feedback.msg_info Pp.(Id.print def_name ++ str " is predeclared (standard Acc wrapper)");
++    let cumul_reg nm = "lean." ^ Id.to_string (name_for_core nm i) ^ ".cumul" in
++    let inst = { ref = GlobRef.ConstRef acc; algs = [] } in
++    add_declared n i inst;
++    let cname = N.append n "intro" in
++    add_declared cname i
++      { ref = Rocqlib.lib_ref (cumul_reg cname); algs = [] };
++    let nrec = N.append n "rec" in
++    add_declared nrec (2 * i)
++      { ref = Rocqlib.lib_ref "lean.Acc_rec.nondep"; algs = [] };
++    inst
+   | Some (ULift_cumul, _, _) ->
+     let def_name = name_for_core n i in
+     let cumul_reg nm = "lean." ^ Id.to_string (name_for_core nm i) ^ ".cumul" in
+@@ -1400,7 +1656,7 @@
+       in
+       (mind, [], ind_name, [ cname ], univs, squashy)
+     | Some
+-        ( ((Nat | Nat_le | Or | And | Fin | UInt32 | BitVec | Char) as k),
++        ( ((Nat | Nat_le | Or | And | False | Fin | UInt32 | BitVec | Char) as k),
+           _,
+           (ind_name, mind) ) ->
+       (* Hack to let the user predeclare various types before running Lean Import

@@ -1,0 +1,3 @@
+/Library/Developer/CommandLineTools/usr/bin/make --no-builtin-rules -f Makefile.rocq CAMLPKGS="-package yojson" 
+ROCQ DEP VFILES
+ROCQ compile src/Lean.v

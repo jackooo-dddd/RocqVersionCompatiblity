@@ -1,0 +1,9 @@
+/Library/Developer/CommandLineTools/usr/bin/make --no-builtin-rules -f Makefile.rocq CAMLPKGS="-package yojson" 
+CAMLDEP src/lean.ml
+ROCQ DEP VFILES
+CAMLOPT -c -for-pack Lean_import src/lean.ml
+CAMLOPT -c -for-pack Lean_import src/g_lean.ml
+CAMLOPT -pack -o src/lean_import.cmx
+CAMLOPT -a -o src/lean_import.cmxa
+CAMLOPT -shared -o src/lean_import.cmxs
+ROCQ compile src/Lean.v
