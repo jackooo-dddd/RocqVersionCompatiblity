@@ -105,10 +105,12 @@ Definition search_arg_target_prop_on_ex_minn_type_guard :
       (pred : Lean.Nat -> ImportedSearchArg.Bool)
       (ex : ImportedSearchArg.Exists Lean.Nat
         (fun n => Lean.eq (pred n) ImportedSearchArg.Bool_true)),
-    P (ImportedSearchArg.Nat_find
-      (fun n => Lean.eq (pred n) ImportedSearchArg.Bool_true)
-      (fun n => ImportedSearchArg.instDecidableEqBool
-        (pred n) ImportedSearchArg.Bool_true) ex) ->
+    (forall n,
+      Lean.eq (pred n) ImportedSearchArg.Bool_true ->
+      (forall n', Lean.eq (pred n') ImportedSearchArg.Bool_true ->
+        ImportedSearchArg.LE_le_inst1 Lean.Nat
+          ImportedSearchArg.instLENat n n') ->
+      P n) ->
     ImportedSearchArg.Exists Lean.Nat (fun n =>
       Lean.And (P n)
         (Lean.And

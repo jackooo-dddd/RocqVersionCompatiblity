@@ -714,54 +714,13 @@ Proof.
     + exact (prop_to_sprop _ _ (sa_total_correspondence R) HtotalR).
 Qed.
 
-(** The final declaration is proof-dependent: both source and target carry an
-    existence proof into their least-witness computation.  The following
-    bridge derives the target least-witness laws from the actual imported
-    [Nat.find] body and its [Subtype.property], rather than assuming a
-    source/target find equality. *)
+(** The Phase 6 target avoids extracting a natural from an existential proof.
+    Instead its premise quantifies over every witness satisfying the same
+    predicate-and-minimality specification as MathComp's [ex_minn]. *)
 
 Definition sa_target_find_pred (pred : nat -> bool)
     (nL : Lean.Nat) : SProp :=
   Lean.eq (sa_target_nat_pred pred nL) ImportedSearchArg.Bool_true.
-
-Definition sa_target_find_exists (pred : nat -> bool)
-    (exR : exists n : nat, pred n) :
-    ImportedSearchArg.Exists Lean.Nat (sa_target_find_pred pred).
-Proof.
-  destruct exR as [nR Hn].
-  exact (ImportedSearchArg.Exists_intro Lean.Nat
-    (sa_target_find_pred pred) (sub_nat_to_imported nR)
-    (prop_to_sprop _ _
-      (sa_nat_pred_true_correspondence pred nR
-        (sub_nat_to_imported nR) (sub_nat_rel_canonical nR)) Hn)).
-Defined.
-
-Definition sa_target_find (pred : nat -> bool)
-    (exR : exists n : nat, pred n) : Lean.Nat :=
-  ImportedSearchArg.Nat_find (sa_target_find_pred pred)
-    (fun nL => ImportedSearchArg.instDecidableEqBool
-      (sa_target_nat_pred pred nL) ImportedSearchArg.Bool_true)
-    (sa_target_find_exists pred exR).
-
-Lemma sa_target_find_property (pred : nat -> bool)
-    (exR : exists n : nat, pred n) :
-  Lean.And
-    (sa_target_find_pred pred (sa_target_find pred exR))
-    (forall mL,
-      sa_target_ltL mL (sa_target_find pred exR) ->
-      ImportedSearchArg.Not (sa_target_find_pred pred mL)).
-Proof.
-  unfold sa_target_find, ImportedSearchArg.Nat_find.
-  exact (ImportedSearchArg.property Lean.Nat
-    (fun nL => Lean.And (sa_target_find_pred pred nL)
-      (forall mL,
-        sa_target_ltL mL nL ->
-        ImportedSearchArg.Not (sa_target_find_pred pred mL)))
-    (ImportedSearchArg.Nat_findX (sa_target_find_pred pred)
-      (fun nL => ImportedSearchArg.instDecidableEqBool
-        (sa_target_nat_pred pred nL) ImportedSearchArg.Bool_true)
-      (sa_target_find_exists pred exR))).
-Qed.
 
 Lemma sa_ex_minn_pred (pred : nat -> bool)
     (exR : exists n : nat, pred n) :
@@ -773,24 +732,24 @@ Lemma sa_ex_minn_min (pred : nat -> bool)
   is_true (pred n) -> is_true (leq (ex_minn exR) n).
 Proof. case: (ex_minnP exR) => m Hpred Hmin. exact (Hmin n). Qed.
 
-Lemma sa_find_correspondence (pred : nat -> bool)
-    (exR : exists n : nat, pred n) :
-  SubNatRel (ex_minn exR) (sa_target_find pred exR).
+Lemma sa_minimal_witness_correspondence (pred : nat -> bool)
+    (exR : exists n : nat, pred n) (nL : Lean.Nat) :
+  sa_target_find_pred pred nL ->
+  (forall mL,
+    sa_target_find_pred pred mL -> sa_target_le nL mL) ->
+  SubNatRel (ex_minn exR) nL.
 Proof.
-  have Hproperty := sa_target_find_property pred exR.
-  destruct Hproperty as [HfindPred HfindMin].
-  have HfindPredR := sprop_to_prop _ _
+  intros HpredL HminimalL.
+  have HpredR := sprop_to_prop _ _
     (sa_nat_pred_true_correspondence pred
-      (sub_nat_to_rocq (sa_target_find pred exR))
-      (sa_target_find pred exR)
-      (sub_nat_rel_surjective (sa_target_find pred exR))) HfindPred.
+      (sub_nat_to_rocq nL) nL (sub_nat_rel_surjective nL)) HpredL.
   have Hleft : sa_target_le (sub_nat_to_imported (ex_minn exR))
-      (sa_target_find pred exR) :=
+      nL :=
     prop_to_sprop _ _
       (sa_le_correspondence _ _ _ _
         (sub_nat_rel_canonical (ex_minn exR))
-        (sub_nat_rel_surjective (sa_target_find pred exR)))
-      (sa_ex_minn_min pred exR _ HfindPredR).
+        (sub_nat_rel_surjective nL))
+      (sa_ex_minn_min pred exR _ HpredR).
   have HsourcePred := sa_ex_minn_pred pred exR.
   have HtargetPred :
       sa_target_find_pred pred (sub_nat_to_imported (ex_minn exR)) :=
@@ -798,18 +757,12 @@ Proof.
       (sa_nat_pred_true_correspondence pred (ex_minn exR)
         (sub_nat_to_imported (ex_minn exR))
         (sub_nat_rel_canonical (ex_minn exR))) HsourcePred.
-  have Hright : sa_target_le (sa_target_find pred exR)
+  have Hright : sa_target_le nL
       (sub_nat_to_imported (ex_minn exR)) :=
-    ImportedSearchArg.Or_elim _ _ _
-      (ImportedSearchArg.Nat_lt_or_ge
-        (sub_nat_to_imported (ex_minn exR))
-        (sa_target_find pred exR))
-      (fun Hlt => sa_imported_false_elim _
-        (HfindMin (sub_nat_to_imported (ex_minn exR)) Hlt HtargetPred))
-      (fun Hge => Hge).
+    HminimalL (sub_nat_to_imported (ex_minn exR)) HtargetPred.
   unfold SubNatRel.
   exact (ImportedSearchArg.Nat_le_antisymm
-    (sub_nat_to_imported (ex_minn exR)) (sa_target_find pred exR)
+    (sub_nat_to_imported (ex_minn exR)) nL
     Hleft Hright).
 Qed.
 
@@ -821,10 +774,14 @@ Lemma sa_prop_at_correspondence (P : nat -> Prop) nR nL :
 Proof.
   intro Hn. apply prop_sprop_rel_intro.
   - intro HP. unfold sa_target_prop.
-    rw (sa_nat_back_of_rel nR nL Hn). exact (strictly_inhabits HP).
+    have Hback := sa_nat_back_of_rel nR nL Hn.
+    exact (strictly_inhabits
+      (@Logic.eq_ind nat nR P HP (sub_nat_to_rocq nL)
+        (Logic.eq_sym Hback))).
   - intro HL. apply strictly_inhabits. unfold sa_target_prop in HL.
     have HP := interpret_strict _ HL.
-    rw (sa_nat_back_of_rel nR nL Hn) in HP. exact HP.
+    have Hback := sa_nat_back_of_rel nR nL Hn.
+    exact (@Logic.eq_ind nat (sub_nat_to_rocq nL) P HP nR Hback).
 Qed.
 
 Lemma sa_minimal_correspondence (pred : nat -> bool) nR nL :
@@ -844,6 +801,49 @@ Proof.
     apply (sprop_to_prop _ _ (sa_le_correspondence _ _ _ _ Hn Hm)).
     apply HL. exact (prop_to_sprop _ _
       (sa_nat_pred_true_correspondence pred mR mL Hm) HpredR).
+Qed.
+
+Lemma sa_prop_on_ex_minn_premise_correspondence
+    (P : nat -> Prop) (pred : nat -> bool)
+    (exR : exists n : nat, pred n) :
+  PropSPropRel
+    (P (ex_minn exR))
+    (forall nL,
+      sa_target_find_pred pred nL ->
+      (forall mL,
+        sa_target_find_pred pred mL -> sa_target_le nL mL) ->
+      sa_target_prop P nL).
+Proof.
+  apply prop_sprop_rel_intro.
+  - intros HP nL HpredL HminimalL.
+    have Hn := sa_minimal_witness_correspondence
+      pred exR nL HpredL HminimalL.
+    exact (prop_to_sprop _ _
+      (sa_prop_at_correspondence P (ex_minn exR) nL Hn) HP).
+  - intro HL. apply strictly_inhabits.
+    have HsourcePred := sa_ex_minn_pred pred exR.
+    have HtargetPred :
+        sa_target_find_pred pred (sub_nat_to_imported (ex_minn exR)) :=
+      prop_to_sprop _ _
+        (sa_nat_pred_true_correspondence pred (ex_minn exR)
+          (sub_nat_to_imported (ex_minn exR))
+          (sub_nat_rel_canonical (ex_minn exR))) HsourcePred.
+    exact (sprop_to_prop _ _
+      (sa_prop_at_correspondence P (ex_minn exR)
+        (sub_nat_to_imported (ex_minn exR))
+        (sub_nat_rel_canonical (ex_minn exR)))
+      (HL (sub_nat_to_imported (ex_minn exR))
+        HtargetPred
+        (fun mL HpredL =>
+          prop_to_sprop _ _
+            (sa_le_correspondence _ _ _ _
+              (sub_nat_rel_canonical (ex_minn exR))
+              (sub_nat_rel_surjective mL))
+            (sa_ex_minn_min pred exR _
+              (sprop_to_prop _ _
+                (sa_nat_pred_true_correspondence pred
+                  (sub_nat_to_rocq mL) mL
+                  (sub_nat_rel_surjective mL)) HpredL))))).
 Qed.
 
 Lemma sa_prop_on_ex_minn_result_correspondence
@@ -874,16 +874,18 @@ Lemma prop_on_ex_minn_statement_certificate
       exists nR,
         P nR /\ is_true (pred nR) /\
         forall mR, is_true (pred mR) -> is_true (leq nR mR))
-    (sa_target_prop P (sa_target_find pred exR) ->
+    ((forall nL,
+        sa_target_find_pred pred nL ->
+        (forall mL,
+          sa_target_find_pred pred mL -> sa_target_le nL mL) ->
+        sa_target_prop P nL) ->
       ImportedSearchArg.Exists Lean.Nat (fun nL =>
         Lean.And (sa_target_prop P nL)
           (Lean.And (sa_target_find_pred pred nL)
             (forall mL,
               sa_target_find_pred pred mL -> sa_target_le nL mL)))).
 Proof.
-  have Hfind := sa_find_correspondence pred exR.
-  have Hprem := sa_prop_at_correspondence P
-    (ex_minn exR) (sa_target_find pred exR) Hfind.
+  have Hprem := sa_prop_on_ex_minn_premise_correspondence P pred exR.
   have Hresult := sa_prop_on_ex_minn_result_correspondence P pred.
   apply prop_sprop_rel_intro.
   - intros HR HpremL. apply (prop_to_sprop _ _ Hresult).
@@ -899,5 +901,6 @@ Print Assumptions search_arg_pred_statement_certificate.
 Print Assumptions search_arg_in_range_statement_certificate.
 Print Assumptions earliest_pred_element_exists_case_statement_certificate.
 Print Assumptions search_arg_extremum_statement_certificate.
-Print Assumptions sa_find_correspondence.
+Print Assumptions sa_minimal_witness_correspondence.
+Print Assumptions sa_prop_on_ex_minn_premise_correspondence.
 Print Assumptions prop_on_ex_minn_statement_certificate.

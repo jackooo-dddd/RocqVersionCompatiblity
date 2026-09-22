@@ -259,13 +259,98 @@ theorem search_arg_extremum (a b x : Nat) :
 
 end ArgSearch
 
+/- `Nat.find` extracts data through well-founded recursion.  For this theorem
+   we only need a least witness inside a known finite prefix, so keep that
+   computation structurally recursive and keep the existential proof in
+   `Prop`. -/
+private def leastWitnessUpTo (pred : Nat → Bool) : Nat → Option Nat
+  | 0 => if pred 0 = true then some 0 else none
+  | n + 1 =>
+      match leastWitnessUpTo pred n with
+      | some m => some m
+      | none => if pred (n + 1) = true then some (n + 1) else none
+
+private theorem leastWitnessUpTo_spec (pred : Nat → Bool) (bound : Nat) :
+    (leastWitnessUpTo pred bound = none ∧
+        ∀ n, n ≤ bound → pred n = false) ∨
+      ∃ n, leastWitnessUpTo pred bound = some n ∧
+        pred n = true ∧ n ≤ bound ∧
+        ∀ m, m ≤ bound → pred m = true → n ≤ m := by
+  induction bound with
+  | zero =>
+      cases hp : pred 0 with
+      | false =>
+          left
+          constructor
+          · unfold leastWitnessUpTo
+            rw [hp]
+            exact if_neg (fun h => Bool.noConfusion h)
+          · intro n hn
+            have : n = 0 := Nat.eq_zero_of_le_zero hn
+            subst n
+            exact hp
+      | true =>
+          right
+          refine ⟨0, ?_, hp, Nat.le_refl 0,
+            fun m _ _ => Nat.zero_le m⟩
+          unfold leastWitnessUpTo
+          rw [hp]
+          exact if_pos rfl
+  | succ bound ih =>
+      rcases ih with hnone | ⟨n, hfind, hpred, hn_bound, hminimal⟩
+      · cases hp : pred (bound + 1) with
+        | false =>
+            left
+            constructor
+            · unfold leastWitnessUpTo
+              rw [hnone.1, hp]
+              exact if_neg (fun h => Bool.noConfusion h)
+            · intro m hm
+              by_cases hmb : m ≤ bound
+              · exact hnone.2 m hmb
+              · have hlt : bound < m := Nat.lt_of_not_ge hmb
+                have : m = bound + 1 := Nat.le_antisymm hm hlt
+                subst m
+                exact hp
+        | true =>
+            right
+            refine ⟨bound + 1, ?_, hp, Nat.le_refl _, ?_⟩
+            · unfold leastWitnessUpTo
+              rw [hnone.1, hp]
+              exact if_pos rfl
+            · intro m hm hpm
+              by_cases hmb : m ≤ bound
+              · exact Bool.noConfusion ((hnone.2 m hmb).symm.trans hpm)
+              · have hlt : bound < m := Nat.lt_of_not_ge hmb
+                exact Nat.succ_le_of_lt hlt
+      · right
+        refine ⟨n, ?_, hpred, Nat.le.step hn_bound, ?_⟩
+        · unfold leastWitnessUpTo
+          rw [hfind]
+        · intro m hm hpm
+          by_cases hmb : m ≤ bound
+          · exact hminimal m hmb hpm
+          · have hlt : bound < m := Nat.lt_of_not_ge hmb
+            exact Nat.le_trans hn_bound (Nat.le_of_lt hlt)
+
 theorem prop_on_ex_minn
     (P : Nat → Prop) (pred : Nat → Bool)
     (ex : ∃ n, pred n = true) :
-    P (Nat.find ex) →
+    (∀ n, pred n = true →
+        (∀ n', pred n' = true → n ≤ n') → P n) →
       ∃ n, P n ∧ pred n = true ∧ ∀ n', pred n' = true → n ≤ n' := by
   intro hP
-  exact ⟨Nat.find ex, hP, Nat.find_spec ex,
-    fun n' hn' => Nat.find_min' ex hn'⟩
+  rcases ex with ⟨bound, hbound⟩
+  rcases leastWitnessUpTo_spec pred bound with hnone |
+    ⟨n, _hfind, hpred, hn_bound, hminimal_bound⟩
+  · exact Bool.noConfusion
+      ((hnone.2 bound (Nat.le_refl bound)).symm.trans hbound)
+  · have hminimal : ∀ m, pred m = true → n ≤ m := by
+      intro m hm
+      by_cases hmb : m ≤ bound
+      · exact hminimal_bound m hmb hm
+      · have hlt : bound < m := Nat.lt_of_not_ge hmb
+        exact Nat.le_trans hn_bound (Nat.le_of_lt hlt)
+    exact ⟨n, hP n hpred hminimal, hpred, hminimal⟩
 
 end Prosa.Util.SearchArg

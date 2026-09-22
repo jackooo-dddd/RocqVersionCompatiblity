@@ -1,0 +1,4 @@
+candidate	result	minimal_blocker_or_outcome	evidence
+candidate1_omega_simp_proof	REJECTED	Lean #print axioms reported propext and Quot.sound	logs/phase6/lean/natfind-free-audit.log
+candidate2_kernel_proof_minimal_roots	PARTIAL	actual theorem imported and definition certificate passed; statement certificate lacked proof-complete Iff interface	logs/phase6/candidate2-certificates/SearchArgStatementCertificate.log
+candidate3_kernel_proof_plus_iff	PASS	actual theorem import and all SearchArg certificates/audits passed	logs/phase6/final/SearchArgAssumptionAudit.log
