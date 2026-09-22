@@ -148,43 +148,47 @@ Proof.
     unfold ImportedSearchArg.Prosa_Util_SearchArg_search_arg_match_1,
       ImportedSearchArg.Option_casesOn_inst2.
     cbn.
-    rw !sub_nat_rocq_roundtrip.
-    destruct (P (f b)), (R (f b) (f x));
-      cbn [sa_bool_to_imported ImportedSearchArg.Bool_and
-        ImportedSearchArg.Bool_and_match_1].
-    + unfold ImportedSearchArg.Bool_and,
-        ImportedSearchArg.Bool_and_match_1; cbn.
-      exact (sa_ite_true
-        (ImportedSearchArg.Option_some_inst1 Lean.Nat (sub_nat_to_imported b))
-        (ImportedSearchArg.Option_some_inst1 Lean.Nat (sub_nat_to_imported x))).
-    + unfold ImportedSearchArg.Bool_and,
-        ImportedSearchArg.Bool_and_match_1; cbn.
-      exact (sa_ite_false
-        (ImportedSearchArg.Option_some_inst1 Lean.Nat (sub_nat_to_imported b))
-        (ImportedSearchArg.Option_some_inst1 Lean.Nat (sub_nat_to_imported x))).
-    + unfold ImportedSearchArg.Bool_and,
-        ImportedSearchArg.Bool_and_match_1; cbn.
-      exact (sa_ite_false
-        (ImportedSearchArg.Option_some_inst1 Lean.Nat (sub_nat_to_imported b))
-        (ImportedSearchArg.Option_some_inst1 Lean.Nat (sub_nat_to_imported x))).
-    + unfold ImportedSearchArg.Bool_and,
-        ImportedSearchArg.Bool_and_match_1; cbn.
-      exact (sa_ite_false
-        (ImportedSearchArg.Option_some_inst1 Lean.Nat (sub_nat_to_imported b))
-        (ImportedSearchArg.Option_some_inst1 Lean.Nat (sub_nat_to_imported x))).
+    eapply sub_imported_eq_trans.
+    + apply coq_eq_to_imported_eq.
+      repeat rewrite sub_nat_rocq_roundtrip. reflexivity.
+    + destruct (P (f b)), (R (f b) (f x));
+        cbn [sa_bool_to_imported ImportedSearchArg.Bool_and
+          ImportedSearchArg.Bool_and_match_1].
+      * unfold ImportedSearchArg.Bool_and,
+          ImportedSearchArg.Bool_and_match_1; cbn.
+        exact (sa_ite_true
+          (ImportedSearchArg.Option_some_inst1 Lean.Nat (sub_nat_to_imported b))
+          (ImportedSearchArg.Option_some_inst1 Lean.Nat (sub_nat_to_imported x))).
+      * unfold ImportedSearchArg.Bool_and,
+          ImportedSearchArg.Bool_and_match_1; cbn.
+        exact (sa_ite_false
+          (ImportedSearchArg.Option_some_inst1 Lean.Nat (sub_nat_to_imported b))
+          (ImportedSearchArg.Option_some_inst1 Lean.Nat (sub_nat_to_imported x))).
+      * unfold ImportedSearchArg.Bool_and,
+          ImportedSearchArg.Bool_and_match_1; cbn.
+        exact (sa_ite_false
+          (ImportedSearchArg.Option_some_inst1 Lean.Nat (sub_nat_to_imported b))
+          (ImportedSearchArg.Option_some_inst1 Lean.Nat (sub_nat_to_imported x))).
+      * unfold ImportedSearchArg.Bool_and,
+          ImportedSearchArg.Bool_and_match_1; cbn.
+        exact (sa_ite_false
+          (ImportedSearchArg.Option_some_inst1 Lean.Nat (sub_nat_to_imported b))
+          (ImportedSearchArg.Option_some_inst1 Lean.Nat (sub_nat_to_imported x))).
   - unfold sa_target_step, sa_source_step, sa_option_to_imported,
       sa_target_P, sa_target_f.
     unfold ImportedSearchArg.Prosa_Util_SearchArg_search_arg_match_1,
       ImportedSearchArg.Option_casesOn_inst2.
     cbn.
-    rw sub_nat_rocq_roundtrip.
-    destruct (P (f b)); cbn [sa_bool_to_imported].
-    + exact (sa_ite_true
-        (ImportedSearchArg.Option_some_inst1 Lean.Nat (sub_nat_to_imported b))
-        (ImportedSearchArg.Option_none_inst1 Lean.Nat)).
-    + exact (sa_ite_false
-        (ImportedSearchArg.Option_some_inst1 Lean.Nat (sub_nat_to_imported b))
-        (ImportedSearchArg.Option_none_inst1 Lean.Nat)).
+    eapply sub_imported_eq_trans.
+    + apply coq_eq_to_imported_eq.
+      rewrite sub_nat_rocq_roundtrip. reflexivity.
+    + destruct (P (f b)); cbn [sa_bool_to_imported].
+      * exact (sa_ite_true
+          (ImportedSearchArg.Option_some_inst1 Lean.Nat (sub_nat_to_imported b))
+          (ImportedSearchArg.Option_none_inst1 Lean.Nat)).
+      * exact (sa_ite_false
+          (ImportedSearchArg.Option_some_inst1 Lean.Nat (sub_nat_to_imported b))
+          (ImportedSearchArg.Option_none_inst1 Lean.Nat)).
 Qed.
 
 Definition sa_target_lt (a b : nat) : SProp :=
@@ -213,9 +217,9 @@ Proof.
     { destruct (ltn a b) eqn:E; first exfalso.
       - apply Hnot. exact (Logic.eq_refl true).
       - reflexivity. }
-    rw Hab. exact (@Lean.eq_refl A e).
+    apply coq_eq_to_imported_eq. rewrite Hab. reflexivity.
   - have Hab : is_true (ltn a b) := sprop_to_prop _ _ Hcorr Htrue.
-    rw Hab. exact (@Lean.eq_refl A t).
+    apply coq_eq_to_imported_eq. rewrite Hab. reflexivity.
 Qed.
 
 Lemma sa_source_eq_2 {T : Type} (f : nat -> T) (P : T -> bool)

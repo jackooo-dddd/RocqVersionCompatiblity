@@ -121,9 +121,17 @@ Lemma sub_add_canonical (a b : nat) :
     (sub_nat_to_imported (a + b)).
 Proof.
   induction b as [|b IH].
-  - rewrite addn0. exact (@Lean.eq_refl Lean.Nat (sub_nat_to_imported a)).
-  - rewrite addnS. cbn [sub_nat_to_imported sub_imported_add].
-    exact (sub_imported_eq_congr Lean.Nat_succ _ _ IH).
+  - refine (sub_imported_eq_trans _ (sub_nat_to_imported a) _ _ _).
+    + exact (sub_imported_add_is_core
+        (sub_nat_to_imported a) Lean.Nat_zero).
+    + exact (coq_eq_to_imported_eq _ _
+        (f_equal sub_nat_to_imported (Logic.eq_sym (addn0 a)))).
+  - refine (sub_imported_eq_trans _
+      (sub_nat_to_imported ((a + b).+1)) _ _ _).
+    + cbn [sub_nat_to_imported sub_imported_add].
+      exact (sub_imported_eq_congr Lean.Nat_succ _ _ IH).
+    + exact (coq_eq_to_imported_eq _ _
+        (f_equal sub_nat_to_imported (Logic.eq_sym (addnS a b)))).
 Qed.
 
 Lemma sub_mul_canonical (a b : nat) :
@@ -132,12 +140,21 @@ Lemma sub_mul_canonical (a b : nat) :
     (sub_nat_to_imported (a * b)).
 Proof.
   induction b as [|b IH].
-  - rewrite muln0. exact (@Lean.eq_refl Lean.Nat Lean.Nat_zero).
-  - rewrite mulnS addnC. cbn [sub_nat_to_imported sub_imported_mul].
-    exact (sub_imported_eq_trans _ _ _
-      (sub_imported_eq_congr (fun z => Lean.Nat_add z
-          (sub_nat_to_imported a)) _ _ IH)
-      (sub_add_canonical (a * b) a)).
+  - refine (sub_imported_eq_trans _ Lean.Nat_zero _ _ _).
+    + exact (sub_imported_mul_is_core
+        (sub_nat_to_imported a) Lean.Nat_zero).
+    + exact (coq_eq_to_imported_eq _ _
+        (f_equal sub_nat_to_imported (Logic.eq_sym (muln0 a)))).
+  - refine (sub_imported_eq_trans _
+      (sub_nat_to_imported (a * b + a)) _ _ _).
+    + cbn [sub_nat_to_imported sub_imported_mul].
+      exact (sub_imported_eq_trans _ _ _
+        (sub_imported_eq_congr (fun z => Lean.Nat_add z
+            (sub_nat_to_imported a)) _ _ IH)
+        (sub_add_canonical (a * b) a)).
+    + exact (coq_eq_to_imported_eq _ _
+        (f_equal sub_nat_to_imported
+          (Logic.eq_sym (Logic.eq_trans (mulnS a b) (addnC a (a * b)))))).
 Qed.
 
 Lemma sub_add_correspondence aR aL bR bL :
