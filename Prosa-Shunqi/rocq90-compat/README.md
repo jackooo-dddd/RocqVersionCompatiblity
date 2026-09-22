@@ -58,3 +58,33 @@ dependencies are Rocq 9.0 compatibility binaries/metapackages pointing to the
 same installed Rocq 9.0 and MathComp 2.4 libraries. The official 1.5.0 source
 tag is retained under `environment/sources/`; installation and package-list
 evidence is retained in `logs/environment/`.
+
+## Phase 2: Acc compatibility diagnostic
+
+Phase 2 is a separate, fail-closed diagnostic. It does not modify the original
+source tree, Lean exports, Rocq kernel, formal certificate status, or the
+historical results above. Its opam root, importer worktrees, compilation
+directories, logs, and results are isolated under this experiment.
+
+Run the current-machine reproduction entry points in this order:
+
+```sh
+scripts/phase2_setup_environment.sh
+scripts/phase2_run_ab_imports.sh
+scripts/phase2_run_acc_audit.sh
+tests/phase2/test_fail_closed.sh
+```
+
+The setup script reuses an already matching local switch. Otherwise it creates
+only `environment/opam-root` and `environment/rocq-9.0`, with the frozen
+versions listed above; it does not select or alter a global default switch.
+The A/B runner checks every reused `.out` hash, rebuilds both importer variants
+from the pinned commit in independent worktrees, and compiles each case in a
+clean directory with explicit plugin paths. The candidate compatibility patch
+is opt-in and lives at
+`importer/patches/phase2-check-universes.patch`; it is never applied to the
+baseline or original importer checkout.
+
+Machine-readable outcomes are in `results/phase2/`; complete exit codes and
+logs are in `logs/phase2/`. See `results/phase2/acc_compat_report.md` for the
+semantic and trust boundary of the experiment.

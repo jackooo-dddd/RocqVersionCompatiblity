@@ -4,6 +4,7 @@ set -u
 source "$(dirname "$0")/common.sh"
 
 mkdir -p "$EXPERIMENT_ROOT/logs/importer/imports"
+overall=0
 
 compile_import() {
   local module=$1
@@ -21,6 +22,9 @@ compile_import() {
   set -e
   printf '%s\n' "$rc" >"$exit_file"
   printf '%-18s exit=%s\n' "$module" "$rc"
+  if (( rc != 0 )); then
+    overall=1
+  fi
 }
 
 compile_import Time
@@ -30,3 +34,5 @@ compile_import SearchArg
 compile_import ListSimple
 compile_import ListLast
 compile_import Bigcat
+
+exit "$overall"

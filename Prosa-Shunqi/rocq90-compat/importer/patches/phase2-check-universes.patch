@@ -1,0 +1,23 @@
+diff --git a/src/lean.ml b/src/lean.ml
+index 9282aea..b73a5af 100644
+--- a/src/lean.ml
++++ b/src/lean.ml
+@@ -219,7 +219,17 @@ let lean_scheme env ~dep mind u s =
+     in
+     Term.it_mkLambda_or_LetIn (Term.it_mkLambda_or_LetIn body fcs) paramsP
+ 
+-let with_unsafe_univs f () = f ()
++let with_unsafe_univs f () =
++  let flags = Global.typing_flags () in
++  Global.set_typing_flags { flags with check_universes = false };
++  try
++    let v = f () in
++    Global.set_typing_flags flags;
++    v
++  with e ->
++    let e = Exninfo.capture e in
++    Global.set_typing_flags flags;
++    Exninfo.iraise e
+ 
+ module N = LeanName
+ 

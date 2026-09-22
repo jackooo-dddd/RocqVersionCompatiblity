@@ -1,0 +1,36 @@
+rocq makefile -f _CoqProject -o Makefile.rocq
+Warning: it is recommended you provide a META.package-name file
+Warning: since you build plugins. See also -generate-meta-for-package.
+/Library/Developer/CommandLineTools/usr/bin/make --no-builtin-rules -f Makefile.rocq CAMLPKGS="-package yojson" 
+ROCQ DEP VFILES
+COQPP src/g_lean.mlg
+CAMLDEP src/leanParseNdjson.mli
+CAMLDEP src/leanParse.mli
+CAMLDEP src/leanParseShared.mli
+CAMLDEP src/leanName.mli
+CAMLDEP src/leanExpr.mli
+CAMLDEP src/lean.mli
+OCAMLLIBDEP src/lean_import.mlpack
+CAMLDEP src/leanParseNdjson.ml
+CAMLDEP src/leanParse.ml
+CAMLDEP src/leanParseShared.ml
+CAMLDEP src/leanName.ml
+CAMLDEP src/lean.ml
+CAMLDEP src/g_lean.ml
+ROCQ compile src/ULiftCumulativeRegistration.v
+CAMLC -c src/lean.mli
+CAMLC -c src/leanName.mli
+CAMLC -c src/leanExpr.mli
+CAMLOPT -c -for-pack Lean_import src/leanName.ml
+CAMLC -c src/leanParse.mli
+CAMLC -c src/leanParseShared.mli
+CAMLC -c src/leanParseNdjson.mli
+CAMLOPT -c -for-pack Lean_import src/leanParseShared.ml
+CAMLOPT -c -for-pack Lean_import src/leanParse.ml
+CAMLOPT -c -for-pack Lean_import src/leanParseNdjson.ml
+CAMLOPT -c -for-pack Lean_import src/lean.ml
+CAMLOPT -c -for-pack Lean_import src/g_lean.ml
+CAMLOPT -pack -o src/lean_import.cmx
+CAMLOPT -a -o src/lean_import.cmxa
+CAMLOPT -shared -o src/lean_import.cmxs
+ROCQ compile src/Lean.v

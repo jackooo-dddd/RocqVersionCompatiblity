@@ -1,0 +1,87 @@
+
+CONTEXT SUMMARY
+===============
+
+* Theory: Set is predicative
+  
+* Theory: Rewrite rules are not allowed
+  
+* Axioms:
+    Corelib.Numbers.Cyclic.Int63.Uint63Axioms.tail0_spec
+    Phase2Imported.ImportedSearchArg.Prosa_Util_SearchArg_search_arg_pred
+    Phase2Imported.ImportedSearchArg.Prosa_Util_SearchArg_search_arg_none
+    Corelib.Numbers.Cyclic.Int63.Uint63Axioms.leb_spec
+    Corelib.Numbers.Cyclic.Int63.Uint63Axioms.head0_spec
+    Phase2Imported.ImportedSearchArg.Prosa_Util_SearchArg_search_arg_extremum
+    Corelib.Numbers.Cyclic.Int63.PrimInt63.diveucl_21
+    Corelib.Numbers.Cyclic.Int63.Uint63Axioms.mulc_spec
+    Corelib.Numbers.Cyclic.Int63.Uint63Axioms.diveucl_def_spec
+    Corelib.Numbers.Cyclic.Int63.Uint63Axioms.add_spec
+    Phase2Imported.ImportedSearchArg.Prosa_Util_SearchArg_search_arg_in_range
+    Corelib.Numbers.Cyclic.Int63.Uint63Axioms.eqb_correct
+    Corelib.Numbers.Cyclic.Int63.Uint63Axioms.lxor_spec
+    Corelib.Numbers.Cyclic.Int63.Uint63Axioms.eqb_refl
+    Corelib.Numbers.Cyclic.Int63.PrimInt63.addmuldiv
+    Corelib.Numbers.Cyclic.Int63.Uint63Axioms.ltb_spec
+    Corelib.Numbers.Cyclic.Int63.Uint63Axioms.lsr_spec
+    Corelib.Numbers.Cyclic.Int63.Uint63Axioms.lsl_spec
+    Corelib.Numbers.Cyclic.Int63.PrimInt63.addcarryc
+    Corelib.Numbers.Cyclic.Int63.Uint63Axioms.subcarryc_def_spec
+    Corelib.Numbers.Cyclic.Int63.Uint63Axioms.compare_def_spec
+    Corelib.Numbers.Cyclic.Int63.Uint63Axioms.div_spec
+    Corelib.Numbers.Cyclic.Int63.Uint63Axioms.mul_spec
+    Corelib.Numbers.Cyclic.Int63.Uint63Axioms.of_to_Z
+    Corelib.Numbers.Cyclic.Int63.Uint63Axioms.sub_spec
+    Corelib.Numbers.Cyclic.Int63.PrimInt63.tail0
+    Corelib.Numbers.Cyclic.Int63.PrimInt63.head0
+    Corelib.Numbers.Cyclic.Int63.Uint63Axioms.land_spec
+    Corelib.Numbers.Cyclic.Int63.PrimInt63.subc
+    Corelib.Numbers.Cyclic.Int63.PrimInt63.mulc
+    Corelib.Numbers.Cyclic.Int63.PrimInt63.mods
+    Corelib.Numbers.Cyclic.Int63.PrimInt63.lxor
+    Corelib.Numbers.Cyclic.Int63.PrimInt63.ltsb
+    Corelib.Numbers.Cyclic.Int63.PrimInt63.lesb
+    Corelib.Numbers.Cyclic.Int63.PrimInt63.land
+    Corelib.Numbers.Cyclic.Int63.PrimInt63.divs
+    Corelib.Numbers.Cyclic.Int63.PrimInt63.addc
+    Corelib.Numbers.Cyclic.Int63.PrimInt63.sub
+    Corelib.Numbers.Cyclic.Int63.PrimInt63.mul
+    Corelib.Numbers.Cyclic.Int63.PrimInt63.mod
+    Corelib.Numbers.Cyclic.Int63.PrimInt63.ltb
+    Corelib.Numbers.Cyclic.Int63.PrimInt63.lsr
+    Corelib.Numbers.Cyclic.Int63.PrimInt63.lsl
+    Corelib.Numbers.Cyclic.Int63.PrimInt63.lor
+    Corelib.Numbers.Cyclic.Int63.PrimInt63.leb
+    Corelib.Numbers.Cyclic.Int63.PrimInt63.int
+    Corelib.Numbers.Cyclic.Int63.PrimInt63.eqb
+    Corelib.Numbers.Cyclic.Int63.PrimInt63.div
+    Corelib.Numbers.Cyclic.Int63.PrimInt63.asr
+    Corelib.Numbers.Cyclic.Int63.PrimInt63.add
+    Corelib.Numbers.Cyclic.Int63.Uint63Axioms.lor_spec
+    Corelib.Numbers.Cyclic.Int63.PrimInt63.subcarryc
+    Corelib.Numbers.Cyclic.Int63.Uint63Axioms.diveucl_21_spec
+    Phase2Imported.ImportedSearchArg.Prosa_Util_SearchArg_prop_on_ex_minn
+    Corelib.Numbers.Cyclic.Int63.Uint63Axioms.addc_def_spec
+    Corelib.Numbers.Cyclic.Int63.Uint63Axioms.mod_spec
+    Corelib.Numbers.Cyclic.Int63.Uint63Axioms.addcarryc_def_spec
+    Corelib.Numbers.Cyclic.Int63.Uint63Axioms.subc_def_spec
+    Corelib.Numbers.Cyclic.Int63.Uint63Axioms.addmuldiv_def_spec
+    Corelib.Numbers.Cyclic.Int63.PrimInt63.diveucl
+    Corelib.Numbers.Cyclic.Int63.PrimInt63.compare
+    Phase2Imported.ImportedSearchArg.Prosa_Util_SearchArg_earliest_pred_element_exists_case
+    Corelib.Numbers.Cyclic.Int63.PrimInt63.compares
+    Phase2Imported.ImportedSearchArg.Prosa_Util_SearchArg_search_arg_not_none
+  
+* Constants/Inductives relying on type-in-type:
+    Phase2Imported.ImportedSearchArg.Iff
+    Phase2Imported.ImportedSearchArg.Acc
+    Phase2Imported.ImportedSearchArg.WellFounded
+    Phase2Imported.ImportedSearchArg.Acc_rec
+    Phase2Imported.ImportedSearchArg.Acc_ind
+    Phase2Imported.ImportedSearchArg.Acc_sind
+    Phase2Imported.ImportedSearchArg.Acc_rect
+  
+* Constants/Inductives relying on unsafe (co)fixpoints: <none>
+  
+* Inductives whose positivity is assumed: <none>
+  

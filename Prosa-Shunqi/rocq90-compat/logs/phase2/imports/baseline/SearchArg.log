@@ -1,0 +1,155 @@
+line 9: Nat
+Nat is predeclared
+line 14: Bool
+line 36: Or
+Or is predeclared
+line 49: And
+And is predeclared
+line 69: LE
+line 69: LE.(field).le
+line 80: LE.le
+line 100: Nat.le
+Nat_le is predeclared
+line 107: instLENat
+line 107: LE_inst1.(field).le0
+line 115: LT
+line 115: LT.(field).lt
+line 123: LT.lt
+line 129: Nat.lt
+line 137: instLTNat
+line 137: LT_inst1.(field).lt0
+line 150: Eq
+Eq is predeclared
+line 167: Exists
+line 167: Exists.(field).h
+line 167: Exists.(field).w
+line 228: Prosa.Util.SearchArg.earliest_pred_element_exists_case
+line 239: Option
+line 243: PUnit
+line 264: PProd
+line 264: PProd.(field).snd
+line 264: PProd.(field).fst
+line 289: Nat.below
+line 342: Nat.brecOn.go
+line 354: Nat.brecOn
+line 356: False
+line 361: Not
+line 374: Decidable
+line 413: Decidable.casesOn
+line 448: ite
+line 464: dite
+line 488: Nat.casesOn
+line 568: Nat.ble.match_1
+line 606: Nat.ble._f
+line 617: Nat.ble
+line 628: DecidableEq
+line 631: Unit
+line 652: Bool.casesOn
+line 656: Unit.unit
+line 731: Bool.decEq.match_1
+line 743: rfl
+line 766: Bool.noConfusionType
+line 810: Eq.ndrec
+line 848: Bool.noConfusion
+line 896: Bool.decEq
+line 901: instDecidableEqBool
+line 917: OfNat
+line 917: OfNat.(field).ofNat
+line 928: OfNat.ofNat
+line 939: instOfNatNat
+line 939: OfNat_inst1.(field).ofNat0
+line 955: False.elim
+line 990: Eq.casesOn
+line 1003: HEq
+line 1007: True
+line 1080: Nat.beq.match_1
+line 1101: Nat.beq._f
+line 1107: Nat.beq
+line 1143: _private.Init.Prelude0.noConfusion_of_Nat.aux.match_1_1
+line 1183: _private.Init.Prelude0.noConfusion_of_Nat.aux._f
+line 1183: PProd_inst1.(field).snd0
+line 1183: PProd_inst1.(field).fst0
+line 1191: _private.Init.Prelude0.noConfusion_of_Nat.aux
+line 1247: congrArg
+line 1299: noConfusion_of_Nat
+line 1315: Bool.ctorIdx
+line 1506: _private.Init.Prelude0.Nat.le_of_ble_eq_true.match_1_1
+line 1509: _private.Init.Prelude0.Nat.zero_le.match_1_1
+line 1553: Nat.zero_le._f
+line 1560: Nat.zero_le
+line 1609: Nat.le.below
+line 1668: Nat.le.brecOn
+line 1759: Nat.le.below.casesOn
+line 1794: Eq.symm
+line 1824: cast
+line 1919: eq_of_heq
+line 2448: _private.Init.Prelude0.Nat.succ_le_succ.match_1_7
+Eq_inst1 is predeclared
+line 2452: outParam
+line 2480: HAdd
+line 2480: HAdd.(field).hAdd
+line 2495: HAdd.hAdd
+line 2505: Add
+line 2505: Add.(field).add
+line 2514: Add.add
+line 2548: instHAdd
+line 2596: Nat.add.match_1
+line 2629: Nat.add._f
+line 2639: Nat.add
+Nat_add is predeclared
+line 2647: instAddNat
+line 2647: Add_inst1.(field).add0
+line 2726: Nat.succ_le_succ
+line 2726: HAdd_inst7.(field).hAdd0
+line 2783: Nat.le_of_ble_eq_true._f
+line 2795: Nat.le_of_ble_eq_true
+line 2814: absurd
+line 3188: _private.Init.Prelude0.Nat.ble_eq_true_of_le.match_1_7
+line 3208: _private.Init.Prelude0.Nat.ble_self_eq_true.match_1_1
+line 3242: Nat.ble_self_eq_true._f
+line 3249: Nat.ble_self_eq_true
+line 3252: _private.Init.Prelude0.Nat.ble_succ_eq_true.match_1_1
+line 3336: Nat.ble_succ_eq_true._f
+line 3347: Nat.ble_succ_eq_true
+line 3415: Nat.ble_eq_true_of_le
+line 3439: Nat.not_le_of_not_ble_eq_true
+line 3469: Nat.decLe
+line 3483: Nat.decLt
+line 3502: Prosa.Util.SearchArg.search_arg.match_3
+line 3532: Option.casesOn
+line 3568: Prosa.Util.SearchArg.search_arg.match_1
+line 3592: Bool.and.match_1
+line 3606: Bool.and
+line 3689: Prosa.Util.SearchArg.search_arg._f
+line 3711: Prosa.Util.SearchArg.search_arg
+line 3742: Prosa.Util.SearchArg.search_arg.eq_1
+line 3802: Prosa.Util.SearchArg.search_arg.eq_2
+line 3815: Iff
+line 3815: Iff.(field).mpr
+line 3815: Iff.(field).mp
+line 3833: Prosa.Util.SearchArg.search_arg_none
+line 3858: Prosa.Util.SearchArg.search_arg_not_none
+line 3877: Prosa.Util.SearchArg.search_arg_pred
+line 3891: Prosa.Util.SearchArg.search_arg_in_range
+line 3959: Prosa.Util.SearchArg.search_arg_extremum
+line 3968: DecidablePred
+line 3979: Subtype
+line 3979: Subtype.(field).property
+line 3979: Subtype.(field).val
+line 3990: Subtype.val
+line 4009: Acc
+
+
+Done!
+- 112 entries (193 possible instances).
+- 18 universe expressions
+- 646 names
+- 3234 expression nodes
+Max universe instance length 3.
+0 inductives have non syntactically arity types.
+File "./ImportedSearchArg.v", line 3, characters 0-28:
+Error:
+Error at line 4009 (for Acc): #IND 2 644 3233 1 645 3231 21
+Anomaly "File "src/lean.ml", line 1548, characters 6-12: Assertion failed."
+Please report at http://coq.inria.fr/bugs/.
+

@@ -1,0 +1,133 @@
+I.Acc
+     : forall _UU03b1_ : Type,
+       (_UU03b1_ -> _UU03b1_ -> SProp) -> _UU03b1_ -> SProp
+I.Acc_intro
+     : forall (_UU03b1_ : Type) (r : _UU03b1_ -> _UU03b1_ -> SProp)
+         (x : _UU03b1_),
+       (forall y : _UU03b1_, r y x -> I.Acc _UU03b1_ r y) ->
+       I.Acc _UU03b1_ r x
+I.Acc_rec
+     : forall (_UU03b1_ : Type) (r : _UU03b1_ -> _UU03b1_ -> SProp)
+         (P : forall a____at____internal__hyg0 : _UU03b1_,
+              I.Acc _UU03b1_ r a____at____internal__hyg0 -> Set),
+       (forall (x : _UU03b1_)
+          (h : forall y : _UU03b1_, r y x -> I.Acc _UU03b1_ r y),
+        (forall (y : _UU03b1_) (a____at____internal__hyg0 : r y x),
+         P y (h y a____at____internal__hyg0)) ->
+        P x (I.Acc_intro _UU03b1_ r x h)) ->
+       forall (a____at____internal__hyg0 : _UU03b1_)
+         (a : I.Acc _UU03b1_ r a____at____internal__hyg0),
+       P a____at____internal__hyg0 a
+I.Acc_rect
+     : forall (_UU03b1_ : Type) (r : _UU03b1_ -> _UU03b1_ -> SProp)
+         (P : forall a____at____internal__hyg0 : _UU03b1_,
+              I.Acc _UU03b1_ r a____at____internal__hyg0 -> Type),
+       (forall (x : _UU03b1_)
+          (h : forall y : _UU03b1_, r y x -> I.Acc _UU03b1_ r y),
+        (forall (y : _UU03b1_) (a____at____internal__hyg0 : r y x),
+         P y (h y a____at____internal__hyg0)) ->
+        P x (I.Acc_intro _UU03b1_ r x h)) ->
+       forall (a____at____internal__hyg0 : _UU03b1_)
+         (a : I.Acc _UU03b1_ r a____at____internal__hyg0),
+       P a____at____internal__hyg0 a
+I.WellFounded
+     : forall _UU03b1_ : Type, (_UU03b1_ -> _UU03b1_ -> SProp) -> SProp
+I.WellFounded_fix
+     : forall (_UU03b1_ : Type) (C : _UU03b1_ -> Type)
+         (r : _UU03b1_ -> _UU03b1_ -> SProp),
+       I.WellFounded _UU03b1_ r ->
+       (forall x : _UU03b1_, (forall y : _UU03b1_, r y x -> C y) -> C x) ->
+       forall x : _UU03b1_, C x
+I.Prosa_Util_SearchArg_search_arg
+     : forall T : Type,
+       (Lean.Nat -> T) ->
+       (T -> I.Bool) ->
+       (T -> T -> I.Bool) -> Lean.Nat -> Lean.Nat -> I.Option_inst1 Lean.Nat
+I.Prosa_Util_SearchArg_prop_on_ex_minn
+     : forall (P : Lean.Nat -> SProp) (pred : Lean.Nat -> I.Bool)
+         (ex : I.Exists Lean.Nat
+                 (fun n : Lean.Nat => Lean.eq (pred n) I.Bool_true)),
+       P
+         (I.Nat_find (fun n : Lean.Nat => Lean.eq (pred n) I.Bool_true)
+            (fun a : Lean.Nat => I.instDecidableEqBool (pred a) I.Bool_true)
+            ex) ->
+       I.Exists Lean.Nat
+         (fun n : Lean.Nat =>
+          Lean.And (P n)
+            (Lean.And (Lean.eq (pred n) I.Bool_true)
+               (forall n' : Lean.Nat,
+                Lean.eq (pred n') I.Bool_true ->
+                I.LE_le_inst1 Lean.Nat I.instLENat n n')))
+I.Acc_rec@{u} =
+fun (_UU03b1_ : Type) (r : _UU03b1_ -> _UU03b1_ -> SProp)
+  (P : forall a____at____internal__hyg0 : _UU03b1_,
+       I.Acc _UU03b1_ r a____at____internal__hyg0 -> Set) =>
+I.Acc_rect _UU03b1_ r P
+     : forall (_UU03b1_ : Type) (r : _UU03b1_ -> _UU03b1_ -> SProp)
+         (P : forall a____at____internal__hyg0 : _UU03b1_,
+              I.Acc _UU03b1_ r a____at____internal__hyg0 -> Set),
+       (forall (x : _UU03b1_)
+          (h : forall y : _UU03b1_, r y x -> I.Acc _UU03b1_ r y),
+        (forall (y : _UU03b1_) (a____at____internal__hyg0 : r y x),
+         P y (h y a____at____internal__hyg0)) ->
+        P x (I.Acc_intro _UU03b1_ r x h)) ->
+       forall (a____at____internal__hyg0 : _UU03b1_)
+         (a : I.Acc _UU03b1_ r a____at____internal__hyg0),
+       P a____at____internal__hyg0 a
+
+I.Acc_rec relies on an unsafe universe hierarchy
+Arguments I.Acc_rec _UU03b1_%type_scope (r P f)%function_scope
+  a____at____internal__hyg0 a
+I.Acc_rect@{u u0} =
+fun (_UU03b1_ : Type) (r : _UU03b1_ -> _UU03b1_ -> SProp)
+  (P : forall a____at____internal__hyg0 : _UU03b1_,
+       I.Acc _UU03b1_ r a____at____internal__hyg0 -> Type)
+  (f : forall (x : _UU03b1_)
+         (h : forall y : _UU03b1_, r y x -> I.Acc _UU03b1_ r y),
+       (forall (y : _UU03b1_) (a____at____internal__hyg0 : r y x),
+        P y (h y a____at____internal__hyg0)) ->
+       P x (I.Acc_intro _UU03b1_ r x h)) =>
+fix F
+  (a____at____internal__hyg0 : _UU03b1_)
+  (a : I.Acc _UU03b1_ r a____at____internal__hyg0) {struct a} :
+    P a____at____internal__hyg0 a :=
+  match
+    a as a0 in (I.Acc _ _ a____at____internal__hyg1)
+    return (P a____at____internal__hyg1 a0)
+  with
+  | I.Acc_intro _ _ x h =>
+      f x h
+        (fun (y : _UU03b1_) (a____at____internal__hyg1 : r y x) =>
+         F y (h y a____at____internal__hyg1))
+  end
+     : forall (_UU03b1_ : Type) (r : _UU03b1_ -> _UU03b1_ -> SProp)
+         (P : forall a____at____internal__hyg0 : _UU03b1_,
+              I.Acc _UU03b1_ r a____at____internal__hyg0 -> Type),
+       (forall (x : _UU03b1_)
+          (h : forall y : _UU03b1_, r y x -> I.Acc _UU03b1_ r y),
+        (forall (y : _UU03b1_) (a____at____internal__hyg0 : r y x),
+         P y (h y a____at____internal__hyg0)) ->
+        P x (I.Acc_intro _UU03b1_ r x h)) ->
+       forall (a____at____internal__hyg0 : _UU03b1_)
+         (a : I.Acc _UU03b1_ r a____at____internal__hyg0),
+       P a____at____internal__hyg0 a
+
+I.Acc_rect relies on an unsafe universe hierarchy
+Arguments I.Acc_rect _UU03b1_%type_scope (r P f)%function_scope
+  a____at____internal__hyg0 a
+     = I.Acc_rec unit phase2_empty_rel
+         (fun (a____at____internal__hyg0 : unit)
+            (_ : I.Acc unit phase2_empty_rel a____at____internal__hyg0) =>
+          nat)
+         (fun (x : unit)
+            (h : forall y : unit,
+                 phase2_empty_rel y x -> I.Acc unit phase2_empty_rel y)
+            (_ : forall (y : unit)
+                   (a____at____internal__hyg0 : phase2_empty_rel y x),
+                 (fun (a____at____internal__hyg1 : unit)
+                    (_ : I.Acc unit phase2_empty_rel
+                           a____at____internal__hyg1) =>
+                  nat) y (h y a____at____internal__hyg0)) =>
+          7)
+         tt phase2_unit_acc
+     : nat
