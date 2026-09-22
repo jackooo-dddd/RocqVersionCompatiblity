@@ -1,0 +1,22 @@
+DIGEST 14f71e3ec62ae16831a5373b0328f7ae
+Fprosa.GeneratedListSimpleSource
+R29:37 mathcomp.ssreflect.ssreflect <> <> lib
+R39:45 mathcomp.ssreflect.ssrbool <> <> lib
+R47:52 mathcomp.ssreflect.eqtype <> <> lib
+R54:59 mathcomp.ssreflect.ssrnat <> <> lib
+R61:63 mathcomp.ssreflect.seq <> <> lib
+R65:68 mathcomp.ssreflect.path <> <> lib
+R70:76 mathcomp.ssreflect.fintype <> <> lib
+R78:82 mathcomp.ssreflect.bigop <> <> lib
+R100:117 mathcomp.zify.zify <> <> lib
+R135:152 prosa.util.tactics <> <> lib
+R170:188 prosa.util.supremum <> <> lib
+mod 199:223 <> GeneratedListSimpleSource
+def 238:241 GeneratedListSimpleSource max0
+R246:250 mathcomp.ssreflect.seq <> foldl def
+R252:255 mathcomp.ssreflect.ssrnat <> maxn def
+def 272:277 GeneratedListSimpleSource first0
+R282:285 mathcomp.ssreflect.seq <> head def
+def 302:306 GeneratedListSimpleSource last0
+R311:314 mathcomp.ssreflect.seq <> last def
+R324:348 prosa.GeneratedListSimpleSource GeneratedListSimpleSource <> mod

@@ -1,0 +1,80 @@
+DIGEST 31e04241b64c93fa1a0d390bb59bed9e
+FFoundationCertificates.PropSPropFoundation
+R111:114 LeanImport.Lean <> <> lib
+ind 126:142 <> StrictlyInhabited
+constr 168:184 <> strictly_inhabits
+binder 145:145 <> P:1
+R189:192 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R188:188 FoundationCertificates.PropSPropFoundation <> P:1 var
+R193:209 FoundationCertificates.PropSPropFoundation <> StrictlyInhabited:2 ind
+R211:211 FoundationCertificates.PropSPropFoundation <> P:1 var
+R225:241 FoundationCertificates.PropSPropFoundation <> strictly_inhabits constr
+R225:241 FoundationCertificates.PropSPropFoundation <> strictly_inhabits constr
+def 262:271 <> embed_prop
+binder 274:274 <> P:4
+R287:290 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R286:286 FoundationCertificates.PropSPropFoundation <> P:4 var
+R291:307 FoundationCertificates.PropSPropFoundation <> StrictlyInhabited variant
+R309:309 FoundationCertificates.PropSPropFoundation <> P:4 var
+binder 320:320 <> p:5
+R325:341 FoundationCertificates.PropSPropFoundation <> strictly_inhabits constr
+R343:343 FoundationCertificates.PropSPropFoundation <> p:5 var
+ax 455:470 <> interpret_strict
+binder 483:483 <> P:6
+R512:515 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R493:509 FoundationCertificates.PropSPropFoundation <> StrictlyInhabited variant
+R511:511 FoundationCertificates.PropSPropFoundation <> P:6 var
+R516:516 FoundationCertificates.PropSPropFoundation <> P:6 var
+def 531:551 <> coq_eq_to_imported_eq
+binder 554:554 <> A:9
+R571:571 FoundationCertificates.PropSPropFoundation <> A:9 var
+binder 565:565 <> x:10
+binder 567:567 <> y:11
+R592:595 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R580:587 Corelib.Init.Logic <> eq ind
+R591:591 FoundationCertificates.PropSPropFoundation <> y:11 var
+R589:589 FoundationCertificates.PropSPropFoundation <> x:10 var
+R596:597 LeanImport.Lean <> eq ind
+R601:601 FoundationCertificates.PropSPropFoundation <> y:11 var
+R599:599 FoundationCertificates.PropSPropFoundation <> x:10 var
+binder 612:612 <> H:12
+R623:623 FoundationCertificates.PropSPropFoundation <> H:12 var
+R628:635 Corelib.Init.Logic <> eq ind
+R648:649 LeanImport.Lean <> eq ind
+R653:653 FoundationCertificates.PropSPropFoundation <> z:14 var
+R651:651 FoundationCertificates.PropSPropFoundation <> x:10 var
+R673:685 Corelib.Init.Logic <> eq_refl constr
+R690:696 LeanImport.Lean <> eq_refl constr
+R698:698 FoundationCertificates.PropSPropFoundation <> x:10 var
+def 728:748 <> imported_eq_to_coq_eq
+binder 751:751 <> A:15
+R768:768 FoundationCertificates.PropSPropFoundation <> A:15 var
+binder 762:762 <> x:16
+binder 764:764 <> y:17
+R783:786 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R777:778 LeanImport.Lean <> eq ind
+R782:782 FoundationCertificates.PropSPropFoundation <> y:17 var
+R780:780 FoundationCertificates.PropSPropFoundation <> x:16 var
+R787:794 Corelib.Init.Logic <> eq ind
+R798:798 FoundationCertificates.PropSPropFoundation <> y:17 var
+R796:796 FoundationCertificates.PropSPropFoundation <> x:16 var
+binder 809:809 <> H:18
+R820:820 FoundationCertificates.PropSPropFoundation <> H:18 var
+R825:826 LeanImport.Lean <> eq ind
+R839:846 Corelib.Init.Logic <> eq ind
+R850:850 FoundationCertificates.PropSPropFoundation <> z:20 var
+R848:848 FoundationCertificates.PropSPropFoundation <> x:16 var
+R870:876 LeanImport.Lean <> eq_refl constr
+R883:895 Corelib.Init.Logic <> eq_refl constr
+R897:897 FoundationCertificates.PropSPropFoundation <> x:16 var
+rec 923:934 <> PropSPropRel
+proj 973:985 <> prop_to_sprop
+proj 999:1011 <> sprop_to_prop
+binder 937:937 <> P:21
+binder 948:948 <> Q:22
+R990:993 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R989:989 FoundationCertificates.PropSPropFoundation <> P:21 var
+R994:994 FoundationCertificates.PropSPropFoundation <> Q:22 var
+R1016:1019 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R1015:1015 FoundationCertificates.PropSPropFoundation <> Q:22 var
+R1020:1020 FoundationCertificates.PropSPropFoundation <> P:21 var

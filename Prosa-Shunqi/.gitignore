@@ -1,0 +1,11 @@
+/.lake/
+/Validation/.work/
+/Validation/logs/
+*.olean
+*.ilean
+*.c
+*.o
+__pycache__/
+*.pyc
+.lia.cache/
+.lia.cache

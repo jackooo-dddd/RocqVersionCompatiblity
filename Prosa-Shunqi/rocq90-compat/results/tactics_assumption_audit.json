@@ -1,0 +1,18 @@
+{
+  "audit_policy": "fail_closed",
+  "certificates": {
+    "modusponens_statement": {
+      "certificate": "modusponens_statement_certificate",
+      "closed": true,
+      "importer_foundation": [],
+      "prop_sprop_foundation": [],
+      "raw_section_sha256": "f468e824263aaedb17f6de56c1ed01f1a0c516ee7f025d58f963f26d6ffbc699",
+      "rocq_sprop_definitional_uip": [],
+      "semantic_premises": [],
+      "source_theorem_dependency": false,
+      "status": "CERTIFIED",
+      "target_theorem_dependency": false,
+      "unexpected": []
+    }
+  }
+}

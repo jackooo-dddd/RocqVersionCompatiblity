@@ -1,0 +1,1386 @@
+DIGEST 13d75429885654f5520da9dd66950456
+Fprosa.GeneratedListLastSource
+R29:37 mathcomp.ssreflect.ssreflect <> <> lib
+R39:45 mathcomp.ssreflect.ssrbool <> <> lib
+R47:52 mathcomp.ssreflect.eqtype <> <> lib
+R54:59 mathcomp.ssreflect.ssrnat <> <> lib
+R61:63 mathcomp.ssreflect.seq <> <> lib
+R65:68 mathcomp.ssreflect.path <> <> lib
+R70:76 mathcomp.ssreflect.fintype <> <> lib
+R78:82 mathcomp.ssreflect.bigop <> <> lib
+R100:117 mathcomp.zify.zify <> <> lib
+R135:152 prosa.util.tactics <> <> lib
+R170:188 prosa.util.supremum <> <> lib
+mod 199:221 <> GeneratedListLastSource
+def 236:240 GeneratedListLastSource last0
+R245:248 mathcomp.ssreflect.seq <> last def
+def 265:268 GeneratedListLastSource max0
+R273:277 mathcomp.ssreflect.seq <> foldl def
+R279:282 mathcomp.ssreflect.ssrnat <> maxn def
+def 299:318 GeneratedListLastSource statement_last0_cons
+R345:347 Corelib.Init.Datatypes <> nat ind
+binder 341:341 <> x:1
+R356:358 mathcomp.ssreflect.seq <> seq abbrev
+R360:362 Corelib.Init.Datatypes <> nat ind
+binder 351:352 <> xs:2
+R376:379 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R368:371 Corelib.Init.Logic <> ::type_scope:x_'<>'_x not
+R366:367 prosa.GeneratedListLastSource <> xs:2 var
+R372:375 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_']' not
+R395:397 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R380:384 prosa.GeneratedListLastSource GeneratedListLastSource last0 def
+R388:391 mathcomp.ssreflect.seq <> ::seq_scope:x_'::'_x not
+R387:387 prosa.GeneratedListLastSource <> x:1 var
+R392:393 prosa.GeneratedListLastSource <> xs:2 var
+R398:402 prosa.GeneratedListLastSource GeneratedListLastSource last0 def
+R404:405 prosa.GeneratedListLastSource <> xs:2 var
+def 421:439 GeneratedListLastSource statement_last0_cat
+R473:475 mathcomp.ssreflect.seq <> seq abbrev
+R477:479 Corelib.Init.Datatypes <> nat ind
+binder 461:464 <> xs_l:3
+binder 466:469 <> xs_r:4
+R494:497 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R486:489 Corelib.Init.Logic <> ::type_scope:x_'<>'_x not
+R482:485 prosa.GeneratedListLastSource <> xs_r:4 var
+R490:493 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_']' not
+R518:520 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R498:502 prosa.GeneratedListLastSource GeneratedListLastSource last0 def
+R509:512 mathcomp.ssreflect.seq <> ::seq_scope:x_'++'_x not
+R505:508 prosa.GeneratedListLastSource <> xs_l:3 var
+R513:516 prosa.GeneratedListLastSource <> xs_r:4 var
+R521:525 prosa.GeneratedListLastSource GeneratedListLastSource last0 def
+R527:530 prosa.GeneratedListLastSource <> xs_r:4 var
+def 546:564 GeneratedListLastSource statement_last0_nth
+R591:593 mathcomp.ssreflect.seq <> seq abbrev
+R595:597 Corelib.Init.Datatypes <> nat ind
+binder 586:587 <> xs:5
+R608:610 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R600:604 prosa.GeneratedListLastSource GeneratedListLastSource last0 def
+R606:607 prosa.GeneratedListLastSource <> xs:5 var
+R611:613 mathcomp.ssreflect.seq <> nth def
+R620:620 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'.-1' not
+R628:631 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'.-1' not
+R621:624 mathcomp.ssreflect.seq <> size def
+R626:627 prosa.GeneratedListLastSource <> xs:5 var
+R617:618 prosa.GeneratedListLastSource <> xs:5 var
+def 647:668 GeneratedListLastSource statement_last0_ex_cat
+R695:697 Corelib.Init.Datatypes <> nat ind
+binder 691:691 <> x:6
+R706:708 mathcomp.ssreflect.seq <> seq abbrev
+R710:712 Corelib.Init.Datatypes <> nat ind
+binder 701:702 <> xs:7
+R726:729 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R718:721 Corelib.Init.Logic <> ::type_scope:x_'<>'_x not
+R716:717 prosa.GeneratedListLastSource <> xs:7 var
+R722:725 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_']' not
+R742:745 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R738:740 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R730:734 prosa.GeneratedListLastSource GeneratedListLastSource last0 def
+R736:737 prosa.GeneratedListLastSource <> xs:7 var
+R741:741 prosa.GeneratedListLastSource <> x:6 var
+R746:752 Corelib.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R766:767 Corelib.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R759:761 mathcomp.ssreflect.seq <> seq abbrev
+R763:765 Corelib.Init.Datatypes <> nat ind
+binder 753:755 <> xsh:8
+R781:783 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R771:774 mathcomp.ssreflect.seq <> ::seq_scope:x_'++'_x not
+R768:770 prosa.GeneratedListLastSource <> xsh:8 var
+R775:778 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_x_']' not
+R780:780 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_x_']' not
+R779:779 prosa.GeneratedListLastSource <> x:6 var
+R784:785 prosa.GeneratedListLastSource <> xs:7 var
+def 801:822 GeneratedListLastSource statement_last0_filter
+R849:851 Corelib.Init.Datatypes <> nat ind
+binder 845:845 <> x:9
+R860:862 mathcomp.ssreflect.seq <> seq abbrev
+R864:866 Corelib.Init.Datatypes <> nat ind
+binder 855:856 <> xs:10
+R877:880 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R874:876 Corelib.Init.Datatypes <> nat ind
+R881:884 Corelib.Init.Datatypes <> bool ind
+binder 870:870 <> P:11
+R898:901 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R890:893 Corelib.Init.Logic <> ::type_scope:x_'<>'_x not
+R888:889 prosa.GeneratedListLastSource <> xs:10 var
+R894:897 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_']' not
+R914:917 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R910:912 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R902:906 prosa.GeneratedListLastSource GeneratedListLastSource last0 def
+R908:909 prosa.GeneratedListLastSource <> xs:10 var
+R913:913 prosa.GeneratedListLastSource <> x:9 var
+R921:924 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R918:918 prosa.GeneratedListLastSource <> P:11 var
+R920:920 prosa.GeneratedListLastSource <> x:9 var
+R952:954 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R925:929 prosa.GeneratedListLastSource GeneratedListLastSource last0 def
+R931:935 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R938:941 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R944:946 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R951:951 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+binder 936:937 <> x0:12
+R947:947 prosa.GeneratedListLastSource <> P:11 var
+R949:950 prosa.GeneratedListLastSource <> x0:12 var
+R942:943 prosa.GeneratedListLastSource <> xs:10 var
+R955:955 prosa.GeneratedListLastSource <> x:9 var
+def 971:989 GeneratedListLastSource statement_max0_cons
+R1016:1018 Corelib.Init.Datatypes <> nat ind
+binder 1012:1012 <> x:13
+R1027:1029 mathcomp.ssreflect.seq <> seq abbrev
+R1031:1033 Corelib.Init.Datatypes <> nat ind
+binder 1022:1023 <> xs:14
+R1051:1053 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R1037:1040 prosa.GeneratedListLastSource GeneratedListLastSource max0 def
+R1044:1047 mathcomp.ssreflect.seq <> ::seq_scope:x_'::'_x not
+R1043:1043 prosa.GeneratedListLastSource <> x:13 var
+R1048:1049 prosa.GeneratedListLastSource <> xs:14 var
+R1054:1057 mathcomp.ssreflect.ssrnat <> maxn def
+R1062:1065 prosa.GeneratedListLastSource GeneratedListLastSource max0 def
+R1067:1068 prosa.GeneratedListLastSource <> xs:14 var
+R1059:1059 prosa.GeneratedListLastSource <> x:13 var
+def 1085:1113 GeneratedListLastSource statement_max0_of_uniform_set
+R1140:1180 mathcomp.ssreflect.ssrnat <> Datatypes_nat__canonical__eqtype_Equality def
+binder 1136:1136 <> k:15
+R1189:1191 mathcomp.ssreflect.seq <> seq abbrev
+R1193:1233 mathcomp.ssreflect.ssrnat <> Datatypes_nat__canonical__eqtype_Equality def
+binder 1184:1185 <> xs:16
+R1248:1251 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R1238:1240 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'<'_x not
+R1241:1244 mathcomp.ssreflect.seq <> size def
+R1246:1247 prosa.GeneratedListLastSource <> xs:16 var
+R1252:1252 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R1324:1328 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R1264:1304 mathcomp.ssreflect.ssrnat <> Datatypes_nat__canonical__eqtype_Equality def
+binder 1260:1260 <> x:17
+R1315:1318 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R1308:1312 Corelib.ssr.ssrbool <> ::bool_scope:x_'\in'_x not
+R1307:1307 prosa.GeneratedListLastSource <> x:17 var
+R1313:1314 prosa.GeneratedListLastSource <> xs:16 var
+R1320:1322 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R1319:1319 prosa.GeneratedListLastSource <> x:17 var
+R1323:1323 prosa.GeneratedListLastSource <> k:15 var
+R1336:1338 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R1329:1332 prosa.GeneratedListLastSource GeneratedListLastSource max0 def
+R1334:1335 prosa.GeneratedListLastSource <> xs:16 var
+R1339:1339 prosa.GeneratedListLastSource <> k:15 var
+def 1355:1374 GeneratedListLastSource statement_in_max0_le
+R1402:1413 mathcomp.ssreflect.seq <> seq_predType canonstruc
+R1415:1455 mathcomp.ssreflect.ssrnat <> Datatypes_nat__canonical__eqtype_Equality def
+binder 1397:1398 <> xs:18
+R1463:1465 Corelib.Init.Datatypes <> nat ind
+binder 1459:1459 <> x:19
+R1477:1480 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R1470:1474 Corelib.ssr.ssrbool <> ::bool_scope:x_'\in'_x not
+R1469:1469 prosa.GeneratedListLastSource <> x:19 var
+R1475:1476 prosa.GeneratedListLastSource <> xs:18 var
+R1482:1485 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'<='_x not
+R1481:1481 prosa.GeneratedListLastSource <> x:19 var
+R1486:1489 prosa.GeneratedListLastSource GeneratedListLastSource max0 def
+R1491:1492 prosa.GeneratedListLastSource <> xs:18 var
+def 1508:1528 GeneratedListLastSource statement_max0_in_seq
+R1555:1557 mathcomp.ssreflect.seq <> seq abbrev
+R1559:1561 Corelib.Init.Datatypes <> nat ind
+binder 1550:1551 <> xs:20
+R1574:1577 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R1566:1569 Corelib.Init.Logic <> ::type_scope:x_'<>'_x not
+R1564:1565 prosa.GeneratedListLastSource <> xs:20 var
+R1570:1573 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_']' not
+R1585:1589 Corelib.ssr.ssrbool <> ::bool_scope:x_'\in'_x not
+R1578:1581 prosa.GeneratedListLastSource GeneratedListLastSource max0 def
+R1583:1584 prosa.GeneratedListLastSource <> xs:20 var
+R1590:1591 prosa.GeneratedListLastSource <> xs:20 var
+def 1607:1629 GeneratedListLastSource statement_max0_2cons_eq
+R1656:1658 Corelib.Init.Datatypes <> nat ind
+binder 1652:1652 <> x:21
+R1667:1669 mathcomp.ssreflect.seq <> seq abbrev
+R1671:1673 Corelib.Init.Datatypes <> nat ind
+binder 1662:1663 <> xs:22
+R1696:1698 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R1677:1680 prosa.GeneratedListLastSource GeneratedListLastSource max0 def
+R1682:1685 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_x_','_x_','_'..'_','_x_'&'_x_']' not
+R1687:1688 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_x_','_x_','_'..'_','_x_'&'_x_']' not
+R1690:1692 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_x_','_x_','_'..'_','_x_'&'_x_']' not
+R1695:1695 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_x_','_x_','_'..'_','_x_'&'_x_']' not
+R1686:1686 prosa.GeneratedListLastSource <> x:21 var
+R1689:1689 prosa.GeneratedListLastSource <> x:21 var
+R1693:1694 prosa.GeneratedListLastSource <> xs:22 var
+R1699:1702 prosa.GeneratedListLastSource GeneratedListLastSource max0 def
+R1706:1709 mathcomp.ssreflect.seq <> ::seq_scope:x_'::'_x not
+R1705:1705 prosa.GeneratedListLastSource <> x:21 var
+R1710:1711 prosa.GeneratedListLastSource <> xs:22 var
+def 1728:1750 GeneratedListLastSource statement_max0_2cons_le
+R1781:1783 Corelib.Init.Datatypes <> nat ind
+binder 1773:1774 <> x1:23
+binder 1776:1777 <> x2:24
+R1792:1794 mathcomp.ssreflect.seq <> seq abbrev
+R1796:1798 Corelib.Init.Datatypes <> nat ind
+binder 1787:1788 <> xs:25
+R1810:1813 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R1804:1807 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'<='_x not
+R1802:1803 prosa.GeneratedListLastSource <> x1:23 var
+R1808:1809 prosa.GeneratedListLastSource <> x2:24 var
+R1835:1837 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R1814:1817 prosa.GeneratedListLastSource GeneratedListLastSource max0 def
+R1819:1822 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_x_','_x_','_'..'_','_x_'&'_x_']' not
+R1825:1826 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_x_','_x_','_'..'_','_x_'&'_x_']' not
+R1829:1831 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_x_','_x_','_'..'_','_x_'&'_x_']' not
+R1834:1834 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_x_','_x_','_'..'_','_x_'&'_x_']' not
+R1823:1824 prosa.GeneratedListLastSource <> x1:23 var
+R1827:1828 prosa.GeneratedListLastSource <> x2:24 var
+R1832:1833 prosa.GeneratedListLastSource <> xs:25 var
+R1838:1841 prosa.GeneratedListLastSource GeneratedListLastSource max0 def
+R1846:1849 mathcomp.ssreflect.seq <> ::seq_scope:x_'::'_x not
+R1844:1845 prosa.GeneratedListLastSource <> x2:24 var
+R1850:1851 prosa.GeneratedListLastSource <> xs:25 var
+def 1868:1886 GeneratedListLastSource statement_max0_rem0
+R1913:1915 mathcomp.ssreflect.seq <> seq abbrev
+R1917:1919 Corelib.Init.Datatypes <> nat ind
+binder 1908:1909 <> xs:26
+R1948:1950 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R1922:1925 prosa.GeneratedListLastSource GeneratedListLastSource max0 def
+R1927:1931 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R1933:1936 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R1939:1941 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R1947:1947 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+binder 1932:1932 <> x:27
+R1943:1945 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'<'_x not
+R1946:1946 prosa.GeneratedListLastSource <> x:27 var
+R1937:1938 prosa.GeneratedListLastSource <> xs:26 var
+R1951:1954 prosa.GeneratedListLastSource GeneratedListLastSource max0 def
+R1956:1957 prosa.GeneratedListLastSource <> xs:26 var
+def 1973:2007 GeneratedListLastSource statement_last_of_seq_le_max_of_seq
+R2034:2036 mathcomp.ssreflect.seq <> seq abbrev
+R2038:2040 Corelib.Init.Datatypes <> nat ind
+binder 2029:2030 <> xs:28
+R2051:2054 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'<='_x not
+R2043:2047 prosa.GeneratedListLastSource GeneratedListLastSource last0 def
+R2049:2050 prosa.GeneratedListLastSource <> xs:28 var
+R2055:2058 prosa.GeneratedListLastSource GeneratedListLastSource max0 def
+R2060:2061 prosa.GeneratedListLastSource <> xs:28 var
+def 2077:2107 GeneratedListLastSource statement_max_of_dominating_seq
+R2137:2139 mathcomp.ssreflect.seq <> seq abbrev
+R2141:2143 Corelib.Init.Datatypes <> nat ind
+binder 2129:2130 <> xs:29
+binder 2132:2133 <> ys:30
+R2146:2146 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R2187:2191 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R2158:2160 Corelib.Init.Datatypes <> nat ind
+binder 2154:2154 <> n:31
+R2173:2176 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'<='_x not
+R2163:2165 mathcomp.ssreflect.seq <> nth def
+R2172:2172 prosa.GeneratedListLastSource <> n:31 var
+R2169:2170 prosa.GeneratedListLastSource <> xs:29 var
+R2177:2179 mathcomp.ssreflect.seq <> nth def
+R2186:2186 prosa.GeneratedListLastSource <> n:31 var
+R2183:2184 prosa.GeneratedListLastSource <> ys:30 var
+R2199:2202 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'<='_x not
+R2192:2195 prosa.GeneratedListLastSource GeneratedListLastSource max0 def
+R2197:2198 prosa.GeneratedListLastSource <> xs:29 var
+R2203:2206 prosa.GeneratedListLastSource GeneratedListLastSource max0 def
+R2208:2209 prosa.GeneratedListLastSource <> ys:30 var
+def 2225:2243 GeneratedListLastSource statement_nth0_cons
+R2270:2272 Corelib.Init.Datatypes <> nat ind
+binder 2266:2266 <> x:32
+R2281:2283 mathcomp.ssreflect.seq <> seq abbrev
+R2285:2287 Corelib.Init.Datatypes <> nat ind
+binder 2276:2277 <> xs:33
+R2295:2297 Corelib.Init.Datatypes <> nat ind
+binder 2291:2291 <> n:34
+R2306:2309 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R2302:2304 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'<'_x not
+R2305:2305 prosa.GeneratedListLastSource <> n:34 var
+R2327:2329 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R2310:2312 mathcomp.ssreflect.seq <> nth def
+R2326:2326 prosa.GeneratedListLastSource <> n:34 var
+R2318:2321 mathcomp.ssreflect.seq <> ::seq_scope:x_'::'_x not
+R2317:2317 prosa.GeneratedListLastSource <> x:32 var
+R2322:2323 prosa.GeneratedListLastSource <> xs:33 var
+R2330:2332 mathcomp.ssreflect.seq <> nth def
+R2340:2342 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'.-1' not
+R2339:2339 prosa.GeneratedListLastSource <> n:34 var
+R2336:2337 prosa.GeneratedListLastSource <> xs:33 var
+def 2358:2373 GeneratedListLastSource statement_rem_in
+R2400:2405 mathcomp.ssreflect.eqtype Equality.Exports eqType abbrev
+binder 2396:2396 <> X:35
+R2415:2415 prosa.GeneratedListLastSource <> X:35 var
+binder 2409:2409 <> x:36
+binder 2411:2411 <> y:37
+R2424:2426 mathcomp.ssreflect.seq <> seq abbrev
+R2428:2428 prosa.GeneratedListLastSource <> X:35 var
+binder 2419:2420 <> xs:38
+R2453:2456 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R2433:2437 Corelib.ssr.ssrbool <> ::bool_scope:x_'\in'_x not
+R2432:2432 prosa.GeneratedListLastSource <> x:36 var
+R2438:2440 mathcomp.ssreflect.seq <> rem def
+R2451:2452 prosa.GeneratedListLastSource <> xs:38 var
+R2449:2449 prosa.GeneratedListLastSource <> y:37 var
+R2446:2446 prosa.GeneratedListLastSource <> X:35 var
+R2458:2462 Corelib.ssr.ssrbool <> ::bool_scope:x_'\in'_x not
+R2457:2457 prosa.GeneratedListLastSource <> x:36 var
+R2463:2464 prosa.GeneratedListLastSource <> xs:38 var
+def 2480:2507 GeneratedListLastSource statement_in_neq_impl_rem_in
+R2534:2539 mathcomp.ssreflect.eqtype Equality.Exports eqType abbrev
+binder 2530:2530 <> X:39
+R2549:2549 prosa.GeneratedListLastSource <> X:39 var
+binder 2543:2543 <> x:40
+binder 2545:2545 <> y:41
+R2558:2560 mathcomp.ssreflect.seq <> seq abbrev
+R2562:2562 prosa.GeneratedListLastSource <> X:39 var
+binder 2553:2554 <> xs:42
+R2574:2577 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R2567:2571 Corelib.ssr.ssrbool <> ::bool_scope:x_'\in'_x not
+R2566:2566 prosa.GeneratedListLastSource <> x:40 var
+R2572:2573 prosa.GeneratedListLastSource <> xs:42 var
+R2584:2587 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R2579:2582 mathcomp.ssreflect.eqtype <> ::bool_scope:x_'!='_x not
+R2578:2578 prosa.GeneratedListLastSource <> x:40 var
+R2583:2583 prosa.GeneratedListLastSource <> y:41 var
+R2589:2593 Corelib.ssr.ssrbool <> ::bool_scope:x_'\in'_x not
+R2588:2588 prosa.GeneratedListLastSource <> x:40 var
+R2594:2596 mathcomp.ssreflect.seq <> rem def
+R2607:2608 prosa.GeneratedListLastSource <> xs:42 var
+R2605:2605 prosa.GeneratedListLastSource <> y:41 var
+R2602:2602 prosa.GeneratedListLastSource <> X:39 var
+def 2624:2648 GeneratedListLastSource statement_filter_size_rem
+R2675:2680 mathcomp.ssreflect.eqtype Equality.Exports eqType abbrev
+binder 2671:2671 <> X:43
+R2688:2688 prosa.GeneratedListLastSource <> X:43 var
+binder 2684:2684 <> x:44
+R2697:2699 mathcomp.ssreflect.seq <> seq abbrev
+R2701:2701 prosa.GeneratedListLastSource <> X:43 var
+binder 2692:2693 <> xs:45
+R2709:2712 Corelib.ssr.ssrbool <> pred def
+R2714:2714 prosa.GeneratedListLastSource <> X:43 var
+binder 2705:2705 <> P:46
+R2726:2729 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R2719:2723 Corelib.ssr.ssrbool <> ::bool_scope:x_'\in'_x not
+R2718:2718 prosa.GeneratedListLastSource <> x:44 var
+R2724:2725 prosa.GeneratedListLastSource <> xs:45 var
+R2733:2736 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R2730:2730 prosa.GeneratedListLastSource <> P:46 var
+R2732:2732 prosa.GeneratedListLastSource <> x:44 var
+R2761:2763 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R2737:2740 mathcomp.ssreflect.seq <> size def
+R2742:2746 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R2748:2751 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R2754:2756 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R2760:2760 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+binder 2747:2747 <> y:47
+R2757:2757 prosa.GeneratedListLastSource <> P:46 var
+R2759:2759 prosa.GeneratedListLastSource <> y:47 var
+R2752:2753 prosa.GeneratedListLastSource <> xs:45 var
+R2801:2803 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'+'_x not
+R2764:2767 mathcomp.ssreflect.seq <> size def
+R2769:2773 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R2775:2778 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R2794:2796 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R2800:2800 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+binder 2774:2774 <> y:48
+R2797:2797 prosa.GeneratedListLastSource <> P:46 var
+R2799:2799 prosa.GeneratedListLastSource <> y:48 var
+R2779:2781 mathcomp.ssreflect.seq <> rem def
+R2792:2793 prosa.GeneratedListLastSource <> xs:45 var
+R2790:2790 prosa.GeneratedListLastSource <> x:44 var
+R2787:2787 prosa.GeneratedListLastSource <> X:43 var
+def 2820:2847 GeneratedListLastSource statement_in_seq_equiv_undup
+R2874:2879 mathcomp.ssreflect.eqtype Equality.Exports eqType abbrev
+binder 2870:2870 <> X:49
+R2888:2890 mathcomp.ssreflect.seq <> seq abbrev
+R2892:2892 prosa.GeneratedListLastSource <> X:49 var
+binder 2883:2884 <> xs:50
+R2900:2900 prosa.GeneratedListLastSource <> X:49 var
+binder 2896:2896 <> x:51
+R2904:2904 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R2919:2923 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R2932:2932 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R2906:2910 Corelib.ssr.ssrbool <> ::bool_scope:x_'\in'_x not
+R2905:2905 prosa.GeneratedListLastSource <> x:51 var
+R2911:2915 mathcomp.ssreflect.seq <> undup def
+R2917:2918 prosa.GeneratedListLastSource <> xs:50 var
+R2925:2929 Corelib.ssr.ssrbool <> ::bool_scope:x_'\in'_x not
+R2924:2924 prosa.GeneratedListLastSource <> x:51 var
+R2930:2931 prosa.GeneratedListLastSource <> xs:50 var
+def 2948:2966 GeneratedListLastSource statement_seq1_some
+R2993:2998 mathcomp.ssreflect.eqtype Equality.Exports eqType abbrev
+binder 2989:2989 <> T:52
+R3008:3008 prosa.GeneratedListLastSource <> T:52 var
+binder 3002:3002 <> x:53
+binder 3004:3004 <> y:54
+R3012:3012 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R3029:3033 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R3050:3050 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R3019:3022 mathcomp.ssreflect.eqtype <> ::bool_scope:x_'=='_x not
+R3013:3016 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_x_']' not
+R3018:3018 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_x_']' not
+R3017:3017 prosa.GeneratedListLastSource <> x:53 var
+R3023:3026 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_x_']' not
+R3028:3028 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_x_']' not
+R3027:3027 prosa.GeneratedListLastSource <> y:54 var
+R3040:3043 mathcomp.ssreflect.eqtype <> ::bool_scope:x_'=='_x not
+R3034:3037 Corelib.Init.Datatypes <> Some constr
+R3039:3039 prosa.GeneratedListLastSource <> x:53 var
+R3044:3047 Corelib.Init.Datatypes <> Some constr
+R3049:3049 prosa.GeneratedListLastSource <> y:54 var
+def 3066:3088 GeneratedListLastSource statement_seq_elim_last
+binder 3111:3111 <> X:55
+R3126:3128 Corelib.Init.Datatypes <> nat ind
+binder 3122:3122 <> n:56
+R3137:3139 mathcomp.ssreflect.seq <> seq abbrev
+R3141:3141 prosa.GeneratedListLastSource <> X:55 var
+binder 3132:3133 <> xs:57
+R3159:3162 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R3152:3154 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R3145:3148 mathcomp.ssreflect.seq <> size def
+R3150:3151 prosa.GeneratedListLastSource <> xs:57 var
+R3156:3158 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'.+1' not
+R3155:3155 prosa.GeneratedListLastSource <> n:56 var
+R3163:3170 Corelib.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R3192:3194 Corelib.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R3175:3175 prosa.GeneratedListLastSource <> X:55 var
+binder 3171:3171 <> x:58
+R3187:3189 mathcomp.ssreflect.seq <> seq abbrev
+R3191:3191 prosa.GeneratedListLastSource <> X:55 var
+binder 3179:3183 <> xs__c:59
+R3215:3218 Corelib.Init.Logic <> ::type_scope:x_'/\'_x not
+R3197:3199 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R3195:3196 prosa.GeneratedListLastSource <> xs:57 var
+R3205:3208 mathcomp.ssreflect.seq <> ::seq_scope:x_'++'_x not
+R3200:3204 prosa.GeneratedListLastSource <> xs__c:59 var
+R3209:3212 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_x_']' not
+R3214:3214 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_x_']' not
+R3213:3213 prosa.GeneratedListLastSource <> x:58 var
+R3229:3231 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R3219:3222 mathcomp.ssreflect.seq <> size def
+R3224:3228 prosa.GeneratedListLastSource <> xs__c:59 var
+R3232:3232 prosa.GeneratedListLastSource <> n:56 var
+def 3248:3263 GeneratedListLastSource statement_in_cat
+R3290:3295 mathcomp.ssreflect.eqtype Equality.Exports eqType abbrev
+binder 3286:3286 <> X:60
+R3303:3303 prosa.GeneratedListLastSource <> X:60 var
+binder 3299:3299 <> x:61
+R3312:3314 mathcomp.ssreflect.seq <> seq abbrev
+R3316:3316 prosa.GeneratedListLastSource <> X:60 var
+binder 3307:3308 <> xs:62
+R3328:3331 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R3321:3325 Corelib.ssr.ssrbool <> ::bool_scope:x_'\in'_x not
+R3320:3320 prosa.GeneratedListLastSource <> x:61 var
+R3326:3327 prosa.GeneratedListLastSource <> xs:62 var
+R3332:3338 Corelib.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R3354:3355 Corelib.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R3349:3351 mathcomp.ssreflect.seq <> seq abbrev
+R3353:3353 prosa.GeneratedListLastSource <> X:60 var
+binder 3339:3341 <> xsl:63
+R3349:3351 mathcomp.ssreflect.seq <> seq abbrev
+R3353:3353 prosa.GeneratedListLastSource <> X:60 var
+binder 3343:3345 <> xsr:64
+R3358:3360 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R3356:3357 prosa.GeneratedListLastSource <> xs:62 var
+R3364:3367 mathcomp.ssreflect.seq <> ::seq_scope:x_'++'_x not
+R3361:3363 prosa.GeneratedListLastSource <> xsl:63 var
+R3374:3377 mathcomp.ssreflect.seq <> ::seq_scope:x_'++'_x not
+R3368:3371 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_x_']' not
+R3373:3373 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_x_']' not
+R3372:3372 prosa.GeneratedListLastSource <> x:61 var
+R3378:3380 prosa.GeneratedListLastSource <> xsr:64 var
+def 3396:3420 GeneratedListLastSource statement_filter_in_pred0
+R3447:3452 mathcomp.ssreflect.eqtype Equality.Exports eqType abbrev
+binder 3443:3443 <> X:65
+R3461:3463 mathcomp.ssreflect.seq <> seq abbrev
+R3465:3465 prosa.GeneratedListLastSource <> X:65 var
+binder 3456:3457 <> xs:66
+R3473:3476 Corelib.ssr.ssrbool <> pred def
+R3478:3478 prosa.GeneratedListLastSource <> X:65 var
+binder 3469:3469 <> P:67
+R3482:3482 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R3515:3519 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R3494:3494 prosa.GeneratedListLastSource <> X:65 var
+binder 3490:3490 <> x:68
+R3505:3508 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R3498:3502 Corelib.ssr.ssrbool <> ::bool_scope:x_'\in'_x not
+R3497:3497 prosa.GeneratedListLastSource <> x:68 var
+R3503:3504 prosa.GeneratedListLastSource <> xs:66 var
+R3509:3511 Corelib.ssr.ssrbool <> ::bool_scope:'~~'_x not
+R3512:3512 prosa.GeneratedListLastSource <> P:67 var
+R3514:3514 prosa.GeneratedListLastSource <> x:68 var
+R3539:3541 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R3520:3524 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R3526:3529 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R3532:3534 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R3538:3538 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+binder 3525:3525 <> x:69
+R3535:3535 prosa.GeneratedListLastSource <> P:67 var
+R3537:3537 prosa.GeneratedListLastSource <> x:69 var
+R3530:3531 prosa.GeneratedListLastSource <> xs:66 var
+R3542:3545 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_']' not
+def 3559:3565 GeneratedListLastSource rem_all
+R3572:3577 mathcomp.ssreflect.eqtype Equality.Exports eqType abbrev
+binder 3568:3568 <> X:70
+R3585:3585 prosa.GeneratedListLastSource <> X:70 var
+binder 3581:3581 <> x:71
+R3594:3596 mathcomp.ssreflect.seq <> seq abbrev
+R3598:3598 prosa.GeneratedListLastSource <> X:70 var
+binder 3589:3590 <> xs:72
+R3612:3613 prosa.GeneratedListLastSource <> xs:72 var
+R3624:3627 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_']' not
+R3632:3635 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_']' not
+R3642:3645 mathcomp.ssreflect.seq <> ::seq_scope:x_'::'_x not
+R3656:3658 Corelib.ssr.ssreflect <> ::boolean_if_scope:'if'_x_'then'_x_'else'_x not
+R3665:3670 Corelib.ssr.ssreflect <> ::boolean_if_scope:'if'_x_'then'_x_'else'_x not
+R3683:3688 Corelib.ssr.ssreflect <> ::boolean_if_scope:'if'_x_'then'_x_'else'_x not
+R3660:3663 mathcomp.ssreflect.eqtype <> ::bool_scope:x_'=='_x not
+R3664:3664 prosa.GeneratedListLastSource <> x:71 var
+R3671:3677 prosa.GeneratedListLastSource <> rem_all:73 def
+R3681:3682 prosa.GeneratedListLastSource <> xs:72 var
+R3679:3679 prosa.GeneratedListLastSource <> x:71 var
+R3690:3693 mathcomp.ssreflect.seq <> ::seq_scope:x_'::'_x not
+R3694:3700 prosa.GeneratedListLastSource <> rem_all:73 def
+R3704:3705 prosa.GeneratedListLastSource <> xs:72 var
+R3702:3702 prosa.GeneratedListLastSource <> x:71 var
+def 3726:3746 GeneratedListLastSource statement_nin_rem_all
+R3773:3778 mathcomp.ssreflect.eqtype Equality.Exports eqType abbrev
+binder 3769:3769 <> X:75
+R3786:3786 prosa.GeneratedListLastSource <> X:75 var
+binder 3782:3782 <> x:76
+R3795:3797 mathcomp.ssreflect.seq <> seq abbrev
+R3799:3799 prosa.GeneratedListLastSource <> X:75 var
+binder 3790:3791 <> xs:77
+R3803:3804 Corelib.Init.Logic <> ::type_scope:'~'_x not
+R3806:3810 Corelib.ssr.ssrbool <> ::bool_scope:x_'\in'_x not
+R3805:3805 prosa.GeneratedListLastSource <> x:76 var
+R3811:3817 prosa.GeneratedListLastSource GeneratedListLastSource rem_all def
+R3821:3822 prosa.GeneratedListLastSource <> xs:77 var
+R3819:3819 prosa.GeneratedListLastSource <> x:76 var
+def 3838:3857 GeneratedListLastSource statement_in_rem_all
+R3884:3889 mathcomp.ssreflect.eqtype Equality.Exports eqType abbrev
+binder 3880:3880 <> X:78
+R3899:3899 prosa.GeneratedListLastSource <> X:78 var
+binder 3893:3893 <> a:79
+binder 3895:3895 <> x:80
+R3908:3910 mathcomp.ssreflect.seq <> seq abbrev
+R3912:3912 prosa.GeneratedListLastSource <> X:78 var
+binder 3903:3904 <> xs:81
+R3934:3937 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R3917:3921 Corelib.ssr.ssrbool <> ::bool_scope:x_'\in'_x not
+R3916:3916 prosa.GeneratedListLastSource <> a:79 var
+R3922:3928 prosa.GeneratedListLastSource GeneratedListLastSource rem_all def
+R3932:3933 prosa.GeneratedListLastSource <> xs:81 var
+R3930:3930 prosa.GeneratedListLastSource <> x:80 var
+R3939:3943 Corelib.ssr.ssrbool <> ::bool_scope:x_'\in'_x not
+R3938:3938 prosa.GeneratedListLastSource <> a:79 var
+R3944:3945 prosa.GeneratedListLastSource <> xs:81 var
+def 3961:3979 GeneratedListLastSource statement_rem_lt_id
+R4006:4008 Corelib.Init.Datatypes <> nat ind
+binder 4002:4002 <> x:82
+R4017:4028 mathcomp.ssreflect.seq <> seq_predType canonstruc
+R4030:4070 mathcomp.ssreflect.ssrnat <> Datatypes_nat__canonical__eqtype_Equality def
+binder 4012:4013 <> xs:83
+R4074:4074 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R4108:4112 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R4086:4088 Corelib.Init.Datatypes <> nat ind
+binder 4082:4082 <> y:84
+R4099:4102 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R4092:4096 Corelib.ssr.ssrbool <> ::bool_scope:x_'\in'_x not
+R4091:4091 prosa.GeneratedListLastSource <> y:84 var
+R4097:4098 prosa.GeneratedListLastSource <> xs:83 var
+R4104:4106 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'<'_x not
+R4103:4103 prosa.GeneratedListLastSource <> x:82 var
+R4107:4107 prosa.GeneratedListLastSource <> y:84 var
+R4125:4127 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R4113:4119 prosa.GeneratedListLastSource GeneratedListLastSource rem_all def
+R4123:4124 prosa.GeneratedListLastSource <> xs:83 var
+R4121:4121 prosa.GeneratedListLastSource <> x:82 var
+R4128:4129 prosa.GeneratedListLastSource <> xs:83 var
+def 4145:4169 GeneratedListLastSource statement_subseq_leq_size
+R4196:4201 mathcomp.ssreflect.eqtype Equality.Exports eqType abbrev
+binder 4192:4192 <> X:85
+R4213:4215 mathcomp.ssreflect.seq <> seq abbrev
+R4217:4217 prosa.GeneratedListLastSource <> X:85 var
+binder 4205:4206 <> xs:86
+binder 4208:4209 <> ys:87
+R4228:4231 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R4221:4224 mathcomp.ssreflect.seq <> uniq def
+R4226:4227 prosa.GeneratedListLastSource <> xs:86 var
+R4232:4232 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R4267:4271 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R4244:4244 prosa.GeneratedListLastSource <> X:85 var
+binder 4240:4240 <> x:88
+R4255:4258 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R4248:4252 Corelib.ssr.ssrbool <> ::bool_scope:x_'\in'_x not
+R4247:4247 prosa.GeneratedListLastSource <> x:88 var
+R4253:4254 prosa.GeneratedListLastSource <> xs:86 var
+R4260:4264 Corelib.ssr.ssrbool <> ::bool_scope:x_'\in'_x not
+R4259:4259 prosa.GeneratedListLastSource <> x:88 var
+R4265:4266 prosa.GeneratedListLastSource <> ys:87 var
+R4279:4282 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'<='_x not
+R4272:4275 mathcomp.ssreflect.seq <> size def
+R4277:4278 prosa.GeneratedListLastSource <> xs:86 var
+R4283:4286 mathcomp.ssreflect.seq <> size def
+R4288:4289 prosa.GeneratedListLastSource <> ys:87 var
+def 4305:4320 GeneratedListLastSource statement_in_zip
+R4349:4354 mathcomp.ssreflect.eqtype Equality.Exports eqType abbrev
+binder 4343:4343 <> X:89
+binder 4345:4345 <> Y:90
+R4363:4365 mathcomp.ssreflect.seq <> seq abbrev
+R4367:4367 prosa.GeneratedListLastSource <> X:89 var
+binder 4358:4359 <> xs:91
+R4376:4378 mathcomp.ssreflect.seq <> seq abbrev
+R4380:4380 prosa.GeneratedListLastSource <> Y:90 var
+binder 4371:4372 <> ys:92
+R4393:4393 prosa.GeneratedListLastSource <> X:89 var
+binder 4384:4384 <> x:93
+binder 4386:4389 <> x__d:94
+R4406:4406 prosa.GeneratedListLastSource <> Y:90 var
+binder 4397:4397 <> y:95
+binder 4399:4402 <> y__d:96
+R4427:4430 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R4417:4419 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R4410:4413 mathcomp.ssreflect.seq <> size def
+R4415:4416 prosa.GeneratedListLastSource <> xs:91 var
+R4420:4423 mathcomp.ssreflect.seq <> size def
+R4425:4426 prosa.GeneratedListLastSource <> ys:92 var
+R4431:4431 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R4509:4513 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R4432:4438 Corelib.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R4448:4449 Corelib.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R4445:4447 Corelib.Init.Datatypes <> nat ind
+binder 4439:4441 <> idx:97
+R4463:4466 Corelib.Init.Logic <> ::type_scope:x_'/\'_x not
+R4453:4455 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'<'_x not
+R4450:4452 prosa.GeneratedListLastSource <> idx:97 var
+R4456:4459 mathcomp.ssreflect.seq <> size def
+R4461:4462 prosa.GeneratedListLastSource <> xs:91 var
+R4486:4489 Corelib.Init.Logic <> ::type_scope:x_'/\'_x not
+R4482:4484 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R4467:4469 mathcomp.ssreflect.seq <> nth def
+R4479:4481 prosa.GeneratedListLastSource <> idx:97 var
+R4476:4477 prosa.GeneratedListLastSource <> xs:91 var
+R4471:4474 prosa.GeneratedListLastSource <> x__d:94 var
+R4485:4485 prosa.GeneratedListLastSource <> x:93 var
+R4505:4507 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R4490:4492 mathcomp.ssreflect.seq <> nth def
+R4502:4504 prosa.GeneratedListLastSource <> idx:97 var
+R4499:4500 prosa.GeneratedListLastSource <> ys:92 var
+R4494:4497 prosa.GeneratedListLastSource <> y__d:96 var
+R4508:4508 prosa.GeneratedListLastSource <> y:95 var
+R4520:4524 Corelib.ssr.ssrbool <> ::bool_scope:x_'\in'_x not
+R4514:4514 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R4516:4517 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R4519:4519 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R4515:4515 prosa.GeneratedListLastSource <> x:93 var
+R4518:4518 prosa.GeneratedListLastSource <> y:95 var
+R4525:4527 mathcomp.ssreflect.seq <> zip def
+R4532:4533 prosa.GeneratedListLastSource <> ys:92 var
+R4529:4530 prosa.GeneratedListLastSource <> xs:91 var
+def 4549:4571 GeneratedListLastSource statement_eq_ind_in_seq
+R4598:4603 mathcomp.ssreflect.eqtype Equality.Exports eqType abbrev
+binder 4594:4594 <> X:98
+R4613:4613 prosa.GeneratedListLastSource <> X:98 var
+binder 4607:4607 <> a:99
+binder 4609:4609 <> b:100
+R4622:4624 mathcomp.ssreflect.seq <> seq abbrev
+R4626:4626 prosa.GeneratedListLastSource <> X:98 var
+binder 4617:4618 <> xs:101
+R4653:4656 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R4640:4642 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R4630:4634 mathcomp.ssreflect.seq <> index def
+R4638:4639 prosa.GeneratedListLastSource <> xs:101 var
+R4636:4636 prosa.GeneratedListLastSource <> a:99 var
+R4643:4647 mathcomp.ssreflect.seq <> index def
+R4651:4652 prosa.GeneratedListLastSource <> xs:101 var
+R4649:4649 prosa.GeneratedListLastSource <> b:100 var
+R4665:4668 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R4658:4662 Corelib.ssr.ssrbool <> ::bool_scope:x_'\in'_x not
+R4657:4657 prosa.GeneratedListLastSource <> a:99 var
+R4663:4664 prosa.GeneratedListLastSource <> xs:101 var
+R4677:4680 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R4670:4674 Corelib.ssr.ssrbool <> ::bool_scope:x_'\in'_x not
+R4669:4669 prosa.GeneratedListLastSource <> b:100 var
+R4675:4676 prosa.GeneratedListLastSource <> xs:101 var
+R4682:4684 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R4681:4681 prosa.GeneratedListLastSource <> a:99 var
+R4685:4685 prosa.GeneratedListLastSource <> b:100 var
+def 4701:4723 GeneratedListLastSource statement_default_or_in
+R4750:4755 mathcomp.ssreflect.eqtype Equality.Exports eqType abbrev
+binder 4746:4746 <> X:102
+R4763:4765 Corelib.Init.Datatypes <> nat ind
+binder 4759:4759 <> n:103
+R4773:4773 prosa.GeneratedListLastSource <> X:102 var
+binder 4769:4769 <> d:104
+R4782:4784 mathcomp.ssreflect.seq <> seq abbrev
+R4786:4786 prosa.GeneratedListLastSource <> X:102 var
+binder 4777:4778 <> xs:105
+R4804:4807 Corelib.Init.Logic <> ::type_scope:x_'\/'_x not
+R4800:4802 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R4790:4792 mathcomp.ssreflect.seq <> nth def
+R4799:4799 prosa.GeneratedListLastSource <> n:103 var
+R4796:4797 prosa.GeneratedListLastSource <> xs:105 var
+R4794:4794 prosa.GeneratedListLastSource <> d:104 var
+R4803:4803 prosa.GeneratedListLastSource <> d:104 var
+R4818:4822 Corelib.ssr.ssrbool <> ::bool_scope:x_'\in'_x not
+R4808:4810 mathcomp.ssreflect.seq <> nth def
+R4817:4817 prosa.GeneratedListLastSource <> n:103 var
+R4814:4815 prosa.GeneratedListLastSource <> xs:105 var
+R4812:4812 prosa.GeneratedListLastSource <> d:104 var
+R4823:4824 prosa.GeneratedListLastSource <> xs:105 var
+def 4840:4859 GeneratedListLastSource statement_exists_two
+R4886:4891 mathcomp.ssreflect.eqtype Equality.Exports eqType abbrev
+binder 4882:4882 <> X:106
+R4900:4902 mathcomp.ssreflect.seq <> seq abbrev
+R4904:4904 prosa.GeneratedListLastSource <> X:106 var
+binder 4895:4896 <> xs:107
+R4919:4922 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R4909:4911 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'<'_x not
+R4912:4915 mathcomp.ssreflect.seq <> size def
+R4917:4918 prosa.GeneratedListLastSource <> xs:107 var
+R4930:4933 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R4923:4926 mathcomp.ssreflect.seq <> uniq def
+R4928:4929 prosa.GeneratedListLastSource <> xs:107 var
+R4934:4940 Corelib.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R4948:4949 Corelib.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R4947:4947 prosa.GeneratedListLastSource <> X:106 var
+binder 4941:4941 <> a:108
+R4947:4947 prosa.GeneratedListLastSource <> X:106 var
+binder 4943:4943 <> b:109
+R4956:4959 Corelib.Init.Logic <> ::type_scope:x_'/\'_x not
+R4951:4954 Corelib.Init.Logic <> ::type_scope:x_'<>'_x not
+R4950:4950 prosa.GeneratedListLastSource <> a:108 var
+R4955:4955 prosa.GeneratedListLastSource <> b:109 var
+R4968:4971 Corelib.Init.Logic <> ::type_scope:x_'/\'_x not
+R4961:4965 Corelib.ssr.ssrbool <> ::bool_scope:x_'\in'_x not
+R4960:4960 prosa.GeneratedListLastSource <> a:108 var
+R4966:4967 prosa.GeneratedListLastSource <> xs:107 var
+R4973:4977 Corelib.ssr.ssrbool <> ::bool_scope:x_'\in'_x not
+R4972:4972 prosa.GeneratedListLastSource <> b:109 var
+R4978:4979 prosa.GeneratedListLastSource <> xs:107 var
+def 4995:5016 GeneratedListLastSource statement_has_all_nilp
+R5043:5048 mathcomp.ssreflect.eqtype Equality.Exports eqType abbrev
+binder 5039:5039 <> T:110
+R5056:5058 mathcomp.ssreflect.seq <> seq abbrev
+R5060:5060 prosa.GeneratedListLastSource <> T:110 var
+binder 5052:5052 <> s:111
+R5068:5071 Corelib.ssr.ssrbool <> pred def
+R5073:5073 prosa.GeneratedListLastSource <> T:110 var
+binder 5064:5064 <> P:112
+R5084:5087 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R5077:5079 mathcomp.ssreflect.seq <> all def
+R5083:5083 prosa.GeneratedListLastSource <> s:111 var
+R5081:5081 prosa.GeneratedListLastSource <> P:112 var
+R5097:5100 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R5088:5090 Corelib.ssr.ssrbool <> ::bool_scope:'~~'_x not
+R5091:5094 mathcomp.ssreflect.seq <> nilp def
+R5096:5096 prosa.GeneratedListLastSource <> s:111 var
+R5101:5103 mathcomp.ssreflect.seq <> has def
+R5107:5107 prosa.GeneratedListLastSource <> s:111 var
+R5105:5105 prosa.GeneratedListLastSource <> P:112 var
+def 5123:5144 GeneratedListLastSource statement_sorted_split
+R5171:5176 mathcomp.ssreflect.eqtype Equality.Exports eqType abbrev
+binder 5167:5167 <> X:113
+R5185:5187 mathcomp.ssreflect.seq <> seq abbrev
+R5189:5189 prosa.GeneratedListLastSource <> X:113 var
+binder 5180:5181 <> xs:114
+R5198:5201 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R5197:5197 prosa.GeneratedListLastSource <> X:113 var
+R5202:5205 Corelib.Init.Datatypes <> bool ind
+binder 5193:5193 <> P:115
+R5214:5217 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R5213:5213 prosa.GeneratedListLastSource <> X:113 var
+R5218:5220 Corelib.Init.Datatypes <> nat ind
+binder 5209:5209 <> f:116
+R5228:5230 Corelib.Init.Datatypes <> nat ind
+binder 5224:5224 <> t:117
+R5271:5274 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R5234:5239 mathcomp.ssreflect.path <> sorted def
+R5269:5270 prosa.GeneratedListLastSource <> xs:114 var
+R5252:5252 prosa.GeneratedListLastSource <> X:113 var
+binder 5246:5246 <> x:118
+binder 5248:5248 <> y:119
+R5260:5263 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'<='_x not
+R5257:5257 prosa.GeneratedListLastSource <> f:116 var
+R5259:5259 prosa.GeneratedListLastSource <> x:118 var
+R5264:5264 prosa.GeneratedListLastSource <> f:116 var
+R5266:5266 prosa.GeneratedListLastSource <> y:119 var
+R5294:5296 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R5275:5279 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R5281:5284 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R5287:5289 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R5293:5293 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+binder 5280:5280 <> x:120
+R5290:5290 prosa.GeneratedListLastSource <> P:115 var
+R5292:5292 prosa.GeneratedListLastSource <> x:120 var
+R5285:5286 prosa.GeneratedListLastSource <> xs:114 var
+R5327:5330 mathcomp.ssreflect.seq <> ::seq_scope:x_'++'_x not
+R5297:5301 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_'&'_x_']' not
+R5303:5306 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_'&'_x_']' not
+R5309:5311 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_'&'_x_']' not
+R5315:5317 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_'&'_x_']' not
+R5326:5326 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_'&'_x_']' not
+binder 5302:5302 <> x:121
+R5312:5312 prosa.GeneratedListLastSource <> P:115 var
+R5314:5314 prosa.GeneratedListLastSource <> x:121 var
+R5321:5324 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'<='_x not
+R5318:5318 prosa.GeneratedListLastSource <> f:116 var
+R5320:5320 prosa.GeneratedListLastSource <> x:121 var
+R5325:5325 prosa.GeneratedListLastSource <> t:117 var
+R5307:5308 prosa.GeneratedListLastSource <> xs:114 var
+R5331:5335 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_'&'_x_']' not
+R5337:5340 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_'&'_x_']' not
+R5343:5345 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_'&'_x_']' not
+R5349:5351 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_'&'_x_']' not
+R5359:5359 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_'&'_x_']' not
+binder 5336:5336 <> x:122
+R5346:5346 prosa.GeneratedListLastSource <> P:115 var
+R5348:5348 prosa.GeneratedListLastSource <> x:122 var
+R5353:5355 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'<'_x not
+R5352:5352 prosa.GeneratedListLastSource <> t:117 var
+R5356:5356 prosa.GeneratedListLastSource <> f:116 var
+R5358:5358 prosa.GeneratedListLastSource <> x:122 var
+R5341:5342 prosa.GeneratedListLastSource <> xs:114 var
+def 5375:5394 GeneratedListLastSource statement_sorted_cat
+R5421:5426 mathcomp.ssreflect.eqtype Equality.Exports eqType abbrev
+binder 5417:5417 <> X:123
+R5434:5436 Corelib.ssr.ssrbool <> rel def
+R5438:5438 prosa.GeneratedListLastSource <> X:123 var
+binder 5430:5430 <> R:124
+R5452:5454 mathcomp.ssreflect.seq <> seq abbrev
+R5456:5456 prosa.GeneratedListLastSource <> X:123 var
+binder 5442:5444 <> xs1:125
+binder 5446:5448 <> xs2:126
+R5479:5482 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R5460:5469 Corelib.ssr.ssrbool <> transitive def
+R5478:5478 prosa.GeneratedListLastSource <> R:124 var
+R5475:5475 prosa.GeneratedListLastSource <> X:123 var
+R5504:5507 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R5483:5488 mathcomp.ssreflect.path <> sorted def
+R5496:5499 mathcomp.ssreflect.seq <> ::seq_scope:x_'++'_x not
+R5493:5495 prosa.GeneratedListLastSource <> xs1:125 var
+R5500:5502 prosa.GeneratedListLastSource <> xs2:126 var
+R5490:5490 prosa.GeneratedListLastSource <> R:124 var
+R5520:5523 Corelib.Init.Logic <> ::type_scope:x_'/\'_x not
+R5508:5513 mathcomp.ssreflect.path <> sorted def
+R5517:5519 prosa.GeneratedListLastSource <> xs1:125 var
+R5515:5515 prosa.GeneratedListLastSource <> R:124 var
+R5524:5529 mathcomp.ssreflect.path <> sorted def
+R5533:5535 prosa.GeneratedListLastSource <> xs2:126 var
+R5531:5531 prosa.GeneratedListLastSource <> R:124 var
+def 5551:5571 GeneratedListLastSource statement_nonnil_last
+R5598:5603 mathcomp.ssreflect.eqtype Equality.Exports eqType abbrev
+binder 5594:5594 <> X:127
+R5612:5614 mathcomp.ssreflect.seq <> seq abbrev
+R5616:5616 prosa.GeneratedListLastSource <> X:127 var
+binder 5607:5608 <> xs:128
+R5628:5628 prosa.GeneratedListLastSource <> X:127 var
+binder 5620:5621 <> d1:129
+binder 5623:5624 <> d2:130
+R5642:5645 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R5634:5637 mathcomp.ssreflect.eqtype <> ::bool_scope:x_'!='_x not
+R5632:5633 prosa.GeneratedListLastSource <> xs:128 var
+R5638:5641 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_']' not
+R5656:5658 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R5646:5649 mathcomp.ssreflect.seq <> last def
+R5654:5655 prosa.GeneratedListLastSource <> xs:128 var
+R5651:5652 prosa.GeneratedListLastSource <> d1:129 var
+R5659:5662 mathcomp.ssreflect.seq <> last def
+R5667:5668 prosa.GeneratedListLastSource <> xs:128 var
+R5664:5665 prosa.GeneratedListLastSource <> d2:130 var
+def 5684:5708 GeneratedListLastSource statement_filter_last_mem
+R5735:5740 mathcomp.ssreflect.eqtype Equality.Exports eqType abbrev
+binder 5731:5731 <> X:131
+R5749:5751 mathcomp.ssreflect.seq <> seq abbrev
+R5753:5753 prosa.GeneratedListLastSource <> X:131 var
+binder 5744:5745 <> xs:132
+R5761:5761 prosa.GeneratedListLastSource <> X:131 var
+binder 5757:5757 <> d:133
+R5769:5772 Corelib.ssr.ssrbool <> pred def
+R5774:5774 prosa.GeneratedListLastSource <> X:131 var
+binder 5765:5765 <> P:134
+R5786:5789 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R5778:5780 mathcomp.ssreflect.seq <> has def
+R5784:5785 prosa.GeneratedListLastSource <> xs:132 var
+R5782:5782 prosa.GeneratedListLastSource <> P:134 var
+R5816:5820 Corelib.ssr.ssrbool <> ::bool_scope:x_'\in'_x not
+R5790:5793 mathcomp.ssreflect.seq <> last def
+R5797:5801 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R5803:5806 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R5809:5811 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R5815:5815 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+binder 5802:5802 <> x:135
+R5812:5812 prosa.GeneratedListLastSource <> P:134 var
+R5814:5814 prosa.GeneratedListLastSource <> x:135 var
+R5807:5808 prosa.GeneratedListLastSource <> xs:132 var
+R5795:5795 prosa.GeneratedListLastSource <> d:133 var
+R5821:5822 prosa.GeneratedListLastSource <> xs:132 var
+def 5838:5842 GeneratedListLastSource range
+R5851:5853 Corelib.Init.Datatypes <> nat ind
+binder 5845:5845 <> a:136
+binder 5847:5847 <> b:137
+R5859:5868 mathcomp.ssreflect.bigop <> index_iota def
+R5873:5875 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'.+1' not
+R5872:5872 prosa.GeneratedListLastSource <> b:137 var
+R5870:5870 prosa.GeneratedListLastSource <> a:136 var
+def 5890:5909 GeneratedListLastSource statement_iotaD_impl
+R5942:5944 Corelib.Init.Datatypes <> nat ind
+binder 5931:5934 <> n_le:138
+binder 5936:5936 <> m:139
+binder 5938:5938 <> n:140
+R5956:5959 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R5951:5954 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'<='_x not
+R5947:5950 prosa.GeneratedListLastSource <> n_le:138 var
+R5955:5955 prosa.GeneratedListLastSource <> n:140 var
+R5968:5970 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R5960:5963 mathcomp.ssreflect.seq <> iota def
+R5967:5967 prosa.GeneratedListLastSource <> n:140 var
+R5965:5965 prosa.GeneratedListLastSource <> m:139 var
+R5982:5985 mathcomp.ssreflect.seq <> ::seq_scope:x_'++'_x not
+R5971:5974 mathcomp.ssreflect.seq <> iota def
+R5978:5981 prosa.GeneratedListLastSource <> n_le:138 var
+R5976:5976 prosa.GeneratedListLastSource <> m:139 var
+R5986:5989 mathcomp.ssreflect.seq <> iota def
+R6004:6006 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'-'_x not
+R6003:6003 prosa.GeneratedListLastSource <> n:140 var
+R6007:6010 prosa.GeneratedListLastSource <> n_le:138 var
+R5993:5995 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'+'_x not
+R5992:5992 prosa.GeneratedListLastSource <> m:139 var
+R5996:5999 prosa.GeneratedListLastSource <> n_le:138 var
+def 6027:6054 GeneratedListLastSource statement_index_iota_lt_step
+R6082:6084 Corelib.Init.Datatypes <> nat ind
+binder 6076:6076 <> a:141
+binder 6078:6078 <> b:142
+R6092:6095 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R6088:6090 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'<'_x not
+R6087:6087 prosa.GeneratedListLastSource <> a:141 var
+R6091:6091 prosa.GeneratedListLastSource <> b:142 var
+R6110:6112 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R6096:6105 mathcomp.ssreflect.bigop <> index_iota def
+R6109:6109 prosa.GeneratedListLastSource <> b:142 var
+R6107:6107 prosa.GeneratedListLastSource <> a:141 var
+R6114:6117 mathcomp.ssreflect.seq <> ::seq_scope:x_'::'_x not
+R6113:6113 prosa.GeneratedListLastSource <> a:141 var
+R6118:6127 mathcomp.ssreflect.bigop <> index_iota def
+R6134:6134 prosa.GeneratedListLastSource <> b:142 var
+R6130:6132 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'.+1' not
+R6129:6129 prosa.GeneratedListLastSource <> a:141 var
+def 6150:6173 GeneratedListLastSource statement_index_iota_cat
+R6205:6207 Corelib.Init.Datatypes <> nat ind
+binder 6195:6195 <> t:143
+binder 6197:6198 <> t1:144
+binder 6200:6201 <> t2:145
+R6223:6226 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R6212:6215 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'<='_x_'<='_x not
+R6217:6220 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'<='_x_'<='_x not
+R6210:6211 prosa.GeneratedListLastSource <> t1:144 var
+R6216:6216 prosa.GeneratedListLastSource <> t:143 var
+R6216:6216 prosa.GeneratedListLastSource <> t:143 var
+R6221:6222 prosa.GeneratedListLastSource <> t2:145 var
+R6243:6245 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R6227:6236 mathcomp.ssreflect.bigop <> index_iota def
+R6241:6242 prosa.GeneratedListLastSource <> t2:145 var
+R6238:6239 prosa.GeneratedListLastSource <> t1:144 var
+R6261:6264 mathcomp.ssreflect.seq <> ::seq_scope:x_'++'_x not
+R6246:6255 mathcomp.ssreflect.bigop <> index_iota def
+R6260:6260 prosa.GeneratedListLastSource <> t:143 var
+R6257:6258 prosa.GeneratedListLastSource <> t1:144 var
+R6265:6274 mathcomp.ssreflect.bigop <> index_iota def
+R6278:6279 prosa.GeneratedListLastSource <> t2:145 var
+R6276:6276 prosa.GeneratedListLastSource <> t:143 var
+def 6295:6322 GeneratedListLastSource statement_range_filter_2cons
+R6349:6389 mathcomp.ssreflect.ssrnat <> Datatypes_nat__canonical__eqtype_Equality def
+binder 6345:6345 <> x:146
+R6398:6400 mathcomp.ssreflect.seq <> seq abbrev
+R6402:6442 mathcomp.ssreflect.ssrnat <> Datatypes_nat__canonical__eqtype_Equality def
+binder 6393:6394 <> xs:147
+R6450:6452 Corelib.Init.Datatypes <> nat ind
+binder 6446:6446 <> k:148
+R6501:6503 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R6456:6460 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R6463:6466 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R6476:6478 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R6500:6500 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+binder 6461:6462 <> ρ:149
+R6481:6485 Corelib.ssr.ssrbool <> ::bool_scope:x_'\in'_x not
+R6479:6480 prosa.GeneratedListLastSource <> ρ:149 var
+R6486:6489 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_x_','_x_','_'..'_','_x_'&'_x_']' not
+R6491:6492 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_x_','_x_','_'..'_','_x_'&'_x_']' not
+R6494:6496 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_x_','_x_','_'..'_','_x_'&'_x_']' not
+R6499:6499 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_x_','_x_','_'..'_','_x_'&'_x_']' not
+R6490:6490 prosa.GeneratedListLastSource <> x:146 var
+R6493:6493 prosa.GeneratedListLastSource <> x:146 var
+R6497:6498 prosa.GeneratedListLastSource <> xs:147 var
+R6467:6471 prosa.GeneratedListLastSource GeneratedListLastSource range def
+R6475:6475 prosa.GeneratedListLastSource <> k:148 var
+R6504:6508 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R6511:6514 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R6524:6526 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R6541:6541 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+binder 6509:6510 <> ρ:150
+R6529:6533 Corelib.ssr.ssrbool <> ::bool_scope:x_'\in'_x not
+R6527:6528 prosa.GeneratedListLastSource <> ρ:150 var
+R6535:6538 mathcomp.ssreflect.seq <> ::seq_scope:x_'::'_x not
+R6534:6534 prosa.GeneratedListLastSource <> x:146 var
+R6539:6540 prosa.GeneratedListLastSource <> xs:147 var
+R6515:6519 prosa.GeneratedListLastSource GeneratedListLastSource range def
+R6523:6523 prosa.GeneratedListLastSource <> k:148 var
+def 6557:6587 GeneratedListLastSource statement_index_iota_filter_eqx
+R6617:6619 Corelib.Init.Datatypes <> nat ind
+binder 6609:6609 <> x:151
+binder 6611:6611 <> a:152
+binder 6613:6613 <> b:153
+R6632:6635 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R6623:6626 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'<='_x_'<'_x not
+R6628:6630 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'<='_x_'<'_x not
+R6622:6622 prosa.GeneratedListLastSource <> a:152 var
+R6627:6627 prosa.GeneratedListLastSource <> x:151 var
+R6627:6627 prosa.GeneratedListLastSource <> x:151 var
+R6631:6631 prosa.GeneratedListLastSource <> b:153 var
+R6672:6674 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R6636:6640 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R6643:6646 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R6661:6663 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R6671:6671 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+binder 6641:6642 <> ρ:154
+R6666:6669 mathcomp.ssreflect.eqtype <> ::bool_scope:x_'=='_x not
+R6664:6665 prosa.GeneratedListLastSource <> ρ:154 var
+R6670:6670 prosa.GeneratedListLastSource <> x:151 var
+R6647:6656 mathcomp.ssreflect.bigop <> index_iota def
+R6660:6660 prosa.GeneratedListLastSource <> b:153 var
+R6658:6658 prosa.GeneratedListLastSource <> a:152 var
+R6675:6678 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_x_']' not
+R6680:6680 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_x_']' not
+R6679:6679 prosa.GeneratedListLastSource <> x:151 var
+def 6696:6728 GeneratedListLastSource statement_index_iota_filter_singl
+R6758:6760 Corelib.Init.Datatypes <> nat ind
+binder 6750:6750 <> x:155
+binder 6752:6752 <> a:156
+binder 6754:6754 <> b:157
+R6773:6776 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R6764:6767 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'<='_x_'<'_x not
+R6769:6771 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'<='_x_'<'_x not
+R6763:6763 prosa.GeneratedListLastSource <> a:156 var
+R6768:6768 prosa.GeneratedListLastSource <> x:155 var
+R6768:6768 prosa.GeneratedListLastSource <> x:155 var
+R6772:6772 prosa.GeneratedListLastSource <> b:157 var
+R6819:6821 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R6777:6781 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R6784:6787 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R6802:6804 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R6818:6818 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+binder 6782:6783 <> ρ:158
+R6807:6811 Corelib.ssr.ssrbool <> ::bool_scope:x_'\in'_x not
+R6805:6806 prosa.GeneratedListLastSource <> ρ:158 var
+R6812:6815 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_x_']' not
+R6817:6817 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_x_']' not
+R6816:6816 prosa.GeneratedListLastSource <> x:155 var
+R6788:6797 mathcomp.ssreflect.bigop <> index_iota def
+R6801:6801 prosa.GeneratedListLastSource <> b:157 var
+R6799:6799 prosa.GeneratedListLastSource <> a:156 var
+R6822:6825 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_x_']' not
+R6827:6827 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_x_']' not
+R6826:6826 prosa.GeneratedListLastSource <> x:155 var
+def 6843:6874 GeneratedListLastSource statement_index_iota_filter_inxs
+R6905:6907 Corelib.Init.Datatypes <> nat ind
+binder 6897:6897 <> a:159
+binder 6899:6899 <> b:160
+binder 6901:6901 <> x:161
+R6916:6927 mathcomp.ssreflect.seq <> seq_predType canonstruc
+R6929:6969 mathcomp.ssreflect.ssrnat <> Datatypes_nat__canonical__eqtype_Equality def
+binder 6911:6912 <> xs:162
+R6978:6981 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R6974:6976 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'<'_x not
+R6973:6973 prosa.GeneratedListLastSource <> x:161 var
+R6977:6977 prosa.GeneratedListLastSource <> a:159 var
+R7020:7022 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R6982:6986 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R6989:6992 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R7007:7009 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R7019:7019 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+binder 6987:6988 <> ρ:163
+R7012:7016 Corelib.ssr.ssrbool <> ::bool_scope:x_'\in'_x not
+R7010:7011 prosa.GeneratedListLastSource <> ρ:163 var
+R7017:7018 prosa.GeneratedListLastSource <> xs:162 var
+R6993:7002 mathcomp.ssreflect.bigop <> index_iota def
+R7006:7006 prosa.GeneratedListLastSource <> b:160 var
+R7004:7004 prosa.GeneratedListLastSource <> a:159 var
+R7023:7027 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R7030:7033 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R7048:7050 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R7070:7070 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+binder 7028:7029 <> ρ:164
+R7053:7057 Corelib.ssr.ssrbool <> ::bool_scope:x_'\in'_x not
+R7051:7052 prosa.GeneratedListLastSource <> ρ:164 var
+R7058:7064 prosa.GeneratedListLastSource GeneratedListLastSource rem_all def
+R7068:7069 prosa.GeneratedListLastSource <> xs:162 var
+R7066:7066 prosa.GeneratedListLastSource <> x:161 var
+R7034:7043 mathcomp.ssreflect.bigop <> index_iota def
+R7047:7047 prosa.GeneratedListLastSource <> b:160 var
+R7045:7045 prosa.GeneratedListLastSource <> a:159 var
+def 7086:7117 GeneratedListLastSource statement_index_iota_filter_step
+R7144:7146 Corelib.Init.Datatypes <> nat ind
+binder 7140:7140 <> x:165
+R7155:7166 mathcomp.ssreflect.seq <> seq_predType canonstruc
+R7168:7208 mathcomp.ssreflect.ssrnat <> Datatypes_nat__canonical__eqtype_Equality def
+binder 7150:7151 <> xs:166
+R7218:7220 Corelib.Init.Datatypes <> nat ind
+binder 7212:7212 <> a:167
+binder 7214:7214 <> b:168
+R7234:7237 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R7225:7228 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'<='_x_'<'_x not
+R7230:7232 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'<='_x_'<'_x not
+R7224:7224 prosa.GeneratedListLastSource <> a:167 var
+R7229:7229 prosa.GeneratedListLastSource <> x:165 var
+R7229:7229 prosa.GeneratedListLastSource <> x:165 var
+R7233:7233 prosa.GeneratedListLastSource <> b:168 var
+R7238:7238 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R7273:7277 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R7250:7252 Corelib.Init.Datatypes <> nat ind
+binder 7246:7246 <> y:169
+R7263:7266 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R7256:7260 Corelib.ssr.ssrbool <> ::bool_scope:x_'\in'_x not
+R7255:7255 prosa.GeneratedListLastSource <> y:169 var
+R7261:7262 prosa.GeneratedListLastSource <> xs:166 var
+R7268:7271 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'<='_x not
+R7267:7267 prosa.GeneratedListLastSource <> x:165 var
+R7272:7272 prosa.GeneratedListLastSource <> y:169 var
+R7321:7323 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R7278:7282 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R7285:7288 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R7303:7305 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R7320:7320 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+binder 7283:7284 <> ρ:170
+R7308:7312 Corelib.ssr.ssrbool <> ::bool_scope:x_'\in'_x not
+R7306:7307 prosa.GeneratedListLastSource <> ρ:170 var
+R7314:7317 mathcomp.ssreflect.seq <> ::seq_scope:x_'::'_x not
+R7313:7313 prosa.GeneratedListLastSource <> x:165 var
+R7318:7319 prosa.GeneratedListLastSource <> xs:166 var
+R7289:7298 mathcomp.ssreflect.bigop <> index_iota def
+R7302:7302 prosa.GeneratedListLastSource <> b:168 var
+R7300:7300 prosa.GeneratedListLastSource <> a:167 var
+R7325:7328 mathcomp.ssreflect.seq <> ::seq_scope:x_'::'_x not
+R7324:7324 prosa.GeneratedListLastSource <> x:165 var
+R7329:7333 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R7336:7339 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R7354:7356 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R7376:7376 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+binder 7334:7335 <> ρ:171
+R7359:7363 Corelib.ssr.ssrbool <> ::bool_scope:x_'\in'_x not
+R7357:7358 prosa.GeneratedListLastSource <> ρ:171 var
+R7364:7370 prosa.GeneratedListLastSource GeneratedListLastSource rem_all def
+R7374:7375 prosa.GeneratedListLastSource <> xs:166 var
+R7372:7372 prosa.GeneratedListLastSource <> x:165 var
+R7340:7349 mathcomp.ssreflect.bigop <> index_iota def
+R7353:7353 prosa.GeneratedListLastSource <> b:168 var
+R7351:7351 prosa.GeneratedListLastSource <> a:167 var
+def 7392:7423 GeneratedListLastSource statement_range_iota_filter_step
+R7450:7452 Corelib.Init.Datatypes <> nat ind
+binder 7446:7446 <> x:172
+R7461:7472 mathcomp.ssreflect.seq <> seq_predType canonstruc
+R7474:7514 mathcomp.ssreflect.ssrnat <> Datatypes_nat__canonical__eqtype_Equality def
+binder 7456:7457 <> xs:173
+R7522:7524 Corelib.Init.Datatypes <> nat ind
+binder 7518:7518 <> k:174
+R7534:7537 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R7529:7532 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'<='_x not
+R7528:7528 prosa.GeneratedListLastSource <> x:172 var
+R7533:7533 prosa.GeneratedListLastSource <> k:174 var
+R7538:7538 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R7573:7577 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R7550:7552 Corelib.Init.Datatypes <> nat ind
+binder 7546:7546 <> y:175
+R7563:7566 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R7556:7560 Corelib.ssr.ssrbool <> ::bool_scope:x_'\in'_x not
+R7555:7555 prosa.GeneratedListLastSource <> y:175 var
+R7561:7562 prosa.GeneratedListLastSource <> xs:173 var
+R7568:7571 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'<='_x not
+R7567:7567 prosa.GeneratedListLastSource <> x:172 var
+R7572:7572 prosa.GeneratedListLastSource <> y:175 var
+R7616:7618 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R7578:7582 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R7585:7588 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R7598:7600 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R7615:7615 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+binder 7583:7584 <> ρ:176
+R7603:7607 Corelib.ssr.ssrbool <> ::bool_scope:x_'\in'_x not
+R7601:7602 prosa.GeneratedListLastSource <> ρ:176 var
+R7609:7612 mathcomp.ssreflect.seq <> ::seq_scope:x_'::'_x not
+R7608:7608 prosa.GeneratedListLastSource <> x:172 var
+R7613:7614 prosa.GeneratedListLastSource <> xs:173 var
+R7589:7593 prosa.GeneratedListLastSource GeneratedListLastSource range def
+R7597:7597 prosa.GeneratedListLastSource <> k:174 var
+R7620:7623 mathcomp.ssreflect.seq <> ::seq_scope:x_'::'_x not
+R7619:7619 prosa.GeneratedListLastSource <> x:172 var
+R7624:7628 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R7631:7634 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R7644:7646 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R7666:7666 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+binder 7629:7630 <> ρ:177
+R7649:7653 Corelib.ssr.ssrbool <> ::bool_scope:x_'\in'_x not
+R7647:7648 prosa.GeneratedListLastSource <> ρ:177 var
+R7654:7660 prosa.GeneratedListLastSource GeneratedListLastSource rem_all def
+R7664:7665 prosa.GeneratedListLastSource <> xs:173 var
+R7662:7662 prosa.GeneratedListLastSource <> x:172 var
+R7635:7639 prosa.GeneratedListLastSource GeneratedListLastSource range def
+R7643:7643 prosa.GeneratedListLastSource <> k:174 var
+def 7682:7705 GeneratedListLastSource statement_iota_filter_gt
+R7740:7742 Corelib.Init.Datatypes <> nat ind
+binder 7728:7728 <> x:178
+binder 7730:7730 <> a:179
+binder 7732:7732 <> b:180
+binder 7734:7736 <> idx:181
+R7753:7756 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R7750:7752 Corelib.Init.Datatypes <> nat ind
+R7757:7760 Corelib.Init.Datatypes <> bool ind
+binder 7746:7746 <> P:182
+R7769:7772 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R7765:7767 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'<'_x not
+R7764:7764 prosa.GeneratedListLastSource <> x:178 var
+R7768:7768 prosa.GeneratedListLastSource <> a:179 var
+R7817:7820 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R7776:7778 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'<'_x not
+R7773:7775 prosa.GeneratedListLastSource <> idx:181 var
+R7779:7782 mathcomp.ssreflect.seq <> size def
+R7784:7788 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R7791:7794 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R7809:7811 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R7816:7816 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+binder 7789:7790 <> x0:183
+R7812:7812 prosa.GeneratedListLastSource <> P:182 var
+R7814:7815 prosa.GeneratedListLastSource <> x0:183 var
+R7795:7804 mathcomp.ssreflect.bigop <> index_iota def
+R7808:7808 prosa.GeneratedListLastSource <> b:180 var
+R7806:7806 prosa.GeneratedListLastSource <> a:179 var
+R7822:7824 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'<'_x not
+R7821:7821 prosa.GeneratedListLastSource <> x:178 var
+R7825:7827 mathcomp.ssreflect.seq <> nth def
+R7865:7867 prosa.GeneratedListLastSource <> idx:181 var
+R7831:7835 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R7838:7841 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R7856:7858 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+R7863:7863 mathcomp.ssreflect.seq <> ::seq_scope:'['_'seq'_x_'<-'_x_'|'_x_']' not
+binder 7836:7837 <> x0:184
+R7859:7859 prosa.GeneratedListLastSource <> P:182 var
+R7861:7862 prosa.GeneratedListLastSource <> x0:184 var
+R7842:7851 mathcomp.ssreflect.bigop <> index_iota def
+R7855:7855 prosa.GeneratedListLastSource <> b:180 var
+R7853:7853 prosa.GeneratedListLastSource <> a:179 var
+def 7883:7905 GeneratedListLastSource statement_sub_count_seq
+R7932:7937 mathcomp.ssreflect.eqtype Equality.Exports eqType abbrev
+binder 7928:7928 <> X:185
+R7947:7950 Corelib.ssr.ssrbool <> pred def
+R7952:7952 prosa.GeneratedListLastSource <> X:185 var
+binder 7941:7941 <> f:186
+binder 7943:7943 <> g:187
+R7961:7963 mathcomp.ssreflect.seq <> seq abbrev
+R7965:7965 prosa.GeneratedListLastSource <> X:185 var
+binder 7956:7957 <> xs:188
+R8002:8005 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R7969:7972 Corelib.ssr.ssrbool <> ::type_scope:'{'_'in'_x_','_x_'}' not
+R7975:7976 Corelib.ssr.ssrbool <> ::type_scope:'{'_'in'_x_','_x_'}' not
+R8001:8001 Corelib.ssr.ssrbool <> ::type_scope:'{'_'in'_x_','_x_'}' not
+R7973:7974 prosa.GeneratedListLastSource <> xs:188 var
+R7988:7988 prosa.GeneratedListLastSource <> X:185 var
+binder 7984:7984 <> x:189
+R7994:7997 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R7991:7991 prosa.GeneratedListLastSource <> f:186 var
+R7993:7993 prosa.GeneratedListLastSource <> x:189 var
+R7998:7998 prosa.GeneratedListLastSource <> g:187 var
+R8000:8000 prosa.GeneratedListLastSource <> x:189 var
+R8016:8019 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'<='_x not
+R8006:8010 mathcomp.ssreflect.seq <> count def
+R8014:8015 prosa.GeneratedListLastSource <> xs:188 var
+R8012:8012 prosa.GeneratedListLastSource <> f:186 var
+R8020:8024 mathcomp.ssreflect.seq <> count def
+R8028:8029 prosa.GeneratedListLastSource <> xs:188 var
+R8026:8026 prosa.GeneratedListLastSource <> g:187 var
+def 8045:8067 GeneratedListLastSource statement_count_predUI'
+R8098:8101 Corelib.ssr.ssrbool <> pred def
+R8103:8105 Corelib.Init.Datatypes <> nat ind
+binder 8090:8091 <> P1:190
+binder 8093:8094 <> P2:191
+R8114:8116 mathcomp.ssreflect.seq <> seq abbrev
+R8118:8120 Corelib.Init.Datatypes <> nat ind
+binder 8109:8110 <> xs:192
+R8146:8148 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R8124:8128 mathcomp.ssreflect.seq <> count def
+R8144:8145 prosa.GeneratedListLastSource <> xs:192 var
+R8131:8135 Corelib.ssr.ssrbool <> predU def
+R8140:8141 prosa.GeneratedListLastSource <> P2:191 var
+R8137:8138 prosa.GeneratedListLastSource <> P1:190 var
+R8174:8176 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'-'_x not
+R8160:8162 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'+'_x not
+R8149:8153 mathcomp.ssreflect.seq <> count def
+R8158:8159 prosa.GeneratedListLastSource <> xs:192 var
+R8155:8156 prosa.GeneratedListLastSource <> P1:190 var
+R8163:8167 mathcomp.ssreflect.seq <> count def
+R8172:8173 prosa.GeneratedListLastSource <> xs:192 var
+R8169:8170 prosa.GeneratedListLastSource <> P2:191 var
+R8177:8181 mathcomp.ssreflect.seq <> count def
+R8197:8198 prosa.GeneratedListLastSource <> xs:192 var
+R8184:8188 Corelib.ssr.ssrbool <> predI def
+R8193:8194 prosa.GeneratedListLastSource <> P2:191 var
+R8190:8191 prosa.GeneratedListLastSource <> P1:190 var
+def 8214:8222 GeneratedListLastSource prefix_of
+R8229:8234 mathcomp.ssreflect.eqtype Equality.Exports eqType abbrev
+binder 8225:8225 <> T:193
+R8246:8248 mathcomp.ssreflect.seq <> seq abbrev
+R8250:8250 prosa.GeneratedListLastSource <> T:193 var
+binder 8238:8239 <> xs:194
+binder 8241:8242 <> ys:195
+R8256:8262 Corelib.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R8270:8271 Corelib.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 8263:8269 <> xs_tail:196
+R8285:8287 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R8274:8277 mathcomp.ssreflect.seq <> ::seq_scope:x_'++'_x not
+R8272:8273 prosa.GeneratedListLastSource <> xs:194 var
+R8278:8284 prosa.GeneratedListLastSource <> xs_tail:196 var
+R8288:8289 prosa.GeneratedListLastSource <> ys:195 var
+def 8304:8319 GeneratedListLastSource strict_prefix_of
+R8326:8331 mathcomp.ssreflect.eqtype Equality.Exports eqType abbrev
+binder 8322:8322 <> T:197
+R8343:8345 mathcomp.ssreflect.seq <> seq abbrev
+R8347:8347 prosa.GeneratedListLastSource <> T:197 var
+binder 8335:8336 <> xs:198
+binder 8338:8339 <> ys:199
+R8355:8361 Corelib.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R8369:8370 Corelib.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 8362:8368 <> xs_tail:200
+R8386:8389 Corelib.Init.Logic <> ::type_scope:x_'/\'_x not
+R8378:8381 Corelib.Init.Logic <> ::type_scope:x_'<>'_x not
+R8371:8377 prosa.GeneratedListLastSource <> xs_tail:200 var
+R8382:8385 mathcomp.ssreflect.seq <> ::seq_scope:'['_'::'_']' not
+R8403:8405 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R8392:8395 mathcomp.ssreflect.seq <> ::seq_scope:x_'++'_x not
+R8390:8391 prosa.GeneratedListLastSource <> xs:198 var
+R8396:8402 prosa.GeneratedListLastSource <> xs_tail:200 var
+R8406:8407 prosa.GeneratedListLastSource <> ys:199 var
+def 8422:8437 GeneratedListLastSource shift_points_pos
+R8445:8447 mathcomp.ssreflect.seq <> seq abbrev
+R8449:8451 Corelib.Init.Datatypes <> nat ind
+binder 8440:8441 <> xs:201
+R8459:8461 Corelib.Init.Datatypes <> nat ind
+binder 8455:8455 <> s:202
+R8466:8468 mathcomp.ssreflect.seq <> seq abbrev
+R8470:8472 Corelib.Init.Datatypes <> nat ind
+R8479:8481 mathcomp.ssreflect.seq <> map def
+R8492:8493 prosa.GeneratedListLastSource <> xs:201 var
+R8484:8487 mathcomp.ssreflect.ssrnat <> addn def
+R8489:8489 prosa.GeneratedListLastSource <> s:202 var
+def 8508:8523 GeneratedListLastSource shift_points_neg
+R8531:8533 mathcomp.ssreflect.seq <> seq abbrev
+R8535:8537 Corelib.Init.Datatypes <> nat ind
+binder 8526:8527 <> xs:203
+R8545:8547 Corelib.Init.Datatypes <> nat ind
+binder 8541:8541 <> s:204
+R8552:8554 mathcomp.ssreflect.seq <> seq abbrev
+R8556:8558 Corelib.Init.Datatypes <> nat ind
+R8581:8586 mathcomp.ssreflect.seq <> filter def
+R8606:8607 prosa.GeneratedListLastSource <> xs:203 var
+binder 8593:8593 <> x:205
+R8599:8602 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'>='_x not
+R8603:8603 prosa.GeneratedListLastSource <> s:204 var
+R8598:8598 prosa.GeneratedListLastSource <> x:205 var
+binder 8569:8576 <> nonsmall:206
+R8614:8616 mathcomp.ssreflect.seq <> map def
+R8635:8642 prosa.GeneratedListLastSource <> nonsmall:206 var
+binder 8623:8623 <> x:207
+R8629:8631 mathcomp.ssreflect.ssrnat <> ::nat_scope:x_'-'_x not
+R8628:8628 prosa.GeneratedListLastSource <> x:207 var
+R8632:8632 prosa.GeneratedListLastSource <> s:204 var
+R8650:8672 prosa.GeneratedListLastSource GeneratedListLastSource <> mod

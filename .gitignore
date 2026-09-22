@@ -1,0 +1,9 @@
+# macOS metadata
+.DS_Store
+
+# IntelliJ IDEA project settings
+.idea/
+
+# Reproducible upstream checkout; keep the pinned revision and local patches,
+# but not the materialized nested Git repository.
+/Prosa-Shunqi/rocq90-compat/importer/rocq-lean-import/

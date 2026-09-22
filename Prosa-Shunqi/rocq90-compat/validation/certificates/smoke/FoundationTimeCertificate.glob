@@ -1,0 +1,167 @@
+DIGEST fde284ba6caa759cd8ec2ff67cb29ffa
+FFoundationCertificates.FoundationTimeCertificate
+R27:40 Stdlib.Arith.PeanoNat <> <> lib
+R74:77 LeanImport.Lean <> <> lib
+R119:130 FoundationImported.ImportedTime <> <> lib
+R159:171 prosa.behavior.time <> <> lib
+def 337:356 <> rocq_nat_to_imported
+R363:365 Corelib.Init.Datatypes <> nat ind
+binder 359:359 <> n:1
+R370:372 LeanImport.Lean <> Nat ind
+R385:385 FoundationCertificates.FoundationTimeCertificate <> n:1 var
+R396:396 Corelib.Init.Datatypes <> O constr
+R401:408 LeanImport.Lean <> Nat_zero constr
+R414:414 Corelib.Init.Datatypes <> S constr
+R422:429 LeanImport.Lean <> Nat_succ constr
+R432:451 FoundationCertificates.FoundationTimeCertificate <> rocq_nat_to_imported:2 def
+def 474:493 <> imported_nat_to_rocq
+R500:502 LeanImport.Lean <> Nat ind
+binder 496:496 <> n:4
+R507:509 Corelib.Init.Datatypes <> nat ind
+R522:522 FoundationCertificates.FoundationTimeCertificate <> n:4 var
+R533:540 LeanImport.Lean <> Nat_zero constr
+R545:545 Corelib.Init.Datatypes <> O constr
+R551:558 LeanImport.Lean <> Nat_succ constr
+R566:566 Corelib.Init.Datatypes <> S constr
+R569:588 FoundationCertificates.FoundationTimeCertificate <> imported_nat_to_rocq:5 def
+def 613:635 <> imported_nat_succ_congr
+R644:646 LeanImport.Lean <> Nat ind
+binder 638:638 <> a:7
+binder 640:640 <> b:8
+R661:664 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R655:656 LeanImport.Lean <> eq ind
+R660:660 FoundationCertificates.FoundationTimeCertificate <> b:8 var
+R658:658 FoundationCertificates.FoundationTimeCertificate <> a:7 var
+R665:666 LeanImport.Lean <> eq ind
+R682:689 LeanImport.Lean <> Nat_succ constr
+R691:691 FoundationCertificates.FoundationTimeCertificate <> b:8 var
+R669:676 LeanImport.Lean <> Nat_succ constr
+R678:678 FoundationCertificates.FoundationTimeCertificate <> a:7 var
+binder 703:703 <> H:9
+R718:718 FoundationCertificates.FoundationTimeCertificate <> H:9 var
+R723:724 LeanImport.Lean <> eq ind
+R737:738 LeanImport.Lean <> eq ind
+R754:761 LeanImport.Lean <> Nat_succ constr
+R763:763 FoundationCertificates.FoundationTimeCertificate <> z:11 var
+R741:748 LeanImport.Lean <> Nat_succ constr
+R750:750 FoundationCertificates.FoundationTimeCertificate <> a:7 var
+R777:783 LeanImport.Lean <> eq_refl constr
+R790:796 LeanImport.Lean <> eq_refl constr
+R799:806 LeanImport.Lean <> Nat_succ constr
+R808:808 FoundationCertificates.FoundationTimeCertificate <> a:7 var
+prf 827:844 <> rocq_nat_roundtrip
+R851:853 Corelib.Init.Datatypes <> nat ind
+binder 847:847 <> n:12
+R860:867 Corelib.Init.Logic <> eq ind
+R917:917 FoundationCertificates.FoundationTimeCertificate <> n:12 var
+R870:889 FoundationCertificates.FoundationTimeCertificate <> imported_nat_to_rocq def
+R892:911 FoundationCertificates.FoundationTimeCertificate <> rocq_nat_to_imported def
+R913:913 FoundationCertificates.FoundationTimeCertificate <> n:12 var
+prf 1000:1021 <> imported_nat_roundtrip
+R1028:1030 LeanImport.Lean <> Nat ind
+binder 1024:1024 <> n:13
+R1037:1038 LeanImport.Lean <> eq ind
+R1088:1088 FoundationCertificates.FoundationTimeCertificate <> n:13 var
+R1041:1060 FoundationCertificates.FoundationTimeCertificate <> rocq_nat_to_imported def
+R1063:1082 FoundationCertificates.FoundationTimeCertificate <> imported_nat_to_rocq def
+R1084:1084 FoundationCertificates.FoundationTimeCertificate <> n:13 var
+R1129:1135 LeanImport.Lean <> eq_refl constr
+R1137:1144 LeanImport.Lean <> Nat_zero constr
+R1129:1135 LeanImport.Lean <> eq_refl constr
+R1137:1144 LeanImport.Lean <> Nat_zero constr
+R1159:1181 FoundationCertificates.FoundationTimeCertificate <> imported_nat_succ_congr def
+R1159:1181 FoundationCertificates.FoundationTimeCertificate <> imported_nat_succ_congr def
+def 1210:1220 <> DurationRel
+R1232:1259 prosa.behavior.time <> duration def
+binder 1227:1228 <> dR:14
+R1272:1299 FoundationImported.ImportedTime <> Prosa_Behavior_Time_duration def
+binder 1267:1268 <> dL:15
+R1315:1316 LeanImport.Lean <> eq ind
+R1344:1345 FoundationCertificates.FoundationTimeCertificate <> dL:15 var
+R1319:1338 FoundationCertificates.FoundationTimeCertificate <> rocq_nat_to_imported def
+R1340:1341 FoundationCertificates.FoundationTimeCertificate <> dR:14 var
+def 1360:1369 <> InstantRel
+R1381:1407 prosa.behavior.time <> instant def
+binder 1376:1377 <> tR:16
+R1420:1446 FoundationImported.ImportedTime <> Prosa_Behavior_Time_instant def
+binder 1415:1416 <> tL:17
+R1462:1463 LeanImport.Lean <> eq ind
+R1491:1492 FoundationCertificates.FoundationTimeCertificate <> tL:17 var
+R1466:1485 FoundationCertificates.FoundationTimeCertificate <> rocq_nat_to_imported def
+R1487:1488 FoundationCertificates.FoundationTimeCertificate <> tR:16 var
+def 1507:1526 <> duration_to_imported
+R1537:1564 prosa.behavior.time <> duration def
+binder 1533:1533 <> d:18
+R1569:1596 FoundationImported.ImportedTime <> Prosa_Behavior_Time_duration def
+R1603:1622 FoundationCertificates.FoundationTimeCertificate <> rocq_nat_to_imported def
+R1624:1624 FoundationCertificates.FoundationTimeCertificate <> d:18 var
+def 1639:1658 <> imported_to_duration
+R1669:1696 FoundationImported.ImportedTime <> Prosa_Behavior_Time_duration def
+binder 1665:1665 <> d:19
+R1701:1728 prosa.behavior.time <> duration def
+R1735:1754 FoundationCertificates.FoundationTimeCertificate <> imported_nat_to_rocq def
+R1756:1756 FoundationCertificates.FoundationTimeCertificate <> d:19 var
+prf 1766:1798 <> duration_relation_total_from_rocq
+binder 1800:1800 <> d:20
+R1806:1816 FoundationCertificates.FoundationTimeCertificate <> DurationRel def
+R1818:1818 FoundationCertificates.FoundationTimeCertificate <> d:20 var
+R1821:1840 FoundationCertificates.FoundationTimeCertificate <> duration_to_imported def
+R1842:1842 FoundationCertificates.FoundationTimeCertificate <> d:20 var
+R1860:1866 LeanImport.Lean <> eq_refl constr
+R1860:1866 LeanImport.Lean <> eq_refl constr
+prf 1884:1918 <> duration_rocq_roundtrip_certificate
+binder 1920:1920 <> d:21
+R1926:1933 Corelib.Init.Logic <> eq ind
+R1983:1983 FoundationCertificates.FoundationTimeCertificate <> d:21 var
+R1936:1955 FoundationCertificates.FoundationTimeCertificate <> imported_to_duration def
+R1958:1977 FoundationCertificates.FoundationTimeCertificate <> duration_to_imported def
+R1979:1979 FoundationCertificates.FoundationTimeCertificate <> d:21 var
+R2000:2017 FoundationCertificates.FoundationTimeCertificate <> rocq_nat_roundtrip thm
+R2000:2017 FoundationCertificates.FoundationTimeCertificate <> rocq_nat_roundtrip thm
+prf 2035:2073 <> duration_imported_roundtrip_certificate
+binder 2075:2075 <> d:22
+R2081:2082 LeanImport.Lean <> eq ind
+R2132:2132 FoundationCertificates.FoundationTimeCertificate <> d:22 var
+R2085:2104 FoundationCertificates.FoundationTimeCertificate <> duration_to_imported def
+R2107:2126 FoundationCertificates.FoundationTimeCertificate <> imported_to_duration def
+R2128:2128 FoundationCertificates.FoundationTimeCertificate <> d:22 var
+R2149:2170 FoundationCertificates.FoundationTimeCertificate <> imported_nat_roundtrip thm
+R2149:2170 FoundationCertificates.FoundationTimeCertificate <> imported_nat_roundtrip thm
+def 2193:2211 <> instant_to_imported
+R2222:2248 prosa.behavior.time <> instant def
+binder 2218:2218 <> t:23
+R2253:2279 FoundationImported.ImportedTime <> Prosa_Behavior_Time_instant def
+R2286:2305 FoundationCertificates.FoundationTimeCertificate <> rocq_nat_to_imported def
+R2307:2307 FoundationCertificates.FoundationTimeCertificate <> t:23 var
+def 2322:2340 <> imported_to_instant
+R2351:2377 FoundationImported.ImportedTime <> Prosa_Behavior_Time_instant def
+binder 2347:2347 <> t:24
+R2382:2408 prosa.behavior.time <> instant def
+R2415:2434 FoundationCertificates.FoundationTimeCertificate <> imported_nat_to_rocq def
+R2436:2436 FoundationCertificates.FoundationTimeCertificate <> t:24 var
+prf 2446:2477 <> instant_relation_total_from_rocq
+binder 2479:2479 <> t:25
+R2485:2494 FoundationCertificates.FoundationTimeCertificate <> InstantRel def
+R2496:2496 FoundationCertificates.FoundationTimeCertificate <> t:25 var
+R2499:2517 FoundationCertificates.FoundationTimeCertificate <> instant_to_imported def
+R2519:2519 FoundationCertificates.FoundationTimeCertificate <> t:25 var
+R2537:2543 LeanImport.Lean <> eq_refl constr
+R2537:2543 LeanImport.Lean <> eq_refl constr
+prf 2561:2594 <> instant_rocq_roundtrip_certificate
+binder 2596:2596 <> t:26
+R2602:2609 Corelib.Init.Logic <> eq ind
+R2657:2657 FoundationCertificates.FoundationTimeCertificate <> t:26 var
+R2612:2630 FoundationCertificates.FoundationTimeCertificate <> imported_to_instant def
+R2633:2651 FoundationCertificates.FoundationTimeCertificate <> instant_to_imported def
+R2653:2653 FoundationCertificates.FoundationTimeCertificate <> t:26 var
+R2674:2691 FoundationCertificates.FoundationTimeCertificate <> rocq_nat_roundtrip thm
+R2674:2691 FoundationCertificates.FoundationTimeCertificate <> rocq_nat_roundtrip thm
+prf 2709:2746 <> instant_imported_roundtrip_certificate
+binder 2748:2748 <> t:27
+R2754:2755 LeanImport.Lean <> eq ind
+R2803:2803 FoundationCertificates.FoundationTimeCertificate <> t:27 var
+R2758:2776 FoundationCertificates.FoundationTimeCertificate <> instant_to_imported def
+R2779:2797 FoundationCertificates.FoundationTimeCertificate <> imported_to_instant def
+R2799:2799 FoundationCertificates.FoundationTimeCertificate <> t:27 var
+R2820:2841 FoundationCertificates.FoundationTimeCertificate <> imported_nat_roundtrip thm
+R2820:2841 FoundationCertificates.FoundationTimeCertificate <> imported_nat_roundtrip thm

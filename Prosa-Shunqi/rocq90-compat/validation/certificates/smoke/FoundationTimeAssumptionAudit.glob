@@ -1,0 +1,11 @@
+DIGEST 7cec59764f901bd1a1ed2cc93ceb8149
+FFoundationCertificates.FoundationTimeAssumptionAudit
+R43:67 FoundationCertificates.FoundationTimeCertificate <> <> lib
+R89:106 FoundationCertificates.FoundationTimeCertificate <> rocq_nat_roundtrip thm
+R127:148 FoundationCertificates.FoundationTimeCertificate <> imported_nat_roundtrip thm
+R169:201 FoundationCertificates.FoundationTimeCertificate <> duration_relation_total_from_rocq thm
+R222:256 FoundationCertificates.FoundationTimeCertificate <> duration_rocq_roundtrip_certificate thm
+R277:315 FoundationCertificates.FoundationTimeCertificate <> duration_imported_roundtrip_certificate thm
+R336:367 FoundationCertificates.FoundationTimeCertificate <> instant_relation_total_from_rocq thm
+R388:421 FoundationCertificates.FoundationTimeCertificate <> instant_rocq_roundtrip_certificate thm
+R442:479 FoundationCertificates.FoundationTimeCertificate <> instant_imported_roundtrip_certificate thm

@@ -1,0 +1,22 @@
+phase	item	status	evidence
+source	full Prosa v0.6 main development (343 .v)	PASS	logs/source/full-main-build.log
+source	util/tactics.v official unmodified	PASS	logs/source/tactics.log
+source	util/seqset.v official unmodified	PASS	logs/source/seqset.log
+source	util/search_arg.v official unmodified	PASS	logs/source/search_arg.log
+source	util/list.v official unmodified	PASS	logs/source/list.log
+source	util/div_mod.v official unmodified	PASS	logs/source/div_mod.log
+importer	current project-patched importer direct build	FAIL	logs/importer/build-project-patch-final.log
+importer	importer with minimal Rocq-9.0 API port	PASS_WITH_WORKAROUND	logs/importer/build-rocq90-final.log
+import	Time.out	PASS	logs/importer/imports/Time.log
+import	Tactics.out	PASS	logs/importer/imports/Tactics.log
+import	Subadditivity.out	PASS	logs/importer/imports/Subadditivity.log
+import	ListSimple.out	PASS	logs/importer/imports/ListSimple.log
+import	SearchArg.out	FAIL	logs/importer/imports/SearchArg.log
+import	ListLast.out	FAIL	logs/importer/imports/ListLast.log
+import	Bigcat.out	FAIL	logs/importer/imports/Bigcat.log
+certificate	behavior/time.v certificate and assumption audit	PASS	logs/certificates/FoundationTimeAssumptionAudit.log
+certificate	util/tactics.v certificate and assumption audit	PASS	logs/certificates/TacticsAssumptionAudit.log
+certificate	shared SubadditivityNatCorrespondence	FAIL	logs/certificates/SubadditivityNatCorrespondence.log
+certificate	ListSimple certificate	FAIL	logs/certificates/ListSimpleCertificate.log
+certificate	SearchArg certificate	FAIL	logs/certificates/SearchArgDefinitionCertificate.log
+certificate	ListLast certificate	FAIL	logs/certificates/ListLastCertificate.log
