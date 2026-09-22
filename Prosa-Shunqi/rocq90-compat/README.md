@@ -88,3 +88,17 @@ baseline or original importer checkout.
 Machine-readable outcomes are in `results/phase2/`; complete exit codes and
 logs are in `logs/phase2/`. See `results/phase2/acc_compat_report.md` for the
 semantic and trust boundary of the experiment.
+
+## Phase 3: Acc-free SearchArg boundary
+
+Phase 3 selectively exports only the compiled `search_arg` definition and its
+two kernel-reflexive equations, with every reachable proof body retained and
+`#AX` records forbidden. Reproduce the focused experiment with:
+
+```sh
+scripts/phase3_generate_searcharg_acc_free.sh
+scripts/phase3_verify_searcharg_acc_free.sh
+```
+
+See `results/phase3/searcharg_acc_free_report.md`. This experiment does not
+change the formal acceptance state.

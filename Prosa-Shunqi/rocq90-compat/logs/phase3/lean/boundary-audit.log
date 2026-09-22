@@ -1,0 +1,15 @@
+TYPE_DEF_EQ_OK target=Prosa.Util.SearchArg.search_arg guard=Prosa.Validation.SearchArgAccFree.search_arg_exact_type_guard target_hash=1774206371 guard_hash=3554261346
+TYPE_DEF_EQ_OK target=Prosa.Util.SearchArg.search_arg.eq_1 guard=Prosa.Validation.SearchArgAccFree.search_arg_eq_1_refl_guard target_hash=582745099 guard_hash=1399478193
+TYPE_DEF_EQ_OK target=Prosa.Util.SearchArg.search_arg.eq_2 guard=Prosa.Validation.SearchArgAccFree.search_arg_eq_2_refl_guard target_hash=69832436 guard_hash=4242828506
+@Util.SearchArg.search_arg : {T : Type u_1} → (ℕ → T) → (T → Bool) → (T → T → Bool) → ℕ → ℕ → Option ℕ
+@Util.SearchArg.search_arg.eq_1 : ∀ {T : Type u_1} (f : ℕ → T) (P : T → Bool) (R : T → T → Bool) (a : ℕ),
+  Util.SearchArg.search_arg f P R a 0 = if a < 0 then none else none
+@Util.SearchArg.search_arg.eq_2 : ∀ {T : Type u_1} (f : ℕ → T) (P : T → Bool) (R : T → T → Bool) (a b' : ℕ),
+  Util.SearchArg.search_arg f P R a b'.succ =
+    if a < b'.succ then
+      match Util.SearchArg.search_arg f P R a b' with
+      | none => if P (f b') = true then some b' else none
+      | some x => if (P (f b') && R (f b') (f x)) = true then some b' else some x
+    else none
+'Prosa.Validation.SearchArgAccFree.search_arg_eq_1_refl_guard' does not depend on any axioms
+'Prosa.Validation.SearchArgAccFree.search_arg_eq_2_refl_guard' does not depend on any axioms

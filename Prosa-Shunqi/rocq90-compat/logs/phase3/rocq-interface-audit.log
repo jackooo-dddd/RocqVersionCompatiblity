@@ -1,0 +1,50 @@
+Prosa_Util_SearchArg_search_arg
+     : forall T : Type,
+       (Nat -> T) ->
+       (T -> Bool) -> (T -> T -> Bool) -> Nat -> Nat -> Option_inst1 Nat
+Prosa_Util_SearchArg_search_arg_eq_1
+     : forall (T : Type) (f : Nat -> T) (P : T -> Bool) 
+         (R : T -> T -> Bool) (a : Nat),
+       eq
+         (Prosa_Util_SearchArg_search_arg T f P R a
+            (OfNat_ofNat_inst1 Nat 0 (instOfNatNat 0)))
+         (ite (Option_inst1 Nat)
+            (LT_lt_inst1 Nat instLTNat a
+               (OfNat_ofNat_inst1 Nat 0 (instOfNatNat 0)))
+            (Nat_decLt a (OfNat_ofNat_inst1 Nat 0 (instOfNatNat 0)))
+            (Option_none_inst1 Nat) (Option_none_inst1 Nat))
+Prosa_Util_SearchArg_search_arg_eq_2
+     : forall (T : Type) (f : Nat -> T) (P : T -> Bool) 
+         (R : T -> T -> Bool) (a b' : Nat),
+       eq (Prosa_Util_SearchArg_search_arg T f P R a (Nat_succ b'))
+         (ite (Option_inst1 Nat) (LT_lt_inst1 Nat instLTNat a (Nat_succ b'))
+            (Nat_decLt a (Nat_succ b'))
+            (Prosa_Util_SearchArg_search_arg_match_1
+               (fun _ : Option_inst1 Nat => Option_inst1 Nat)
+               (Prosa_Util_SearchArg_search_arg T f P R a b')
+               (fun _ : Unit =>
+                ite (Option_inst1 Nat) (eq (P (f b')) Bool_true)
+                  (instDecidableEqBool (P (f b')) Bool_true)
+                  (Option_some_inst1 Nat b') (Option_none_inst1 Nat))
+               (fun x : Nat =>
+                ite (Option_inst1 Nat)
+                  (eq (Bool_and (P (f b')) (R (f b') (f x))) Bool_true)
+                  (instDecidableEqBool (Bool_and (P (f b')) (R (f b') (f x)))
+                     Bool_true)
+                  (Option_some_inst1 Nat b') (Option_some_inst1 Nat x)))
+            (Option_none_inst1 Nat))
+Axioms:
+eq_inst1 relies on definitional UIP.
+eq relies on definitional UIP.
+True relies on definitional UIP.
+HEq_inst1 relies on definitional UIP.
+Axioms:
+eq_inst1 relies on definitional UIP.
+eq relies on definitional UIP.
+True relies on definitional UIP.
+HEq_inst1 relies on definitional UIP.
+Axioms:
+eq_inst1 relies on definitional UIP.
+eq relies on definitional UIP.
+True relies on definitional UIP.
+HEq_inst1 relies on definitional UIP.

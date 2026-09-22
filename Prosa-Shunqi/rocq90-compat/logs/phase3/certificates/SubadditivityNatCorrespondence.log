@@ -1,0 +1,40 @@
+File "./SubadditivityNatCorrespondence.v", line 1, characters 0-54:
+Warning: Notation "_ + _" was already used in scope nat_scope.
+[notation-overridden,parsing,default]
+File "./SubadditivityNatCorrespondence.v", line 1, characters 0-54:
+Warning: Notation "_ - _" was already used in scope nat_scope.
+[notation-overridden,parsing,default]
+File "./SubadditivityNatCorrespondence.v", line 1, characters 0-54:
+Warning: Notation "_ <= _" was already used in scope nat_scope.
+[notation-overridden,parsing,default]
+File "./SubadditivityNatCorrespondence.v", line 1, characters 0-54:
+Warning: Notation "_ < _" was already used in scope nat_scope.
+[notation-overridden,parsing,default]
+File "./SubadditivityNatCorrespondence.v", line 1, characters 0-54:
+Warning: Notation "_ >= _" was already used in scope nat_scope.
+[notation-overridden,parsing,default]
+File "./SubadditivityNatCorrespondence.v", line 1, characters 0-54:
+Warning: Notation "_ > _" was already used in scope nat_scope.
+[notation-overridden,parsing,default]
+File "./SubadditivityNatCorrespondence.v", line 1, characters 0-54:
+Warning: Notation "_ <= _ <= _" was already used in scope nat_scope.
+[notation-overridden,parsing,default]
+File "./SubadditivityNatCorrespondence.v", line 1, characters 0-54:
+Warning: Notation "_ < _ <= _" was already used in scope nat_scope.
+[notation-overridden,parsing,default]
+File "./SubadditivityNatCorrespondence.v", line 1, characters 0-54:
+Warning: Notation "_ <= _ < _" was already used in scope nat_scope.
+[notation-overridden,parsing,default]
+File "./SubadditivityNatCorrespondence.v", line 1, characters 0-54:
+Warning: Notation "_ < _ < _" was already used in scope nat_scope.
+[notation-overridden,parsing,default]
+File "./SubadditivityNatCorrespondence.v", line 1, characters 0-54:
+Warning: Notation "_ * _" was already used in scope nat_scope.
+[notation-overridden,parsing,default]
+File "./SubadditivityNatCorrespondence.v", line 127, characters 0-4:
+Error: Binder
+(_evar_0_ : "sub_imported_add (sub_nat_to_imported a) (sub_nat_to_imported 0) =
+             sub_nat_to_imported a")
+has relevance mark set to relevant but was expected to be irrelevant
+(maybe a bugged tactic).
+
