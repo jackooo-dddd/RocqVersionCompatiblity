@@ -33,7 +33,10 @@ JSON 内锁定了四个 planning input 的 Git blob SHA。正常的新翻译 com
 
 **零声明文件不是自动完成。** 要检查其 imports/re-exports、notation、instances/coercions 和可观察接口，并获得符合项目规则的模块验收记录。没有适用 gate 时记录缺口，不把 0/0 当成证明，也不凭这份计划发明一种自动放行状态。
 
-Rank 1–10 使用正式 `prepare_rocq90_batch1.sh → check_rocq90_batch1.sh → finalize_rocq90_batch1.sh` 入口。List 的旧专用脚本仍只服务历史/后续 List 工作；Rank 11 应建立 Batch 2 whole-file Rocq 9.0 migration，不能只把路径换成另一个 `.lean` 就声称完成验证。
+Rank 1–10 使用正式 Batch 1 入口；Rank 11 使用正式
+`prepare_rocq90_batch2.sh → check_rocq90_batch2.sh → finalize_rocq90_batch2.sh`
+入口并已 whole-file 验收。List 的旧专用脚本只保留历史 provenance，不能替代
+当前 Rocq 9.0 evidence。下一 READY 是 Rank 12 `util/sum.v`。
 
 ## 确定性顺序
 
@@ -64,8 +67,8 @@ Rank 1–10 使用正式 `prepare_rocq90_batch1.sh → check_rocq90_batch1.sh �
 | 8 | `util/nat.v` | 2 | Rocq 9.0 Batch 1 whole-file revalidation accepted；minimal computation boundary。 |
 | 9 | `util/unit_growth.v` | 12 | Rocq 9.0 Batch 1 whole-file revalidation accepted；official source 直编译。 |
 | 10 | `util/search_arg.v` | 8 | Rocq 9.0 Batch 1 whole-file revalidation accepted；Nat.find-free target boundary。 |
-| 11 | `util/list.v` | 57 | **下一 READY：Full Rocq 9.0 Migration — Batch 2**；按语义簇完成并最终 whole-file 验收。 |
-| 12 | `util/sum.v` | 25 | 大文件；按语义簇拆分并最终 whole-file 验收；保留现有 review gates。 |
+| 11 | `util/list.v` | 57 | Rocq 9.0 Batch 2 whole-file revalidation accepted；57/57 actual-artifact certificates PASS。 |
+| 12 | `util/sum.v` | 25 | **下一 READY**；大文件，按语义簇拆分并最终 whole-file 验收；保留现有 review gates。 |
 | 13 | `util/epsilon.v` | 0 | notation/模块审计；0项不等于自动 accepted。 |
 | 14 | `util/bigop.v` | 1 | 整文件；泛型 bigop 的运算/单位元/laws 边界需要预检。 |
 | 15 | `util/setoid.v` | 3 | 整文件；先于 minmax。 |

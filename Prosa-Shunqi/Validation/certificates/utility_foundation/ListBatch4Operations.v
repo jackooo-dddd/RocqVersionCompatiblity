@@ -151,9 +151,9 @@ Lemma l4_range_related aR aL bR bL :
 Proof.
   intros Ha Hb. unfold GeneratedListLastSource.range.
   have Hb1 := lr_add_related bR bL 1 ll_target_one Hb lr_one_related.
-  rewrite addn1 in Hb1.
+  have HbS := l3_nat_source_transport (bR + 1) bR.+1 _ (addn1 bR) Hb1.
   have Hidx := l4_index_iota_related aR aL bR.+1
-    (lr_target_add bL ll_target_one) Ha Hb1.
+    (lr_target_add bL ll_target_one) Ha HbS.
   unfold LlListRel in Hidx |- *.
   exact (sub_imported_eq_trans _ _ _ Hidx
     (sub_imported_eq_sym _ _
@@ -177,8 +177,8 @@ Qed.
 Definition l4_target_mem_decidable (x : Lean.Nat)
     (xs : ImportedListLast.List_inst1 Lean.Nat) :
     ImportedListLast.Decidable (ll_target_mem x xs) :=
-  ImportedListLast.Prosa_Validation_Rocq90Batch2ListInterface_decidableMem
-    Lean.Nat ImportedListLast.instDecidableEqNat x xs.
+  ImportedListLast.Prosa_Validation_Rocq90Batch2ListInterface_natDecidableMem
+    x xs.
 
 Definition l4_target_decide_mem (x : Lean.Nat)
     (xs : ImportedListLast.List_inst1 Lean.Nat) : ImportedListLast.Bool :=

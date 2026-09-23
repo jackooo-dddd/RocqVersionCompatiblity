@@ -283,8 +283,13 @@ for name in ('ListLast', 'ListSimple'):
     if unexpected:
         raise SystemExit(f'{name}: unexpected #AX records: {unexpected}')
     if name == 'ListLast':
-        names = {qualified(parts[0]) for line in lines
-                 if len(parts := line.split()) >= 2 and parts[1] in ('#DEF', '#THM')}
+        names = set()
+        for line in lines:
+            parts = line.split()
+            if len(parts) >= 2 and parts[0] in ('#DEF', '#AX'):
+                names.add(qualified(parts[1]))
+            elif len(parts) >= 3 and parts[0] == '#IND':
+                names.add(qualified(parts[2]))
         forbidden = set(boundary['forbidden_export_names'])
         leaked = sorted(x for x in names if x.rsplit('.', 1)[-1] in forbidden)
         if leaked:

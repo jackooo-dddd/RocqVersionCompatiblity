@@ -37,9 +37,13 @@
     "Prosa.Validation.Rocq90Batch2ListInterface.natLt",
     "Prosa.Validation.Rocq90Batch2ListInterface.natMem",
     "Prosa.Validation.Rocq90Batch2ListInterface.decidableMem",
+    "Prosa.Validation.Rocq90Batch2ListInterface.natDecidableMem",
     "Prosa.Validation.Rocq90Batch2ListInterface.natRemAll",
+    "Prosa.Validation.Rocq90Batch2ListInterface.singletonListEqDecidable",
+    "Prosa.Validation.Rocq90Batch2ListInterface.someEqDecidable",
     "Nat.decLt", "Option", "Option.none", "Option.some",
-    "Option.instDecidableEq", "instDecidableEqList", "instDecidableEqBool"
+    "instDecidableEqBool",
+    "List.Nodup"
   ],
   "body_theorem_targets": [
     "Prosa.Validation.ListLastInterface.nat_zero",
@@ -109,6 +113,7 @@
     "Prosa.Validation.Rocq90Batch2ListInterface.last0_nth_safe"
   ],
   "forbidden_export_names": [
-    "Acc", "Acc_rec", "Acc_rect", "WellFounded", "brecOn", "get?Internal"
+    "Acc", "Acc_rec", "Acc_rect", "WellFounded", "get?Internal",
+    "find", "findX"
   ]
 }

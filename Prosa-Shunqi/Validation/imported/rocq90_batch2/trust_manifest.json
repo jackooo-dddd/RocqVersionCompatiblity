@@ -1,0 +1,19 @@
+{
+  "ImportedListLast": {
+    "assumed_positivity": [],
+    "lean_foundation_axioms": [
+      "FoundationImported.ImportedListLast.Quot_sound",
+      "FoundationImported.ImportedListLast.propext"
+    ],
+    "type_in_type": [],
+    "unexpected_custom_rocq_axioms": [],
+    "unsafe_fixpoints": []
+  },
+  "ImportedListSimple": {
+    "assumed_positivity": [],
+    "lean_foundation_axioms": [],
+    "type_in_type": [],
+    "unexpected_custom_rocq_axioms": [],
+    "unsafe_fixpoints": []
+  }
+}

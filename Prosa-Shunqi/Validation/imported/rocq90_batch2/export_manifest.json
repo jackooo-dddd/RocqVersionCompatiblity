@@ -1,0 +1,21 @@
+{
+  "ListLast": {
+    "lean_foundation_records": [
+      "Quot.sound",
+      "propext"
+    ],
+    "normal_elimination_checking": true,
+    "normal_universe_checking": true,
+    "sha256": "eea8924a89070413d9e8755ebcca56ea3a30718b1839003612206fab9714f641",
+    "statement_only": false,
+    "unexpected_axiom_records": []
+  },
+  "ListSimple": {
+    "lean_foundation_records": [],
+    "normal_elimination_checking": true,
+    "normal_universe_checking": true,
+    "sha256": "033db5ef70e40a66f0547a6af76392d1e7fe64214cff8356029e07a94ba8dd8e",
+    "statement_only": false,
+    "unexpected_axiom_records": []
+  }
+}

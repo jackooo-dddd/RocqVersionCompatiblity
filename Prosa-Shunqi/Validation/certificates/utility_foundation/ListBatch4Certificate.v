@@ -244,9 +244,9 @@ Proof.
       (sub_nat_lt_correspondence _ _ _ _ Ha Hb) HltL.
     have Hleft := l4_index_iota_related aR aL bR bL Ha Hb.
     have Ha1 := lr_add_related aR aL 1 ll_target_one Ha lr_one_related.
-    rewrite addn1 in Ha1.
+    have HaS := l3_nat_source_transport (aR + 1) aR.+1 _ (addn1 aR) Ha1.
     have Htail := l4_index_iota_related aR.+1
-      (lr_target_add aL ll_target_one) bR bL Ha1 Hb.
+      (lr_target_add aL ll_target_one) bR bL HaS Hb.
     have Hright := ll_cons_related aR aL _ _ Ha Htail.
     exact (prop_to_sprop _ _
       (ll_list_eq_correspondence _ _ _ _ Hleft Hright)
@@ -258,8 +258,8 @@ Proof.
       (sub_nat_lt_correspondence _ _ _ _ Ha Hb) HltR.
     have Hleft := l4_index_iota_related aR _ bR _ Ha Hb.
     have Ha1 := lr_add_related aR _ 1 ll_target_one Ha lr_one_related.
-    rewrite addn1 in Ha1.
-    have Htail := l4_index_iota_related aR.+1 _ bR _ Ha1 Hb.
+    have HaS := l3_nat_source_transport (aR + 1) aR.+1 _ (addn1 aR) Ha1.
+    have Htail := l4_index_iota_related aR.+1 _ bR _ HaS Hb.
     have Hright := ll_cons_related aR _ _ _ Ha Htail.
     exact (sprop_to_prop _ _
       (ll_list_eq_correspondence _ _ _ _ Hleft Hright)

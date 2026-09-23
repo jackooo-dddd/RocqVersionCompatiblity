@@ -94,7 +94,9 @@ Proof.
       have Hadd := lr_add_related (count PR xs)
         (l5_target_countP PL (lr_to_imported xs)) 1 ll_target_one
         IH lr_one_related.
-      rewrite /= Hpa.
+      apply (l3_nat_source_transport (S (count PR xs))
+        (count PR (a :: xs)) _).
+      { by rewrite /= Hpa. }
       unfold SubNatRel in Hadd |- *.
       have Hsource : Lean.eq
           (sub_nat_to_imported (S (count PR xs)))
@@ -116,7 +118,9 @@ Proof.
           ImportedListLast.Bool_true)
         (l5_target_bool_ne_true_of_eq_false (PL a) Hb)
         ll_target_one ll_target_zero.
-      rewrite /= Hpa.
+      apply (l3_nat_source_transport (count PR xs)
+        (count PR (a :: xs)) _).
+      { by rewrite /= Hpa. }
       unfold SubNatRel in IH |- *.
       exact (sub_imported_eq_trans _ _ _ IH
         (sub_imported_eq_sym _ _
@@ -172,7 +176,9 @@ Proof.
       have Hadd := lr_add_related (count PR xs)
         (l5_target_nat_countP PL (ll_to_imported xs)) 1 ll_target_one
         IH lr_one_related.
-      rewrite /= Hpa.
+      apply (l3_nat_source_transport (S (count PR xs))
+        (count PR (a :: xs)) _).
+      { by rewrite /= Hpa. }
       unfold SubNatRel in Hadd |- *.
       have Hsource : Lean.eq
           (sub_nat_to_imported (S (count PR xs)))
@@ -196,7 +202,9 @@ Proof.
         (l5_target_bool_ne_true_of_eq_false
           (PL (sub_nat_to_imported a)) Hb)
         ll_target_one ll_target_zero.
-      rewrite /= Hpa.
+      apply (l3_nat_source_transport (count PR xs)
+        (count PR (a :: xs)) _).
+      { by rewrite /= Hpa. }
       unfold SubNatRel in IH |- *.
       exact (sub_imported_eq_trans _ _ _ IH
         (sub_imported_eq_sym _ _

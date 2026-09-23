@@ -744,6 +744,22 @@ Fixpoint l3_pair_imported_mem_decoded (T U : eqType)
         (l3_pair_imported_mem_decoded T U p tail Htail)
   end.
 
+Definition l3_pair_mem_truth_transport (T U : eqType)
+    (p p' : T * U) (xs xs' : seq (T * U)) :
+  Logic.eq p p' -> Logic.eq xs xs' ->
+  SubNatTruth (p \in xs) -> SubNatTruth (p' \in xs') :=
+  fun Hp Hxs Htruth =>
+    match Hp in Logic.eq _ q return Logic.eq xs xs' ->
+      SubNatTruth (p \in xs) -> SubNatTruth (q \in xs')
+    with
+    | Logic.eq_refl => fun Hlists Ht =>
+        match Hlists in Logic.eq _ ys return
+          SubNatTruth (p \in xs) -> SubNatTruth (p \in ys)
+        with
+        | Logic.eq_refl => fun Ht' => Ht'
+        end Ht
+    end Hxs Htruth.
+
 Lemma l3_pair_imported_mem_backward (T U : eqType) (p : T * U)
     (xs : seq (T * U)) :
   l3_pair_target_mem (l3_pair_to_imported p)
@@ -751,12 +767,10 @@ Lemma l3_pair_imported_mem_backward (T U : eqType) (p : T * U)
   SubNatTruth (p \in xs).
 Proof.
   intro H.
-  have Hdecoded := l3_pair_imported_mem_decoded T U
-    (l3_pair_to_imported p) (l3_pair_list_to_imported xs) H.
-  cbn in Hdecoded.
-  rewrite (l3_pair_source_roundtrip p) in Hdecoded.
-  rewrite (l3_pair_list_source_roundtrip xs) in Hdecoded.
-  exact Hdecoded.
+  exact (l3_pair_mem_truth_transport T U _ _ _ _
+    (l3_pair_source_roundtrip p) (l3_pair_list_source_roundtrip xs)
+    (l3_pair_imported_mem_decoded T U
+      (l3_pair_to_imported p) (l3_pair_list_to_imported xs) H)).
 Qed.
 
 Definition l3_pair_list_mem_transport {T U : Type}
@@ -890,7 +904,9 @@ Proof.
       (sub_imported_eq_sym _ _
         (ImportedListLast.Prosa_Validation_ListLastInterface_generic_idxOf_nil
           T (lr_decidable_eq T) x))).
-  - rewrite (l3_index_cons T x a xs).
+  - apply (l3_nat_source_transport
+      (if a == x then O else S (index x xs)) (index x (a :: xs)) _
+      (Logic.eq_sym (l3_index_cons T x a xs))).
     refine (sub_imported_eq_trans _ _ _
       (l3_cond_nat_related (a == x) (l3_target_eq_bool T a x)
         0 (index x xs).+1 ll_target_zero

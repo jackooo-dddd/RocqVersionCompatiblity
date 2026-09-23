@@ -30,7 +30,7 @@ Current canonical reports, in the approved execution order:
 | 8 | `util/nat.v` | [nat](files/util/2026-09-21_082258_nat.md) | `ACCEPTED_V06_FILE_ROCQ90` |
 | 9 | `util/unit_growth.v` | [unit_growth](files/util/2026-09-21_082258_unit_growth.md) | `ACCEPTED_V06_FILE_ROCQ90` |
 | 10 | `util/search_arg.v` | [search_arg](files/util/2026-09-21_082258_search_arg.md) | `ACCEPTED_V06_FILE_ROCQ90` |
-| 11 | `util/list.v` | [list](files/util/2026-09-21_082258_list.md) | `ROCQ90_REVALIDATION_PENDING` |
+| 11 | `util/list.v` | [list](files/util/2026-09-21_082258_list.md) | `ACCEPTED_V06_FILE_ROCQ90` |
 | 12 | `util/sum.v` | [sum](files/util/2026-09-21_082258_sum.md) | `ROCQ90_REVALIDATION_PENDING` |
 | 13 | `util/epsilon.v` | [epsilon](files/util/2026-09-22_034433_epsilon.md) | `ROCQ90_REVALIDATION_PENDING` |
 | 14 | `util/bigop.v` | [bigop](files/util/2026-09-22_034433_bigop.md) | `ROCQ90_REVALIDATION_PENDING` |
@@ -43,17 +43,17 @@ Current canonical reports, in the approved execution order:
 
 ## Current proof progress
 
-On the active Rocq-9.0 baseline, machine-published acceptance is **10 / 357
-source files** and **46 / 2439 public declarations**, with **0
-translated-but-not-certified**. Rank 1–10 passed fresh actual-artifact import,
-all semantic certificates, assumption classification, and `rocqchk`; the
-formal batch result is
-[`rocq90_full_migration_batch1.md`](migrations/rocq90_full_migration_batch1.md).
+On the active Rocq-9.0 baseline, machine-published acceptance is **11 / 357
+source files** and **103 / 2439 public declarations**, with **0
+translated-but-not-certified**. Rank 1–11 passed fresh actual-artifact import,
+all semantic certificates, assumption classification, and `rocqchk`. The
+latest formal batch result is
+[`rocq90_full_migration_batch2.md`](migrations/rocq90_full_migration_batch2.md).
 
 Rocq-9.3 acceptance for later files is retained as historical provenance but
 does not make a predecessor READY under the active baseline. The next READY
-work is **Full Rocq 9.0 Migration — Batch 2**, rank 11, `util/list.v`
-whole-file migration.
+work is rank 12, `util/sum.v` (25 authoritative declarations); it was not
+started in Batch 2.
 
 The formal scheduling document is
 [`../v06_file_translation_order.md`](../v06_file_translation_order.md).

@@ -31,9 +31,29 @@ def natMem (x : Nat) (xs : List Nat) : Prop := x ∈ xs
 def decidableMem {T : Type u} [DecidableEq T]
     (x : T) (xs : List T) : Decidable (x ∈ xs) := inferInstance
 
+def natDecidableMem (x : Nat) (xs : List Nat) : Decidable (natMem x xs) :=
+  by unfold natMem; infer_instance
+
 /-- Nat-specialized view of the actual production `rem_all` definition. -/
 def natRemAll (x : Nat) (xs : List Nat) : List Nat :=
   Prosa.Util.List.rem_all x xs
+
+def singletonListEqDecidable {T : Type u} [DecidableEq T] (x y : T) :
+    Decidable ([x] = [y]) := by
+  by_cases h : x = y
+  · exact isTrue (by subst y; rfl)
+  · exact isFalse (by
+      intro hxy
+      apply h
+      exact (List.cons.inj hxy).1)
+
+def someEqDecidable {T : Type u} [DecidableEq T] (x y : T) :
+    Decidable (some x = some y) := by
+  by_cases h : x = y
+  · exact isTrue (by subst y; rfl)
+  · exact isFalse (by
+      intro hxy
+      exact h (Option.some.inj hxy))
 
 theorem getD_nil {T : Type u} (n : Nat) (fallback : T) :
     getD ([] : List T) n fallback = fallback := by

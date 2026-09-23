@@ -743,9 +743,8 @@ Definition lr_target_singleton_list_eq_decidable (T : eqType) (x y : T) :
       (Lean.eq
         (ImportedListLast.List_cons T x (ImportedListLast.List_nil T))
         (ImportedListLast.List_cons T y (ImportedListLast.List_nil T))) :=
-  ImportedListLast.instDecidableEqList T (lr_decidable_eq T)
-    (ImportedListLast.List_cons T x (ImportedListLast.List_nil T))
-    (ImportedListLast.List_cons T y (ImportedListLast.List_nil T)).
+  ImportedListLast.Prosa_Validation_Rocq90Batch2ListInterface_singletonListEqDecidable
+    T (lr_decidable_eq T) x y.
 
 Definition lr_target_singleton_list_eq_decide (T : eqType) (x y : T) :
     ImportedListLast.Bool :=
@@ -756,9 +755,8 @@ Definition lr_target_some_eq_decidable (T : eqType) (x y : T) :
     ImportedListLast.Decidable
       (Lean.eq (ImportedListLast.Option_some T x)
         (ImportedListLast.Option_some T y)) :=
-  ImportedListLast.Option_instDecidableEq T (lr_decidable_eq T)
-    (ImportedListLast.Option_some T x)
-    (ImportedListLast.Option_some T y).
+  ImportedListLast.Prosa_Validation_Rocq90Batch2ListInterface_someEqDecidable
+    T (lr_decidable_eq T) x y.
 
 Definition lr_target_some_eq_decide (T : eqType) (x y : T) :
     ImportedListLast.Bool :=
