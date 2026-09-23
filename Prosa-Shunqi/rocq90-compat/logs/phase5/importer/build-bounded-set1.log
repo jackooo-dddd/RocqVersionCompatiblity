@@ -1,8 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/make --no-builtin-rules -f Makefile.rocq CAMLPKGS="-package yojson" 
-ROCQ DEP VFILES
-ROCQ compile src/Lean.v
-File "./src/Lean.v", line 135, characters 0-91:
-Warning:
-The record Lean_SPropBox could not be defined as a primitive record because
-it is not in SProp but all projections may be irrelevant.
-[non-primitive-record,records,default]

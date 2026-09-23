@@ -13,7 +13,7 @@
 
 - 唯一 specification：Prosa v0.6 `414e66760333eaa4ef78c685bcf53291c527a548`。
 - 本次读取 RTS commit：`4e9f60d54e5722a92170413bf4506c7df91cdf21`。
-- 正式验证环境：Lean 4.33.1；Mathlib `0df444a360eaa60ab8c11dca51a86af692955474`；stock Rocq 9.0.0。Rocq 9.3 仅保留为历史 validation provenance；Phase 1–7 是迁移依据，不是主 pipeline 运行时依赖。
+- 唯一支持的正式验证环境：Lean 4.33.1；Mathlib `0df444a360eaa60ab8c11dca51a86af692955474`；stock Rocq 9.0.0。
 - 调度 authority：`Validation/planning/v06_dependency/file_layers.csv`；数量及种类来自 `file_inventory.csv`、`declaration_inventory.csv`。
 - 完整范围：357 个文件。343 个属于 main；14 个 refinement 文件单独保留为 deferred。普通 MathComp/HB/Stdlib 依赖不因此被一概排除。
 - `scope_manifest.json` 中较早的 worktree 路径和工具版本是历史 inventory provenance，不是要求退回旧 workspace 或旧验证环境。
@@ -22,7 +22,7 @@ JSON 内锁定了四个 planning input 的 Git blob SHA。正常的新翻译 com
 
 ## Agent 执行规则
 
-1. **按本文件的 rank 顺序，选择下一个尚未完整完成的 source file。** 若该文件已存在当前 baseline 下有效的 `ACCEPTED_V06_FILE_ROCQ90` 证据，则检查证据仍与当前 source/artifact/certificate 匹配后跳过；Rocq 9.3 的历史 `ACCEPTED_V06_FILE` 不能单独触发跳过。开始前仍必须满足 scope 允许且 **所有直接文件依赖均已有效验收**。
+1. **按本文件的 rank 顺序，选择下一个尚未完整完成的 source file。** 若该文件已存在当前 baseline 下有效的 `ACCEPTED_V06_FILE_ROCQ90` 证据，则检查证据仍与当前 source/artifact/certificate 匹配后跳过。开始前仍必须满足 scope 允许且 **所有直接文件依赖均已有效验收**。
 2. 依赖文件只有部分 declarations accepted、证据 stale 或只有 compile PASS，都不满足文件门槛。某项被阻塞时记录 blocker，可继续其他已 READY 的独立文件；不可启动其下游，不可删 DAG 边制造 READY。记录跳过原因，解除阻塞后回到较早 rank。
 3. 一个任务优先以 **whole file** 为单位。通常 ≤15 个声明整文件一批；16–20 个先检查新语义边界；>20 个按相互关联的声明组拆分。大文件内部允许分批，但整文件没收尾之前仍不能放行下游。声明 DAG 只细化文件内顺序，不替代文件 DAG。
 4. 每个新 class/计算边界先做最小 actual-artifact 预检；之后收齐本文件候选并冻结 snapshot，复用 prepare→check→finalize 模式。共享的是同一冻结输入的准备产物，不是承诺整个文件永远只需要一次试验。输入变了必须重新准备。
@@ -36,8 +36,7 @@ JSON 内锁定了四个 planning input 的 Git blob SHA。正常的新翻译 com
 Rank 1–10 使用正式 Batch 1 入口；Rank 11 使用正式 Batch 2 入口；Rank 12–19
 使用正式
 `prepare_rocq90_batch3.sh → check_rocq90_batch3.sh → finalize_rocq90_batch3.sh`
-入口并已 whole-file 验收。旧专用脚本只保留历史 provenance，不能替代当前
-Rocq 9.0 evidence。下一 READY 是 Rank 20 `util/nondecreasing.v`，它属于继续
+入口并已 whole-file 验收。下一 READY 是 Rank 20 `util/nondecreasing.v`，它属于继续
 完成历史未完成 translation，而不是 migration-only revalidation。
 
 ## 确定性顺序

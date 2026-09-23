@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Formal Rocq 9.0 Batch 1 hooks.  They intentionally do not read any
-# rocq90-compat work, log, result, or artifact directory.
+# Formal Rocq 9.0 Batch 1 hooks. All inputs are declared below or in the
+# associated descriptor.
 
 VALIDATION_PREPARE_INPUTS=(
   "$VALIDATION_ROOT/tooling/rocq90_batch1_descriptor.json"
@@ -259,17 +259,11 @@ PY
 }
 
 validation_prepare_rocq_import() {
-  local i module template
+  local i module
   for i in "${!batch_modules[@]}"; do
     module=${batch_modules[$i]}
-    case "$module" in
-      Time) template="$VALIDATION_ROOT/imported/foundation_slice_1/ImportedTime.v" ;;
-      Tactics|Notation|Rel|Seqset|Subadditivity|Supremum)
-        template="$VALIDATION_ROOT/imported/foundation_slice_2/Imported${module}.v" ;;
-      Nat|UnitGrowth|SearchArg)
-        template="$VALIDATION_ROOT/imported/utility_foundation/Imported${module}.v" ;;
-    esac
-    cp "$template" "$VALIDATION_PREPARED/imported/Imported${module}.v"
+    printf 'From LeanImport Require Import Lean.\n\nLean Import "%s.out".\n' \
+      "$module" >"$VALIDATION_PREPARED/imported/Imported${module}.v"
     batch_rocq_compile "$VALIDATION_PREPARED" "$VALIDATION_PREPARED/imported" \
       "Imported${module}.v" >"$VALIDATION_RUN_LOG/import_${module}.log" 2>&1
   done
@@ -525,7 +519,6 @@ status = {
     'schema_version': 1,
     'classification': 'ROCQ90_FULL_MIGRATION_BATCH1_ACCEPTED',
     'active_validation_baseline': 'Rocq 9.0.0',
-    'historical_validation_provenance': 'Rocq 9.3',
     'snapshot_id': snapshot, 'files_accepted': 10,
     'files_total': 10, 'declarations_accepted': 46,
     'declarations_total': 46, 'translated_but_not_certified': 0,

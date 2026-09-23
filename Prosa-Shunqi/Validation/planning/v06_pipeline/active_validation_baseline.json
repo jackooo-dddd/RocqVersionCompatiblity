@@ -3,9 +3,9 @@
   "batch1_status": "rocq90_batch1_status.json",
   "batch2_status": "rocq90_batch2_status.json",
   "batch3_status": "rocq90_batch3_status.json",
-  "classification": "ROCQ90_FULL_MIGRATION_BATCH3_ACCEPTED",
-  "historical_validation_provenance": "Rocq 9.3",
-  "migration_justification": "../../../rocq90-compat/ (Phase 1-7, frozen; not a runtime dependency)",
+  "classification": "ROCQ90_ONLY_MAINLINE_VERIFIED",
+  "importer_evaluation": "../importer/rocq90_importer_evaluation.json",
+  "supported_baselines": ["Rocq 9.0.0"],
   "next_ready_file": "util/nondecreasing.v",
   "next_work_item": "Rank 20 historical unfinished translation (33 declarations)",
   "schema_version": 1

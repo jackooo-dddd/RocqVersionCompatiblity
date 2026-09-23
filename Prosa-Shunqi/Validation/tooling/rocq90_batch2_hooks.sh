@@ -312,10 +312,10 @@ PY
 }
 
 validation_prepare_rocq_import() {
-  cp "$VALIDATION_ROOT/imported/utility_foundation/ImportedListLast.v" \
-    "$VALIDATION_PREPARED/imported/ImportedListLast.v"
-  cp "$VALIDATION_ROOT/imported/utility_foundation/ImportedListSimple.v" \
-    "$VALIDATION_PREPARED/imported/ImportedListSimple.v"
+  printf 'From LeanImport Require Import Lean.\n\nLean Import "ListLast.out".\n' \
+    >"$VALIDATION_PREPARED/imported/ImportedListLast.v"
+  printf 'From LeanImport Require Import Lean.\n\nLean Import "ListSimple.out".\n' \
+    >"$VALIDATION_PREPARED/imported/ImportedListSimple.v"
   local dependency="$VALIDATION_ROOT/imported/rocq90_batch1/ImportedSubadditivity.vo"
   local expected
   expected=$(jq -r '.files[] | select(.file=="util/subadditivity.v") | .vo_sha256' \
@@ -530,7 +530,6 @@ for item in inventory:
         'target_theorem_dependency': audit['target_theorem_dependency'],
         'unexpected_assumptions': audit['unexpected'],
         'foundation_classification': audit['status'],
-        'existing_rocq93_acceptance': True,
         'rocq90_migration_status': 'ACCEPTED',
     })
 if any(r['semantic_premises'] or r['source_theorem_dependency'] or
@@ -558,7 +557,6 @@ status = {
     'file': 'util/list.v', 'rank': 11,
     'whole_file_acceptance': 'ACCEPTED_V06_FILE_ROCQ90',
     'active_validation_baseline': 'Rocq 9.0.0',
-    'historical_validation_provenance': 'Rocq 9.3',
     'snapshot_id': snapshot, 'authoritative_declarations': 57,
     'declarations_accepted': 57, 'translated_but_not_certified': 0,
     'actual_artifact_guards': 57, 'all_certificates': 'PASS',

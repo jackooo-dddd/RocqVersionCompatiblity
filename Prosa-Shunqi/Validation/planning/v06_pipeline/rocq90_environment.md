@@ -9,12 +9,8 @@ the repository-local switch, then `Validation/scripts/check_rocq90_environment.s
 to fail closed on every required package version. These scripts do not change
 the global default OPAM switch.
 
-The importer is pinned to
-`546979bfd55b94288abfb72583a534b0136d282d` and applies only
-`rocq90-project.patch` followed by `rocq90-api.patch`. Normal universe and
-elimination checking remain enabled and `with_unsafe_univs f () = f ()`.
-Phase 2's unsafe patch and Phase 5's experimental Acc mapping are excluded.
-
-Rocq 9.3 is historical provenance. Phase 1–7 explain the migration decision
-but no active `Validation/` command reads their temporary work, logs, results,
-or compiled artifacts.
+The importer is pinned to upstream commit
+`b8291b9dae4f5ed780112e95eea484e435199b46` and applies the single
+`rocq90-importer.patch`. Normal universe and elimination checking remain
+enabled and `with_unsafe_univs f () = f ()`. No unsafe universe patch,
+experimental `Acc` mapping, or alternate baseline is supported.

@@ -1,0 +1,15 @@
+scope,metric,unit,before_546979_two_patch,after_b829_single_patch,delta,delta_percent
+importer,clean_build_time,seconds,2.07,2.64,0.57,27.536
+importer,clean_build_peak_rss,bytes,433078272,391725056,-41353216,-9.549
+Time,import_time,seconds,0.21,0.25,0.04,19.048
+SearchArg,import_time,seconds,0.72,0.79,0.07,9.722
+ListSimple,import_time,seconds,0.60,0.62,0.02,3.333
+ListLast,import_time,seconds,2.08,2.12,0.04,1.923
+List,combined_import_time,seconds,2.68,2.74,0.06,2.239
+Bigcat,import_time,seconds,2.73,2.76,0.03,1.099
+representative,combined_import_time,seconds,6.34,6.54,0.20,3.155
+rank_1_19,rocq_import_stage_sum,seconds,18.217702,17.859587,-0.358115,-1.966
+rank_1_19,certificate_compile_stage_sum,seconds,72.041714,74.555216,2.513502,3.489
+rank_1_19,cold_prepare_check_finalize_wall,seconds,632.57,717.03,84.46,13.352
+rank_1_19,cold_prepare_check_finalize_peak_rss,bytes,3013754880,2995093504,-18661376,-0.619
+representative,vo_size,bytes,2310560,2266805,-43755,-1.894

@@ -1,4 +1,0 @@
-check	status	exit_code	log
-acc_types_and_computation	PASS	0	logs/phase2/audit/acc_types_and_computation.log
-typing_flags	PASS	0	logs/phase2/audit/typing_flags.log
-candidate_patch_scope	PASS	0	logs/phase2/audit/candidate_patch_scope.log

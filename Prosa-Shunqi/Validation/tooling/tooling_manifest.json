@@ -2,7 +2,6 @@
   "schema": 2,
   "status": "TOOLING_REPRODUCIBLE",
   "active_validation_baseline": "Rocq 9.0.0",
-  "historical_validation_provenance": "Rocq 9.3",
   "lean4export": {
     "upstream": "https://github.com/leanprover/lean4export.git",
     "base_commit": "c9f8373f8a37a65c0ed9bfd20480a3d7481a163e",
@@ -12,16 +11,14 @@
   },
   "rocq_lean_import": {
     "upstream": "https://github.com/rocq-community/rocq-lean-import.git",
-    "base_commit": "546979bfd55b94288abfb72583a534b0136d282d",
-    "patch_order": [
-      "patches/rocq90-project.patch",
-      "patches/rocq90-api.patch"
-    ],
-    "project_patch_sha256": "0b3f5ad7903d43ee211f77d92a814ab799d0392bd6848d6eec5906a16b5de3f4",
-    "rocq90_api_patch_sha256": "18cc125a349449c09ed0689a301992db8d57d277036aab58486502711fef39a2",
-    "combined_diff_sha256": "4848820b463c5de34a7d70571277cf5fb44bf5eeb3899b7d5a75d231787982f6",
-    "expected_plugin_sha256": "e39bf1e216751e3accdcee3fa06ed2effe629a7b3bbcda911a7862f5853c5ec6",
-    "expected_foundation_vo_sha256": "1cd8548cac7649cddf8d289876a2fb7869f4b879b654e8512cc4fe76eac1e8cf",
+    "base_commit": "b8291b9dae4f5ed780112e95eea484e435199b46",
+    "patch": "patches/rocq90-importer.patch",
+    "patch_sha256": "7bfe3fec08074ce6818d12621aad7afc68899453805c74b36d7bd3fe55572fa0",
+    "patch_loc": 316,
+    "patched_file_count": 2,
+    "combined_diff_sha256": "7bfe3fec08074ce6818d12621aad7afc68899453805c74b36d7bd3fe55572fa0",
+    "expected_plugin_sha256": "6f0c2fecd1297de31cca1c4aafe8cd1c346701b4aed95dc73e6004032aa3b13b",
+    "expected_foundation_vo_sha256": "441cec39e694c4dd090dfe525308884bf1af83c5798a1966c2c816e79e03f210",
     "universe_checking": true,
     "elimination_checking": true,
     "with_unsafe_univs": "let with_unsafe_univs f () = f ()",
@@ -38,6 +35,5 @@
     "mathcomp": "2.4.0",
     "coq-mathcomp-zify": "1.5.0+2.0+8.16",
     "rocq_opam_switch": "Validation/environment/rocq-9.0"
-  },
-  "migration_justification": "rocq90-compat Phase 1-7 (frozen historical evidence)"
+  }
 }

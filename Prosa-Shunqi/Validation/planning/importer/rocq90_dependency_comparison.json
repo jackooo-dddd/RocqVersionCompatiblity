@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "measurement_policy": {
+    "opam_transitive_dependencies": "installed packages minus installed roots",
+    "build_script_config_count": "tracked .sh/.py/.json files under Validation/scripts and Validation/tooling",
+    "imported_dependency_closure": "#DEF/#IND/#AX records in the published Rank 1-19 .out files",
+    "workspace_disk_kib": "du -sk of Prosa-Shunqi immediately before and after requested cache/history cleanup"
+  },
+  "metrics": [
+    {"metric": "opam_package_count", "unit": "packages", "before": 57, "after": 57, "delta": 0},
+    {"metric": "opam_root_count", "unit": "packages", "before": 7, "after": 7, "delta": 0},
+    {"metric": "opam_transitive_dependencies", "unit": "packages", "before": 50, "after": 50, "delta": 0},
+    {"metric": "rocq_switch_disk", "unit": "KiB", "before": 1963108, "after": 1963108, "delta": 0},
+    {"metric": "importer_patch_loc", "unit": "added_plus_deleted_lines", "before": 278, "after": 316, "delta": 38},
+    {"metric": "importer_patched_file_count", "unit": "files", "before": 2, "after": 2, "delta": 0},
+    {"metric": "validation_build_script_config_count", "unit": "files", "before": 77, "after": 39, "delta": -38},
+    {"metric": "imported_dependency_closure", "unit": "records", "before": 3703, "after": 3703, "delta": 0},
+    {"metric": "formal_rank_1_19_artifact_disk", "unit": "KiB", "before": 12072, "after": 10356, "delta": -1716},
+    {"metric": "workspace_disk", "unit": "KiB", "before": 9057240, "after": 5759060, "delta": -3298180}
+  ],
+  "assessment": {
+    "dependencies_fewer": false,
+    "patch_smaller": false,
+    "clean_build_faster": false,
+    "representative_import_faster": false,
+    "full_rank_1_19_import_stage_faster": true,
+    "formal_artifacts_smaller": true,
+    "workspace_smaller_after_cleanup": true,
+    "note": "The historical base simplifies patch ownership and removes the separate API patch, but does not reduce OPAM dependencies or total patch LOC. Single-run wall times are reported without claiming statistical significance."
+  }
+}

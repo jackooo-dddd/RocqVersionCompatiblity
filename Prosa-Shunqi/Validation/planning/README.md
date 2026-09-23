@@ -11,9 +11,7 @@ Before rerunning them in this workspace, create a new `Prosa-Shunqi`-specific
 reproduction entry point rather than altering or falsifying the old evidence.
 Future pipeline planning belongs in `v06_pipeline/`.
 
-The active validation baseline is Rocq 9.0.0. Rocq 9.3 status files and
-artifacts are retained as historical provenance; active downstream readiness
+Rocq 9.0.0 is the only supported validation baseline. Downstream readiness
 must use `v06_pipeline/active_validation_baseline.json` and the Rocq 9.0 batch
-status it names. The current publication is Batch 3, covering ranks 1–19 and
-171 declarations. Never infer readiness from a historical 9.3 acceptance
-alone.
+status files it names. The current publication covers ranks 1–19 and 171
+declarations.

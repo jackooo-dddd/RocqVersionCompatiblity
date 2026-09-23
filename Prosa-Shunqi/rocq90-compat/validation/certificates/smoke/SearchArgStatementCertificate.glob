@@ -1,6 +1,0 @@
-DIGEST 438ba7d7b3f7551b5c985017b2627fe9
-FFoundationCertificates.SearchArgStatementCertificate
-R29:37 mathcomp.ssreflect.ssreflect <> <> lib
-R39:45 mathcomp.ssreflect.ssrbool <> <> lib
-R47:52 mathcomp.ssreflect.ssrnat <> <> lib
-R86:89 LeanImport.Lean <> <> lib

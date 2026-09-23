@@ -2,14 +2,14 @@
   "actual_artifact_guards": 57,
   "authoritative_prosa_commit": "414e66760333eaa4ef78c685bcf53291c527a548",
   "fresh_olean_sha256": "cd008d9e3d4c410e3db1d8cc4c1c5d4c2cdb9873e69adaa68a6938a54349ee89",
-  "imported_list_last_vo_sha256": "3a6008b9a70f40e4e60185ad6d05187e22ecf84e5c7cbbbfa91f4b5d54376f68",
-  "imported_list_simple_vo_sha256": "66a5158f88291d1f89c3d2b6ebcd5770a3fca795b4c63714fedb78394aa6e46e",
+  "imported_list_last_vo_sha256": "4e41cfd0fd83ce3b311eb592c3aceca09452f7564f4d5b7a2653950d4ae5b254",
+  "imported_list_simple_vo_sha256": "9e430c5897d6794a698fac431561258c197c4f6e46cfc5c5d41456af5efe7d3a",
   "lean_source_sha256": "c5f9503dc9d55fe3eec5be2bf2f7743f896a6b2d14c8fdc9afe6421e19d42e5a",
   "list_last_out_sha256": "eea8924a89070413d9e8755ebcca56ea3a30718b1839003612206fab9714f641",
   "list_simple_out_sha256": "033db5ef70e40a66f0547a6af76392d1e7fe64214cff8356029e07a94ba8dd8e",
   "mathlib_commit": "0df444a360eaa60ab8c11dca51a86af692955474",
   "schema_version": 1,
-  "snapshot_id": "33f4ac5f5c46df4dda4c8ee1bbcc8a261d75725e33d8d994b25c03b5dd473a9d",
+  "snapshot_id": "38b6225c00bc916c75397e0f6094fa4e6c03fc7773310440ccaed1cb1236a08a",
   "source_sha256": "7bb5784dc312aef4ec80b00314a36f938a20e29ed1e7d68475b9c2dca9cada6a",
   "statement_only": false
 }

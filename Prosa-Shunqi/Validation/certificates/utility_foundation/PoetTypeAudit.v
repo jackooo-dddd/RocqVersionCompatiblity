@@ -5,7 +5,7 @@ From prosa Require Import GeneratedPoetSource.
 
 (** The generated source signature is taken from the pinned inventory's
     elaborated [Check @declaration] evidence.  Full [util/list.v] compilation
-    under Rocq 9.3 overflows in an unrelated early legacy proof, so the source
+    under the retired pre-9.0 validation baseline overflows in an unrelated early legacy proof, so the source
     proof constant is deliberately absent from this validation environment. *)
 Check GeneratedPoetSource.statement_forall_exists_implied_by_forall_in_zip.
 

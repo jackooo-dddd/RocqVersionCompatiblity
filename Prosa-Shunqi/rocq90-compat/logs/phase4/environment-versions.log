@@ -1,8 +1,0 @@
-coq-mathcomp-ssreflect  2.4.0
-coq-mathcomp-zify       1.5.0+2.0+8.16
-ocaml                   4.14.2
-ocaml-base-compiler     4.14.2
-rocq-mathcomp-ssreflect 2.4.0
-rocq-prover             9.0.0
-importer_commit 546979bfd55b94288abfb72583a534b0136d282d
-let with_unsafe_univs f () = f ()

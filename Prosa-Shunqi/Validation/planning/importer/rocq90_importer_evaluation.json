@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "classification": "ROCQ90_ONLY_MAINLINE_VERIFIED",
+  "starting_head": "777f634cd0b53e409b174dfdfbae2dcca7a53d66",
+  "selected_importer": {
+    "upstream": "https://github.com/rocq-community/rocq-lean-import.git",
+    "commit": "b8291b9dae4f5ed780112e95eea484e435199b46",
+    "relationship_to_breaking_point": "immediate upstream predecessor of 50802fbc22c96706189a070ab7e9da6f34a90409",
+    "patch": "Validation/tooling/patches/rocq90-importer.patch",
+    "patch_sha256": "7bfe3fec08074ce6818d12621aad7afc68899453805c74b36d7bd3fe55572fa0",
+    "patch_loc": 316,
+    "patched_files": [
+      "src/Lean.v",
+      "src/lean.ml"
+    ],
+    "separate_rocq90_api_patch_required": false,
+    "plugin_sha256": "6f0c2fecd1297de31cca1c4aafe8cd1c346701b4aed95dc73e6004032aa3b13b",
+    "foundation_vo_sha256": "441cec39e694c4dd090dfe525308884bf1af83c5798a1966c2c816e79e03f210"
+  },
+  "candidate_findings": {
+    "unpatched_b829_build": "FAIL",
+    "unpatched_blocker": "Rocq 9.0 UGraph.add_universe API mismatch",
+    "current_export_format_requires": [
+      "UInt32/BitVec support",
+      "current Lean String.ofByteArray/UTF-8 construction",
+      "non-record and dependent projection lowering"
+    ],
+    "safety_fix": "with_unsafe_univs f () = f ()",
+    "selection_reason": "The latest pre-breaking historical base handles the project after one audited patch; the separate API and project patch layering is no longer retained."
+  },
+  "environment": {
+    "rocq": "9.0.0",
+    "ocaml": "4.14.2",
+    "mathcomp": "2.4.0",
+    "coq_mathcomp_zify": "1.5.0+2.0+8.16",
+    "lean": "4.33.1",
+    "mathlib_commit": "0df444a360eaa60ab8c11dca51a86af692955474",
+    "prosa_commit": "414e66760333eaa4ef78c685bcf53291c527a548"
+  },
+  "verification": {
+    "files": 19,
+    "files_passed": 19,
+    "declarations": 171,
+    "declarations_passed": 171,
+    "translated_but_not_certified": 0,
+    "semantic_premises": [],
+    "source_theorem_dependency": false,
+    "target_theorem_dependency": false,
+    "unexpected_assumptions": [],
+    "normal_universe_checking": true,
+    "normal_elimination_checking": true,
+    "type_in_type": 0,
+    "unsafe_fixpoints": 0,
+    "assumed_positivity": 0,
+    "unexpected_custom_rocq_axioms": 0,
+    "batch_status_sha256": {
+      "batch1": "fb958542f119e54f7eee1745c29eb4ea7eb8edec6dc33d69998968a7756b19b5",
+      "batch2": "546420db92602dfdd188dd4f6cf95645cf625cb7b5c74b4a490f9c3228e31d7b",
+      "batch3": "d5ab7797fb9a70b0aa51dda5cf529753d993f77625171e48b17aa0f2e41f7b3c"
+    }
+  },
+  "unsupported_paths_removed": true
+}

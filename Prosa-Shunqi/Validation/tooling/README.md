@@ -1,13 +1,13 @@
 # Reproducible validation tooling
 
 The active semantic validator uses pinned, workspace-local builds of
-`lean4export` and `rocq-lean-import` under stock Rocq 9.0.0. Rocq 9.3 remains
-historical validation provenance only. The checked-in Rocq 9.0 importer is
-built from commit `546979b…`, first with `rocq90-project.patch` and then with
-`rocq90-api.patch`; the setup verifies that `with_unsafe_univs f () = f ()`
-and rejects any `check_universes=false` or `check_eliminations=false` path.
-Phase 2's unsafe-universe patch and Phase 5's experimental Acc mapping are not
-part of this tooling.
+`lean4export` and `rocq-lean-import` under stock Rocq 9.0.0. This is the only
+supported validation baseline. The importer is built from upstream commit
+`b8291b9dae4f5ed780112e95eea484e435199b46` with the single audited
+`rocq90-importer.patch`. The patch supplies current Lean `BitVec`/string
+representation support, the minimum stock-Rocq-9.0 API adaptation, and keeps
+`with_unsafe_univs f () = f ()`. Setup rejects any
+`check_universes=false` or `check_eliminations=false` path.
 
 Batch 1 uses proof-complete semantic boundaries rather than statement-only
 production declarations. A fresh `.olean` audit binds all 46 production
@@ -32,7 +32,7 @@ Run:
 The resulting worktrees are created under
 `Validation/.work/tooling/rocq90/`. The local OPAM root and switch live under
 `Validation/environment/`; neither path is acceptance evidence. The setup
-fails closed on base-commit, ordered patches,
+fails closed on base-commit, the single patch,
 worktree-diff, toolchain, or output-artifact mismatch.  `Export.lean.orig` is
 recreated only to reproduce the recorded Slice 1 worktree status; it is not a
 build input.
@@ -86,11 +86,6 @@ Bool truth, `eqType`/`DecidableEq`, ordered `seq`/`List` roundtrips, and
 membership against the exact imported datatype; they are ordinary Rocq source
 and must pass kernel compilation and the normal assumption classifier.
 
-The 2026-09-22 regression sample covers accepted Sum (25 declarations), Poet
-(1), and Bigcat (13). Its cold prepare measured 100.29 s for the isolated Lean
-closure; an identical rerun verified all four prepare stages from cache in
-0.019 s. The final adapter check/finalize took 4.24 s. All 18 generated adapter
-checks had no semantic premise or unexpected assumption; only Bool-truth and
-membership used the existing `PropSPropFoundation.interpret_strict` boundary.
-The existing 39 semantic results were unchanged. Evidence is under
-`Validation/logs/incremental/workflow_regression/`.
+Importer cleanup and Rank 1–19 performance evidence are recorded in
+`Reports/migrations/rocq90_only_importer_cleanup.md` and the machine-readable
+files under `Validation/planning/importer/`.

@@ -7,7 +7,7 @@
 Ranks 12–19 are formally accepted on the active stock Rocq 9.0 baseline:
 **8/8 files, 68/68 authoritative declarations**, and zero
 translated-but-not-certified declarations. This restores every previously
-completed Rocq-9.3 utility acceptance to the current Rocq-9.0 baseline.
+completed retired-pre-9.0 utility acceptance to the current Rocq-9.0 baseline.
 Production Lean translation was not modified.
 
 ## Fixed authority and environment
@@ -30,8 +30,8 @@ Production Lean translation was not modified.
 
 The formal content-addressed snapshot is
 `769cbc4f3ad46b0ac39c038ef67a34a55e24384911fd4668948485a51210db8f`.
-The pipeline is self-contained under `Validation/` and does not read
-`rocq90-compat/.work`, logs, results, or artifacts.
+The pipeline is self-contained under `Validation/` and reads only declared
+mainline inputs.
 
 ## Formal execution
 
@@ -47,7 +47,7 @@ The prepare snapshot fresh-compiles the complete Rank 1–19 Lean dependency
 closure, then compiles the eight production modules and semantic interfaces.
 It verifies 68 independent historical expected types against the actual fresh
 production declarations using `Meta.isDefEq`. Official Prosa sources through
-Rank 19 compile directly under Rocq 9.0 without Rocq-9.3 source patches.
+Rank 19 compile directly under Rocq 9.0 without retired-pre-9.0 source patches.
 
 The proof-complete export is split into Sum sequence/interval modules plus the
 seven remaining module interfaces. Semantic statement definitions expose the
@@ -145,4 +145,4 @@ cumulative active Rocq 9.0 coverage:
 Batch 3 stops before Rank 20. The next READY file is
 `util/nondecreasing.v` (33 declarations), which begins the stage of completing
 historically unfinished translation rather than revalidating an existing
-Rocq-9.3 acceptance.
+retired-pre-9.0 acceptance.

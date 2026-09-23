@@ -10,6 +10,15 @@ batch3_utility_fixture="$VALIDATION_ROOT/fixtures/utility_foundation"
 batch3_translation_fixture="$VALIDATION_ROOT/fixtures/translation_order"
 batch3_cert_src="$VALIDATION_ROOT/certificates/utility_foundation"
 batch3_common_src="$VALIDATION_ROOT/certificates/common"
+batch3_type_inventories=(
+  "$VALIDATION_ROOT/planning/v06_pipeline/rocq90_batch3_type_inventory_sum.json"
+  "$VALIDATION_ROOT/planning/v06_pipeline/rocq90_batch3_type_inventory_bigop.json"
+  "$VALIDATION_ROOT/planning/v06_pipeline/rocq90_batch3_type_inventory_setoid.json"
+  "$VALIDATION_ROOT/planning/v06_pipeline/rocq90_batch3_type_inventory_poet.json"
+  "$VALIDATION_ROOT/planning/v06_pipeline/rocq90_batch3_type_inventory_bigcat.json"
+  "$VALIDATION_ROOT/planning/v06_pipeline/rocq90_batch3_type_inventory_minmax.json"
+  "$VALIDATION_ROOT/planning/v06_pipeline/rocq90_batch3_type_inventory_div_mod.json"
+)
 
 batch3_modules=(
   SumSequence SumInterval Epsilon Bigop Setoid Poet Bigcat Minmax DivMod
@@ -72,6 +81,7 @@ VALIDATION_PREPARE_INPUTS=(
   "$VALIDATION_ROOT/scripts/generate_batch3_artifact_audit.py"
   "$VALIDATION_ROOT/scripts/extract_v06_semantic_source.py"
 )
+VALIDATION_PREPARE_INPUTS+=("${batch3_type_inventories[@]}")
 while IFS= read -r input; do VALIDATION_PREPARE_INPUTS+=("$input"); done < <(
   find "$batch3_utility_fixture" "$batch3_translation_fixture" -type f \
     \( -name '*ComputationInterface.lean' -o -name 'EpsilonInterface.lean' \
@@ -152,14 +162,7 @@ validation_prepare_lean_build() {
   mkdir -p "$generated" \
     "$VALIDATION_PREPARED/olean/Validation/fixtures/rocq90_batch3"
   local -a guard_args=()
-  for manifest in \
-    "$VALIDATION_ROOT/planning/v06_pipeline/utility_foundation_expansion_manifest.json" \
-    "$VALIDATION_ROOT/planning/v06_pipeline/bigop_module_manifest.json" \
-    "$VALIDATION_ROOT/planning/v06_pipeline/setoid_module_manifest.json" \
-    "$VALIDATION_ROOT/planning/v06_pipeline/poet_module_manifest.json" \
-    "$VALIDATION_ROOT/planning/v06_pipeline/bigcat_module_manifest.json" \
-    "$VALIDATION_ROOT/planning/v06_pipeline/minmax_module_manifest.json" \
-    "$VALIDATION_ROOT/planning/v06_pipeline/div_mod_module_manifest.json"; do
+  for manifest in "${batch3_type_inventories[@]}"; do
     guard_args+=(--manifest "$manifest")
   done
   python3 "$VALIDATION_ROOT/scripts/generate_batch3_artifact_audit.py" \
@@ -467,16 +470,14 @@ PY
 }
 
 validation_prepare_rocq_import() {
-  cp "$VALIDATION_ROOT/imported/utility_foundation/ImportedSumSequence.v" \
-    "$VALIDATION_PREPARED/imported/ImportedSumSequence.v"
+  printf 'From LeanImport Require Import Lean.\n\nLean Import "SumSequence.out".\n' \
+    >"$VALIDATION_PREPARED/imported/ImportedSumSequence.v"
   cp "$VALIDATION_ROOT/fixtures/utility_foundation/ImportedSumInterval.v" \
     "$VALIDATION_PREPARED/imported/ImportedSumInterval.v"
-  local module lower wrapper dependency expected
+  local module dependency expected
   for module in Epsilon Bigop Setoid Poet Bigcat Minmax DivMod; do
-    lower=$(printf '%s' "$module" | tr '[:upper:]' '[:lower:]')
-    [[ "$module" == DivMod ]] && lower=div_mod
-    wrapper="$VALIDATION_ROOT/imported/translation_order/$lower/Imported$module.v"
-    cp "$wrapper" "$VALIDATION_PREPARED/imported/Imported$module.v"
+    printf 'From LeanImport Require Import Lean.\n\nLean Import "%s.out".\n' \
+      "$module" >"$VALIDATION_PREPARED/imported/Imported$module.v"
   done
   for module in Subadditivity Nat; do
     dependency="$VALIDATION_ROOT/imported/rocq90_batch1/Imported$module.vo"
@@ -734,7 +735,6 @@ for item in inventory:
       'target_theorem_dependency': audit['target_theorem_dependency'],
       'unexpected_assumptions': audit['unexpected'],
       'foundation_classification': audit['status'],
-      'existing_rocq93_acceptance': True,
       'rocq90_migration_status': 'ACCEPTED',
     }
     if row['semantic_premises'] or row['source_theorem_dependency'] or row['target_theorem_dependency'] or row['unexpected_assumptions']:
@@ -768,7 +768,6 @@ artifact_out.write_text(json.dumps({
 status = {
   'schema_version': 1, 'classification': 'ROCQ90_FULL_MIGRATION_BATCH3_ACCEPTED',
   'active_validation_baseline': 'Rocq 9.0.0',
-  'historical_validation_provenance': 'Rocq 9.3',
   'snapshot_id': snapshot, 'files_accepted': 8,
   'authoritative_declarations': 68, 'declarations_accepted': 68,
   'translated_but_not_certified': 0, 'actual_artifact_guards': 68,

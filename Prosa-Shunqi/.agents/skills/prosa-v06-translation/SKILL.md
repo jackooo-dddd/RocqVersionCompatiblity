@@ -12,10 +12,7 @@ description: Translate and semantically validate authoritative Prosa v0.6 files 
   specification.
 - Use Lean 4.33.1 and Mathlib commit
   `0df444a360eaa60ab8c11dca51a86af692955474`.
-- Use stock Rocq 9.0.0 as the active validation baseline. Treat Rocq 9.3 as
-  historical provenance only.
-- Treat the frozen compatibility Phase 1–7 evidence as migration
-  justification, not as a runtime or artifact dependency of `Validation/`.
+- Use stock Rocq 9.0.0 as the only supported validation baseline.
 - Read `v06_file_translation_order.md`, the authoritative file DAG, the
   active Rocq-9.0 status, and the file's one canonical report before starting.
 
@@ -44,7 +41,8 @@ Use fail-closed `prepare → check → finalize` validation.
 - Certificate-only edits may reuse a hash-verified prepare snapshot. Changes
   to Lean source, `.olean`, export boundary, importer, environment, or another
   declared prepare input must invalidate prepare.
-- Never use a Rocq-9.3 `.vo` as Rocq-9.0 evidence.
+- Never use a `.vo` that was not freshly produced by the supported Rocq-9.0
+  pipeline as acceptance evidence.
 
 For every production declaration require an independently stated exact-type
 guard checked with `Meta.isDefEq` against the freshly compiled actual
@@ -59,9 +57,9 @@ artifact. A declaration compared only with itself is not a valid guard.
   semantics. Do not use a source or target business theorem to certify itself.
 - Preserve actual `.olean → .out → Rocq import` binding and record hashes for
   source, `.olean`, `.out`, and `.vo`.
-- Prefer direct compilation of pinned official Rocq source. Do not carry
-  Rocq-9.3 source workarounds into Rocq 9.0 unless a new direct compile proves
-  they are still required.
+- Prefer direct compilation of pinned official Rocq source. Add a source
+  compatibility transformation only when a fresh Rocq-9.0 compile proves it
+  necessary and the transformation is independently audited.
 - For Rocq-9.0 relevance-sensitive equality, first prove ordinary Rocq `Prop`
   equality, explicitly transport it, and convert only once at the imported
   Lean equality/SProp boundary. Avoid broad `rewrite` inside SProp evidence.

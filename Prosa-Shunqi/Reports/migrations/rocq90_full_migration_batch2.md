@@ -84,7 +84,7 @@ classification and is not mislabeled globally axiom-free.
 
 The complete machine ledger is
 `Validation/imported/rocq90_batch2/artifact_manifest.json`; the 57 declaration
-rows are in `declaration_manifest.json`. Earlier Rocq 9.3 acceptance remains in
+rows are in `declaration_manifest.json`. Earlier the retired pre-9.0 validation baseline acceptance remains in
 the canonical List report as historical provenance and is not active evidence.
 
 ## Boundary and compatibility repairs
@@ -145,8 +145,8 @@ Validation/scripts/validate_rocq90_batch2.sh
 
 It extends the Batch 1 content-addressed `prepare -> check -> finalize` driver
 and publishes to `Validation/imported/rocq90_batch2/` plus
-`Validation/planning/v06_pipeline/rocq90_batch2_status.json`. It has no runtime
-dependency on `rocq90-compat` and never reuses Rocq 9.3 `.vo` evidence.
+`Validation/planning/v06_pipeline/rocq90_batch2_status.json`. It uses only
+fresh artifacts produced by the supported Rocq 9.0 pipeline.
 
 Batch 2 stops after Rank 11. The next READY file is:
 

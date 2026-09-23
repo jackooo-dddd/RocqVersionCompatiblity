@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generate independent Lean exact-type guards for Rocq 9.0 Batch 3.
 
-The expected types come from the already-reviewed Rocq 9.3 module manifests,
+The expected types come from the frozen Rocq 9.0 Batch 3 type inventory,
 while the guarded constants come from the freshly compiled production
 modules.  The generated Lean module checks the pair with Meta.isDefEq; it
 never derives an expected type from the declaration being guarded.
@@ -50,7 +50,7 @@ def expected_type(row: dict[str, object]) -> tuple[str, str]:
     )[0].strip()
     recorded = str(row["lean_type_sha256"])
     if sha256(head) != recorded and sha256(frozen) != recorded:
-        raise SystemExit(f"historical type fingerprint mismatch: {target}")
+        raise SystemExit(f"frozen type fingerprint mismatch: {target}")
     if " : " not in head:
         raise SystemExit(f"cannot isolate historical type: {target}")
     return head.split(" : ", 1)[1].strip(), recorded
@@ -79,7 +79,7 @@ def main() -> None:
             if key[0] not in FILES:
                 continue
             if key in by_source_name:
-                raise SystemExit(f"duplicate historical declaration: {key}")
+                raise SystemExit(f"duplicate frozen declaration: {key}")
             by_source_name[key] = row
 
     expected_keys = {(row["source_file"], row["declaration_name"]) for row in inventory}
@@ -107,7 +107,7 @@ def main() -> None:
                 "source_file": key[0],
                 "source_declaration": key[1],
                 "lean_declaration": target,
-                "historical_expected_type_sha256": fingerprint,
+                "expected_type_sha256": fingerprint,
                 "guard": guard,
             }
         )
@@ -150,7 +150,7 @@ def main() -> None:
             {
                 "schema_version": 1,
                 "authoritative_count": 68,
-                "expected_type_source": "historical reviewed manifests",
+                "expected_type_source": "Rocq 9.0 Batch 3 type inventories",
                 "guards": metadata,
             },
             indent=2,

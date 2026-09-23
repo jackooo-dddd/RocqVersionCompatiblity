@@ -1,9 +1,0 @@
-DIGEST 11245057166ae9e3e4f604ff4d3135ed
-FFoundationCertificates.ListSimpleCertificate
-R29:37 mathcomp.ssreflect.ssreflect <> <> lib
-R39:45 mathcomp.ssreflect.ssrbool <> <> lib
-R47:52 mathcomp.ssreflect.ssrnat <> <> lib
-R54:56 mathcomp.ssreflect.seq <> <> lib
-R90:93 LeanImport.Lean <> <> lib
-R135:152 FoundationImported.ImportedListSimple <> <> lib
-R154:174 FoundationImported.ImportedSubadditivity <> <> lib

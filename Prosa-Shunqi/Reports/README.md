@@ -50,8 +50,7 @@ all semantic certificates, assumption classification, and `rocqchk`. The
 latest formal batch result is
 [`rocq90_full_migration_batch3.md`](migrations/rocq90_full_migration_batch3.md).
 
-All declarations that previously had formal Rocq-9.3 acceptance have now been
-freshly revalidated on Rocq 9.0. The next READY work is rank 20,
+The next READY work is rank 20,
 `util/nondecreasing.v` (33 declarations), which resumes the historically
 unfinished translation stage rather than another migration-only revalidation.
 
@@ -60,55 +59,9 @@ The formal scheduling document is
 Dependency readiness still comes from the accepted file DAG, not from report
 text.
 
-## Validation workflow optimization (2026-09-22 11:27:51 +08:00)
+The current validator uses content-addressed `prepare → check → finalize`
+execution. Its supported entry points and trust policy are documented in
+`Validation/tooling/README.md`.
 
-The translation skill and workspace validator now make incremental validation
-the default for subsequent files. A content-addressed `prepare → check →
-finalize` driver binds source, production dependencies, toolchain, exporter /
-importer binaries, options, module-loading configuration, and every prepared
-output hash. Certificate-only changes reuse verified Lean/export/import
-artifacts; relevant input changes generate a different snapshot, while absent
-or corrupt cache entries fail closed. Every run records execution count,
-cache mode, elapsed time, input fingerprint, and output hashes for all seven
-validation stages.
-
-Repeated artifact-local Bool, `eqType`/`DecidableEq`, ordered `seq`/`List`,
-roundtrip, and membership proofs can now be generated from one audited Rocq
-template. The generated file still names the exact imported artifact and is
-kernel-compiled and assumption-audited; this is proof reuse, not a new trust
-assumption. Export modes for statement-only types, computation equations,
-body projections, guarded normalization, and universe-sensitive datatype
-interfaces are also catalogued behind a common config-driven helper.
-
-Regression on existing accepted Sum (25), Poet (1), and Bigcat (13) results
-passed without changing their semantic status or acceptance gates. The cold
-isolated Lean build took 100.29 s; the identical prepare rerun had four cache
-hits, zero stage executions, and took 0.019 s. The final generated-adapter
-compile/audit/publication check took 4.24 s. One intentionally retained failed
-attempt records an initially ambiguous audit-marker sort and exposed a hook
-error-propagation bug; publication remained blocked until both were fixed.
-
-At that historical optimization checkpoint, accepted coverage was **18 / 357
-files** and **156 / 2439 declarations**; `util/div_mod.v` was still an
-unaccepted 15-declaration Lean candidate. The current active coverage is the
-Batch 3 result stated above: **19 / 357 files** and **171 / 2439
-declarations**.
-
-## Legacy and raw evidence
-
-`Reports/legacy/` retains the former date-named, multi-file, and batch reports
-with their original bytes. Canonical reports record each legacy filename and
-hash. Intermediate PASS entries in a legacy report remain intermediate; only
-the later publication gate can establish final acceptance.
-
-Raw machine logs and intermediate evidence belong under `Validation/logs/`,
-not here.
-
-## Continuous-run summaries
-
-Cross-file execution summaries requested for a specific run live under
-`Reports/runs/`. They record chronological progress and final outcomes for
-that run, but never override canonical per-file reports or machine-readable
-pipeline status. Current run:
-
-- [2026-09-22 translation-order continuous run](runs/2026-09-22_000308_translation_order_continuous_run.md)
+The repository-wide supported-baseline and importer cleanup is recorded in
+[`rocq90_only_importer_cleanup.md`](migrations/rocq90_only_importer_cleanup.md).

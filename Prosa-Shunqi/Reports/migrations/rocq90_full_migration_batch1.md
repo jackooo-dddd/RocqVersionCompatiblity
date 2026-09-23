@@ -6,7 +6,7 @@
 
 The active `Validation/` baseline is now stock Rocq 9.0.0 for execution ranks
 1–10. All ten authoritative files and all 46 authoritative declarations have
-fresh actual-artifact semantic revalidation. Rocq 9.3 artifacts remain
+fresh actual-artifact semantic revalidation. the retired pre-9.0 validation baseline artifacts remain
 historical provenance only.
 
 ## Reproducibility identities
@@ -103,7 +103,7 @@ is `Validation/planning/v06_pipeline/rocq90_batch1_status.json`.
 
 ## Source, boundary, and translation decisions
 
-All ten pinned v0.6 source files compile directly under Rocq 9.0. No Rocq-9.3
+All ten pinned v0.6 source files compile directly under Rocq 9.0. No retired-pre-9.0
 source extraction workaround is used for tactics, Seqset, or SearchArg.
 
 This batch did not change production Lean translations. It adopts the already
@@ -160,9 +160,9 @@ reuses a hash-verified prepared snapshot; changes to Lean source, fresh
 artifact, export boundary, importer, environment, or declared inputs invalidate
 prepare. Published artifacts live entirely below `Validation/`; the active
 pipeline does not read compatibility-experiment work, log, or result trees and
-does not reuse Rocq-9.3 `.vo` files.
+does not reuse retired-pre-9.0 `.vo` files.
 
-Phase 1–7 remain frozen migration justification. Earlier Rocq-9.3 acceptance
+Phase 1–7 remain frozen migration justification. Earlier retired-pre-9.0 acceptance
 and artifact hashes remain in each canonical file report as provenance, while
 the active acceptance rows now point to Rocq 9.0.
 
