@@ -9,31 +9,27 @@ Require Import GeneratedUnitGrowthSource.
 (** Adapters for the operations occurring in the freshly imported
     [Prosa.Util.UnitGrowth] artifact. *)
 Definition ug_add (a b : Lean.Nat) : Lean.Nat :=
-  ImportedUnitGrowth.HAdd_hAdd_inst7 Lean.Nat Lean.Nat Lean.Nat
-    (ImportedUnitGrowth.instHAdd_inst1 Lean.Nat
-      ImportedUnitGrowth.instAddNat) a b.
+  ImportedUnitGrowth.add0 Lean.Nat ImportedUnitGrowth.instAddNat a b.
 
 Definition ug_sub (a b : Lean.Nat) : Lean.Nat :=
-  ImportedUnitGrowth.HSub_hSub_inst7 Lean.Nat Lean.Nat Lean.Nat
-    (ImportedUnitGrowth.instHSub_inst1 Lean.Nat
-      ImportedUnitGrowth.instSubNat) a b.
+  ImportedUnitGrowth.sub0 Lean.Nat ImportedUnitGrowth.instSubNat a b.
 
 Definition ug_le (a b : Lean.Nat) : SProp :=
-  ImportedUnitGrowth.LE_le_inst1 Lean.Nat ImportedUnitGrowth.instLENat a b.
+  ImportedUnitGrowth.le0 Lean.Nat ImportedUnitGrowth.instLENat a b.
 
 Definition ug_lt (a b : Lean.Nat) : SProp :=
-  ImportedUnitGrowth.LT_lt_inst1 Lean.Nat ImportedUnitGrowth.instLTNat a b.
+  ImportedUnitGrowth.lt0 Lean.Nat ImportedUnitGrowth.instLTNat a b.
 
 Definition ug_zero : Lean.Nat :=
-  ImportedUnitGrowth.OfNat_ofNat_inst1 Lean.Nat Lean.Nat_zero
+  ImportedUnitGrowth.ofNat0 Lean.Nat Lean.Nat_zero
     (ImportedUnitGrowth.instOfNatNat Lean.Nat_zero).
 
 Definition ug_one : Lean.Nat :=
-  ImportedUnitGrowth.OfNat_ofNat_inst1 Lean.Nat (Lean.Nat_succ Lean.Nat_zero)
+  ImportedUnitGrowth.ofNat0 Lean.Nat (Lean.Nat_succ Lean.Nat_zero)
     (ImportedUnitGrowth.instOfNatNat (Lean.Nat_succ Lean.Nat_zero)).
 
 Definition ug_min (a b : Lean.Nat) : Lean.Nat :=
-  ImportedUnitGrowth.Min_min_inst1 Lean.Nat ImportedUnitGrowth.instMinNat a b.
+  ImportedUnitGrowth.min0 Lean.Nat ImportedUnitGrowth.instMinNat a b.
 
 Definition ug_decide_le (a b : Lean.Nat) : ImportedUnitGrowth.Bool :=
   ImportedUnitGrowth.Decidable_decide (ug_le a b)
@@ -136,7 +132,7 @@ Proof. discriminate H. Defined.
 Lemma ug_min_left (a b : Lean.Nat) :
   ug_le a b -> Lean.eq (ug_min a b) a.
 Proof.
-  intro Hle. unfold ug_min, ImportedUnitGrowth.Min_min_inst1,
+  intro Hle. unfold ug_min, ImportedUnitGrowth.min0,
     ImportedUnitGrowth.instMinNat, ImportedUnitGrowth.minOfLe_inst1.
   cbn. destruct (ImportedUnitGrowth.Nat_decLe a b) as [Hno|Hyes].
   - exact (ug_imported_false_elim _ (Hno Hle)).
@@ -147,7 +143,7 @@ Lemma ug_min_right (a b : Lean.Nat) :
   (ug_le a b -> ImportedUnitGrowth.False) ->
   Lean.eq (ug_min a b) b.
 Proof.
-  intro Hnot. unfold ug_min, ImportedUnitGrowth.Min_min_inst1,
+  intro Hnot. unfold ug_min, ImportedUnitGrowth.min0,
     ImportedUnitGrowth.instMinNat, ImportedUnitGrowth.minOfLe_inst1.
   cbn. destruct (ImportedUnitGrowth.Nat_decLe a b) as [Hno|Hyes].
   - exact (@Lean.eq_refl Lean.Nat b).
@@ -360,7 +356,7 @@ Proof.
 Qed.
 
 Definition ug_monotone_target (f : Lean.Nat -> Lean.Nat) : SProp :=
-  ImportedUnitGrowth.Prosa_Util_Rel_monotone_inst1 Lean.Nat
+  ImportedUnitGrowth.Prosa_Util_Rel_monotone Lean.Nat
     ug_decide_le f.
 
 Lemma ug_monotone_correspondence

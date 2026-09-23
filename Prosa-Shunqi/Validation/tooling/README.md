@@ -1,8 +1,20 @@
 # Reproducible validation tooling
 
-The semantic validator uses pinned, workspace-local builds of `lean4export`
-and `rocq-lean-import`. Their checked-in patches reproduce the audited base
-tool state and the generic validation features used by the current pipeline.
+The active semantic validator uses pinned, workspace-local builds of
+`lean4export` and `rocq-lean-import` under stock Rocq 9.0.0. Rocq 9.3 remains
+historical validation provenance only. The checked-in Rocq 9.0 importer is
+built from commit `546979b…`, first with `rocq90-project.patch` and then with
+`rocq90-api.patch`; the setup verifies that `with_unsafe_univs f () = f ()`
+and rejects any `check_universes=false` or `check_eliminations=false` path.
+Phase 2's unsafe-universe patch and Phase 5's experimental Acc mapping are not
+part of this tooling.
+
+Batch 1 uses proof-complete semantic boundaries rather than statement-only
+production declarations. A fresh `.olean` audit binds all 46 production
+types with `Meta.isDefEq`; exports contain only definitions, necessary
+computation equations, and safe operation interfaces. In particular,
+SearchArg uses the Phase 6 Nat.find-free boundary, and Nat/UnitGrowth do not
+import theorem implementation graphs that would reintroduce `Acc`.
 The exporter includes an opt-in
 `LEAN4EXPORT_PRESERVE_REDUCIBLE_THEOREM_TYPES=1` mode: after a selected
 subexpression projection has passed `Meta.isDefEq`, it preserves that projected
@@ -10,28 +22,28 @@ expression instead of globally unfolding unrelated reducible terms. This is
 needed for theorem types containing Boolean recursors and does not bypass the
 kernel normalization guard.
 
-The Slice 1 importer worktree was based on local commit `c9f43ad…`, which is
-not fetchable from the official GitHub remote.  Its checked-in reproduction
-therefore starts from reachable upstream commit `546979b…`; the importer patch
-contains both the complete `546979b… -> c9f43ad…` UInt32 change and the later
-Rocq 9.3 compatibility edits. It additionally fixes recursor generation for
-an inductive such as `Option` whose sort is squashable only at some universe
-instances: the importer now decides Type-versus-SProp elimination from the
-current instantiated result sort, rather than from the global inductive
-classification. This is needed for the actual `List.getD` computation exported
-by `util/nondecreasing.v`; it adds no axiom or semantic assumption.
-
 Run:
 
 ```bash
+../scripts/setup_rocq90_environment.sh
 ./setup_validation_tooling.sh
 ```
 
 The resulting worktrees are created under
-`Validation/.work/tooling/`.  The setup fails closed on base-commit, patch,
+`Validation/.work/tooling/rocq90/`. The local OPAM root and switch live under
+`Validation/environment/`; neither path is acceptance evidence. The setup
+fails closed on base-commit, ordered patches,
 worktree-diff, toolchain, or output-artifact mismatch.  `Export.lean.orig` is
 recreated only to reproduce the recorded Slice 1 worktree status; it is not a
 build input.
+
+The formal Rank 1–10 entry points are:
+
+```bash
+Validation/scripts/prepare_rocq90_batch1.sh
+Validation/scripts/check_rocq90_batch1.sh
+Validation/scripts/finalize_rocq90_batch1.sh
+```
 
 ## Incremental validation protocol
 

@@ -286,7 +286,7 @@ Definition sup_mem_head_truth (a b : bool) :
 
 Definition sup_eq_refl_truth (T : eqType) (x : T) :
     SupBoolTruth (x == x).
-Proof. rewrite eqxx. exact sup_theorem_I. Defined.
+Proof. exact (sup_bool_prop_to_truth _ (eqxx x)). Defined.
 
 Fixpoint sup_imported_mem_decoded {T : eqType} (x : T)
     (xs : ImportedSupremum.List T)
@@ -334,23 +334,49 @@ Proof.
       (sup_imported_eq_sym _ _ (sup_list_rel_as_eq _ _ Hlist)) Hmem).
 Qed.
 
+Definition sup_option_ne_backward (T : eqType)
+    (aR bR : option T) (aL bL : ImportedSupremum.Option T)
+    (Ha : SupOptionRel T aR aL) (Hb : SupOptionRel T bR bL) :
+    ImportedSupremum.Ne (ImportedSupremum.Option T) aL bL ->
+    StrictlyInhabited (is_true (aR != bR)) :=
+  fun HneqL =>
+    match @eqP _ aR bR as reflection in reflect _ b
+      return StrictlyInhabited (is_true (~~ b))
+    with
+    | ReflectT HeqR =>
+        supremum_false_elim _
+          (HneqL (prop_to_sprop _ _
+            (sup_option_eq_correspondence T aR bR aL bL Ha Hb) HeqR))
+    | ReflectF _ => strictly_inhabits (Logic.eq_refl true)
+    end.
+
+Lemma sup_option_ne_contradiction (T : eqType) (aR bR : option T) :
+  is_true (aR != bR) -> Logic.eq aR bR -> Logic.False.
+Proof.
+  move=> /negP Hneq HeqR. apply Hneq. apply/eqP. exact HeqR.
+Qed.
+
+Definition sup_option_ne_forward (T : eqType)
+    (aR bR : option T) (aL bL : ImportedSupremum.Option T)
+    (Ha : SupOptionRel T aR aL) (Hb : SupOptionRel T bR bL) :
+    is_true (aR != bR) ->
+    ImportedSupremum.Ne (ImportedSupremum.Option T) aL bL :=
+  fun Hneq HeqL =>
+    let HeqR := sprop_to_prop _ _
+      (sup_option_eq_correspondence T aR bR aL bL Ha Hb) HeqL in
+    coq_false_to_supremum_false
+      (sup_option_ne_contradiction T aR bR Hneq HeqR).
+
 Lemma sup_option_ne_correspondence (T : eqType)
     (aR bR : option T) (aL bL : ImportedSupremum.Option T) :
   SupOptionRel T aR aL -> SupOptionRel T bR bL ->
   PropSPropRel (is_true (aR != bR))
     (ImportedSupremum.Ne (ImportedSupremum.Option T) aL bL).
 Proof.
-  intros Ha Hb. apply prop_sprop_rel_intro.
-  - intros Hneq HeqL.
-    have HeqR := sprop_to_prop _ _
-      (sup_option_eq_correspondence T aR bR aL bL Ha Hb) HeqL.
-    subst bR. rewrite eqxx in Hneq. discriminate Hneq.
-  - intro HneqL.
-    destruct (@eqP _ aR bR) as [HeqR | HneqR].
-    + exact (supremum_false_elim _
-        (HneqL (prop_to_sprop _ _
-          (sup_option_eq_correspondence T aR bR aL bL Ha Hb) HeqR))).
-    + apply strictly_inhabits. exact (Logic.eq_refl true).
+  intros Ha Hb.
+  exact (prop_sprop_rel_intro _ _
+    (sup_option_ne_forward T aR bR aL bL Ha Hb)
+    (sup_option_ne_backward T aR bR aL bL Ha Hb)).
 Qed.
 
 Print Assumptions sup_bool_true_correspondence.

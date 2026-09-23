@@ -226,7 +226,7 @@ Lemma sa_nat_pred_true_correspondence (P : nat -> bool)
     (Lean.eq (sa_target_nat_pred P nL) ImportedSearchArg.Bool_true).
 Proof.
   intro Hn. unfold sa_target_nat_pred.
-  rw (sa_nat_back_of_rel nR nL Hn).
+  rewrite (sa_nat_back_of_rel nR nL Hn).
   exact (sa_bool_true_correspondence (P nR)).
 Qed.
 
@@ -236,7 +236,7 @@ Lemma sa_nat_pred_false_correspondence (P : nat -> bool)
     (Lean.eq (sa_target_nat_pred P nL) ImportedSearchArg.Bool_false).
 Proof.
   intro Hn. unfold sa_target_nat_pred.
-  rw (sa_nat_back_of_rel nR nL Hn).
+  rewrite (sa_nat_back_of_rel nR nL Hn).
   exact (sa_bool_false_correspondence (P nR)).
 Qed.
 
@@ -336,16 +336,26 @@ Proof.
     + intros HR HrangeL.
       have HrangeR := sprop_to_prop _ _
         (sa_range_correspondence _ _ _ _ _ _ Ha Hb Hx) HrangeL.
-      unfold sa_target_P, sa_target_f. rw (sa_nat_back_of_rel xR xL Hx).
-      exact (prop_to_sprop _ _ (sa_bool_false_correspondence _)
-        (HR HrangeR)).
+      unfold sa_target_P, sa_target_f.
+      eapply sub_imported_eq_trans.
+      * apply coq_eq_to_imported_eq.
+        rewrite (sa_nat_back_of_rel xR xL Hx). reflexivity.
+      * exact (prop_to_sprop _ _ (sa_bool_false_correspondence _)
+          (HR HrangeR)).
     + intro HL. apply strictly_inhabits. intro HrangeR.
       have HrangeL := prop_to_sprop _ _
         (sa_range_correspondence _ _ _ _ _ _ Ha Hb Hx) HrangeR.
       have HfalseL := HL HrangeL.
       unfold sa_target_P, sa_target_f in HfalseL.
-      rw (sa_nat_back_of_rel xR xL Hx) in HfalseL.
-      exact (sprop_to_prop _ _ (sa_bool_false_correspondence _) HfalseL).
+      have Hround : Lean.eq
+          (sa_bool_to_imported (P (f (sub_nat_to_rocq xL))))
+          (sa_bool_to_imported (P (f xR))) :=
+        coq_eq_to_imported_eq _ _
+          (f_equal (fun x => sa_bool_to_imported (P (f x)))
+            (sa_nat_back_of_rel xR xL Hx)).
+      have HfalseR := sub_imported_eq_trans _ _ _
+        (sub_imported_eq_sym _ _ Hround) HfalseL.
+      exact (sprop_to_prop _ _ (sa_bool_false_correspondence _) HfalseR).
 Qed.
 
 Lemma search_arg_pred_statement_certificate {T : Type}
@@ -367,12 +377,11 @@ Proof.
         (sub_imported_eq_sym _ _
           (search_arg_definition_certificate f P R aR bR))
         (sa_some_rel xR xL Hx)) HeqL.
-    unfold sa_target_P, sa_target_f. unfold SubNatRel in Hx.
-    have Hxback := f_equal sub_nat_to_rocq
-      (imported_eq_to_coq_eq _ _ Hx).
-    rewrite (sub_nat_rocq_roundtrip xR) in Hxback.
-    rewrite <- Hxback.
-    exact (prop_to_sprop _ _ (sa_bool_true_correspondence _) (HR HeqR)).
+    unfold sa_target_P, sa_target_f.
+    eapply sub_imported_eq_trans.
+    + apply coq_eq_to_imported_eq.
+      rewrite (sa_nat_back_of_rel xR xL Hx). reflexivity.
+    + exact (prop_to_sprop _ _ (sa_bool_true_correspondence _) (HR HeqR)).
   - intro HL. apply strictly_inhabits. intro HeqR.
     have HeqL := prop_to_sprop _ _
       (sa_option_eq_correspondence _ _ _ _
@@ -381,12 +390,15 @@ Proof.
         (sa_some_rel xR xL Hx)) HeqR.
     have HtrueL := HL HeqL.
     unfold sa_target_P, sa_target_f in HtrueL.
-    unfold SubNatRel in Hx.
-    have Hxback := f_equal sub_nat_to_rocq
-      (imported_eq_to_coq_eq _ _ Hx).
-    rewrite (sub_nat_rocq_roundtrip xR) in Hxback.
-    rewrite <- Hxback in HtrueL.
-    exact (sprop_to_prop _ _ (sa_bool_true_correspondence _) HtrueL).
+    have Hround : Lean.eq
+        (sa_bool_to_imported (P (f (sub_nat_to_rocq xL))))
+        (sa_bool_to_imported (P (f xR))) :=
+      coq_eq_to_imported_eq _ _
+        (f_equal (fun x => sa_bool_to_imported (P (f x)))
+          (sa_nat_back_of_rel xR xL Hx)).
+    have HtrueR := sub_imported_eq_trans _ _ _
+      (sub_imported_eq_sym _ _ Hround) HtrueL.
+    exact (sprop_to_prop _ _ (sa_bool_true_correspondence _) HtrueR).
 Qed.
 
 Lemma search_arg_in_range_statement_certificate {T : Type}
@@ -479,7 +491,7 @@ Lemma sa_Pf_true_correspondence {T : Type}
       ImportedSearchArg.Bool_true).
 Proof.
   intro Hn. unfold sa_target_P, sa_target_f.
-  rw (sa_nat_back_of_rel nR nL Hn).
+  rewrite (sa_nat_back_of_rel nR nL Hn).
   exact (sa_bool_true_correspondence (P (f nR))).
 Qed.
 
@@ -493,8 +505,8 @@ Lemma sa_Rff_true_correspondence {T : Type}
       ImportedSearchArg.Bool_true).
 Proof.
   intros Hn Hm. unfold sa_target_R, sa_target_f.
-  rw (sa_nat_back_of_rel nR nL Hn).
-  rw (sa_nat_back_of_rel mR mL Hm).
+  rewrite (sa_nat_back_of_rel nR nL Hn).
+  rewrite (sa_nat_back_of_rel mR mL Hm).
   exact (sa_bool_true_correspondence (R (f nR) (f mR))).
 Qed.
 

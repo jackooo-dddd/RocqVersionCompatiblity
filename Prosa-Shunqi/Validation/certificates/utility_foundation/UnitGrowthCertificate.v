@@ -6,94 +6,10 @@ From FoundationCertificates Require Import
   UnitGrowthCorrespondence.
 Require Import GeneratedUnitGrowthSource.
 
-(** Exact target-type guards. These guards bind the independently checked
-    statements to the actual theorem constants. The semantic certificates
-    below never reference a guard or target/source theorem proof. *)
-Definition imported_unit_growth_function_k_steps_bounded_type_guard :
-  forall f : Lean.Nat -> Lean.Nat,
-    ug_unit_growth_target f -> forall x k : Lean.Nat,
-      ug_le (f (ug_add x k)) (ug_add k (f x)) :=
-  ImportedUnitGrowth.Prosa_Util_UnitGrowth_unit_growth_function_k_steps_bounded.
-
-Definition imported_slowed_respects_pointwise_leq_type_guard :
-  forall (f F : Lean.Nat -> Lean.Nat) (delta : Lean.Nat),
-    ug_unit_growth_target f ->
-    (forall x : Lean.Nat, ug_le x delta -> ug_le (f x) (F x)) ->
-    ug_le (f delta)
-      (ImportedUnitGrowth.Prosa_Util_UnitGrowth_slowed F delta) :=
-  ImportedUnitGrowth.Prosa_Util_UnitGrowth_slowed_respects_pointwise_leq.
-
-Definition imported_slowed_is_unit_step_type_guard :
-  forall f : Lean.Nat -> Lean.Nat,
-    ug_unit_growth_target
-      (ImportedUnitGrowth.Prosa_Util_UnitGrowth_slowed f) :=
-  ImportedUnitGrowth.Prosa_Util_UnitGrowth_slowed_is_unit_step.
-
-Definition imported_slowed_respects_monotone_type_guard :
-  forall f : Lean.Nat -> Lean.Nat,
-    ug_monotone_target f ->
-    ug_monotone_target
-      (ImportedUnitGrowth.Prosa_Util_UnitGrowth_slowed f) :=
-  ImportedUnitGrowth.Prosa_Util_UnitGrowth_slowed_respects_monotone.
-
-Definition imported_slowed_never_exceeds_type_guard :
-  forall (f : Lean.Nat -> Lean.Nat) (x : Lean.Nat),
-    ug_le (ImportedUnitGrowth.Prosa_Util_UnitGrowth_slowed f x) (f x) :=
-  ImportedUnitGrowth.Prosa_Util_UnitGrowth_slowed_never_exceeds.
-
-Definition imported_exists_intermediate_point_type_guard :
-  forall f : Lean.Nat -> Lean.Nat,
-    ug_unit_growth_target f ->
-    forall x1 x2 : Lean.Nat, ug_le x1 x2 ->
-    forall y : Lean.Nat,
-      Lean.And (ug_le (f x1) y) (ug_lt y (f x2)) ->
-      ImportedUnitGrowth.Exists Lean.Nat (fun xmid =>
-        Lean.And (Lean.And (ug_le x1 xmid) (ug_lt xmid x2))
-          (Lean.eq (f xmid) y)) :=
-  ImportedUnitGrowth.Prosa_Util_UnitGrowth_exists_intermediate_point.
-
-Definition imported_exists_intermediate_point_leq_type_guard :
-  forall f : Lean.Nat -> Lean.Nat,
-    ug_unit_growth_target f ->
-    forall x1 x2 : Lean.Nat, ug_le x1 x2 ->
-    forall y : Lean.Nat,
-      Lean.And (ug_le (f x1) y) (ug_le y (f x2)) ->
-      ImportedUnitGrowth.Exists Lean.Nat (fun xmid =>
-        Lean.And (Lean.And (ug_le x1 xmid) (ug_le xmid x2))
-          (Lean.eq (f xmid) y)) :=
-  ImportedUnitGrowth.Prosa_Util_UnitGrowth_exists_intermediate_point_leq.
-
-Definition imported_exists_first_intermediate_point_type_guard :
-  forall (P : Lean.Nat -> ImportedUnitGrowth.Bool)
-      (t1 t2 : Lean.Nat),
-    ug_le t1 t2 ->
-    Lean.eq (P t1) ImportedUnitGrowth.Bool_false ->
-    Lean.eq (P t2) ImportedUnitGrowth.Bool_true ->
-    ImportedUnitGrowth.Exists Lean.Nat (fun t =>
-      Lean.And (Lean.And (ug_lt t1 t) (ug_le t t2))
-        (Lean.And
-          (forall x : Lean.Nat,
-            Lean.And (ug_le t1 x) (ug_lt x t) ->
-            Lean.eq (P x) ImportedUnitGrowth.Bool_false)
-          (Lean.eq (P t) ImportedUnitGrowth.Bool_true))) :=
-  ImportedUnitGrowth.Prosa_Util_UnitGrowth_exists_first_intermediate_point.
-
-Definition imported_bound_preserved_under_slowed_type_guard :
-  forall (f : Lean.Nat -> Lean.Nat) (delta A F : Lean.Nat),
-    ug_le A (ug_sub F (f delta)) ->
-    ug_le A
-      (ug_sub F (ImportedUnitGrowth.Prosa_Util_UnitGrowth_slowed f delta)) :=
-  ImportedUnitGrowth.Prosa_Util_UnitGrowth_bound_preserved_under_slowed.
-
-Definition imported_slowed_subtraction_value_preservation_type_guard :
-  forall (f : Lean.Nat -> Lean.Nat) (Delta : Lean.Nat),
-    ug_monotone_target f ->
-    ImportedUnitGrowth.Exists Lean.Nat (fun delta =>
-      Lean.And (ug_le delta Delta)
-        (Lean.eq (ug_sub Delta (f Delta))
-          (ug_sub delta
-            (ImportedUnitGrowth.Prosa_Util_UnitGrowth_slowed f delta)))) :=
-  ImportedUnitGrowth.Prosa_Util_UnitGrowth_slowed_subtraction_value_preservation.
+(** Exact production theorem types are bound to the fresh `.olean` by
+    `Batch1ArtifactAudit.lean`.  The imported boundary here intentionally
+    contains only proof-complete computation interfaces, so these independent
+    semantic certificates do not introduce theorem-shaped target constants. *)
 
 Lemma unit_growth_function_k_steps_bounded_statement_certificate :
   forall (fR : nat -> nat) (fL : Lean.Nat -> Lean.Nat),

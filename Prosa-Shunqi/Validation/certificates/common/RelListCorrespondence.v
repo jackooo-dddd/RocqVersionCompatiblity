@@ -115,7 +115,7 @@ Definition rel_mem_head_truth (a b : bool) :
   end.
 
 Definition rel_eq_refl_truth (T : eqType) (x : T) : RelBoolTruth (x == x).
-Proof. rewrite eqxx. exact rel_validation_I. Defined.
+Proof. exact (rel_bool_prop_to_truth _ (eqxx x)). Defined.
 
 Fixpoint rel_list_to_seq {T : Type} (xs : ImportedRel.List T) : seq T :=
   match xs with

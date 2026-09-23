@@ -13,7 +13,7 @@
 
 - 唯一 specification：Prosa v0.6 `414e66760333eaa4ef78c685bcf53291c527a548`。
 - 本次读取 RTS commit：`4e9f60d54e5722a92170413bf4506c7df91cdf21`。
-- 正式验证环境：Lean 4.33.1；Mathlib `0df444a360eaa60ab8c11dca51a86af692955474`；Rocq 9.3。
+- 正式验证环境：Lean 4.33.1；Mathlib `0df444a360eaa60ab8c11dca51a86af692955474`；stock Rocq 9.0.0。Rocq 9.3 仅保留为历史 validation provenance；Phase 1–7 是迁移依据，不是主 pipeline 运行时依赖。
 - 调度 authority：`Validation/planning/v06_dependency/file_layers.csv`；数量及种类来自 `file_inventory.csv`、`declaration_inventory.csv`。
 - 完整范围：357 个文件。343 个属于 main；14 个 refinement 文件单独保留为 deferred。普通 MathComp/HB/Stdlib 依赖不因此被一概排除。
 - `scope_manifest.json` 中较早的 worktree 路径和工具版本是历史 inventory provenance，不是要求退回旧 workspace 或旧验证环境。
@@ -22,7 +22,7 @@ JSON 内锁定了四个 planning input 的 Git blob SHA。正常的新翻译 com
 
 ## Agent 执行规则
 
-1. **按本文件的 rank 顺序，选择下一个尚未完整完成的 source file。** 若该文件已存在有效的 `ACCEPTED_V06_FILE` 证据，则检查证据仍与当前 source/artifact/certificate 匹配后跳过；否则继续完成该文件。开始前仍必须满足 scope 允许且 **所有直接文件依赖均已有效验收**。
+1. **按本文件的 rank 顺序，选择下一个尚未完整完成的 source file。** 若该文件已存在当前 baseline 下有效的 `ACCEPTED_V06_FILE_ROCQ90` 证据，则检查证据仍与当前 source/artifact/certificate 匹配后跳过；Rocq 9.3 的历史 `ACCEPTED_V06_FILE` 不能单独触发跳过。开始前仍必须满足 scope 允许且 **所有直接文件依赖均已有效验收**。
 2. 依赖文件只有部分 declarations accepted、证据 stale 或只有 compile PASS，都不满足文件门槛。某项被阻塞时记录 blocker，可继续其他已 READY 的独立文件；不可启动其下游，不可删 DAG 边制造 READY。记录跳过原因，解除阻塞后回到较早 rank。
 3. 一个任务优先以 **whole file** 为单位。通常 ≤15 个声明整文件一批；16–20 个先检查新语义边界；>20 个按相互关联的声明组拆分。大文件内部允许分批，但整文件没收尾之前仍不能放行下游。声明 DAG 只细化文件内顺序，不替代文件 DAG。
 4. 每个新 class/计算边界先做最小 actual-artifact 预检；之后收齐本文件候选并冻结 snapshot，复用 prepare→check→finalize 模式。共享的是同一冻结输入的准备产物，不是承诺整个文件永远只需要一次试验。输入变了必须重新准备。
@@ -33,7 +33,7 @@ JSON 内锁定了四个 planning input 的 Git blob SHA。正常的新翻译 com
 
 **零声明文件不是自动完成。** 要检查其 imports/re-exports、notation、instances/coercions 和可观察接口，并获得符合项目规则的模块验收记录。没有适用 gate 时记录缺口，不把 0/0 当成证明，也不凭这份计划发明一种自动放行状态。
 
-**当前增量脚本仍是 List 专用。** `check_utility_list_batch.sh` 中仍指定 List snapshot 和 ListBatch certificate modules。后续文件应使用已有对应入口，或复用 common 层建立最小文件配置/入口；不能只把路径换成另一个 `.lean` 就声称完成验证。不要为此启动无关的大型 pipeline 重构。
+Rank 1–10 使用正式 `prepare_rocq90_batch1.sh → check_rocq90_batch1.sh → finalize_rocq90_batch1.sh` 入口。List 的旧专用脚本仍只服务历史/后续 List 工作；Rank 11 应建立 Batch 2 whole-file Rocq 9.0 migration，不能只把路径换成另一个 `.lean` 就声称完成验证。
 
 ## 确定性顺序
 
@@ -54,17 +54,17 @@ JSON 内锁定了四个 planning input 的 Git blob SHA。正常的新翻译 com
 
 | Rank | Source file | Declarations | 执行说明 |
 |---:|---|---:|---|
-| 1 | `behavior/time.v` | 2 | review时已整文件验收；检查当前证据有效后跳过。 |
-| 2 | `util/tactics.v` | 2 | review时已整文件验收；检查当前证据有效后跳过。 |
-| 3 | `util/notation.v` | 1 | review时已整文件验收；检查当前证据有效后跳过。 |
-| 4 | `util/rel.v` | 3 | review时已整文件验收；检查当前证据有效后跳过。 |
-| 5 | `util/seqset.v` | 3 | review时已整文件验收；检查当前证据有效后跳过。 |
-| 6 | `util/subadditivity.v` | 6 | review时已整文件验收；检查当前证据有效后跳过。 |
-| 7 | `util/supremum.v` | 7 | review时已整文件验收；检查当前证据有效后跳过。 |
-| 8 | `util/nat.v` | 2 | review时已整文件验收；检查当前证据有效后跳过。 |
-| 9 | `util/unit_growth.v` | 12 | review时已整文件验收；检查当前证据有效后跳过。 |
-| 10 | `util/search_arg.v` | 8 | review时已整文件验收；检查当前证据有效后跳过。 |
-| 11 | `util/list.v` | 57 | 大文件；若尚未整文件 accepted，则按语义簇完成并最终 whole-file 验收。 |
+| 1 | `behavior/time.v` | 2 | Rocq 9.0 Batch 1 whole-file revalidation accepted；有效时跳过。 |
+| 2 | `util/tactics.v` | 2 | Rocq 9.0 Batch 1 whole-file revalidation accepted；官方 source 直编译。 |
+| 3 | `util/notation.v` | 1 | Rocq 9.0 Batch 1 whole-file revalidation accepted。 |
+| 4 | `util/rel.v` | 3 | Rocq 9.0 Batch 1 whole-file revalidation accepted。 |
+| 5 | `util/seqset.v` | 3 | Rocq 9.0 Batch 1 whole-file revalidation accepted；无 9.3 source workaround。 |
+| 6 | `util/subadditivity.v` | 6 | Rocq 9.0 Batch 1 whole-file revalidation accepted；使用 relevance-safe equality transport。 |
+| 7 | `util/supremum.v` | 7 | Rocq 9.0 Batch 1 whole-file revalidation accepted。 |
+| 8 | `util/nat.v` | 2 | Rocq 9.0 Batch 1 whole-file revalidation accepted；minimal computation boundary。 |
+| 9 | `util/unit_growth.v` | 12 | Rocq 9.0 Batch 1 whole-file revalidation accepted；official source 直编译。 |
+| 10 | `util/search_arg.v` | 8 | Rocq 9.0 Batch 1 whole-file revalidation accepted；Nat.find-free target boundary。 |
+| 11 | `util/list.v` | 57 | **下一 READY：Full Rocq 9.0 Migration — Batch 2**；按语义簇完成并最终 whole-file 验收。 |
 | 12 | `util/sum.v` | 25 | 大文件；按语义簇拆分并最终 whole-file 验收；保留现有 review gates。 |
 | 13 | `util/epsilon.v` | 0 | notation/模块审计；0项不等于自动 accepted。 |
 | 14 | `util/bigop.v` | 1 | 整文件；泛型 bigop 的运算/单位元/laws 边界需要预检。 |

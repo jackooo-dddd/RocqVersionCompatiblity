@@ -7,15 +7,13 @@ From FoundationCertificates Require Import
 (** Adapter for the operations that occur in the actual freshly imported
     [Prosa.Util.Nat] theorem types. *)
 Definition nat_target_add (a b : Lean.Nat) : Lean.Nat :=
-  ImportedNat.HAdd_hAdd_inst7 Lean.Nat Lean.Nat Lean.Nat
-    (ImportedNat.instHAdd_inst1 Lean.Nat ImportedNat.instAddNat) a b.
+  ImportedNat.add0 Lean.Nat ImportedNat.instAddNat a b.
 
 Definition nat_target_sub (a b : Lean.Nat) : Lean.Nat :=
-  ImportedNat.HSub_hSub_inst7 Lean.Nat Lean.Nat Lean.Nat
-    (ImportedNat.instHSub_inst1 Lean.Nat ImportedNat.instSubNat) a b.
+  ImportedNat.sub0 Lean.Nat ImportedNat.instSubNat a b.
 
 Definition nat_target_le (a b : Lean.Nat) : SProp :=
-  ImportedNat.LE_le_inst1 Lean.Nat ImportedNat.instLENat a b.
+  ImportedNat.le0 Lean.Nat ImportedNat.instLENat a b.
 
 Lemma nat_target_add_correspondence aR aL bR bL :
   SubNatRel aR aL -> SubNatRel bR bL ->

@@ -22,6 +22,13 @@
    for that source file, without a timezone suffix. Later batches and
    revalidation update that same report; legacy date/batch reports are not the
    current status authority.
+10. Rocq 9.0.0 is the active validation baseline. Rocq 9.3 evidence remains
+    provenance only; current downstream READY state requires a passing Rocq
+    9.0 whole-file status for every predecessor.
+11. Formal validation is fail-closed and uses normal universe/elimination
+    checking, actual fresh `.olean` export, assumption classification, and
+    `rocqchk`. Experimental compatibility `.work`, logs, and results are not
+    main-pipeline inputs.
 
 Current Lean and historical Prosa sources are references only and may never
 override the pinned v0.6 semantics.

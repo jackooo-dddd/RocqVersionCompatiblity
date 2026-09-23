@@ -12,7 +12,9 @@ validation_common_init() {
   MATHLIB_COMMIT_EXPECTED=0df444a360eaa60ab8c11dca51a86af692955474
   PROSA_COMMIT_EXPECTED=414e66760333eaa4ef78c685bcf53291c527a548
   PROSA_TREE_EXPECTED=7d7e94c731f7eefde4ca738310d4cafdd7bebdf0
-  ROCQ_SWITCH=${IMPORT_OPAM_SWITCH:-rocq93rc1}
+  source "$VALIDATION_ROOT/scripts/common/rocq90_environment.sh"
+  validation_rocq90_environment_init "$VALIDATION_ROOT"
+  ROCQ_SWITCH="$VALIDATION_ROCQ90_SWITCH"
 
   local source_override=${PROSA_V06_SOURCE_ROOT:-}
   if [[ -n "$source_override" ]]; then
@@ -23,8 +25,8 @@ validation_common_init() {
   fi
 
   "$VALIDATION_ROOT/tooling/setup_validation_tooling.sh" >/dev/null
-  EXPORTER_ROOT=${LEAN4EXPORT_SRC:-"$VALIDATION_ROOT/.work/tooling/lean4export"}
-  IMPORTER_ROOT=${ROCQLI_SRC:-"$VALIDATION_ROOT/.work/tooling/rocq-lean-import"}
+  EXPORTER_ROOT=${LEAN4EXPORT_SRC:-"$VALIDATION_ROOT/.work/tooling/rocq90/lean4export"}
+  IMPORTER_ROOT=${ROCQLI_SRC:-"$VALIDATION_ROOT/.work/tooling/rocq90/rocq-lean-import"}
   if [[ $(git -C "$SOURCE_ROOT" rev-parse HEAD) != "$PROSA_COMMIT_EXPECTED" ]]; then
     echo "authoritative Prosa commit mismatch" >&2; return 1
   fi
@@ -87,14 +89,14 @@ validation_compile_official_source() {
   [[ $(validation_sha256 "$work/source/$source_file") == "$expected_hash" ]]
   (
     cd "$work/source"
-    opam exec --switch="$ROCQ_SWITCH" -- rocq c \
+    validation_rocq90_exec rocq c \
       -R "$work/source" prosa "$source_file"
   )
 }
 
 validation_rocq_compile() {
   local work=$1 source_file=$2
-  opam exec --switch="$ROCQ_SWITCH" -- rocq c \
+  validation_rocq90_exec rocq c \
     -R "$work/source" prosa \
     -Q "$IMPORTER_ROOT/src" LeanImport -I "$IMPORTER_ROOT/src" \
     -Q "$work/imported" FoundationImported \
@@ -108,11 +110,11 @@ validation_verify_tool_hashes() {
     echo "lean4export binary hash mismatch" >&2; return 1
   fi
   if [[ $(validation_sha256 "$IMPORTER_ROOT/src/lean_import.cmxs") != \
-      c3a10b84f88ff66a3fcff8e15e3c0a6a307592b45726c612fa8a95b061d97982 ]]; then
+      e39bf1e216751e3accdcee3fa06ed2effe629a7b3bbcda911a7862f5853c5ec6 ]]; then
     echo "rocq-lean-import plugin hash mismatch" >&2; return 1
   fi
   if [[ $(validation_sha256 "$IMPORTER_ROOT/src/Lean.vo") != \
-      0ec01795b0a3d6646fb72824262eb7888677ac3ee4cbfc665f6a68309c54fd70 ]]; then
+      1cd8548cac7649cddf8d289876a2fb7869f4b879b654e8512cc4fe76eac1e8cf ]]; then
     echo "rocq-lean-import foundation hash mismatch" >&2; return 1
   fi
 }

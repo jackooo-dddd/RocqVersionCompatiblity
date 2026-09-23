@@ -20,40 +20,40 @@ Current canonical reports, in the approved execution order:
 
 | Rank | Source file | Canonical report | Current file status |
 |---:|---|---|---|
-| 1 | `behavior/time.v` | [time](files/behavior/2026-09-20_210930_time.md) | `ACCEPTED_V06_FILE` |
-| 2 | `util/tactics.v` | [tactics](files/util/2026-09-20_214230_tactics.md) | `ACCEPTED_V06_FILE` |
-| 3 | `util/notation.v` | [notation](files/util/2026-09-20_214230_notation.md) | `ACCEPTED_V06_FILE` |
-| 4 | `util/rel.v` | [rel](files/util/2026-09-20_214230_rel.md) | `ACCEPTED_V06_FILE` |
-| 5 | `util/seqset.v` | [seqset](files/util/2026-09-20_214230_seqset.md) | `ACCEPTED_V06_FILE` |
-| 6 | `util/subadditivity.v` | [subadditivity](files/util/2026-09-20_214230_subadditivity.md) | `ACCEPTED_V06_FILE` |
-| 7 | `util/supremum.v` | [supremum](files/util/2026-09-20_214230_supremum.md) | `ACCEPTED_V06_FILE` |
-| 8 | `util/nat.v` | [nat](files/util/2026-09-21_082258_nat.md) | `ACCEPTED_V06_FILE` |
-| 9 | `util/unit_growth.v` | [unit_growth](files/util/2026-09-21_082258_unit_growth.md) | `ACCEPTED_V06_FILE` |
-| 10 | `util/search_arg.v` | [search_arg](files/util/2026-09-21_082258_search_arg.md) | `ACCEPTED_V06_FILE` |
-| 11 | `util/list.v` | [list](files/util/2026-09-21_082258_list.md) | `ACCEPTED_V06_FILE` |
-| 12 | `util/sum.v` | [sum](files/util/2026-09-21_082258_sum.md) | `ACCEPTED_V06_FILE` |
-| 13 | `util/epsilon.v` | [epsilon](files/util/2026-09-22_034433_epsilon.md) | `ACCEPTED_V06_FILE` |
-| 14 | `util/bigop.v` | [bigop](files/util/2026-09-22_034433_bigop.md) | `ACCEPTED_V06_FILE` |
-| 15 | `util/setoid.v` | [setoid](files/util/2026-09-22_042247_setoid.md) | `ACCEPTED_V06_FILE` |
-| 16 | `util/poet.v` | [poet](files/util/2026-09-22_044913_poet.md) | `ACCEPTED_V06_FILE` |
-| 17 | `util/bigcat.v` | [bigcat](files/util/2026-09-22_053020_bigcat.md) | `ACCEPTED_V06_FILE` |
-| 18 | `util/minmax.v` | [minmax](files/util/2026-09-22_082537_minmax.md) | `ACCEPTED_V06_FILE` |
-| 19 | `util/div_mod.v` | [div_mod](files/util/2026-09-22_103919_div_mod.md) | `ACCEPTED_V06_FILE` |
-| 20 | `util/nondecreasing.v` | [nondecreasing](files/util/2026-09-22_133028_nondecreasing.md) | `TRANSLATION_IN_PROGRESS` |
+| 1 | `behavior/time.v` | [time](files/behavior/2026-09-20_210930_time.md) | `ACCEPTED_V06_FILE_ROCQ90` |
+| 2 | `util/tactics.v` | [tactics](files/util/2026-09-20_214230_tactics.md) | `ACCEPTED_V06_FILE_ROCQ90` |
+| 3 | `util/notation.v` | [notation](files/util/2026-09-20_214230_notation.md) | `ACCEPTED_V06_FILE_ROCQ90` |
+| 4 | `util/rel.v` | [rel](files/util/2026-09-20_214230_rel.md) | `ACCEPTED_V06_FILE_ROCQ90` |
+| 5 | `util/seqset.v` | [seqset](files/util/2026-09-20_214230_seqset.md) | `ACCEPTED_V06_FILE_ROCQ90` |
+| 6 | `util/subadditivity.v` | [subadditivity](files/util/2026-09-20_214230_subadditivity.md) | `ACCEPTED_V06_FILE_ROCQ90` |
+| 7 | `util/supremum.v` | [supremum](files/util/2026-09-20_214230_supremum.md) | `ACCEPTED_V06_FILE_ROCQ90` |
+| 8 | `util/nat.v` | [nat](files/util/2026-09-21_082258_nat.md) | `ACCEPTED_V06_FILE_ROCQ90` |
+| 9 | `util/unit_growth.v` | [unit_growth](files/util/2026-09-21_082258_unit_growth.md) | `ACCEPTED_V06_FILE_ROCQ90` |
+| 10 | `util/search_arg.v` | [search_arg](files/util/2026-09-21_082258_search_arg.md) | `ACCEPTED_V06_FILE_ROCQ90` |
+| 11 | `util/list.v` | [list](files/util/2026-09-21_082258_list.md) | `ROCQ90_REVALIDATION_PENDING` |
+| 12 | `util/sum.v` | [sum](files/util/2026-09-21_082258_sum.md) | `ROCQ90_REVALIDATION_PENDING` |
+| 13 | `util/epsilon.v` | [epsilon](files/util/2026-09-22_034433_epsilon.md) | `ROCQ90_REVALIDATION_PENDING` |
+| 14 | `util/bigop.v` | [bigop](files/util/2026-09-22_034433_bigop.md) | `ROCQ90_REVALIDATION_PENDING` |
+| 15 | `util/setoid.v` | [setoid](files/util/2026-09-22_042247_setoid.md) | `ROCQ90_REVALIDATION_PENDING` |
+| 16 | `util/poet.v` | [poet](files/util/2026-09-22_044913_poet.md) | `ROCQ90_REVALIDATION_PENDING` |
+| 17 | `util/bigcat.v` | [bigcat](files/util/2026-09-22_053020_bigcat.md) | `ROCQ90_REVALIDATION_PENDING` |
+| 18 | `util/minmax.v` | [minmax](files/util/2026-09-22_082537_minmax.md) | `ROCQ90_REVALIDATION_PENDING` |
+| 19 | `util/div_mod.v` | [div_mod](files/util/2026-09-22_103919_div_mod.md) | `ROCQ90_REVALIDATION_PENDING` |
+| 20 | `util/nondecreasing.v` | [nondecreasing](files/util/2026-09-22_133028_nondecreasing.md) | `HISTORICAL_TRANSLATION_IN_PROGRESS` |
 
 ## Current proof progress
 
-Machine-published acceptance is now **19 / 357 source files** and
-**171 / 2439 public declarations**, with **0 translated-but-not-certified**.
-The latest completed file is `util/div_mod.v`: all 15 declarations are
-translated, Lean proof-clean, semantically certified against a fresh actual
-artifact, assumption-audited, and content-addressed in the published manifest.
-Its reusable bridge relates MathComp quotient, remainder, and Boolean
-divisibility to imported Lean `Nat.div`, `Nat.mod`, and `Dvd`, including the
-zero-divisor cases and truncated subtraction. All 15 certificates are
-`CERTIFIED_WITH_PROP_SPROP_FOUNDATION`; none has a semantic premise or a
-source/target theorem self-dependency. The next dependency-ready unfinished
-file in the approved order is rank 20, `util/nondecreasing.v`.
+On the active Rocq-9.0 baseline, machine-published acceptance is **10 / 357
+source files** and **46 / 2439 public declarations**, with **0
+translated-but-not-certified**. Rank 1–10 passed fresh actual-artifact import,
+all semantic certificates, assumption classification, and `rocqchk`; the
+formal batch result is
+[`rocq90_full_migration_batch1.md`](migrations/rocq90_full_migration_batch1.md).
+
+Rocq-9.3 acceptance for later files is retained as historical provenance but
+does not make a predecessor READY under the active baseline. The next READY
+work is **Full Rocq 9.0 Migration — Batch 2**, rank 11, `util/list.v`
+whole-file migration.
 
 The formal scheduling document is
 [`../v06_file_translation_order.md`](../v06_file_translation_order.md).

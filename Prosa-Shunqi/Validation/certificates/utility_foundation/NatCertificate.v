@@ -22,10 +22,6 @@ Definition rocq_subnACA_type_guard :
   forall m n p q : nat, rocq_subnACA_at m n p q :=
   @prosa.util.nat.subnACA.
 
-Definition imported_subnACA_type_guard :
-  forall m n p q : Lean.Nat, imported_subnACA_at m n p q :=
-  @ImportedNat.Prosa_Util_Nat_subnACA.
-
 Lemma subnACA_correspondence_certificate :
   forall mR mL nR nL pR pL qR qL,
     SubNatRel mR mL -> SubNatRel nR nL ->
@@ -76,10 +72,6 @@ Definition imported_leq_subRL_impl_at (m n p : Lean.Nat) : SProp :=
 Definition rocq_leq_subRL_impl_type_guard :
   forall m n p : nat, rocq_leq_subRL_impl_at m n p :=
   @prosa.util.nat.leq_subRL_impl.
-
-Definition imported_leq_subRL_impl_type_guard :
-  forall m n p : Lean.Nat, imported_leq_subRL_impl_at m n p :=
-  @ImportedNat.Prosa_Util_Nat_leq_subRL_impl.
 
 Lemma leq_subRL_impl_correspondence_certificate :
   forall mR mL nR nL pR pL,

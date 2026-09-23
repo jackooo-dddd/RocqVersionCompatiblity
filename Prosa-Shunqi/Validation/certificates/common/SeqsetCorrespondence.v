@@ -108,7 +108,7 @@ Definition seqset_or_right (a b : bool) :
 
 Definition seqset_eq_refl_truth (T : eqType) (x : T) :
     SeqsetBoolTruth (x == x).
-Proof. rewrite eqxx. exact seqset_I. Defined.
+Proof. exact (seqset_bool_prop_to_truth _ (eqxx x)). Defined.
 
 Definition seqset_mem_head {T : Type} (x y : T)
     (xs : ImportedSeqset.List T) : Logic.eq x y ->

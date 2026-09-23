@@ -1,6 +1,9 @@
 /.lake/
 /Validation/.work/
 /Validation/logs/
+/Validation/environment/
+*.log
+*.exit
 *.olean
 *.ilean
 *.c

@@ -27,6 +27,24 @@ Inductive SupListRel (T : Type) :
     SupListRel T xsR xsL ->
     SupListRel T (x :: xsR) (ImportedSupremum.List_cons T x xsL).
 
+Definition sup_option_rel_transport (T : Type)
+    (source source' : option T)
+    (target target' : ImportedSupremum.Option T) :
+    Logic.eq source source' -> Logic.eq target target' ->
+    SupOptionRel T source target -> SupOptionRel T source' target' :=
+  fun Hsource Htarget Hrel =>
+    match Hsource in Logic.eq _ source0 return
+      Logic.eq target target' ->
+      SupOptionRel T source0 target'
+    with
+    | Logic.eq_refl => fun Htarget0 =>
+        match Htarget0 in Logic.eq _ target0 return
+          SupOptionRel T source target0
+        with
+        | Logic.eq_refl => Hrel
+        end
+    end Htarget.
+
 Lemma choose_superior_correspondence_certificate :
   forall (T : eqType)
          (RR : T -> T -> bool)
@@ -46,8 +64,18 @@ Proof.
       destruct (RL x y) eqn:HRL;
       cbn in HR |- *.
     + destruct HR.
-    + rewrite HRR. rewrite HRL. cbn. exact (sup_option_some T x).
-    + rewrite HRR. rewrite HRL. cbn. exact (sup_option_some T y).
+    + refine (sup_option_rel_transport T (Some x) _
+        (ImportedSupremum.Option_some T x) _ _ _
+        (sup_option_some T x)).
+      * rewrite HRR. reflexivity.
+      * unfold ImportedSupremum.Prosa_Util_Supremum_choose_superior.
+        rewrite HRL. reflexivity.
+    + refine (sup_option_rel_transport T (Some y) _
+        (ImportedSupremum.Option_some T y) _ _ _
+        (sup_option_some T y)).
+      * rewrite HRR. reflexivity.
+      * unfold ImportedSupremum.Prosa_Util_Supremum_choose_superior.
+        rewrite HRL. reflexivity.
     + destruct HR.
 Qed.
 
