@@ -1,0 +1,181 @@
+--- ListLastCertificate.v
++++ ListLastCertificate.v.phase7
+@@ -199,31 +199,42 @@
+     [seq y <- x :: xs | P y].
+ Proof. cbn. destruct (P x); reflexivity. Qed.
+ 
+-Lemma ll_filter_canonical (P : nat -> bool) (xs : seq nat) :
+-  Lean.eq (ll_target_filter (ll_target_pred P) (ll_to_imported xs))
++Lemma ll_filter_canonical_coq (P : nat -> bool) (xs : seq nat) :
++  Logic.eq (ll_target_filter (ll_target_pred P) (ll_to_imported xs))
+     (ll_to_imported [seq x <- xs | P x]).
+ Proof.
+   induction xs as [|x xs IH].
+-  - exact (ImportedListLast.Prosa_Validation_ListLastInterface_filter_nil
+-      (ll_target_pred P)).
+-  - refine (sub_imported_eq_trans _ _ _
+-      (ImportedListLast.Prosa_Validation_ListLastInterface_filter_cons
+-        (ll_target_pred P) (sub_nat_to_imported x) (ll_to_imported xs)) _).
+-    unfold ll_target_pred. rw (sub_nat_rocq_roundtrip x).
++  - exact (imported_eq_to_coq_eq _ _
++      (ImportedListLast.Prosa_Validation_ListLastInterface_filter_nil
++        (ll_target_pred P))).
++  - refine (Logic.eq_trans
++      (imported_eq_to_coq_eq _ _
++        (ImportedListLast.Prosa_Validation_ListLastInterface_filter_cons
++          (ll_target_pred P) (sub_nat_to_imported x) (ll_to_imported xs))) _).
++    unfold ll_target_pred. rewrite (sub_nat_rocq_roundtrip x).
+     unfold ll_target_filter, ll_target_pred in IH.
+-    refine (sub_imported_eq_trans _ _ _
+-      (ll_target_filter_match (P x) (sub_nat_to_imported x)
+-        (ImportedListLast.List_filter_inst1 Lean.Nat
+-          (fun n => ll_bool_to_imported (P (sub_nat_to_rocq n)))
+-          (ll_to_imported xs))) _).
+-    refine (sub_imported_eq_trans _ _ _
+-      (ll_filter_branch_canonical (P x) x
+-        [seq y <- xs | P y]
+-        (ImportedListLast.List_filter_inst1 Lean.Nat
+-          (fun n => ll_bool_to_imported (P (sub_nat_to_rocq n)))
+-          (ll_to_imported xs)) IH) _).
+-    exact (coq_eq_to_imported_eq _ _
+-      (f_equal ll_to_imported (ll_source_filter_cons P x xs))).
++    refine (Logic.eq_trans
++      (imported_eq_to_coq_eq _ _
++        (ll_target_filter_match (P x) (sub_nat_to_imported x)
++          (ImportedListLast.List_filter_inst1 Lean.Nat
++            (fun n => ll_bool_to_imported (P (sub_nat_to_rocq n)))
++            (ll_to_imported xs)))) _).
++    refine (Logic.eq_trans
++      (imported_eq_to_coq_eq _ _
++        (ll_filter_branch_canonical (P x) x
++          [seq y <- xs | P y]
++          (ImportedListLast.List_filter_inst1 Lean.Nat
++            (fun n => ll_bool_to_imported (P (sub_nat_to_rocq n)))
++            (ll_to_imported xs))
++          (coq_eq_to_imported_eq _ _ IH))) _).
++    exact (f_equal ll_to_imported (ll_source_filter_cons P x xs)).
++Qed.
++
++Lemma ll_filter_canonical (P : nat -> bool) (xs : seq nat) :
++  Lean.eq (ll_target_filter (ll_target_pred P) (ll_to_imported xs))
++    (ll_to_imported [seq x <- xs | P x]).
++Proof.
++  exact (coq_eq_to_imported_eq _ _ (ll_filter_canonical_coq P xs)).
+ Qed.
+ 
+ (** Reusable logical lifting for the closed theorem statements.  These
+@@ -410,7 +421,7 @@
+   intros nR nL Hn. unfold LlBoolRel, ll_target_pred.
+   have Hback : Logic.eq (sub_nat_to_rocq nL) nR :=
+     ll_nat_related_back nR nL Hn.
+-  rewrite Hback. exact (@Lean.eq_refl _ _).
++  apply coq_eq_to_imported_eq. rewrite Hback. reflexivity.
+ Qed.
+ 
+ Lemma ll_forall_pred_correspondence
+@@ -495,7 +506,8 @@
+ 
+ Definition ll_target_getD
+     (xs : ImportedListLast.List_inst1 Lean.Nat) (n : Lean.Nat) : Lean.Nat :=
+-  ImportedListLast.List_getD_inst1 Lean.Nat xs n ll_target_zero.
++  ImportedListLast.Prosa_Validation_Phase7ListLastInterface_getD_inst1
++    Lean.Nat xs n ll_target_zero.
+ 
+ Lemma ll_length_canonical (xs : seq nat) :
+   SubNatRel (size xs) (ll_target_length (ll_to_imported xs)).
+@@ -539,33 +551,45 @@
+     (ImportedListLast.Prosa_Validation_ListLastInterface_sub_one nL)).
+ Qed.
+ 
+-Lemma ll_getD_canonical (xs : seq nat) (n : nat) :
+-  Lean.eq (ll_target_getD (ll_to_imported xs) (sub_nat_to_imported n))
++Lemma ll_getD_canonical_coq (xs : seq nat) (n : nat) :
++  Logic.eq (ll_target_getD (ll_to_imported xs) (sub_nat_to_imported n))
+     (sub_nat_to_imported (nth O xs n)).
+ Proof.
+   unfold ll_target_getD, ll_target_zero.
+   revert n. induction xs as [|x xs IH]; intro n.
+   - rewrite nth_nil. cbn [sub_nat_to_imported ll_to_imported].
+-    exact (sub_imported_eq_trans _ _ _
+-      (ImportedListLast.Prosa_Validation_ListLastInterface_getD_nil
+-        (sub_nat_to_imported n))
+-      ImportedListLast.Prosa_Validation_ListLastInterface_nat_zero).
++    exact (Logic.eq_trans
++      (imported_eq_to_coq_eq _ _
++        (ImportedListLast.Prosa_Validation_Phase7ListLastInterface_getD_nat_nil
++          (sub_nat_to_imported n)))
++      (imported_eq_to_coq_eq _ _
++        ImportedListLast.Prosa_Validation_ListLastInterface_nat_zero)).
+   - destruct n as [|n].
+-    + refine (sub_imported_eq_trans _ _ _
+-        (sub_imported_eq_sym _ _
+-          (sub_imported_eq_congr
+-            (fun k => ll_target_getD
+-              (ImportedListLast.List_cons_inst1 Lean.Nat
+-                (sub_nat_to_imported x) (ll_to_imported xs)) k)
+-            _ _
+-            ImportedListLast.Prosa_Validation_ListLastInterface_nat_zero)) _).
+-      exact (ImportedListLast.Prosa_Validation_ListLastInterface_getD_zero
+-        (sub_nat_to_imported x) (ll_to_imported xs)).
+-    + refine (sub_imported_eq_trans _ _ _
+-        (ImportedListLast.Prosa_Validation_ListLastInterface_getD_succ_direct
+-          (sub_nat_to_imported x) (ll_to_imported xs)
+-          (sub_nat_to_imported n)) _).
+-      exact (IH n).
++    + exact (Logic.eq_trans
++        (imported_eq_to_coq_eq _ _
++          (sub_imported_eq_sym _ _
++            (sub_imported_eq_congr
++              (fun k => ll_target_getD
++                (ImportedListLast.List_cons_inst1 Lean.Nat
++                  (sub_nat_to_imported x) (ll_to_imported xs)) k)
++              _ _
++              ImportedListLast.Prosa_Validation_ListLastInterface_nat_zero)))
++        (imported_eq_to_coq_eq _ _
++          (ImportedListLast.Prosa_Validation_Phase7ListLastInterface_getD_nat_zero
++            (sub_nat_to_imported x) (ll_to_imported xs)))).
++    + exact (Logic.eq_trans
++        (imported_eq_to_coq_eq _ _
++          (ImportedListLast.Prosa_Validation_Phase7ListLastInterface_getD_nat_succ
++            (sub_nat_to_imported x) (ll_to_imported xs)
++            (sub_nat_to_imported n)))
++        (IH n)).
++Qed.
++
++Lemma ll_getD_canonical (xs : seq nat) (n : nat) :
++  Lean.eq (ll_target_getD (ll_to_imported xs) (sub_nat_to_imported n))
++    (sub_nat_to_imported (nth O xs n)).
++Proof.
++  exact (coq_eq_to_imported_eq _ _ (ll_getD_canonical_coq xs n)).
+ Qed.
+ 
+ Lemma ll_getD_related xsR xsL nR nL :
+@@ -611,14 +635,14 @@
+     { move: (leq_total a b) => /orP [Hab|Hba]; last exact Hba.
+       exfalso. exact (Hnot Hab). }
+     have Hmax : maxn a b = a := (elimT maxn_idPl Hba).
+-    rewrite Hmax. exact (@Lean.eq_refl Lean.Nat (sub_nat_to_imported a)).
++    apply coq_eq_to_imported_eq. rewrite Hmax. reflexivity.
+   - have Hab : is_true (leq a b).
+     { have Hrel := sub_nat_le_correspondence a (sub_nat_to_imported a)
+         b (sub_nat_to_imported b) (sub_nat_rel_canonical a)
+         (sub_nat_rel_canonical b).
+       exact (sprop_to_prop _ _ Hrel Hle). }
+     have Hmax : maxn a b = b := (elimT maxn_idPr Hab).
+-    rewrite Hmax. exact (@Lean.eq_refl Lean.Nat (sub_nat_to_imported b)).
++    apply coq_eq_to_imported_eq. rewrite Hmax. reflexivity.
+ Qed.
+ 
+ Lemma ll_foldl_max_canonical (z : nat) (xs : seq nat) :
+@@ -771,8 +795,8 @@
+   | false, false => fun H => H
+   end.
+ 
+-Definition ll_eq_refl_truth (x : nat) : SubNatTruth (x == x).
+-Proof. rw eqxx. exact sub_nat_truth_intro. Defined.
++Definition ll_eq_refl_truth (x : nat) : SubNatTruth (x == x) :=
++  sub_nat_prop_to_truth (x == x) (eqxx x).
+ 
+ Fixpoint ll_imported_mem_decoded (x : Lean.Nat)
+     (xs : ImportedListLast.List_inst1 Lean.Nat)
+
