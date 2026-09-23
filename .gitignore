@@ -7,6 +7,7 @@
 # Generated command and test output. Existing tracked evidence remains tracked.
 *.log
 *.exit
+/Prosa-Shunqi/rocq90-compat/logs/phase7/root-closure/*.tsv
 
 # Reproducible upstream checkout; keep the pinned revision and local patches,
 # but not the materialized nested Git repository.

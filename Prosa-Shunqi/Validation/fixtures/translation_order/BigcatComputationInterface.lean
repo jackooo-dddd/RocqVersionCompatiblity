@@ -34,7 +34,9 @@ theorem production_bigCatFin_zero {T : Type u} (f : Fin 0 → List T) :
 theorem production_bigCatFin_succ {T : Type u} (n : Nat)
     (f : Fin (n + 1) → List T) :
     bigCatFin f = f 0 ++ bigCatFin (fun i : Fin n => f i.succ) := by
-  simp [bigCatFin, List.ofFn_succ]
+  unfold bigCatFin List.ofFn
+  rw [Fin.foldr_succ]
+  rfl
 
 theorem production_bigCatSeq_eq {X : Type u} {Y : Type v}
     (xs : List X) (p : X → Bool) (f : X → List Y) :

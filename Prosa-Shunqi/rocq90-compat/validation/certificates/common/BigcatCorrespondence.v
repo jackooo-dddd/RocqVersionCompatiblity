@@ -235,8 +235,8 @@ Definition bc_mem_head_of_coq_eq {T : Type} (x y : T)
     end.
 
 Definition bc_eq_refl_truth (T : eqType) (x : T) :
-    SubNatTruth (x == x).
-Proof. rw eqxx. exact sub_nat_truth_intro. Defined.
+    SubNatTruth (x == x) :=
+  sub_nat_prop_to_truth (x == x) (eqxx x).
 
 Definition bc_mem_head_truth (a b : bool) :
     SubNatTruth a -> SubNatTruth (a || b) :=
@@ -821,32 +821,38 @@ Lemma bc_bigCatNat_delta_related_rel (T : Type)
     (bc_target_bigCat_nat_delta
       (sub_nat_to_imported m) (sub_nat_to_imported d) fL).
 Proof.
-  intro Hf. induction d as [|d IH].
+  intro Hf. unfold BcListRel. apply coq_eq_to_imported_eq.
+  induction d as [|d IH].
   - rewrite addn0 big_geq //.
-    unfold BcListRel, bc_target_bigCat_nat_delta,
-      bc_target_bigCat_nat. cbn.
-    exact (sub_imported_eq_sym _ _
-      (ImportedBigcat.Prosa_Validation_BigcatInterface_production_bigCat_same
-        T (sub_nat_to_imported m) fL)).
-  - rewrite addnS big_nat_recr.
-    exact (leq_addr d m).
+    unfold bc_target_bigCat_nat_delta, bc_target_bigCat_nat. cbn.
+    exact (imported_eq_to_coq_eq _ _
+      (sub_imported_eq_sym _ _
+        (ImportedBigcat.Prosa_Validation_BigcatInterface_production_bigCat_same
+          T (sub_nat_to_imported m) fL))).
+  - rewrite addnS
+      (big_nat_recr (m + d) m fR (leq_addr d m)).
+    have IHs : BcListRel (\cat_(m <= i < m + d) fR i)
+        (bc_target_bigCat_nat_delta
+          (sub_nat_to_imported m) (sub_nat_to_imported d) fL) :=
+      coq_eq_to_imported_eq _ _ IH.
     have Happ := bc_append_related T
       (\cat_(m <= i < m + d) fR i) (fR (m + d))
       (bc_target_bigCat_nat_delta
         (sub_nat_to_imported m) (sub_nat_to_imported d) fL)
       (fL (Lean.Nat_add
         (sub_nat_to_imported m) (sub_nat_to_imported d)))
-      IH (Hf (m + d)
+      IHs (Hf (m + d)
         (Lean.Nat_add (sub_nat_to_imported m) (sub_nat_to_imported d))
         (sub_add_correspondence m (sub_nat_to_imported m)
           d (sub_nat_to_imported d)
           (sub_nat_rel_canonical m) (sub_nat_rel_canonical d))).
     unfold BcListRel, bc_target_bigCat_nat_delta,
       bc_target_bigCat_nat in Happ |- *.
-    exact (sub_imported_eq_trans _ _ _ Happ
-      (sub_imported_eq_sym _ _
-        (ImportedBigcat.Prosa_Validation_BigcatInterface_production_bigCat_add_succ
-          T (sub_nat_to_imported m) (sub_nat_to_imported d) fL))).
+    exact (imported_eq_to_coq_eq _ _
+      (sub_imported_eq_trans _ _ _ Happ
+        (sub_imported_eq_sym _ _
+          (ImportedBigcat.Prosa_Validation_BigcatInterface_production_bigCat_add_succ
+            T (sub_nat_to_imported m) (sub_nat_to_imported d) fL)))).
 Qed.
 
 Lemma bc_bigCatNat_delta_related (T : Type) (f : nat -> seq T)
@@ -946,7 +952,7 @@ Lemma bc_target_zero_sub_prop (b : nat) :
 Proof.
   induction b as [|b IH].
   - reflexivity.
-  - rw bc_target_sub_succ_prop IH. reflexivity.
+  - rewrite bc_target_sub_succ_prop IH. reflexivity.
 Qed.
 
 Lemma bc_target_succ_sub_succ_prop (a b : nat) :
@@ -957,7 +963,8 @@ Lemma bc_target_succ_sub_succ_prop (a b : nat) :
 Proof.
   induction b as [|b IH].
   - reflexivity.
-  - rw !bc_target_sub_succ_prop. exact (f_equal ImportedBigcat.Nat_pred IH).
+  - rewrite !bc_target_sub_succ_prop.
+    exact (f_equal ImportedBigcat.Nat_pred IH).
 Qed.
 
 Lemma bc_target_sub_canonical_prop (a b : nat) :
@@ -969,7 +976,7 @@ Proof.
   - destruct a; reflexivity.
   - destruct a as [|a].
     + exact (bc_target_zero_sub_prop b.+1).
-    + rw bc_target_succ_sub_succ_prop. exact (IH a).
+    + rewrite bc_target_succ_sub_succ_prop. exact (IH a).
 Qed.
 
 Lemma bc_target_range_succ_prop (start len step : Lean.Nat) :
@@ -1013,11 +1020,11 @@ Proof.
   elim: len start => [|len IH] start.
   - reflexivity.
   - cbn [sub_nat_to_imported iota bc_nat_seq_to_imported].
-    rw bc_target_range_succ_prop.
+    rewrite bc_target_range_succ_prop.
     have Hstart : Logic.eq
         (Lean.Nat_add (sub_nat_to_imported start) bc_target_one)
         (sub_nat_to_imported start.+1) by reflexivity.
-    rw Hstart (IH start.+1). reflexivity.
+    rewrite Hstart (IH start.+1). reflexivity.
 Qed.
 
 Definition BcNatFunRel (fR : nat -> nat)
@@ -1056,7 +1063,7 @@ Proof.
   - reflexivity.
   - cbn [bc_nat_seq_to_imported foldr].
     unfold bc_target_list_sum in IH |- *.
-    rw bc_target_foldr_cons_prop IH.
+    rewrite bc_target_foldr_cons_prop IH.
     exact (imported_eq_to_coq_eq _ _
       (sub_imported_eq_sym _ _
         (sub_add_correspondence x (sub_nat_to_imported x)
@@ -1069,8 +1076,8 @@ Lemma bc_mathcomp_big_seq_as_fold (xs : seq nat) (F : nat -> nat) :
   Logic.eq (\sum_(i <- xs) F i) (foldr addn O (map F xs)).
 Proof.
   elim: xs => [|x xs IH].
-  - rw big_nil. reflexivity.
-  - rw big_cons. cbn [map foldr]. now rw IH.
+  - rewrite big_nil. reflexivity.
+  - rewrite big_cons. cbn [map foldr]. now rewrite IH.
 Qed.
 
 Definition bc_target_interval_sum
@@ -1088,12 +1095,12 @@ Lemma bc_interval_sum_related
 Proof.
   intro HF. unfold bc_target_interval_sum.
   unfold SubNatRel. apply coq_eq_to_imported_eq.
-  rw bc_target_sub_canonical_prop bc_target_range_iota_prop.
+  rewrite bc_target_sub_canonical_prop bc_target_range_iota_prop.
   have Hmap := bc_target_map_nat_related F FL HF (iota m (n - m)).
   have HmapP := imported_eq_to_coq_eq _ _ Hmap.
   rewrite -HmapP.
-  rw bc_target_list_sum_converted_prop.
-  rw /index_iota bc_mathcomp_big_seq_as_fold.
+  rewrite bc_target_list_sum_converted_prop.
+  rewrite /index_iota bc_mathcomp_big_seq_as_fold.
   reflexivity.
 Qed.
 
@@ -1225,12 +1232,14 @@ Lemma bc_bigCatFin_related_rel (T : Type) (n : nat)
     (bc_target_bigCatFin (sub_nat_to_imported n) fL).
 Proof.
   induction n as [|n IH].
-  - intro Hf. rewrite big_ord0.
-    unfold BcListRel, bc_target_bigCatFin.
-    exact (sub_imported_eq_sym _ _
-      (ImportedBigcat.Prosa_Validation_BigcatInterface_production_bigCatFin_zero
-        T fL)).
-  - intro Hf. rewrite big_ord_recl.
+  - intro Hf. unfold BcListRel. apply coq_eq_to_imported_eq.
+    rewrite big_ord0. unfold bc_target_bigCatFin.
+    exact (imported_eq_to_coq_eq _ _
+      (sub_imported_eq_sym _ _
+        (ImportedBigcat.Prosa_Validation_BigcatInterface_production_bigCatFin_zero
+          T fL))).
+  - intro Hf. unfold BcListRel. apply coq_eq_to_imported_eq.
+    rewrite big_ord_recl. apply imported_eq_to_coq_eq.
     exact (bc_bigCatFin_succ_step T n fR fL
       (Hf ord0 (bc_target_fin_zero (sub_nat_to_imported n))
         (@Lean.eq_refl _ _))

@@ -50,9 +50,8 @@ theorem mem_bigcat_nat (x : T) (m n j : Nat)
   refine ⟨f j, ?_, hMem⟩
   rw [List.mem_map]
   refine ⟨j - m, List.mem_range.mpr ?_, ?_⟩
-  · omega
-  · congr 1
-    omega
+  · exact Nat.sub_lt_sub_right hRange.1 hRange.2
+  · exact congrArg f (Nat.add_sub_of_le hRange.1)
 
 theorem mem_bigcat_nat_exists (x : T) (m n : Nat)
     (hMem : x ∈ bigCat m n f) :
@@ -63,7 +62,8 @@ theorem mem_bigcat_nat_exists (x : T) (m n : Nat)
   rw [List.mem_map] at hl
   obtain ⟨k, hk, rfl⟩ := hl
   have hklt : k < n - m := List.mem_range.mp hk
-  exact ⟨m + k, hxl, by omega, by omega⟩
+  exact ⟨m + k, hxl, Nat.le_add_right m k,
+    by simpa only [Nat.add_comm] using Nat.add_lt_of_lt_sub hklt⟩
 
 theorem mem_bigcat_ord (x : T) (n : Nat) (j : Fin n)
     (g : Fin n → List T) (_hj : j.val < n) (hMem : x ∈ g j) :
@@ -96,7 +96,7 @@ theorem bigcat_nat_uniq
         mem_bigcat_nat_exists f a n₁ (n₁ + k) ha'
       have hb' : a ∈ f (n₁ + k) := hab ▸ hb
       have hEq := hNoElementsInCommon a i (n₁ + k) hi hb'
-      omega
+      exact Nat.ne_of_lt hiUpper hEq
 
 theorem bigcat_nat_filter_eq_filter_bigcat_nat
     {X : Type u} (F : Nat → List X) (P : X → Bool) (t₁ t₂ : Nat) :
@@ -111,25 +111,34 @@ theorem bigcat_nat_filter_eq_filter_bigcat_nat
   | nil => rfl
   | cons i indices ih => simp only [List.map_cons, List.flatten_cons, List.filter_append, ih]
 
+private theorem foldr_family_lengths_eq_flatten_length
+    {I : Type _} {X : Type _} (indices : List I) (F : I → List X) :
+    List.foldr Nat.add 0 (indices.map (fun i => (F i).length)) =
+      (indices.map F).flatten.length := by
+  induction indices with
+  | nil => rfl
+  | cons i indices ih =>
+    change (F i).length +
+        List.foldr Nat.add 0 (indices.map (fun j => (F j).length)) =
+      (F i ++ (indices.map F).flatten).length
+    rw [List.length_append, ih]
+
+private theorem size_big_nat_normalized {X : Type u}
+    (F : Nat → List X) (t₁ t₂ : Nat) :
+    List.foldr Nat.add 0
+        (List.map (fun t => (F t).length) (List.range' t₁ (t₂ - t₁) 1)) =
+      (bigCat t₁ t₂ F).length := by
+  unfold bigCat
+  rw [List.range'_eq_map_range, List.map_map]
+  change List.foldr Nat.add 0
+      (List.map (fun i => (F (t₁ + i)).length) (_root_.List.range (t₂ - t₁))) =
+    (List.map (fun i => F (t₁ + i)) (_root_.List.range (t₂ - t₁))).flatten.length
+  exact foldr_family_lengths_eq_flatten_length
+    (_root_.List.range (t₂ - t₁)) (fun i => F (t₁ + i))
+
 theorem size_big_nat {X : Type u} (F : Nat → List X) (t₁ t₂ : Nat) :
     (∑ t ∈ Finset.Ico t₁ t₂, (F t).length) = (bigCat t₁ t₂ F).length := by
-  by_cases h : t₁ ≤ t₂
-  · obtain ⟨d, rfl⟩ := Nat.exists_eq_add_of_le h
-    clear h
-    induction d with
-    | zero => simp [bigCat]
-    | succ d ih =>
-        rw [Nat.add_succ, Finset.sum_Ico_succ_top (by omega)]
-        unfold bigCat
-        have hsub : t₁ + d + 1 - t₁ = d + 1 := by omega
-        rw [hsub, List.range_succ, List.map_append]
-        simp only [List.map_singleton, List.flatten_append, List.flatten_singleton,
-          List.length_append]
-        simpa [bigCat, Nat.add_sub_cancel_left] using
-          congrArg (fun z => z + (F (t₁ + d)).length) ih
-  · have hle : t₂ ≤ t₁ := Nat.le_of_not_ge h
-    rw [Finset.Ico_eq_empty_of_le hle]
-    simp [bigCat, Nat.sub_eq_zero_of_le hle]
+  exact size_big_nat_normalized F t₁ t₂
 
 end BigCatNatLemmas
 
