@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+script_dir=$(cd "$(dirname "$0")" && pwd)
+exec "$script_dir/run_incremental_validation.sh" check \
+  --name rocq90_batch2 \
+  --config "$script_dir/../tooling/rocq90_batch2_descriptor.json" \
+  --hooks "$script_dir/../tooling/rocq90_batch2_hooks.sh"

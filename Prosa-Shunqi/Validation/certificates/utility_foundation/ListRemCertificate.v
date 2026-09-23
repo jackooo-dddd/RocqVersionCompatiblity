@@ -73,7 +73,7 @@ Definition lr_mem_head_of_coq_eq {T : Type} (x y : T)
 
 Definition lr_eq_refl_truth (T : eqType) (x : T) :
     SubNatTruth (x == x).
-Proof. rw eqxx. exact sub_nat_truth_intro. Defined.
+Proof. exact (sub_nat_prop_to_truth _ (eqxx x)). Defined.
 
 Fixpoint lr_seq_mem_forward {T : eqType} (x : T) (xs : seq T) :
     SubNatTruth (x \in xs) ->
@@ -172,26 +172,31 @@ Lemma lr_erase_canonical (T : eqType) (y : T) (xs : seq T) :
   Lean.eq (lr_target_erase T (lr_to_imported xs) y)
     (lr_to_imported (rem y xs)).
 Proof.
+  apply coq_eq_to_imported_eq.
+  unfold lr_target_erase.
   induction xs as [|a xs IH].
-  - exact (ImportedListLast.Prosa_Validation_ListLastInterface_generic_erase_nil
+  - apply imported_eq_to_coq_eq.
+    exact (ImportedListLast.Prosa_Validation_ListLastInterface_generic_erase_nil
       T (lr_decidable_eq T) y).
-  - refine (sub_imported_eq_trans _ _ _
+  - rewrite (imported_eq_to_coq_eq _ _
       (ImportedListLast.Prosa_Validation_ListLastInterface_generic_erase_cons
-        T (lr_decidable_eq T) a (lr_to_imported xs) y) _).
-    refine (sub_imported_eq_trans _ _ _
-      (sub_imported_eq_congr
-        (fun b => lr_erase_match b a (lr_to_imported xs)
-          (lr_target_erase T (lr_to_imported xs) y)) _ _
-        (lr_decide_eq_canonical T a y)) _).
-    refine (sub_imported_eq_trans _ _ _
-      (lr_erase_match_canonical (a == y) a (lr_to_imported xs)
-        (lr_target_erase T (lr_to_imported xs) y)) _).
+        T (lr_decidable_eq T) a (lr_to_imported xs) y)).
+    fold (lr_target_erase T (lr_to_imported xs) y).
+    fold (lr_erase_match
+      (ImportedListLast.Decidable_decide (Lean.eq a y)
+        (lr_decidable_eq T a y)) a (lr_to_imported xs)
+      (lr_target_erase T (lr_to_imported xs) y)).
+    have Hdec : Logic.eq
+        (ImportedListLast.Decidable_decide (Lean.eq a y)
+          (lr_decidable_eq T a y))
+        (ll_bool_to_imported (a == y)) :=
+      imported_eq_to_coq_eq _ _ (lr_decide_eq_canonical T a y).
+    rewrite Hdec.
     destruct (@eqP T a y) as [Heq | Hneq].
-    + subst a. rewrite /rem eqxx. exact (@Lean.eq_refl _ _).
+    + subst a. rewrite /rem eqxx. reflexivity.
     + have Hneqb : a != y by apply/eqP.
       rewrite /rem (negbTE Hneqb).
-      exact (sub_imported_eq_congr
-        (ImportedListLast.List_cons T a) _ _ IH).
+      exact (f_equal (ImportedListLast.List_cons T a) IH).
 Qed.
 
 Lemma lr_erase_related (T : eqType) (y : T)
@@ -521,9 +526,8 @@ Definition lr_target_erase_dups (T : eqType)
 Definition lr_target_mem_decidable (T : eqType) (x : T)
     (xs : ImportedListLast.List T) :
     ImportedListLast.Decidable (lr_target_mem x xs) :=
-  ImportedListLast.List_instDecidableMemOfLawfulBEq T
-    (ImportedListLast.instBEqOfDecidableEq T (lr_decidable_eq T))
-    (ImportedListLast.instLawfulBEq T (lr_decidable_eq T)) x xs.
+  ImportedListLast.Prosa_Validation_Rocq90Batch2ListInterface_decidableMem
+    T (lr_decidable_eq T) x xs.
 
 Definition lr_target_decide_mem (T : eqType) (x : T)
     (xs : ImportedListLast.List T) : ImportedListLast.Bool :=

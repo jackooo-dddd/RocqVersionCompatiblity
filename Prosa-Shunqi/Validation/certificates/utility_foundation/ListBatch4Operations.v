@@ -177,10 +177,8 @@ Qed.
 Definition l4_target_mem_decidable (x : Lean.Nat)
     (xs : ImportedListLast.List_inst1 Lean.Nat) :
     ImportedListLast.Decidable (ll_target_mem x xs) :=
-  ImportedListLast.List_instDecidableMemOfLawfulBEq_inst1 Lean.Nat
-    (ImportedListLast.instBEqOfDecidableEq_inst1 Lean.Nat
-      ImportedListLast.instDecidableEqNat)
-    ImportedListLast.Nat_instLawfulBEq x xs.
+  ImportedListLast.Prosa_Validation_Rocq90Batch2ListInterface_decidableMem
+    Lean.Nat ImportedListLast.instDecidableEqNat x xs.
 
 Definition l4_target_decide_mem (x : Lean.Nat)
     (xs : ImportedListLast.List_inst1 Lean.Nat) : ImportedListLast.Bool :=
@@ -201,8 +199,7 @@ Qed.
 Definition l4_target_rem_all (x : Lean.Nat)
     (xs : ImportedListLast.List_inst1 Lean.Nat) :
     ImportedListLast.List_inst1 Lean.Nat :=
-  ImportedListLast.Prosa_Util_List_rem_all_inst1 Lean.Nat
-    ImportedListLast.instDecidableEqNat x xs.
+  ImportedListLast.Prosa_Validation_Rocq90Batch2ListInterface_natRemAll x xs.
 
 Lemma l4_target_rem_all_nil (x : Lean.Nat) :
   Lean.eq (l4_target_rem_all x

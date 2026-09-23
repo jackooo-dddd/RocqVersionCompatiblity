@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "scope": "rocq90_full_migration_batch2_rank_11_util_list",
+  "inputs": [
+    {"name": "lean_toolchain", "root": "project", "path": "lean-toolchain"},
+    {"name": "lakefile", "root": "project", "path": "lakefile.lean"},
+    {"name": "lake_manifest", "root": "project", "path": "lake-manifest.json"},
+    {"name": "lean_tactics", "root": "project", "path": "Prosa/Util/Tactics.lean"},
+    {"name": "lean_supremum", "root": "project", "path": "Prosa/Util/Supremum.lean"},
+    {"name": "lean_list", "root": "project", "path": "Prosa/Util/List.lean"},
+    {"name": "legacy_computation_interface", "root": "validation", "path": "fixtures/utility_foundation/ListLastComputationInterface.lean"},
+    {"name": "rocq90_computation_interface", "root": "validation", "path": "fixtures/rocq90_batch2/ListComputationInterface.lean"},
+    {"name": "artifact_audit", "root": "validation", "path": "fixtures/rocq90_batch2/ListArtifactAudit.lean"},
+    {"name": "boundary", "root": "validation", "path": "tooling/rocq90_batch2_boundary.json"},
+    {"name": "source_tactics", "root": "source", "path": "util/tactics.v"},
+    {"name": "source_supremum", "root": "source", "path": "util/supremum.v"},
+    {"name": "source_list", "root": "source", "path": "util/list.v"},
+    {"name": "declaration_inventory", "root": "validation", "path": "planning/v06_dependency/declaration_inventory.csv"},
+    {"name": "type_evidence", "root": "validation", "path": "planning/v06_dependency/declaration_type_evidence.json"},
+    {"name": "source_extractor", "root": "validation", "path": "scripts/extract_v06_semantic_source.py"},
+    {"name": "environment_check", "root": "validation", "path": "scripts/check_rocq90_environment.sh"},
+    {"name": "environment_common", "root": "validation", "path": "scripts/common/rocq90_environment.sh"},
+    {"name": "tooling_manifest", "root": "validation", "path": "tooling/tooling_manifest.json"},
+    {"name": "lean4export", "root": "exporter", "path": ".lake/build/bin/lean4export"},
+    {"name": "rocq_import", "root": "importer", "path": "src/lean_import.cmxs"},
+    {"name": "rocq_foundation", "root": "importer", "path": "src/Lean.vo"}
+  ],
+  "git_repositories": [
+    {"name": "authoritative_source", "root": "source", "path": "", "require_clean": true},
+    {"name": "mathlib", "root": "project", "path": ".lake/packages/mathlib", "require_clean": true}
+  ],
+  "command_inputs": [
+    {"name": "lean_version", "argv": ["lean", "--version"]}
+  ],
+  "module_loading": {
+    "lean_root": "project",
+    "rocq_source_prefix": "prosa",
+    "imported_prefix": "FoundationImported",
+    "certificate_prefix": "FoundationCertificates",
+    "autoImplicit": false,
+    "rocq_baseline": "9.0.0",
+    "universe_checking": true,
+    "elimination_checking": true
+  },
+  "prepared_outputs": {
+    "lean_build": [
+      "olean/Prosa/Util/Tactics.olean",
+      "olean/Prosa/Util/Supremum.olean",
+      "olean/Prosa/Util/List.olean",
+      "olean/Validation/fixtures/utility_foundation/ListLastComputationInterface.olean",
+      "olean/Validation/fixtures/rocq90_batch2/ListComputationInterface.olean",
+      "olean/Validation/fixtures/rocq90_batch2/ListArtifactAudit.olean",
+      "lean_artifact_audit.log",
+      "lean_axiom_summary.json"
+    ],
+    "source_acquisition": [
+      "source/util/tactics.vo",
+      "source/util/supremum.vo",
+      "source/util/list.vo",
+      "source/GeneratedListLastSource.vo",
+      "source/GeneratedListSimpleSource.vo",
+      "source/list_last_source_extraction.json",
+      "source/list_simple_source_extraction.json"
+    ],
+    "export": [
+      "imported/ListLast.out",
+      "imported/ListSimple.out",
+      "export_manifest.json"
+    ],
+    "rocq_import": [
+      "imported/ImportedSubadditivity.vo",
+      "imported/ImportedListLast.vo",
+      "imported/ImportedListSimple.vo",
+      "import_manifest.json"
+    ]
+  }
+}

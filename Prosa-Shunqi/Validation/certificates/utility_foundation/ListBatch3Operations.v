@@ -202,22 +202,31 @@ Qed.
 (** Generic defaulted lookup. *)
 Definition l3_target_getD {T : Type}
     (xs : ImportedListLast.List T) (n : Lean.Nat) (d : T) : T :=
-  ImportedListLast.List_getD T xs n d.
+  ImportedListLast.Prosa_Validation_Rocq90Batch2ListInterface_getD T xs n d.
+
+Lemma l3_getD_canonical_coq {T : Type} (d : T) (xs : seq T) (n : nat) :
+  Logic.eq (nth d xs n)
+    (l3_target_getD (lr_to_imported xs) (sub_nat_to_imported n) d).
+Proof.
+  revert n. induction xs as [|a xs IH]; intro n.
+  - destruct n; reflexivity.
+  - destruct n as [|n].
+    + cbn. symmetry. apply imported_eq_to_coq_eq.
+      exact
+        (ImportedListLast.Prosa_Validation_Rocq90Batch2ListInterface_getD_zero
+          T a (lr_to_imported xs) d).
+    + cbn. rewrite IH. symmetry. apply imported_eq_to_coq_eq.
+      exact
+        (ImportedListLast.Prosa_Validation_Rocq90Batch2ListInterface_getD_succ
+          T a (lr_to_imported xs) (sub_nat_to_imported n) d).
+Qed.
 
 Lemma l3_getD_canonical {T : Type} (d : T) (xs : seq T) (n : nat) :
   Lean.eq (nth d xs n)
     (l3_target_getD (lr_to_imported xs) (sub_nat_to_imported n) d).
 Proof.
-  revert n. induction xs as [|a xs IH]; intro n.
-  - destruct n; exact (@Lean.eq_refl T d).
-  - destruct n as [|n].
-    + cbn. exact (sub_imported_eq_sym _ _
-        (ImportedListLast.Prosa_Validation_ListLastInterface_generic_getD_zero
-          T a d (lr_to_imported xs))).
-    + cbn. exact (sub_imported_eq_trans _ _ _ (IH n)
-        (sub_imported_eq_sym _ _
-          (ImportedListLast.Prosa_Validation_ListLastInterface_generic_getD_succ
-            T a d (lr_to_imported xs) (sub_nat_to_imported n)))).
+  apply coq_eq_to_imported_eq.
+  exact (l3_getD_canonical_coq d xs n).
 Qed.
 
 Lemma l3_getD_related {T : Type} (d : T)
@@ -719,7 +728,7 @@ Fixpoint l3_pair_seq_mem_forward (T U : eqType) (p : T * U)
 
 Definition l3_pair_eq_refl_truth (T U : eqType) (p : T * U) :
     SubNatTruth (p == p).
-Proof. rw eqxx. exact sub_nat_truth_intro. Defined.
+Proof. exact (sub_nat_prop_to_truth _ (eqxx p)). Defined.
 
 Fixpoint l3_pair_imported_mem_decoded (T U : eqType)
     (p : ImportedListLast.Prod T U)

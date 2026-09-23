@@ -230,8 +230,7 @@ Qed.
     the already certified Nat and monomorphic List relations. *)
 Definition lb_target_nat_rem_all (x : Lean.Nat)
     (xs : ImportedListLast.List_inst1 Lean.Nat) :=
-  ImportedListLast.Prosa_Util_List_rem_all_inst1 Lean.Nat
-    ImportedListLast.instDecidableEqNat x xs.
+  ImportedListLast.Prosa_Validation_Rocq90Batch2ListInterface_natRemAll x xs.
 
 Lemma lb_target_nat_rem_all_nil (x : Lean.Nat) :
   Lean.eq

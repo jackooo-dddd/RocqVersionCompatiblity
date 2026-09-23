@@ -84,6 +84,7 @@ Lemma list_simple_max_canonical (a b : nat) :
     (list_simple_target_max (sub_nat_to_imported a) (sub_nat_to_imported b))
     (sub_nat_to_imported (maxn a b)).
 Proof.
+  apply coq_eq_to_imported_eq.
   unfold list_simple_target_max, ImportedListSimple.Nat_max,
     ImportedListSimple.Max_max_inst1, ImportedListSimple.Nat_instMax,
     ImportedListSimple.maxOfLe_inst1.
@@ -103,7 +104,7 @@ Proof.
       exfalso. exact (Hnot Hab). }
     have Hmax : maxn a b = a := (elimT maxn_idPl Hba).
     rewrite Hmax.
-    exact (@Lean.eq_refl Lean.Nat (sub_nat_to_imported a)).
+    reflexivity.
   - have Hab : is_true (leq a b).
     { have Hrel := sub_nat_le_correspondence a (sub_nat_to_imported a)
         b (sub_nat_to_imported b) (sub_nat_rel_canonical a)
@@ -111,7 +112,7 @@ Proof.
       exact (sprop_to_prop _ _ Hrel Hle). }
     have Hmax : maxn a b = b := (elimT maxn_idPr Hab).
     rewrite Hmax.
-    exact (@Lean.eq_refl Lean.Nat (sub_nat_to_imported b)).
+    reflexivity.
 Qed.
 
 Lemma list_simple_foldl_max_canonical (z : nat) (xs : seq nat) :
