@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "scope": "rocq90_full_migration_batch3_ranks_12_19",
+  "inputs": [
+    {"name": "lean_toolchain", "root": "project", "path": "lean-toolchain"},
+    {"name": "lake_manifest", "root": "project", "path": "lake-manifest.json"},
+    {"name": "lean_sum", "root": "project", "path": "Prosa/Util/Sum.lean"},
+    {"name": "lean_epsilon", "root": "project", "path": "Prosa/Util/Epsilon.lean"},
+    {"name": "lean_bigop", "root": "project", "path": "Prosa/Util/Bigop.lean"},
+    {"name": "lean_setoid", "root": "project", "path": "Prosa/Util/Setoid.lean"},
+    {"name": "lean_poet", "root": "project", "path": "Prosa/Util/Poet.lean"},
+    {"name": "lean_bigcat", "root": "project", "path": "Prosa/Util/Bigcat.lean"},
+    {"name": "lean_minmax", "root": "project", "path": "Prosa/Util/Minmax.lean"},
+    {"name": "lean_div_mod", "root": "project", "path": "Prosa/Util/Div_mod.lean"},
+    {"name": "semantic_interface", "root": "validation", "path": "fixtures/rocq90_batch3/Batch3SemanticInterface.lean"},
+    {"name": "boundary", "root": "validation", "path": "tooling/rocq90_batch3_boundary.json"},
+    {"name": "artifact_audit_generator", "root": "validation", "path": "scripts/generate_batch3_artifact_audit.py"},
+    {"name": "type_audit_generator", "root": "validation", "path": "scripts/generate_batch3_rocq_type_audits.py"},
+    {"name": "declaration_inventory", "root": "validation", "path": "planning/v06_dependency/declaration_inventory.csv"},
+    {"name": "type_evidence", "root": "validation", "path": "planning/v06_dependency/declaration_type_evidence.json"},
+    {"name": "source_extractor", "root": "validation", "path": "scripts/extract_v06_semantic_source.py"},
+    {"name": "environment_common", "root": "validation", "path": "scripts/common/rocq90_environment.sh"},
+    {"name": "tooling_manifest", "root": "validation", "path": "tooling/tooling_manifest.json"},
+    {"name": "lean4export", "root": "exporter", "path": ".lake/build/bin/lean4export"},
+    {"name": "rocq_import", "root": "importer", "path": "src/lean_import.cmxs"},
+    {"name": "rocq_foundation", "root": "importer", "path": "src/Lean.vo"}
+  ],
+  "git_repositories": [
+    {"name": "authoritative_source", "root": "source", "path": "", "require_clean": true},
+    {"name": "mathlib", "root": "project", "path": ".lake/packages/mathlib", "require_clean": true}
+  ],
+  "command_inputs": [
+    {"name": "lean_version", "argv": ["lean", "--version"]}
+  ],
+  "module_loading": {
+    "lean_root": "project",
+    "rocq_source_prefix": "prosa",
+    "imported_prefix": "FoundationImported",
+    "certificate_prefix": "FoundationCertificates",
+    "autoImplicit": false,
+    "rocq_baseline": "9.0.0",
+    "universe_checking": true,
+    "elimination_checking": true
+  },
+  "prepared_outputs": {
+    "lean_build": [
+      "olean/Prosa/Util/Sum.olean",
+      "olean/Prosa/Util/Epsilon.olean",
+      "olean/Prosa/Util/Bigop.olean",
+      "olean/Prosa/Util/Setoid.olean",
+      "olean/Prosa/Util/Poet.olean",
+      "olean/Prosa/Util/Bigcat.olean",
+      "olean/Prosa/Util/Minmax.olean",
+      "olean/Prosa/Util/Div_mod.olean",
+      "olean/Validation/fixtures/rocq90_batch3/Batch3SemanticInterface.olean",
+      "olean/Validation/fixtures/rocq90_batch3/Batch3ArtifactAudit.olean",
+      "lean_artifact_audit.log",
+      "lean_axiom_summary.json",
+      "inventory_check.json"
+    ],
+    "source_acquisition": [
+      "source/util/div_mod.vo",
+      "source/GeneratedSumSequenceSource.vo",
+      "source/GeneratedSumIntervalSource.vo",
+      "source/EpsilonSourceInterface.vo",
+      "source/GeneratedBigopSource.vo",
+      "source/GeneratedPoetSource.vo",
+      "source/GeneratedBigcatSource.vo",
+      "source/GeneratedMinmaxSource.vo",
+      "source/GeneratedDivModSource.vo"
+    ],
+    "export": [
+      "imported/SumSequence.out",
+      "imported/SumInterval.out",
+      "imported/Epsilon.out",
+      "imported/Bigop.out",
+      "imported/Setoid.out",
+      "imported/Poet.out",
+      "imported/Bigcat.out",
+      "imported/Minmax.out",
+      "imported/DivMod.out",
+      "export_manifest.json"
+    ],
+    "rocq_import": [
+      "imported/ImportedSubadditivity.vo",
+      "imported/ImportedNat.vo",
+      "imported/ImportedSumSequence.vo",
+      "imported/ImportedSumInterval.vo",
+      "imported/ImportedEpsilon.vo",
+      "imported/ImportedBigop.vo",
+      "imported/ImportedSetoid.vo",
+      "imported/ImportedPoet.vo",
+      "imported/ImportedBigcat.vo",
+      "imported/ImportedMinmax.vo",
+      "imported/ImportedDivMod.vo",
+      "import_manifest.json"
+    ]
+  }
+}

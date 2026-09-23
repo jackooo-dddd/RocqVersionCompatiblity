@@ -41,7 +41,7 @@ Lemma sum_target_zero_sub_prop (b : nat) :
 Proof.
   induction b as [|b IH].
   - reflexivity.
-  - rw sum_target_sub_succ_prop IH. reflexivity.
+  - rewrite sum_target_sub_succ_prop IH. reflexivity.
 Qed.
 
 Lemma sum_target_succ_sub_succ_prop (a b : nat) :
@@ -54,7 +54,7 @@ Lemma sum_target_succ_sub_succ_prop (a b : nat) :
 Proof.
   induction b as [|b IH].
   - reflexivity.
-  - rw !sum_target_sub_succ_prop.
+  - rewrite !sum_target_sub_succ_prop.
     exact (f_equal ImportedSumInterval.Nat_pred IH).
 Qed.
 
@@ -68,7 +68,7 @@ Proof.
   - destruct a; reflexivity.
   - destruct a as [|a].
     + exact (sum_target_zero_sub_prop b.+1).
-    + rw sum_target_succ_sub_succ_prop. exact (IH a).
+    + rewrite sum_target_succ_sub_succ_prop. exact (IH a).
 Qed.
 
 Lemma sum_target_range_succ_prop (start len step : Lean.Nat) :
@@ -113,12 +113,12 @@ Proof.
   elim: len start => [|len IH] start.
   - reflexivity.
   - cbn [sub_nat_to_imported iota sum_seq_to_target].
-    rw sum_target_range_succ_prop.
+    rewrite sum_target_range_succ_prop.
     have Hstart : Logic.eq
         (Lean.Nat_add
           (sub_nat_to_imported start) sum_target_one)
         (sub_nat_to_imported start.+1) by reflexivity.
-    rw Hstart (IH start.+1). reflexivity.
+    rewrite Hstart (IH start.+1). reflexivity.
 Qed.
 
 Lemma sum_target_map_converted_prop (F : nat -> nat) (xs : seq nat) :
@@ -129,9 +129,9 @@ Lemma sum_target_map_converted_prop (F : nat -> nat) (xs : seq nat) :
 Proof.
   elim: xs => [|x xs IH].
   - reflexivity.
-  - cbn [sum_seq_to_target]. rw sum_target_map_cons_prop.
+  - cbn [sum_seq_to_target]. rewrite sum_target_map_cons_prop.
     unfold sum_target_function.
-    rw sub_nat_rocq_roundtrip IH. reflexivity.
+    rewrite sub_nat_rocq_roundtrip IH. reflexivity.
 Qed.
 
 Definition sum_target_list_sum
@@ -148,7 +148,7 @@ Proof.
   - cbn [sum_seq_to_target foldr].
     unfold sum_target_list_sum.
     unfold sum_target_list_sum in IH.
-    rw sum_target_foldr_cons_prop IH.
+    rewrite sum_target_foldr_cons_prop IH.
     exact (sum_target_add_canonical_prop x (foldr addn O xs)).
 Qed.
 
@@ -167,8 +167,8 @@ Lemma mathcomp_big_seq_as_fold (xs : seq nat) (F : nat -> nat) :
   Logic.eq (\sum_(i <- xs) F i) (foldr addn O (map F xs)).
 Proof.
   elim: xs => [|x xs IH].
-  - rw big_nil. reflexivity.
-  - rw big_cons. cbn [map foldr]. now rw IH.
+  - rewrite big_nil. reflexivity.
+  - rewrite big_cons. cbn [map foldr]. now rewrite IH.
 Qed.
 
 Lemma sum_target_interval_value_prop (m n : nat) (F : nat -> nat) :
@@ -176,11 +176,11 @@ Lemma sum_target_interval_value_prop (m n : nat) (F : nat -> nat) :
     (sub_nat_to_imported (\sum_(m <= i < n) F i)).
 Proof.
   unfold sum_target_interval_value.
-  rw sum_target_sub_canonical_prop.
-  rw sum_target_range_iota_prop.
-  rw sum_target_map_converted_prop.
-  rw sum_target_list_sum_converted_prop.
-  rw /index_iota mathcomp_big_seq_as_fold.
+  rewrite sum_target_sub_canonical_prop.
+  rewrite sum_target_range_iota_prop.
+  rewrite sum_target_map_converted_prop.
+  rewrite sum_target_list_sum_converted_prop.
+  rewrite /index_iota mathcomp_big_seq_as_fold.
   reflexivity.
 Qed.
 
@@ -230,8 +230,10 @@ Lemma si_nat_fun_canonical (F : nat -> nat) :
 Proof.
   intros nR nL Hn. unfold SubNatRel in Hn |- *.
   destruct Hn. unfold si_nat_fun_to_imported.
-  rewrite sub_nat_rocq_roundtrip.
-  exact (@Lean.eq_refl _ _).
+  exact (sub_imported_eq_sym _ _
+    (coq_eq_to_imported_eq _ _
+      (f_equal (fun z => sub_nat_to_imported (F z))
+        (sub_nat_rocq_roundtrip nR)))).
 Qed.
 
 Lemma si_nat_fun_surjective (F : Lean.Nat -> Lean.Nat) :
@@ -309,6 +311,20 @@ Lemma si_target_add_related aR aL bR bL :
   SubNatRel (aR + bR) (si_target_add aL bL).
 Proof. exact (sub_add_correspondence aR aL bR bL). Qed.
 
+Definition si_subnat_rel_source_transport (a b : nat) (c : Lean.Nat) :
+  Logic.eq a b -> SubNatRel b c -> SubNatRel a c :=
+  fun Hab =>
+    match Hab in Logic.eq _ b0 return SubNatRel b0 c -> SubNatRel a c with
+    | Logic.eq_refl => fun H => H
+    end.
+
+Lemma si_interval_sum_fold_prop (m n : nat) (F : nat -> nat) :
+  Logic.eq (\sum_(m <= i < n) F i)
+    (foldr addn O (map F (iota m (n - m)))).
+Proof.
+  rewrite /index_iota mathcomp_big_seq_as_fold. reflexivity.
+Qed.
+
 Lemma si_interval_sum_related
     (mR nR : nat) (mL nL : Lean.Nat)
     (FR : nat -> nat) (FL : Lean.Nat -> Lean.Nat) :
@@ -318,17 +334,25 @@ Lemma si_interval_sum_related
 Proof.
   intros Hm Hn HF.
   unfold si_target_interval_value.
-  rewrite /index_iota mathcomp_big_seq_as_fold.
-  apply si_list_sum_related.
-  apply si_map_related.
-  - exact HF.
-  - unfold SiNatListRel. unfold SubNatRel in Hm, Hn.
-    exact (sub_imported_eq_trans _ _ _
-      (si_range_related mR (nR - mR))
-      (sub_imported_eq_congr2
-        (fun start len => ImportedSumInterval.List_range'
-          start len sum_target_one) _ _ _ _ Hm
-        (si_target_sub_related nR nL mR mL Hn Hm))).
+  unfold SubNatRel in Hm, Hn.
+  exact (si_subnat_rel_source_transport _ _ _
+    (si_interval_sum_fold_prop mR nR FR)
+    (si_list_sum_related
+      (map FR (iota mR (nR - mR)))
+      (ImportedSumInterval.List_map_inst3 Lean.Nat Lean.Nat FL
+        (ImportedSumInterval.List_range' mL (si_target_sub nL mL)
+          sum_target_one))
+      (si_map_related FR FL
+        (iota mR (nR - mR))
+        (ImportedSumInterval.List_range' mL (si_target_sub nL mL)
+          sum_target_one)
+        HF
+        (sub_imported_eq_trans _ _ _
+          (si_range_related mR (nR - mR))
+          (sub_imported_eq_congr2
+            (fun start len => ImportedSumInterval.List_range'
+              start len sum_target_one) _ _ _ _ Hm
+            (si_target_sub_related nR nL mR mL Hn Hm)))))).
 Qed.
 
 (** Namespace-local Bool realization for the same approved Bool relation.
@@ -383,7 +407,10 @@ Lemma si_bool_pred_canonical P :
 Proof.
   intros nR nL Hn. unfold SubNatRel in Hn. destruct Hn.
   unfold SiBoolRel, si_bool_pred_to_imported.
-  rewrite sub_nat_rocq_roundtrip. exact (@Lean.eq_refl _ _).
+  exact (coq_eq_to_imported_eq _ _
+    (Logic.eq_sym
+      (f_equal (fun z => si_bool_to_imported (P z))
+        (sub_nat_rocq_roundtrip nR)))).
 Qed.
 
 Lemma si_bool_pred_surjective P :

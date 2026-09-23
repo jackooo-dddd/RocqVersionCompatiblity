@@ -64,7 +64,7 @@ Proof.
   intro H.
   have Hdecoded := f_equal sub_nat_to_rocq
     (imported_eq_to_coq_eq _ _ H).
-  rw sub_nat_rocq_roundtrip in Hdecoded.
+  rewrite sub_nat_rocq_roundtrip in Hdecoded.
   exact Hdecoded.
 Qed.
 
@@ -105,8 +105,9 @@ Proof.
   { apply Hzero. apply/andP. split.
     - exact (sum_target_le_backward m (sub_nat_to_rocq i) HlowC).
     - exact (sum_target_lt_backward (sub_nat_to_rocq i) n HhighC). }
-  unfold sum_target_function. rw HzeroR.
-  exact (@Lean.eq_refl Lean.Nat Lean.Nat_zero).
+  unfold sum_target_function.
+  exact (coq_eq_to_imported_eq _ _
+    (f_equal sub_nat_to_imported HzeroR)).
 Qed.
 
 Lemma sum_target_zero_to_source_point_strict
@@ -132,8 +133,11 @@ Proof.
     (Lean.And_intro _ _
       (sum_target_le_forward m i Hlow)
       (sum_target_lt_forward i n Hhigh)).
-  unfold sum_target_function in Heq. rw sub_nat_rocq_roundtrip in Heq.
-  exact (sum_target_decode_zero _ Heq).
+  unfold sum_target_function in Heq.
+  have Hdecoded := sum_target_decode_zero _ Heq.
+  exact (Logic.eq_trans
+    (Logic.eq_sym
+      (f_equal F (sub_nat_rocq_roundtrip i))) Hdecoded).
 Qed.
 
 Lemma sum_target_point_to_source_zero_strict
@@ -181,8 +185,9 @@ Proof.
       { apply HiZero. apply/andP. split.
         - exact (sum_target_le_backward m (sub_nat_to_rocq i) HlowC).
         - exact (sum_target_lt_backward (sub_nat_to_rocq i) n HhighC). }
-      unfold sum_target_function. rw HiZero'.
-      exact (@Lean.eq_refl Lean.Nat Lean.Nat_zero).
+      unfold sum_target_function.
+      exact (coq_eq_to_imported_eq _ _
+        (f_equal sub_nat_to_imported HiZero')).
     + intro Hall.
       have HsourceZero : Logic.eq (\sum_(m <= i < n) F i) O.
       { apply Hpoint. intros i Hi. move/andP: Hi => [Hlow Hhigh].
@@ -191,10 +196,14 @@ Proof.
             (sum_target_le_forward m i Hlow)
             (sum_target_lt_forward i n Hhigh)).
         unfold sum_target_function in Heq.
-        rw sub_nat_rocq_roundtrip in Heq.
-        exact (sum_target_decode_zero _ Heq). }
+        have Hdecoded := sum_target_decode_zero _ Heq.
+        exact (Logic.eq_trans
+          (Logic.eq_sym
+            (f_equal F (sub_nat_rocq_roundtrip i))) Hdecoded). }
       have Hsum := finite_nat_sum_value_correspondence m n F.
-      rw HsourceZero in Hsum. exact Hsum.
+      exact (sub_imported_eq_trans _ _ _ Hsum
+        (coq_eq_to_imported_eq _ _
+          (f_equal sub_nat_to_imported HsourceZero))).
   - intro Htarget. destruct Htarget as [Hzero Hpoint].
     apply strictly_inhabits. split.
     + intro HsumZero.
@@ -232,7 +241,7 @@ Lemma target_sum_of_ones_value_prop (t delta : nat) :
     (sub_nat_to_imported (\sum_(t <= x < t + delta) 1)).
 Proof.
   unfold target_sum_of_ones_value.
-  rw sum_target_add_canonical_prop.
+  rewrite sum_target_add_canonical_prop.
   change (Logic.eq
     (sum_target_interval_value t (t + delta) (fun _ : nat => 1%N))
     (sub_nat_to_imported (\sum_(t <= x < t + delta) 1))).
@@ -245,7 +254,7 @@ Lemma sub_nat_to_imported_injective (a b : nat) :
   Logic.eq a b.
 Proof.
   intro H. have Hdecoded := f_equal sub_nat_to_rocq H.
-  now rw !sub_nat_rocq_roundtrip in Hdecoded.
+  now rewrite !sub_nat_rocq_roundtrip in Hdecoded.
 Qed.
 
 Theorem sum_of_ones_statement_certificate (t delta : nat) :
@@ -255,10 +264,10 @@ Theorem sum_of_ones_statement_certificate (t delta : nat) :
 Proof.
   apply prop_sprop_rel_intro.
   - intro Hsource. apply coq_eq_to_imported_eq.
-    rw target_sum_of_ones_value_prop Hsource. reflexivity.
+    rewrite target_sum_of_ones_value_prop Hsource. reflexivity.
   - intro Htarget. apply strictly_inhabits.
     apply sub_nat_to_imported_injective.
-    rw -target_sum_of_ones_value_prop.
+    rewrite <- target_sum_of_ones_value_prop.
     exact (imported_eq_to_coq_eq _ _ Htarget).
 Qed.
 
@@ -300,7 +309,7 @@ Lemma target_sum_le_range_value_prop
     (sub_nat_to_imported (\sum_(t <= x < t + delta) f x)).
 Proof.
   unfold target_sum_le_range_value.
-  rw sum_target_add_canonical_prop.
+  rewrite sum_target_add_canonical_prop.
   change (Logic.eq (sum_target_interval_value t (t + delta) f)
     (sub_nat_to_imported (\sum_(t <= x < t + delta) f x))).
   exact (sum_target_interval_value_prop t (t + delta) f).
@@ -390,8 +399,12 @@ Proof.
       exact (sub_imported_le_transport _ _ _ _
         (@Lean.eq_refl Lean.Nat (Lean.Nat_succ (sub_nat_to_imported x)))
         (sub_imported_eq_sym _ _ (sum_target_add_canonical t delta)) Hupper).
-    + unfold sum_target_function. rw sub_nat_rocq_roundtrip (Logic.proj2 Hx).
-      exact (@Lean.eq_refl Lean.Nat Lean.Nat_zero).
+    + unfold sum_target_function.
+      exact (coq_eq_to_imported_eq _ _
+        (f_equal sub_nat_to_imported
+          (Logic.eq_trans
+            (f_equal f (sub_nat_rocq_roundtrip x))
+            (Logic.proj2 Hx)))).
   - intro Htarget. apply strictly_inhabits. intro HltR.
     have Hvalue := coq_eq_to_imported_eq _ _
       (target_sum_le_range_value_prop f t delta).

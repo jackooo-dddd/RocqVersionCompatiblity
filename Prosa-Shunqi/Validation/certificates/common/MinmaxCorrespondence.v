@@ -176,7 +176,7 @@ Definition mm_mem_head_of_coq_eq {T : Type} (x y : T)
 
 Definition mm_eq_refl_truth (T : eqType) (x : T) :
     SubNatTruth (x == x).
-Proof. rw eqxx. exact sub_nat_truth_intro. Defined.
+Proof. exact (sub_nat_prop_to_truth (x == x) (eqxx x)). Defined.
 
 Definition mm_mem_head_truth (a b : bool) :
     SubNatTruth a -> SubNatTruth (a || b) :=
@@ -266,6 +266,13 @@ Definition MmNatFunRel {T : Type} (FR : T -> nat)
     (FL : T -> Lean.Nat) : SProp :=
   forall x, SubNatRel (FR x) (FL x).
 
+Definition mm_subnat_rel_source_transport (a b : nat) (c : Lean.Nat) :
+  Logic.eq a b -> SubNatRel b c -> SubNatRel a c :=
+  fun Hab =>
+    match Hab in Logic.eq _ b0 return SubNatRel b0 c -> SubNatRel a c with
+    | Logic.eq_refl => fun H => H
+    end.
+
 Definition mm_nat_fun_to_imported {T : Type} (F : T -> nat) :
     T -> Lean.Nat := fun x => sub_nat_to_imported (F x).
 
@@ -281,8 +288,10 @@ Lemma mm_nat_pred_canonical (P : nat -> bool) (n : nat) :
   MmBoolRel (P n) (mm_nat_pred_to_imported P (sub_nat_to_imported n)).
 Proof.
   unfold MmBoolRel, mm_nat_pred_to_imported.
-  rewrite (sub_nat_rocq_roundtrip n).
-  exact (@Lean.eq_refl _ _).
+  exact (coq_eq_to_imported_eq _ _
+    (Logic.eq_sym
+      (f_equal (fun z => mm_bool_to_imported (P z))
+        (sub_nat_rocq_roundtrip n)))).
 Qed.
 
 Lemma mm_nat_pred_value_by_eq (P : nat -> bool) (n : nat) (b : bool) :
@@ -291,8 +300,10 @@ Lemma mm_nat_pred_value_by_eq (P : nat -> bool) (n : nat) (b : bool) :
     (mm_bool_to_imported b).
 Proof.
   intro H. unfold mm_nat_pred_to_imported.
-  rewrite (sub_nat_rocq_roundtrip n). rewrite H.
-  exact (@Lean.eq_refl _ _).
+  exact (coq_eq_to_imported_eq _ _
+    (f_equal mm_bool_to_imported
+      (Logic.eq_trans
+        (f_equal P (sub_nat_rocq_roundtrip n)) H))).
 Qed.
 
 Definition mm_target_le (a b : Lean.Nat) : SProp :=
@@ -334,17 +345,23 @@ Proof.
   revert b. induction a as [|a IHa]; intro b; destruct b as [|b].
   - exact (ImportedMinmax.Prosa_Validation_MinmaxInterface_production_natMax_zero_left
       Lean.Nat_zero).
-  - rewrite max0n.
-    exact (ImportedMinmax.Prosa_Validation_MinmaxInterface_production_natMax_zero_left
-      (sub_nat_to_imported b.+1)).
-  - rewrite maxn0.
-    exact (ImportedMinmax.Prosa_Validation_MinmaxInterface_production_natMax_zero_right
-      (sub_nat_to_imported a.+1)).
-  - rewrite maxnSS. cbn [sub_nat_to_imported].
-    exact (sub_imported_eq_trans _ _ _
-      (ImportedMinmax.Prosa_Validation_MinmaxInterface_production_natMax_succ_succ
-        (sub_nat_to_imported a) (sub_nat_to_imported b))
-      (sub_imported_eq_congr Lean.Nat_succ _ _ (IHa b))).
+  - exact (sub_imported_eq_trans _ _ _
+      (ImportedMinmax.Prosa_Validation_MinmaxInterface_production_natMax_zero_left
+        (sub_nat_to_imported b.+1))
+      (coq_eq_to_imported_eq _ _
+        (f_equal sub_nat_to_imported (Logic.eq_sym (max0n b.+1))))).
+  - exact (sub_imported_eq_trans _ _ _
+      (ImportedMinmax.Prosa_Validation_MinmaxInterface_production_natMax_zero_right
+        (sub_nat_to_imported a.+1))
+      (coq_eq_to_imported_eq _ _
+        (f_equal sub_nat_to_imported (Logic.eq_sym (maxn0 a.+1))))).
+  - exact (sub_imported_eq_trans _ _ _
+      (sub_imported_eq_trans _ _ _
+        (ImportedMinmax.Prosa_Validation_MinmaxInterface_production_natMax_succ_succ
+          (sub_nat_to_imported a) (sub_nat_to_imported b))
+        (sub_imported_eq_congr Lean.Nat_succ _ _ (IHa b)))
+      (coq_eq_to_imported_eq _ _
+        (f_equal sub_nat_to_imported (Logic.eq_sym (maxnSS a b))))).
 Qed.
 
 Lemma mm_max_related aR aL bR bL :
@@ -372,17 +389,48 @@ Lemma mm_bigmax_list_cons_step (T : Type) (x : T) (xs : seq T)
     (mm_target_bigMaxListCond (mm_to_imported (x :: xs))
       (mm_pred_to_imported P) (mm_nat_fun_to_imported F)).
 Proof.
-  intros HP IH. rewrite big_cons HP. destruct b.
+  intros HP IH.
+  have Hsource : Logic.eq (\max_(i <- x :: xs | P i) F i)
+      (if b then maxn (F x) (\max_(i <- xs | P i) F i)
+       else \max_(i <- xs | P i) F i).
+  { rewrite big_cons HP. reflexivity. }
+  destruct b.
   - unfold SubNatRel, mm_target_bigMaxListCond in IH |- *.
-    exact (sub_imported_eq_trans _ _ _
-      (sub_imported_eq_sym _ _
-        (mm_max_canonical (F x) (\max_(i <- xs | P i) F i)))
+    exact (mm_subnat_rel_source_transport _ _ _ Hsource
       (sub_imported_eq_trans _ _ _
-        (sub_imported_eq_congr
-          (mm_target_max (sub_nat_to_imported (F x))) _ _ IH)
+        (sub_imported_eq_sym _ _
+          (mm_max_canonical (F x) (\max_(i <- xs | P i) F i)))
+        (sub_imported_eq_trans _ _ _
+          (sub_imported_eq_congr
+            (mm_target_max (sub_nat_to_imported (F x))) _ _ IH)
+          (sub_imported_eq_trans _ _ _
+            (sub_imported_eq_sym _ _
+              (mm_target_bool_ite_canonical Lean.Nat true
+                (mm_target_max (sub_nat_to_imported (F x))
+                  (mm_target_bigMaxListCond (mm_to_imported xs)
+                    (mm_pred_to_imported P) (mm_nat_fun_to_imported F)))
+                (mm_target_bigMaxListCond (mm_to_imported xs)
+                  (mm_pred_to_imported P) (mm_nat_fun_to_imported F))))
+            (sub_imported_eq_trans _ _ _
+              (sub_imported_eq_sym _ _
+                (sub_imported_eq_congr
+                  (fun z => mm_target_bool_ite Lean.Nat z
+                    (mm_target_max (sub_nat_to_imported (F x))
+                      (mm_target_bigMaxListCond (mm_to_imported xs)
+                        (mm_pred_to_imported P) (mm_nat_fun_to_imported F)))
+                    (mm_target_bigMaxListCond (mm_to_imported xs)
+                      (mm_pred_to_imported P) (mm_nat_fun_to_imported F)))
+                  _ _ (mm_pred_value_by_eq P x true HP)))
+              (sub_imported_eq_sym _ _
+                (ImportedMinmax.Prosa_Validation_MinmaxInterface_production_bigMaxListCond_cons
+                  T x (mm_to_imported xs) (mm_pred_to_imported P)
+                  (mm_nat_fun_to_imported F)))))))).
+  - unfold SubNatRel, mm_target_bigMaxListCond in IH |- *.
+    exact (mm_subnat_rel_source_transport _ _ _ Hsource
+      (sub_imported_eq_trans _ _ _ IH
         (sub_imported_eq_trans _ _ _
           (sub_imported_eq_sym _ _
-            (mm_target_bool_ite_canonical Lean.Nat true
+            (mm_target_bool_ite_canonical Lean.Nat false
               (mm_target_max (sub_nat_to_imported (F x))
                 (mm_target_bigMaxListCond (mm_to_imported xs)
                   (mm_pred_to_imported P) (mm_nat_fun_to_imported F)))
@@ -397,35 +445,11 @@ Proof.
                       (mm_pred_to_imported P) (mm_nat_fun_to_imported F)))
                   (mm_target_bigMaxListCond (mm_to_imported xs)
                     (mm_pred_to_imported P) (mm_nat_fun_to_imported F)))
-                _ _ (mm_pred_value_by_eq P x true HP)))
+                _ _ (mm_pred_value_by_eq P x false HP)))
             (sub_imported_eq_sym _ _
               (ImportedMinmax.Prosa_Validation_MinmaxInterface_production_bigMaxListCond_cons
                 T x (mm_to_imported xs) (mm_pred_to_imported P)
                 (mm_nat_fun_to_imported F))))))).
-  - unfold SubNatRel, mm_target_bigMaxListCond in IH |- *.
-    exact (sub_imported_eq_trans _ _ _ IH
-      (sub_imported_eq_trans _ _ _
-        (sub_imported_eq_sym _ _
-          (mm_target_bool_ite_canonical Lean.Nat false
-            (mm_target_max (sub_nat_to_imported (F x))
-              (mm_target_bigMaxListCond (mm_to_imported xs)
-                (mm_pred_to_imported P) (mm_nat_fun_to_imported F)))
-            (mm_target_bigMaxListCond (mm_to_imported xs)
-              (mm_pred_to_imported P) (mm_nat_fun_to_imported F))))
-        (sub_imported_eq_trans _ _ _
-          (sub_imported_eq_sym _ _
-            (sub_imported_eq_congr
-              (fun z => mm_target_bool_ite Lean.Nat z
-                (mm_target_max (sub_nat_to_imported (F x))
-                  (mm_target_bigMaxListCond (mm_to_imported xs)
-                    (mm_pred_to_imported P) (mm_nat_fun_to_imported F)))
-                (mm_target_bigMaxListCond (mm_to_imported xs)
-                  (mm_pred_to_imported P) (mm_nat_fun_to_imported F)))
-              _ _ (mm_pred_value_by_eq P x false HP)))
-          (sub_imported_eq_sym _ _
-            (ImportedMinmax.Prosa_Validation_MinmaxInterface_production_bigMaxListCond_cons
-              T x (mm_to_imported xs) (mm_pred_to_imported P)
-              (mm_nat_fun_to_imported F)))))).
 Qed.
 
 Lemma mm_bigmax_list_canonical (T : Type) (xs : seq T)
@@ -435,10 +459,12 @@ Lemma mm_bigmax_list_canonical (T : Type) (xs : seq T)
       (mm_pred_to_imported P) (mm_nat_fun_to_imported F)).
 Proof.
   induction xs as [|x xs IH].
-  - rewrite big_nil. unfold SubNatRel, mm_target_bigMaxListCond.
-    exact (sub_imported_eq_sym _ _
-      (ImportedMinmax.Prosa_Validation_MinmaxInterface_production_bigMaxListCond_nil
-        T (mm_pred_to_imported P) (mm_nat_fun_to_imported F))).
+  - have Hsource : Logic.eq (\max_(x <- [::] | P x) F x) O.
+    { rewrite big_nil. reflexivity. }
+    exact (mm_subnat_rel_source_transport _ _ _ Hsource
+      (sub_imported_eq_sym _ _
+        (ImportedMinmax.Prosa_Validation_MinmaxInterface_production_bigMaxListCond_nil
+          T (mm_pred_to_imported P) (mm_nat_fun_to_imported F)))).
   - exact (mm_bigmax_list_cons_step T x xs P F (P x)
       (Logic.eq_refl (P x)) IH).
 Qed.
@@ -497,17 +523,50 @@ Lemma mm_bigmax_range_succ_step (n : nat) (P : nat -> bool) (b : bool) :
     (mm_target_bigMaxNatRange (sub_nat_to_imported n.+1)
       (mm_nat_pred_to_imported P)).
 Proof.
-  intros HP IH. rewrite mm_source_bigmax_range_succ HP. destruct b.
-  - unfold SubNatRel, mm_target_bigMaxNatRange in IH |- *.
-    exact (sub_imported_eq_trans _ _ _
-      (sub_imported_eq_sym _ _
-        (mm_max_canonical (\max_(i < n | P i) i) n))
+  intros HP IH. destruct b.
+  - have Hsource : Logic.eq (\max_(i < n.+1 | P i) i)
+        (maxn (\max_(i < n | P i) i) n).
+    { rewrite mm_source_bigmax_range_succ HP. reflexivity. }
+    unfold SubNatRel, mm_target_bigMaxNatRange in IH |- *.
+    exact (mm_subnat_rel_source_transport _ _ _ Hsource
       (sub_imported_eq_trans _ _ _
-        (sub_imported_eq_congr
-          (fun z => mm_target_max z (sub_nat_to_imported n)) _ _ IH)
+        (sub_imported_eq_sym _ _
+          (mm_max_canonical (\max_(i < n | P i) i) n))
+        (sub_imported_eq_trans _ _ _
+          (sub_imported_eq_congr
+            (fun z => mm_target_max z (sub_nat_to_imported n)) _ _ IH)
+          (sub_imported_eq_trans _ _ _
+            (sub_imported_eq_sym _ _
+              (mm_target_bool_ite_canonical Lean.Nat true
+                (mm_target_max
+                  (mm_target_bigMaxNatRange (sub_nat_to_imported n)
+                    (mm_nat_pred_to_imported P))
+                  (sub_nat_to_imported n))
+                (mm_target_bigMaxNatRange (sub_nat_to_imported n)
+                  (mm_nat_pred_to_imported P))))
+            (sub_imported_eq_trans _ _ _
+              (sub_imported_eq_sym _ _
+                (sub_imported_eq_congr
+                  (fun z => mm_target_bool_ite Lean.Nat z
+                    (mm_target_max
+                      (mm_target_bigMaxNatRange (sub_nat_to_imported n)
+                        (mm_nat_pred_to_imported P))
+                      (sub_nat_to_imported n))
+                    (mm_target_bigMaxNatRange (sub_nat_to_imported n)
+                      (mm_nat_pred_to_imported P)))
+                  _ _ (mm_nat_pred_value_by_eq P n true HP)))
+              (sub_imported_eq_sym _ _
+                (ImportedMinmax.Prosa_Validation_MinmaxInterface_production_bigMaxNatRange_succ
+                  (sub_nat_to_imported n) (mm_nat_pred_to_imported P)))))))).
+  - have Hsource : Logic.eq (\max_(i < n.+1 | P i) i)
+        (\max_(i < n | P i) i).
+    { rewrite mm_source_bigmax_range_succ HP maxn0. reflexivity. }
+    unfold SubNatRel, mm_target_bigMaxNatRange in IH |- *.
+    exact (mm_subnat_rel_source_transport _ _ _ Hsource
+      (sub_imported_eq_trans _ _ _ IH
         (sub_imported_eq_trans _ _ _
           (sub_imported_eq_sym _ _
-            (mm_target_bool_ite_canonical Lean.Nat true
+            (mm_target_bool_ite_canonical Lean.Nat false
               (mm_target_max
                 (mm_target_bigMaxNatRange (sub_nat_to_imported n)
                   (mm_nat_pred_to_imported P))
@@ -524,36 +583,10 @@ Proof.
                     (sub_nat_to_imported n))
                   (mm_target_bigMaxNatRange (sub_nat_to_imported n)
                     (mm_nat_pred_to_imported P)))
-                _ _ (mm_nat_pred_value_by_eq P n true HP)))
+                _ _ (mm_nat_pred_value_by_eq P n false HP)))
             (sub_imported_eq_sym _ _
               (ImportedMinmax.Prosa_Validation_MinmaxInterface_production_bigMaxNatRange_succ
                 (sub_nat_to_imported n) (mm_nat_pred_to_imported P))))))).
-  - rewrite maxn0.
-    unfold SubNatRel, mm_target_bigMaxNatRange in IH |- *.
-    exact (sub_imported_eq_trans _ _ _ IH
-      (sub_imported_eq_trans _ _ _
-        (sub_imported_eq_sym _ _
-          (mm_target_bool_ite_canonical Lean.Nat false
-            (mm_target_max
-              (mm_target_bigMaxNatRange (sub_nat_to_imported n)
-                (mm_nat_pred_to_imported P))
-              (sub_nat_to_imported n))
-            (mm_target_bigMaxNatRange (sub_nat_to_imported n)
-              (mm_nat_pred_to_imported P))))
-        (sub_imported_eq_trans _ _ _
-          (sub_imported_eq_sym _ _
-            (sub_imported_eq_congr
-              (fun z => mm_target_bool_ite Lean.Nat z
-                (mm_target_max
-                  (mm_target_bigMaxNatRange (sub_nat_to_imported n)
-                    (mm_nat_pred_to_imported P))
-                  (sub_nat_to_imported n))
-                (mm_target_bigMaxNatRange (sub_nat_to_imported n)
-                  (mm_nat_pred_to_imported P)))
-              _ _ (mm_nat_pred_value_by_eq P n false HP)))
-          (sub_imported_eq_sym _ _
-            (ImportedMinmax.Prosa_Validation_MinmaxInterface_production_bigMaxNatRange_succ
-              (sub_nat_to_imported n) (mm_nat_pred_to_imported P)))))).
 Qed.
 
 Lemma mm_bigmax_range_canonical (n : nat) (P : nat -> bool) :
@@ -562,10 +595,12 @@ Lemma mm_bigmax_range_canonical (n : nat) (P : nat -> bool) :
       (mm_nat_pred_to_imported P)).
 Proof.
   induction n as [|n IH].
-  - rewrite big_ord0. unfold SubNatRel, mm_target_bigMaxNatRange.
-    exact (sub_imported_eq_sym _ _
-      (ImportedMinmax.Prosa_Validation_MinmaxInterface_production_bigMaxNatRange_zero
-        (mm_nat_pred_to_imported P))).
+  - have Hsource : Logic.eq (\max_(i < 0 | P i) i) O.
+    { rewrite big_ord0. reflexivity. }
+    exact (mm_subnat_rel_source_transport _ _ _ Hsource
+      (sub_imported_eq_sym _ _
+        (ImportedMinmax.Prosa_Validation_MinmaxInterface_production_bigMaxNatRange_zero
+          (mm_nat_pred_to_imported P)))).
   - exact (mm_bigmax_range_succ_step n P (P n)
       (Logic.eq_refl (P n)) IH).
 Qed.

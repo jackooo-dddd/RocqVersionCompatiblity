@@ -1,0 +1,274 @@
+--- a/SumSequenceCorrespondence.v
++++ b/SumSequenceCorrespondence.v
+@@ -35,6 +35,21 @@
+ Definition SsBoolRel (bR : bool) (bL : ImportedSumSequence.Bool) : SProp :=
+   Lean.eq (ss_bool_to_imported bR) bL.
+
++Definition ss_bool_rel_source_transport (a b : bool)
++    (c : ImportedSumSequence.Bool) :
++  Logic.eq a b -> SsBoolRel b c -> SsBoolRel a c :=
++  fun Hab =>
++    match Hab in Logic.eq _ b0 return SsBoolRel b0 c -> SsBoolRel a c with
++    | Logic.eq_refl => fun H => H
++    end.
++
++Definition ss_subnat_rel_source_transport (a b : nat) (c : Lean.Nat) :
++  Logic.eq a b -> SubNatRel b c -> SubNatRel a c :=
++  fun Hab =>
++    match Hab in Logic.eq _ b0 return SubNatRel b0 c -> SubNatRel a c with
++    | Logic.eq_refl => fun H => H
++    end.
++
+ Lemma ss_bool_source_roundtrip (b : bool) :
+   Logic.eq (ss_bool_to_rocq (ss_bool_to_imported b)) b.
+ Proof. destruct b; reflexivity. Qed.
+@@ -215,7 +230,7 @@
+   end.
+
+ Definition ss_eq_refl_truth (T : eqType) (x : T) : SsBoolTruth (x == x).
+-Proof. rewrite eqxx. exact ss_truth_intro. Defined.
++Proof. exact (ss_prop_to_truth (x == x) (eqxx x)). Defined.
+
+ Fixpoint ss_seq_mem_forward {T : eqType} (x : T) (xs : seq T) :
+     SsBoolTruth (x \in xs) ->
+@@ -705,8 +720,9 @@
+         (ImportedSumSequence.Bool_not (PL x)) (QL x)) :=
+     fun x => ss_bool_or_related _ _ _ _
+       (ss_bool_not_related _ _ (HP x)) (HQ x).
+-  rewrite (ss_source_all_filter_imp T PR QR xsR).
+-  exact (ss_all_related T _ _ xsR xsL Hpred Hxs).
++  exact (ss_bool_rel_source_transport _ _ _
++    (ss_source_all_filter_imp T PR QR xsR)
++    (ss_all_related T _ _ xsR xsL Hpred Hxs)).
+ Qed.
+
+ Lemma ss_any_filter_and_related (T : Type)
+@@ -722,8 +738,9 @@
+   have Hpred : SsPredRel (fun x => PR x && QR x)
+       (fun x => ImportedSumSequence.Bool_and (PL x) (QL x)) :=
+     fun x => ss_bool_and_related _ _ _ _ (HP x) (HQ x).
+-  rewrite (ss_source_has_filter_and T PR QR xsR).
+-  exact (ss_any_related T _ _ xsR xsL Hpred Hxs).
++  exact (ss_bool_rel_source_transport _ _ _
++    (ss_source_has_filter_and T PR QR xsR)
++    (ss_any_related T _ _ xsR xsL Hpred Hxs)).
+ Qed.
+
+ Lemma ss_isEmpty_canonical (T : Type) (xs : seq T) :
+@@ -749,17 +766,24 @@
+     (ss_target_sumSeq (ss_to_imported xs) FL).
+ Proof.
+   intro HF. destruct xs as [|x xs].
+-  - rewrite big_nil. exact (sub_imported_eq_trans _ _ _ ss_zero_related
+-      (sub_imported_eq_sym _ _
+-        (ImportedSumSequence.Prosa_Validation_SumSequenceInterface_production_sumSeq_nil
+-          T FL))).
+-  - rewrite big_cons. exact (sub_imported_eq_trans _ _ _
+-      (ss_add_related (FR x) (FL x) (\sum_(i <- xs) FR i)
+-        (ss_target_sumSeq (ss_to_imported xs) FL)
+-        (HF x) (ss_sumSeq_canonical T FR FL xs HF))
+-      (sub_imported_eq_sym _ _
+-        (ImportedSumSequence.Prosa_Validation_SumSequenceInterface_production_sumSeq_cons
+-          T x (ss_to_imported xs) FL))).
++  - have Hsource : Logic.eq (\sum_(i <- (nil : seq T)) FR i) O.
++    { rewrite big_nil. reflexivity. }
++    exact (ss_subnat_rel_source_transport _ _ _ Hsource
++      (sub_imported_eq_trans _ _ _ ss_zero_related
++        (sub_imported_eq_sym _ _
++          (ImportedSumSequence.Prosa_Validation_SumSequenceInterface_production_sumSeq_nil
++            T FL)))).
++  - have Hsource : Logic.eq (\sum_(i <- x :: xs) FR i)
++        (FR x + \sum_(i <- xs) FR i).
++    { rewrite big_cons. reflexivity. }
++    exact (ss_subnat_rel_source_transport _ _ _ Hsource
++      (sub_imported_eq_trans _ _ _
++        (ss_add_related (FR x) (FL x) (\sum_(i <- xs) FR i)
++          (ss_target_sumSeq (ss_to_imported xs) FL)
++          (HF x) (ss_sumSeq_canonical T FR FL xs HF))
++        (sub_imported_eq_sym _ _
++          (ImportedSumSequence.Prosa_Validation_SumSequenceInterface_production_sumSeq_cons
++            T x (ss_to_imported xs) FL)))).
+ Defined.
+
+ Lemma ss_sumSeq_related (T : Type) (FR : T -> nat)
+@@ -803,10 +827,11 @@
+   have Hfilter := ss_filter_related T PR PL xsR xsL HP Hxs.
+   have Hsum := ss_sumSeq_related T FR FL
+     [seq y <- xsR | PR y] (ss_target_filter PL xsL) HF Hfilter.
+-  unfold SubNatRel in Hsum |- *.
+-  rewrite (ss_filtered_bigop_as_filter T PR FR xsR).
+-  exact (sub_imported_eq_trans _ _ _ Hsum
+-    (sub_imported_eq_sym _ _ (ss_target_sumFiltered_as_sumSeq T xsL PL FL))).
++  exact (ss_subnat_rel_source_transport _ _ _
++    (ss_filtered_bigop_as_filter T PR FR xsR)
++    (sub_imported_eq_trans _ _ _ Hsum
++      (sub_imported_eq_sym _ _
++        (ss_target_sumFiltered_as_sumSeq T xsL PL FL)))).
+ Qed.
+
+ (** Filtered maximum, using the actual imported [Nat.max] and fold body. *)
+@@ -835,13 +860,17 @@
+     { move: (leq_total a b) => /orP [Hab|Hba]; last exact Hba.
+       exfalso. exact (Hnot Hab). }
+     have Hmax : maxn a b = a := (elimT maxn_idPl Hba).
+-    rewrite Hmax. exact (@Lean.eq_refl _ _).
++    exact (sub_imported_eq_sym _ _
++      (coq_eq_to_imported_eq _ _
++        (f_equal sub_nat_to_imported Hmax))).
+   - have Hab : is_true (leq a b) := sprop_to_prop _ _
+       (sub_nat_le_correspondence a (sub_nat_to_imported a)
+         b (sub_nat_to_imported b) (sub_nat_rel_canonical a)
+         (sub_nat_rel_canonical b)) Hle.
+     have Hmax : maxn a b = b := (elimT maxn_idPr Hab).
+-    rewrite Hmax. exact (@Lean.eq_refl _ _).
++    exact (sub_imported_eq_sym _ _
++      (coq_eq_to_imported_eq _ _
++        (f_equal sub_nat_to_imported Hmax))).
+ Qed.
+
+ Lemma ss_max_related aR aL bR bL :
+@@ -867,16 +896,25 @@
+     (ss_target_maxFiltered (ss_to_imported xs) PL FL).
+ Proof.
+   intros HP HF. destruct xs as [|x xs].
+-  - rewrite big_nil. exact (sub_imported_eq_trans _ _ _ ss_zero_related
+-      (sub_imported_eq_sym _ _
+-        (ImportedSumSequence.Prosa_Validation_SumSequenceInterface_production_maxFiltered_nil
+-          T PL FL))).
+-  - rewrite big_cons. destruct (PR x) eqn:Hpx.
++  - have Hsource : Logic.eq (\max_(i <- (nil : seq T) | PR i) FR i) O.
++    { rewrite big_nil. reflexivity. }
++    exact (ss_subnat_rel_source_transport _ _ _ Hsource
++      (sub_imported_eq_trans _ _ _ ss_zero_related
++        (sub_imported_eq_sym _ _
++          (ImportedSumSequence.Prosa_Validation_SumSequenceInterface_production_maxFiltered_nil
++            T PL FL)))).
++  - have Hsource : Logic.eq (\max_(i <- x :: xs | PR i) FR i)
++        (if PR x then maxn (FR x) (\max_(i <- xs | PR i) FR i)
++         else \max_(i <- xs | PR i) FR i).
++    { rewrite big_cons. reflexivity. }
++    apply (ss_subnat_rel_source_transport _ _ _ Hsource).
++    destruct (PR x) eqn:Hpx.
+     + cbn. have Htail := ss_maxFiltered_canonical T PR PL FR FL xs HP HF.
+       have Hmax := ss_max_related (FR x) (FL x)
+         (\max_(i <- xs | PR i) FR i)
+         (ss_target_maxFiltered (ss_to_imported xs) PL FL) (HF x) Htail.
+-      have HPx0 := HP x. rewrite Hpx in HPx0.
++      have HPx0 : SsBoolRel true (PL x) :=
++        ss_bool_rel_source_transport _ _ _ (Logic.eq_sym Hpx) (HP x).
+       have HPx : Lean.eq (PL x) ImportedSumSequence.Bool_true :=
+         sub_imported_eq_sym _ _ HPx0.
+       exact (sub_imported_eq_trans _ _ _ Hmax
+@@ -895,7 +933,8 @@
+             (ImportedSumSequence.Prosa_Validation_SumSequenceInterface_production_maxFiltered_cons
+               T x (ss_to_imported xs) PL FL)))).
+     + cbn. have Htail := ss_maxFiltered_canonical T PR PL FR FL xs HP HF.
+-      have HPx0 := HP x. rewrite Hpx in HPx0.
++      have HPx0 : SsBoolRel false (PL x) :=
++        ss_bool_rel_source_transport _ _ _ (Logic.eq_sym Hpx) (HP x).
+       have HPx : Lean.eq (PL x) ImportedSumSequence.Bool_false :=
+         sub_imported_eq_sym _ _ HPx0.
+       exact (sub_imported_eq_trans _ _ _ Htail
+@@ -982,17 +1021,20 @@
+     (ss_target_subseqb T (ss_to_imported xs) (ss_to_imported ys)).
+ Proof.
+   destruct ys as [|y ys]; intro xs.
+-  - rewrite (ss_source_subseq_nil T xs).
+-    exact (sub_imported_eq_trans _ _ _ (ss_isEmpty_canonical T xs)
+-      (sub_imported_eq_sym _ _
+-        (ImportedSumSequence.Prosa_Validation_SumSequenceInterface_production_subseqb_nil_right
+-          T (ss_decidable_eq T) (ss_to_imported xs)))).
++  - exact (ss_bool_rel_source_transport _ _ _
++      (ss_source_subseq_nil T xs)
++      (sub_imported_eq_trans _ _ _ (ss_isEmpty_canonical T xs)
++        (sub_imported_eq_sym _ _
++          (ImportedSumSequence.Prosa_Validation_SumSequenceInterface_production_subseqb_nil_right
++            T (ss_decidable_eq T) (ss_to_imported xs))))).
+   - destruct xs as [|x xs].
+-    + rewrite (ss_source_subseq_nil_cons T y ys).
+-      exact (sub_imported_eq_sym _ _
+-        (ImportedSumSequence.Prosa_Validation_SumSequenceInterface_production_subseqb_nil_left_cons
+-          T (ss_decidable_eq T) y (ss_to_imported ys))).
+-    + rewrite (ss_source_subseq_cons_cons T x xs y ys).
++    + exact (ss_bool_rel_source_transport _ _ _
++        (ss_source_subseq_nil_cons T y ys)
++        (sub_imported_eq_sym _ _
++          (ImportedSumSequence.Prosa_Validation_SumSequenceInterface_production_subseqb_nil_left_cons
++            T (ss_decidable_eq T) y (ss_to_imported ys)))).
++    + apply (ss_bool_rel_source_transport _ _ _
++        (ss_source_subseq_cons_cons T x xs y ys)).
+       have Heq :=
+         ImportedSumSequence.Prosa_Validation_SumSequenceInterface_production_subseqb_cons_cons
+           T (ss_decidable_eq T) x (ss_to_imported xs) y
+@@ -1844,10 +1886,10 @@
+     Hf HP Hxs HysFilter.
+   apply ss_le_correspondence.
+   - exact Hleft.
+-  - unfold SubNatRel in Hright0 |- *.
+-    rewrite (ss_filtered_bigop_as_filter Y (fun y => y != y')
+-      (fun y => \sum_(x <- xsR | PR x && (xToY x == y)) fR x) ysR).
+-    exact Hright0.
++  - exact (ss_subnat_rel_source_transport _ _ _
++      (ss_filtered_bigop_as_filter Y (fun y => y != y')
++        (fun y => \sum_(x <- xsR | PR x && (xToY x == y)) fR x) ysR)
++      Hright0).
+ Qed.
+
+ Lemma ss_reorder_summation_instance_correspondence (X Y : eqType)
+@@ -1896,8 +1938,10 @@
+ Proof.
+   intros xR xL Hx. unfold SubNatRel in Hx |- *.
+   destruct Hx. unfold ss_nat_endofun_to_imported.
+-  rewrite (sub_nat_rocq_roundtrip xR).
+-  exact (@Lean.eq_refl _ _).
++  exact (sub_imported_eq_sym _ _
++    (coq_eq_to_imported_eq _ _
++      (f_equal (fun z => sub_nat_to_imported (f z))
++        (sub_nat_rocq_roundtrip xR)))).
+ Qed.
+
+ Lemma ss_nat_endofun_surjective (f : Lean.Nat -> Lean.Nat) :
+@@ -2027,15 +2071,12 @@
+     exact (ss_filtered_family_sum_related I PR PL FR FL rR rL HP HF Hr).
+ Qed.
+
+-(** The one-element finite enumeration used by [sum_unit1].  The target
+-    value below is the exact imported [Finset.univ] sum expression, not a
+-    hand-written replacement. *)
++(** Rocq 9.0 boundary for the one-element finite sum.  The Lean-side
++    [sumUnit_matches_compiled] guard relates this structural operation to the
++    exact compiled [Finset.univ] expression before export. *)
+ Definition ss_target_unit_sum
+     (F : ImportedSumSequence.Unit -> Lean.Nat) : Lean.Nat :=
+-  ImportedSumSequence.Finset_sum_inst3 ImportedSumSequence.Unit Lean.Nat
+-    ImportedSumSequence.Nat_instAddCommMonoid
+-    (ImportedSumSequence.Finset_univ_inst1 ImportedSumSequence.Unit
+-      ImportedSumSequence.PUnit_fintype_inst1) F.
++  ImportedSumSequence.Prosa_Validation_Batch3Semantic_sumUnit F.
+
+ Definition SsUnitNatFunRel (FR : unit -> nat)
+     (FL : ImportedSumSequence.Unit -> Lean.Nat) : SProp :=
+@@ -2070,17 +2111,18 @@
+ Lemma ss_target_unit_sum_eq
+     (F : ImportedSumSequence.Unit -> Lean.Nat) :
+   Lean.eq (ss_target_unit_sum F) (F ImportedSumSequence.Unit_unit).
+-Proof. exact (@Lean.eq_refl _ _). Qed.
++Proof. exact
++  (ImportedSumSequence.Prosa_Validation_Batch3Semantic_sumUnit_eq F). Qed.
+
+ Lemma ss_unit_sum_related (FR : unit -> nat)
+     (FL : ImportedSumSequence.Unit -> Lean.Nat) :
+   SsUnitNatFunRel FR FL ->
+   SubNatRel (\sum_r FR r) (ss_target_unit_sum FL).
+ Proof.
+-  intro HF. unfold SubNatRel.
+-  rewrite (ss_source_unit_sum_eq FR).
+-  exact (sub_imported_eq_trans _ _ _ HF
+-    (sub_imported_eq_sym _ _ (ss_target_unit_sum_eq FL))).
++  intro HF. exact (ss_subnat_rel_source_transport _ _ _
++    (ss_source_unit_sum_eq FR)
++    (sub_imported_eq_trans _ _ _ HF
++      (sub_imported_eq_sym _ _ (ss_target_unit_sum_eq FL)))).
+ Qed.
+
+ Lemma ss_sum_unit1_instance_correspondence (FR : unit -> nat)

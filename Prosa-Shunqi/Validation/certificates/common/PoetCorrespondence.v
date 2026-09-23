@@ -169,7 +169,7 @@ Definition po_mem_head_of_coq_eq {T : Type} (x y : T)
 
 Definition po_eq_refl_truth (T : eqType) (x : T) :
     SubNatTruth (x == x).
-Proof. rw eqxx. exact sub_nat_truth_intro. Defined.
+Proof. exact (sub_nat_prop_to_truth (x == x) (eqxx x)). Defined.
 
 Definition po_mem_head_truth (a b : bool) :
     SubNatTruth a -> SubNatTruth (a || b) :=
@@ -360,8 +360,10 @@ Proof.
   intros pR pL Hp. unfold PoBoolRel, po_pair_pred_to_imported.
   have Hback := f_equal po_pair_to_rocq
     (imported_eq_to_coq_eq _ _ Hp).
-  rewrite (po_pair_source_roundtrip pR) in Hback.
-  rewrite <- Hback. exact (@Lean.eq_refl _ _).
+  have Hsource : Logic.eq pR (po_pair_to_rocq pL) :=
+    Logic.eq_trans (Logic.eq_sym (po_pair_source_roundtrip pR)) Hback.
+  exact (coq_eq_to_imported_eq _ _
+    (f_equal (fun p => po_bool_to_imported (PR p)) Hsource)).
 Qed.
 
 Fixpoint po_all_canonical (T U : Type) (PR : T * U -> bool)

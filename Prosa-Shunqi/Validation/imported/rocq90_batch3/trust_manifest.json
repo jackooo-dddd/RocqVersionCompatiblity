@@ -1,0 +1,73 @@
+{
+  "Bigcat": {
+    "assumed_positivity": [],
+    "lean_foundation_axioms": [
+      "FoundationImported.ImportedBigcat.propext"
+    ],
+    "type_in_type": [],
+    "unexpected_custom_rocq_axioms": [],
+    "unsafe_fixpoints": []
+  },
+  "Bigop": {
+    "assumed_positivity": [],
+    "lean_foundation_axioms": [],
+    "type_in_type": [],
+    "unexpected_custom_rocq_axioms": [],
+    "unsafe_fixpoints": []
+  },
+  "DivMod": {
+    "assumed_positivity": [],
+    "lean_foundation_axioms": [
+      "FoundationImported.ImportedDivMod.propext"
+    ],
+    "type_in_type": [],
+    "unexpected_custom_rocq_axioms": [],
+    "unsafe_fixpoints": []
+  },
+  "Epsilon": {
+    "assumed_positivity": [],
+    "lean_foundation_axioms": [],
+    "type_in_type": [],
+    "unexpected_custom_rocq_axioms": [],
+    "unsafe_fixpoints": []
+  },
+  "Minmax": {
+    "assumed_positivity": [],
+    "lean_foundation_axioms": [
+      "FoundationImported.ImportedMinmax.propext"
+    ],
+    "type_in_type": [],
+    "unexpected_custom_rocq_axioms": [],
+    "unsafe_fixpoints": []
+  },
+  "Poet": {
+    "assumed_positivity": [],
+    "lean_foundation_axioms": [],
+    "type_in_type": [],
+    "unexpected_custom_rocq_axioms": [],
+    "unsafe_fixpoints": []
+  },
+  "Setoid": {
+    "assumed_positivity": [],
+    "lean_foundation_axioms": [],
+    "type_in_type": [],
+    "unexpected_custom_rocq_axioms": [],
+    "unsafe_fixpoints": []
+  },
+  "SumInterval": {
+    "assumed_positivity": [],
+    "lean_foundation_axioms": [],
+    "type_in_type": [],
+    "unexpected_custom_rocq_axioms": [],
+    "unsafe_fixpoints": []
+  },
+  "SumSequence": {
+    "assumed_positivity": [],
+    "lean_foundation_axioms": [
+      "FoundationImported.ImportedSumSequence.propext"
+    ],
+    "type_in_type": [],
+    "unexpected_custom_rocq_axioms": [],
+    "unsafe_fixpoints": []
+  }
+}

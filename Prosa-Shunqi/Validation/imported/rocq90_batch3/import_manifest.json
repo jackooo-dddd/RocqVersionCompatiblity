@@ -1,0 +1,35 @@
+{
+  "Bigcat": {
+    "sha256": "6a8e61cab721e6eba9976fd7ba5c7a728e0b2d474d9d27ea87d17ca48e1ba712"
+  },
+  "Bigop": {
+    "sha256": "88193bc86bdc2c7955418f0994a00c4c86d0aebee7f90e19d4387d038fd8a068"
+  },
+  "DivMod": {
+    "sha256": "6d643a8d74d59e4dbacff783c955ab7f2fe6910aff95ad98d63c098d99a0a158"
+  },
+  "Epsilon": {
+    "sha256": "aca8ad78d0c93222e5d12fc2afbdc62952c792f779e8754439f075240a09bae7"
+  },
+  "Minmax": {
+    "sha256": "900b967636d401b30868ae5ab476fd79b865b3fc4abae7fd259ddf041b1f421a"
+  },
+  "Nat": {
+    "sha256": "eae9a11f2c71e8c054503a2fe827d392b872efa9b75f68b950f187e1275609a0"
+  },
+  "Poet": {
+    "sha256": "9d11e193ec8ea7822c7a09b94307b7d209800c44dfa4e67c5c4831bb0330aadd"
+  },
+  "Setoid": {
+    "sha256": "05de600b2f330c0ea3c31f262fc6d6d399fafcfd223df892520dfe65077e4140"
+  },
+  "Subadditivity": {
+    "sha256": "01032163c7c6fb6843ea6f21ed1390950ea4be4db76285647bfda211f488b6bf"
+  },
+  "SumInterval": {
+    "sha256": "a30585a339a9ce888363a758dc4c7331580a501af1bc16a5142f067a77c837f7"
+  },
+  "SumSequence": {
+    "sha256": "0ae08955439729b8d35150113a85b7b594dfd439118ae49a78d6edcf825565eb"
+  }
+}

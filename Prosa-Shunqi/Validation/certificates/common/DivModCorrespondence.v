@@ -59,6 +59,13 @@ Definition dm_coq_false_to_target (H : Logic.False) :
     ImportedDivMod.False :=
   match H return ImportedDivMod.False with end.
 
+Definition dm_subnat_rel_source_transport (a b : nat) (c : Lean.Nat) :
+  Logic.eq a b -> SubNatRel b c -> SubNatRel a c :=
+  fun Hab =>
+    match Hab in Logic.eq _ b0 return SubNatRel b0 c -> SubNatRel a c with
+    | Logic.eq_refl => fun H => H
+    end.
+
 Lemma dm_add_correspondence aR aL bR bL :
   SubNatRel aR aL -> SubNatRel bR bL ->
   SubNatRel (aR + bR) (dm_imported_add aL bL).
@@ -164,7 +171,8 @@ Lemma dm_succ_correspondence nR nL :
 Proof.
   intro Hn. have H := dm_add_correspondence nR nL 1 dm_imported_one
     Hn (sub_nat_rel_canonical 1).
-  rewrite addn1 in H. exact H.
+  exact (dm_subnat_rel_source_transport _ _ _
+    (Logic.eq_sym (addn1 nR)) H).
 Qed.
 
 Lemma dm_div_mod_decoded_canonical (x y : nat) :
@@ -354,9 +362,10 @@ Proof.
       y (sub_nat_to_imported y)
       (sub_nat_rel_canonical x) (sub_nat_rel_canonical y))
     (sub_nat_rel_canonical 1).
-  unfold SubNatRel in Hrel.
-  rewrite addn1 in Hrel.
-  exact (sub_imported_eq_sym _ _ Hrel).
+  have Hsucc := dm_subnat_rel_source_transport _ _ _
+    (Logic.eq_sym (addn1 (x %/ y))) Hrel.
+  unfold SubNatRel in Hsucc.
+  exact (sub_imported_eq_sym _ _ Hsucc).
 Qed.
 
 Lemma dm_div_ceil_canonical (x y : nat) :

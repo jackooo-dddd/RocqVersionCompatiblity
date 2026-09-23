@@ -31,29 +31,29 @@ Current canonical reports, in the approved execution order:
 | 9 | `util/unit_growth.v` | [unit_growth](files/util/2026-09-21_082258_unit_growth.md) | `ACCEPTED_V06_FILE_ROCQ90` |
 | 10 | `util/search_arg.v` | [search_arg](files/util/2026-09-21_082258_search_arg.md) | `ACCEPTED_V06_FILE_ROCQ90` |
 | 11 | `util/list.v` | [list](files/util/2026-09-21_082258_list.md) | `ACCEPTED_V06_FILE_ROCQ90` |
-| 12 | `util/sum.v` | [sum](files/util/2026-09-21_082258_sum.md) | `ROCQ90_REVALIDATION_PENDING` |
-| 13 | `util/epsilon.v` | [epsilon](files/util/2026-09-22_034433_epsilon.md) | `ROCQ90_REVALIDATION_PENDING` |
-| 14 | `util/bigop.v` | [bigop](files/util/2026-09-22_034433_bigop.md) | `ROCQ90_REVALIDATION_PENDING` |
-| 15 | `util/setoid.v` | [setoid](files/util/2026-09-22_042247_setoid.md) | `ROCQ90_REVALIDATION_PENDING` |
-| 16 | `util/poet.v` | [poet](files/util/2026-09-22_044913_poet.md) | `ROCQ90_REVALIDATION_PENDING` |
-| 17 | `util/bigcat.v` | [bigcat](files/util/2026-09-22_053020_bigcat.md) | `ROCQ90_REVALIDATION_PENDING` |
-| 18 | `util/minmax.v` | [minmax](files/util/2026-09-22_082537_minmax.md) | `ROCQ90_REVALIDATION_PENDING` |
-| 19 | `util/div_mod.v` | [div_mod](files/util/2026-09-22_103919_div_mod.md) | `ROCQ90_REVALIDATION_PENDING` |
+| 12 | `util/sum.v` | [sum](files/util/2026-09-21_082258_sum.md) | `ACCEPTED_V06_FILE_ROCQ90` |
+| 13 | `util/epsilon.v` | [epsilon](files/util/2026-09-22_034433_epsilon.md) | `ACCEPTED_V06_FILE_ROCQ90` |
+| 14 | `util/bigop.v` | [bigop](files/util/2026-09-22_034433_bigop.md) | `ACCEPTED_V06_FILE_ROCQ90` |
+| 15 | `util/setoid.v` | [setoid](files/util/2026-09-22_042247_setoid.md) | `ACCEPTED_V06_FILE_ROCQ90` |
+| 16 | `util/poet.v` | [poet](files/util/2026-09-22_044913_poet.md) | `ACCEPTED_V06_FILE_ROCQ90` |
+| 17 | `util/bigcat.v` | [bigcat](files/util/2026-09-22_053020_bigcat.md) | `ACCEPTED_V06_FILE_ROCQ90` |
+| 18 | `util/minmax.v` | [minmax](files/util/2026-09-22_082537_minmax.md) | `ACCEPTED_V06_FILE_ROCQ90` |
+| 19 | `util/div_mod.v` | [div_mod](files/util/2026-09-22_103919_div_mod.md) | `ACCEPTED_V06_FILE_ROCQ90` |
 | 20 | `util/nondecreasing.v` | [nondecreasing](files/util/2026-09-22_133028_nondecreasing.md) | `HISTORICAL_TRANSLATION_IN_PROGRESS` |
 
 ## Current proof progress
 
-On the active Rocq-9.0 baseline, machine-published acceptance is **11 / 357
-source files** and **103 / 2439 public declarations**, with **0
-translated-but-not-certified**. Rank 1–11 passed fresh actual-artifact import,
+On the active Rocq-9.0 baseline, machine-published acceptance is **19 / 357
+source files** and **171 / 2439 public declarations**, with **0
+translated-but-not-certified**. Rank 1–19 passed fresh actual-artifact import,
 all semantic certificates, assumption classification, and `rocqchk`. The
 latest formal batch result is
-[`rocq90_full_migration_batch2.md`](migrations/rocq90_full_migration_batch2.md).
+[`rocq90_full_migration_batch3.md`](migrations/rocq90_full_migration_batch3.md).
 
-Rocq-9.3 acceptance for later files is retained as historical provenance but
-does not make a predecessor READY under the active baseline. The next READY
-work is rank 12, `util/sum.v` (25 authoritative declarations); it was not
-started in Batch 2.
+All declarations that previously had formal Rocq-9.3 acceptance have now been
+freshly revalidated on Rocq 9.0. The next READY work is rank 20,
+`util/nondecreasing.v` (33 declarations), which resumes the historically
+unfinished translation stage rather than another migration-only revalidation.
 
 The formal scheduling document is
 [`../v06_file_translation_order.md`](../v06_file_translation_order.md).
@@ -88,10 +88,11 @@ compile/audit/publication check took 4.24 s. One intentionally retained failed
 attempt records an initially ambiguous audit-marker sort and exposed a hook
 error-propagation bug; publication remained blocked until both were fixed.
 
-This optimization changes workflow only. Accepted coverage remains **18 / 357
-files** and **156 / 2439 declarations**. `util/div_mod.v` remains an
-unaccepted 15-declaration Lean candidate while its actual-artifact semantic
-validation is paused at the user's requested optimization boundary.
+At that historical optimization checkpoint, accepted coverage was **18 / 357
+files** and **156 / 2439 declarations**; `util/div_mod.v` was still an
+unaccepted 15-declaration Lean candidate. The current active coverage is the
+Batch 3 result stated above: **19 / 357 files** and **171 / 2439
+declarations**.
 
 ## Legacy and raw evidence
 

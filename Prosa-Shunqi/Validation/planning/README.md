@@ -13,5 +13,7 @@ Future pipeline planning belongs in `v06_pipeline/`.
 
 The active validation baseline is Rocq 9.0.0. Rocq 9.3 status files and
 artifacts are retained as historical provenance; active downstream readiness
-must use `v06_pipeline/rocq90_batch1_status.json` (and later Rocq 9.0 batch
-status files), never infer readiness from a historical 9.3 acceptance alone.
+must use `v06_pipeline/active_validation_baseline.json` and the Rocq 9.0 batch
+status it names. The current publication is Batch 3, covering ranks 1–19 and
+171 declarations. Never infer readiness from a historical 9.3 acceptance
+alone.

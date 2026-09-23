@@ -33,10 +33,12 @@ JSON 内锁定了四个 planning input 的 Git blob SHA。正常的新翻译 com
 
 **零声明文件不是自动完成。** 要检查其 imports/re-exports、notation、instances/coercions 和可观察接口，并获得符合项目规则的模块验收记录。没有适用 gate 时记录缺口，不把 0/0 当成证明，也不凭这份计划发明一种自动放行状态。
 
-Rank 1–10 使用正式 Batch 1 入口；Rank 11 使用正式
-`prepare_rocq90_batch2.sh → check_rocq90_batch2.sh → finalize_rocq90_batch2.sh`
-入口并已 whole-file 验收。List 的旧专用脚本只保留历史 provenance，不能替代
-当前 Rocq 9.0 evidence。下一 READY 是 Rank 12 `util/sum.v`。
+Rank 1–10 使用正式 Batch 1 入口；Rank 11 使用正式 Batch 2 入口；Rank 12–19
+使用正式
+`prepare_rocq90_batch3.sh → check_rocq90_batch3.sh → finalize_rocq90_batch3.sh`
+入口并已 whole-file 验收。旧专用脚本只保留历史 provenance，不能替代当前
+Rocq 9.0 evidence。下一 READY 是 Rank 20 `util/nondecreasing.v`，它属于继续
+完成历史未完成 translation，而不是 migration-only revalidation。
 
 ## 确定性顺序
 
@@ -68,15 +70,15 @@ Rank 1–10 使用正式 Batch 1 入口；Rank 11 使用正式
 | 9 | `util/unit_growth.v` | 12 | Rocq 9.0 Batch 1 whole-file revalidation accepted；official source 直编译。 |
 | 10 | `util/search_arg.v` | 8 | Rocq 9.0 Batch 1 whole-file revalidation accepted；Nat.find-free target boundary。 |
 | 11 | `util/list.v` | 57 | Rocq 9.0 Batch 2 whole-file revalidation accepted；57/57 actual-artifact certificates PASS。 |
-| 12 | `util/sum.v` | 25 | **下一 READY**；大文件，按语义簇拆分并最终 whole-file 验收；保留现有 review gates。 |
-| 13 | `util/epsilon.v` | 0 | notation/模块审计；0项不等于自动 accepted。 |
-| 14 | `util/bigop.v` | 1 | 整文件；泛型 bigop 的运算/单位元/laws 边界需要预检。 |
-| 15 | `util/setoid.v` | 3 | 整文件；先于 minmax。 |
-| 16 | `util/poet.v` | 1 | 整文件；复用现有 List/zip 等关系。 |
-| 17 | `util/bigcat.v` | 13 | 整文件；bigcat 聚合对应需预检。 |
-| 18 | `util/minmax.v` | 10 | 整文件；List/Nat/Notation/Setoid 均应已验收。 |
-| 19 | `util/div_mod.v` | 15 | 整文件目标；division/modulo 等新运算先预检。 |
-| 20 | `util/nondecreasing.v` | 33 | 按语义簇拆分，但文件整体收尾后才放行 all。 |
+| 12 | `util/sum.v` | 25 | Rocq 9.0 Batch 3 whole-file revalidation accepted；25/25。 |
+| 13 | `util/epsilon.v` | 0 | Rocq 9.0 Batch 3 module-interface acceptance；0 项不作自动通过。 |
+| 14 | `util/bigop.v` | 1 | Rocq 9.0 Batch 3 whole-file revalidation accepted。 |
+| 15 | `util/setoid.v` | 3 | Rocq 9.0 Batch 3 whole-file revalidation accepted；其后才放行 minmax。 |
+| 16 | `util/poet.v` | 1 | Rocq 9.0 Batch 3 whole-file revalidation accepted。 |
+| 17 | `util/bigcat.v` | 13 | Rocq 9.0 Batch 3 whole-file revalidation accepted。 |
+| 18 | `util/minmax.v` | 10 | Rocq 9.0 Batch 3 whole-file revalidation accepted。 |
+| 19 | `util/div_mod.v` | 15 | Rocq 9.0 Batch 3 whole-file revalidation accepted。 |
+| 20 | `util/nondecreasing.v` | 33 | **下一 READY**；历史未完成 translation，按语义簇拆分，但文件整体收尾后才放行 all。 |
 | 21 | `util/all.v` | 0 | 聚合模块审计；18个直接文件依赖全部 accepted 后才收尾。 |
 | 22 | `behavior/job.v` | 5 | 整文件；保持 eqType/DecidableEq 与 class 字段边界。 |
 | 23 | `behavior/arrival_sequence.v` | 14 | 整文件；保留 arrival sequence 顺序、重复项和 Bool 观察。 |

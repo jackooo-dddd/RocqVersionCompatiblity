@@ -1,0 +1,208 @@
+{
+  "schema_version": 1,
+  "scope": "Rocq 9.0 Batch 3 proof-complete semantic export boundary",
+  "root_module": "Validation.fixtures.rocq90_batch3.Batch3SemanticInterface",
+  "forbidden_export_names": ["Acc", "Acc_rec", "Acc_rect", "find", "findX"],
+  "modules": {
+    "SumSequence": {
+      "definitions": [
+        "Prosa.Util.Sum.sumSeq", "Prosa.Util.Sum.sumFiltered",
+        "Prosa.Util.Sum.maxFiltered", "Prosa.Util.Sum.subseqb",
+        "Prosa.Util.Sum.sumOfPartition", "Prosa.Util.Sum.sumOverPartitions",
+        "Prosa.Validation.Batch3Semantic.sumUnit",
+        "Prosa.Validation.Batch3Semantic.sumUnitStatement"
+      ],
+      "body_theorems": [
+        "Prosa.Validation.SumSequenceInterface.generic_filter_nil",
+        "Prosa.Validation.SumSequenceInterface.generic_filter_cons",
+        "Prosa.Validation.SumSequenceInterface.generic_map_nil",
+        "Prosa.Validation.SumSequenceInterface.generic_map_cons",
+        "Prosa.Validation.SumSequenceInterface.generic_length_nil",
+        "Prosa.Validation.SumSequenceInterface.generic_length_cons",
+        "Prosa.Validation.SumSequenceInterface.generic_all_nil",
+        "Prosa.Validation.SumSequenceInterface.generic_all_cons",
+        "Prosa.Validation.SumSequenceInterface.generic_any_nil",
+        "Prosa.Validation.SumSequenceInterface.generic_any_cons",
+        "Prosa.Validation.SumSequenceInterface.generic_isEmpty_nil",
+        "Prosa.Validation.SumSequenceInterface.generic_isEmpty_cons",
+        "Prosa.Validation.SumSequenceInterface.nat_sum_nil",
+        "Prosa.Validation.SumSequenceInterface.nat_sum_cons",
+        "Prosa.Validation.SumSequenceInterface.nat_foldr_max_nil",
+        "Prosa.Validation.SumSequenceInterface.nat_foldr_max_cons",
+        "Prosa.Validation.SumSequenceInterface.production_sumSeq_nil",
+        "Prosa.Validation.SumSequenceInterface.production_sumSeq_cons",
+        "Prosa.Validation.SumSequenceInterface.production_sumFiltered_nil",
+        "Prosa.Validation.SumSequenceInterface.production_sumFiltered_cons",
+        "Prosa.Validation.SumSequenceInterface.production_maxFiltered_nil",
+        "Prosa.Validation.SumSequenceInterface.production_maxFiltered_cons",
+        "Prosa.Validation.SumSequenceInterface.production_subseqb_nil_right",
+        "Prosa.Validation.SumSequenceInterface.production_subseqb_nil_left_cons",
+        "Prosa.Validation.SumSequenceInterface.production_subseqb_cons_cons",
+        "Prosa.Validation.SumSequenceInterface.production_sumOfPartition_eq",
+        "Prosa.Validation.SumSequenceInterface.production_sumOverPartitions_eq",
+        "Prosa.Validation.Batch3Semantic.sumUnit_eq"
+      ],
+      "semantic_adapters": [
+        "Prosa.Validation.Batch3Semantic.sum_sum_nat_eq0_nat",
+        "Prosa.Validation.Batch3Semantic.sum_sum_nat_gt0",
+        "Prosa.Validation.Batch3Semantic.sum_sum_majorant_constant",
+        "Prosa.Validation.Batch3Semantic.sum_sum_split_exhaustive_mutually_exclusive_preds",
+        "Prosa.Validation.Batch3Semantic.sum_bigmax_leq_sum",
+        "Prosa.Validation.Batch3Semantic.sum_sum_le_subseq",
+        "Prosa.Validation.Batch3Semantic.sum_leq_sum_seq",
+        "Prosa.Validation.Batch3Semantic.sum_eq_sum_seq",
+        "Prosa.Validation.Batch3Semantic.sum_leq_sum_seq_pred",
+        "Prosa.Validation.Batch3Semantic.sum_leq_sum_subseq",
+        "Prosa.Validation.Batch3Semantic.sum_leq_sum_sub_uniq",
+        "Prosa.Validation.Batch3Semantic.sum_ltn_sum_leq_seq",
+        "Prosa.Validation.Batch3Semantic.sum_eq_sum_leq_seq",
+        "Prosa.Validation.Batch3Semantic.sum_sum_over_partitions_le",
+        "Prosa.Validation.Batch3Semantic.sum_reorder_summation",
+        "Prosa.Validation.Batch3Semantic.sum_sum_over_partitions_eq",
+        "Prosa.Validation.Batch3Semantic.sum_sum_leq_mono",
+        "Prosa.Validation.Batch3Semantic.sum_sum_ge_2_seq"
+      ]
+    },
+    "SumInterval": {
+      "definitions": [],
+      "body_theorems": [],
+      "semantic_adapters": [
+        "Prosa.Validation.Batch3Semantic.sum_sum_of_ones",
+        "Prosa.Validation.Batch3Semantic.sum_big_nat_eq0",
+        "Prosa.Validation.Batch3Semantic.sum_sum_le_summation_range",
+        "Prosa.Validation.Batch3Semantic.sum_big_sum_eq_in_eq_sized_intervals",
+        "Prosa.Validation.Batch3Semantic.sum_pigeonhole_on_interval",
+        "Prosa.Validation.Batch3Semantic.sum_sum_ge_2_nat"
+      ]
+    },
+    "Bigop": {
+      "definitions": ["Prosa.Util.Bigop.bigSeq"],
+      "body_theorems": [
+        "Prosa.Validation.BigopInterface.production_bigSeq_nil",
+        "Prosa.Validation.BigopInterface.production_bigSeq_cons"
+      ],
+      "semantic_adapters": [
+        "Prosa.Validation.Batch3Semantic.bigop_big_pred1_seq"
+      ]
+    },
+    "Setoid": {
+      "definitions": ["Prosa.Util.Setoid.leb", "Prosa.Util.Setoid.leqRW"],
+      "body_theorems": [
+        "Prosa.Validation.SetoidInterface.production_leqRW_apply"
+      ],
+      "semantic_adapters": [
+        "Prosa.Validation.Batch3Semantic.setoid_leb_eq"
+      ]
+    },
+    "Poet": {
+      "definitions": [],
+      "body_theorems": [
+        "Prosa.Validation.PoetInterface.production_length_nil",
+        "Prosa.Validation.PoetInterface.production_length_cons",
+        "Prosa.Validation.PoetInterface.production_zip_nil_left",
+        "Prosa.Validation.PoetInterface.production_zip_nil_right",
+        "Prosa.Validation.PoetInterface.production_zip_cons",
+        "Prosa.Validation.PoetInterface.production_all_nil",
+        "Prosa.Validation.PoetInterface.production_all_cons"
+      ],
+      "semantic_adapters": [
+        "Prosa.Validation.Batch3Semantic.poet_forall_exists_implied_by_forall_in_zip"
+      ]
+    },
+    "Bigcat": {
+      "definitions": [
+        "Fin.isLt", "Prosa.Util.Notation.bigCat", "Prosa.Util.Bigcat.bigCatFin",
+        "Prosa.Util.Bigcat.bigCatSeq", "Prosa.Util.Bigcat.bigCatSeqAll"
+      ],
+      "body_theorems": [
+        "Prosa.Validation.BigcatInterface.production_bigCat_same",
+        "Prosa.Validation.BigcatInterface.production_bigCat_of_le",
+        "Prosa.Validation.BigcatInterface.production_bigCat_add_succ",
+        "Prosa.Validation.BigcatInterface.production_bigCatFin_zero",
+        "Prosa.Validation.BigcatInterface.production_bigCatFin_succ",
+        "Prosa.Validation.BigcatInterface.production_bigCatSeq_eq",
+        "Prosa.Validation.BigcatInterface.production_bigCatSeqAll_eq",
+        "Prosa.Validation.BigcatInterface.production_append_nil",
+        "Prosa.Validation.BigcatInterface.production_append_cons",
+        "Prosa.Validation.BigcatInterface.production_flatMap_nil",
+        "Prosa.Validation.BigcatInterface.production_flatMap_cons",
+        "Prosa.Validation.BigcatInterface.production_filter_nil",
+        "Prosa.Validation.BigcatInterface.production_filter_cons",
+        "Prosa.Validation.BigcatInterface.production_length_nil",
+        "Prosa.Validation.BigcatInterface.production_length_cons"
+      ],
+      "semantic_adapters": [
+        "Prosa.Validation.Batch3Semantic.bigcat_mem_bigcat_nat",
+        "Prosa.Validation.Batch3Semantic.bigcat_mem_bigcat_nat_exists",
+        "Prosa.Validation.Batch3Semantic.bigcat_mem_bigcat_ord",
+        "Prosa.Validation.Batch3Semantic.bigcat_bigcat_nat_uniq",
+        "Prosa.Validation.Batch3Semantic.bigcat_bigcat_nat_filter_eq_filter_bigcat_nat",
+        "Prosa.Validation.Batch3Semantic.bigcat_size_big_nat",
+        "Prosa.Validation.Batch3Semantic.bigcat_mem_bigcat",
+        "Prosa.Validation.Batch3Semantic.bigcat_mem_bigcat_exists",
+        "Prosa.Validation.Batch3Semantic.bigcat_bigcat_filter_eq_filter_bigcat",
+        "Prosa.Validation.Batch3Semantic.bigcat_bigcat_uniq",
+        "Prosa.Validation.Batch3Semantic.bigcat_seq_different_elements_nil",
+        "Prosa.Validation.Batch3Semantic.bigcat_bigcat_seq_uniqK",
+        "Prosa.Validation.Batch3Semantic.bigcat_bigcat_partitions"
+      ]
+    },
+    "Minmax": {
+      "definitions": [
+        "Prosa.Util.Minmax.bigMaxListCond", "Prosa.Util.Minmax.bigMaxNatRange"
+      ],
+      "body_theorems": [
+        "Prosa.Validation.MinmaxInterface.production_bigMaxListCond_nil",
+        "Prosa.Validation.MinmaxInterface.production_bigMaxListCond_cons",
+        "Prosa.Validation.MinmaxInterface.production_bigMaxNatRange_zero",
+        "Prosa.Validation.MinmaxInterface.production_bigMaxNatRange_succ",
+        "Prosa.Validation.MinmaxInterface.production_any_nil",
+        "Prosa.Validation.MinmaxInterface.production_any_cons",
+        "Prosa.Validation.MinmaxInterface.production_natMax_zero_left",
+        "Prosa.Validation.MinmaxInterface.production_natMax_zero_right",
+        "Prosa.Validation.MinmaxInterface.production_natMax_succ_succ"
+      ],
+      "semantic_adapters": [
+        "Prosa.Validation.Batch3Semantic.minmax_leq_bigmax_cond_seq",
+        "Prosa.Validation.Batch3Semantic.minmax_leq_bigmax_sup",
+        "Prosa.Validation.Batch3Semantic.minmax_bigmax_leq_seqP",
+        "Prosa.Validation.Batch3Semantic.minmax_leq_big_max",
+        "Prosa.Validation.Batch3Semantic.minmax_bigmax_ord_ltn_identity",
+        "Prosa.Validation.Batch3Semantic.minmax_bigmax_ltn_ord",
+        "Prosa.Validation.Batch3Semantic.minmax_bigmax_pred",
+        "Prosa.Validation.Batch3Semantic.minmax_bigmax_witness",
+        "Prosa.Validation.Batch3Semantic.minmax_bigmax_witness_diff",
+        "Prosa.Validation.Batch3Semantic.minmax_bigmax_subset"
+      ]
+    },
+    "DivMod": {
+      "definitions": [
+        "Prosa.Util.Div_mod.div_floor", "Prosa.Util.Div_mod.div_ceil"
+      ],
+      "body_theorems": [
+        "Prosa.Validation.DivModInterface.production_div_floor_eq",
+        "Prosa.Validation.DivModInterface.production_div_ceil_eq",
+        "Prosa.Validation.DivModInterface.production_div_add_mod",
+        "Prosa.Validation.DivModInterface.production_mod_lt",
+        "Prosa.Validation.DivModInterface.production_div_zero",
+        "Prosa.Validation.DivModInterface.production_mod_zero",
+        "Prosa.Validation.DivModInterface.production_dvd_iff_mod_eq_zero"
+      ],
+      "semantic_adapters": [
+        "Prosa.Validation.Batch3Semantic.divmod_eqdivn_leqmodn",
+        "Prosa.Validation.Batch3Semantic.divmod_ltdivn_dvdn",
+        "Prosa.Validation.Batch3Semantic.divmod_addn1_modn_commute",
+        "Prosa.Validation.Batch3Semantic.divmod_addmod_le_mod",
+        "Prosa.Validation.Batch3Semantic.divmod_divn_leq",
+        "Prosa.Validation.Batch3Semantic.divmod_div_ceil0",
+        "Prosa.Validation.Batch3Semantic.divmod_div_ceil_gt0",
+        "Prosa.Validation.Batch3Semantic.divmod_div_ceil_monotone1",
+        "Prosa.Validation.Batch3Semantic.divmod_leq_div_ceil_add1",
+        "Prosa.Validation.Batch3Semantic.divmod_div_ceil_subadditive",
+        "Prosa.Validation.Batch3Semantic.divmod_div_ceil_multiple",
+        "Prosa.Validation.Batch3Semantic.divmod_div_floor_add_g",
+        "Prosa.Validation.Batch3Semantic.divmod_mod_elim"
+      ]
+    }
+  }
+}

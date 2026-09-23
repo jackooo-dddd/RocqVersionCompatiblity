@@ -164,7 +164,7 @@ Definition bo_or_right_truth (a b : bool) :
   end.
 
 Definition bo_eq_refl_truth (T : eqType) (x : T) : BoBoolTruth (x == x).
-Proof. rewrite eqxx. exact bo_truth_intro. Defined.
+Proof. exact (bo_prop_to_truth (x == x) (eqxx x)). Defined.
 
 Fixpoint bo_seq_mem_forward {T : eqType} (x : T) (xs : seq T) :
     BoBoolTruth (x \in xs) -> ImportedBigop.List_Mem T x (bo_to_imported xs) :=
@@ -385,17 +385,17 @@ Definition bo_target_bigSeq (R X : Type) (idx : R) (op : R -> R -> R)
     (xs : ImportedBigop.List X) : R :=
   ImportedBigop.Prosa_Util_Bigop_bigSeq R X idx op P F xs.
 
-Lemma bo_bigSeq_canonical_related (R : Type) (idx : R)
+Lemma bo_bigSeq_canonical_related_prop (R : Type) (idx : R)
     (op : R -> R -> R) (X : Type) (PR : X -> bool)
     (PL : X -> ImportedBigop.Bool) (F : X -> R) (xs : seq X) :
   BoPredRel PR PL ->
-  Lean.eq (bo_source_bigSeq idx op PR F xs)
+  Logic.eq (bo_source_bigSeq idx op PR F xs)
     (bo_target_bigSeq R X idx op PL F (bo_to_imported xs)).
 Proof.
   intro HP. induction xs as [|x xs IH].
-  - exact (sub_imported_eq_sym _ _
+  - exact (Logic.eq_sym (imported_eq_to_coq_eq _ _
       (ImportedBigop.Prosa_Validation_BigopInterface_production_bigSeq_nil
-        R X idx op PL F)).
+        R X idx op PL F))).
   - have Heq :=
       ImportedBigop.Prosa_Validation_BigopInterface_production_bigSeq_cons
         R X idx op PL F x (bo_to_imported xs).
@@ -406,8 +406,19 @@ Proof.
     have HPxC := imported_eq_to_coq_eq _ _ (HP x).
     destruct (PR x) eqn:HPR; cbn in HPxC.
     + rewrite <- HPxC. cbn.
-      exact (sub_imported_eq_congr (op (F x)) _ _ IH).
+      exact (f_equal (op (F x)) IH).
     + rewrite <- HPxC. cbn. exact IH.
+Qed.
+
+Lemma bo_bigSeq_canonical_related (R : Type) (idx : R)
+    (op : R -> R -> R) (X : Type) (PR : X -> bool)
+    (PL : X -> ImportedBigop.Bool) (F : X -> R) (xs : seq X) :
+  BoPredRel PR PL ->
+  Lean.eq (bo_source_bigSeq idx op PR F xs)
+    (bo_target_bigSeq R X idx op PL F (bo_to_imported xs)).
+Proof.
+  intro HP. exact (coq_eq_to_imported_eq _ _
+    (bo_bigSeq_canonical_related_prop R idx op X PR PL F xs HP)).
 Qed.
 
 Lemma bo_bigSeq_related (R : Type) (idx : R) (op : R -> R -> R)

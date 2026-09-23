@@ -1,0 +1,109 @@
+{
+  "Bigcat": {
+    "forbidden_implementation_graph": [],
+    "lean_foundation_records": [
+      "propext"
+    ],
+    "normal_elimination_checking": true,
+    "normal_universe_checking": true,
+    "semantic_adapter_count": 13,
+    "sha256": "28d8b1cfb7134f8d2657a65bfa92470cf51a0c835e52a2c647deff47c243ebd5",
+    "statement_only": false,
+    "target_count": 33,
+    "unexpected_axiom_records": []
+  },
+  "Bigop": {
+    "forbidden_implementation_graph": [],
+    "lean_foundation_records": [],
+    "normal_elimination_checking": true,
+    "normal_universe_checking": true,
+    "semantic_adapter_count": 1,
+    "sha256": "935bd342e9899d35fc1e2dc35a620fc56b804ed352d8e8412aa38660cacc5048",
+    "statement_only": false,
+    "target_count": 4,
+    "unexpected_axiom_records": []
+  },
+  "DivMod": {
+    "forbidden_implementation_graph": [],
+    "lean_foundation_records": [
+      "propext"
+    ],
+    "normal_elimination_checking": true,
+    "normal_universe_checking": true,
+    "semantic_adapter_count": 13,
+    "sha256": "845a33b3eb19732cba198b43100b26a24020d12ed203867e0d8f273d78b7c4f4",
+    "statement_only": false,
+    "target_count": 22,
+    "unexpected_axiom_records": []
+  },
+  "Epsilon": {
+    "forbidden_implementation_graph": [],
+    "lean_foundation_records": [],
+    "normal_elimination_checking": true,
+    "normal_universe_checking": true,
+    "semantic_adapter_count": 0,
+    "sha256": "f545e50332968fdae21b8c298b07edd6aff081b1007e7585aca741330d7ef12c",
+    "statement_only": false,
+    "target_count": 1,
+    "unexpected_axiom_records": []
+  },
+  "Minmax": {
+    "forbidden_implementation_graph": [],
+    "lean_foundation_records": [
+      "propext"
+    ],
+    "normal_elimination_checking": true,
+    "normal_universe_checking": true,
+    "semantic_adapter_count": 10,
+    "sha256": "c4b69fda742a5acfbd67c76a4c2f8bbec9f0c8d0927bbe452c6ff0b9b62ba35e",
+    "statement_only": false,
+    "target_count": 21,
+    "unexpected_axiom_records": []
+  },
+  "Poet": {
+    "forbidden_implementation_graph": [],
+    "lean_foundation_records": [],
+    "normal_elimination_checking": true,
+    "normal_universe_checking": true,
+    "semantic_adapter_count": 1,
+    "sha256": "f0778c7668094265ab1841205cce9c5d0ccf4e39d9bcca28b564cbffa36f92e1",
+    "statement_only": false,
+    "target_count": 8,
+    "unexpected_axiom_records": []
+  },
+  "Setoid": {
+    "forbidden_implementation_graph": [],
+    "lean_foundation_records": [],
+    "normal_elimination_checking": true,
+    "normal_universe_checking": true,
+    "semantic_adapter_count": 1,
+    "sha256": "4b87271343676ff4a5f80e37f4691b33e16884b1f911e1f26b4eeb02bb66b1a8",
+    "statement_only": false,
+    "target_count": 4,
+    "unexpected_axiom_records": []
+  },
+  "SumInterval": {
+    "forbidden_implementation_graph": [],
+    "lean_foundation_records": [],
+    "normal_elimination_checking": true,
+    "normal_universe_checking": true,
+    "semantic_adapter_count": 6,
+    "sha256": "67ceab4f9cc6e5c3bbe4875a946a7c4a24f55db24b03e75824d3c8ee1e261f18",
+    "statement_only": false,
+    "target_count": 6,
+    "unexpected_axiom_records": []
+  },
+  "SumSequence": {
+    "forbidden_implementation_graph": [],
+    "lean_foundation_records": [
+      "propext"
+    ],
+    "normal_elimination_checking": true,
+    "normal_universe_checking": true,
+    "semantic_adapter_count": 18,
+    "sha256": "5c8a389bce25dd0a22115d0fa42934f60ceac3b57681457668add1acf86c7899",
+    "statement_only": false,
+    "target_count": 54,
+    "unexpected_axiom_records": []
+  }
+}

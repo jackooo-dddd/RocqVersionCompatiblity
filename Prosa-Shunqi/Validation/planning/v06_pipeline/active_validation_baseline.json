@@ -2,10 +2,11 @@
   "active_validation_baseline": "Rocq 9.0.0",
   "batch1_status": "rocq90_batch1_status.json",
   "batch2_status": "rocq90_batch2_status.json",
-  "classification": "ROCQ90_FULL_MIGRATION_BATCH2_ACCEPTED",
+  "batch3_status": "rocq90_batch3_status.json",
+  "classification": "ROCQ90_FULL_MIGRATION_BATCH3_ACCEPTED",
   "historical_validation_provenance": "Rocq 9.3",
   "migration_justification": "../../../rocq90-compat/ (Phase 1-7, frozen; not a runtime dependency)",
-  "next_ready_file": "util/sum.v",
-  "next_work_item": "Full Rocq 9.0 Migration - Batch 3, Rank 12 whole-file migration",
+  "next_ready_file": "util/nondecreasing.v",
+  "next_work_item": "Rank 20 historical unfinished translation (33 declarations)",
   "schema_version": 1
 }

@@ -1,0 +1,483 @@
+{
+  "authoritative_count": 68,
+  "expected_type_source": "historical reviewed manifests",
+  "guards": [
+    {
+      "guard": "guard_01",
+      "historical_expected_type_sha256": "62d430491182b48f5151fcbaca5900e6f41d1ab55f0ae5ce19f3202546636702",
+      "lean_declaration": "Prosa.Util.Bigcat.mem_bigcat_nat",
+      "source_declaration": "mem_bigcat_nat",
+      "source_file": "util/bigcat.v"
+    },
+    {
+      "guard": "guard_02",
+      "historical_expected_type_sha256": "3e7bdf71c49f9dbf37ec531b515056d15b4a24f64d75b449e0c9e3be19053638",
+      "lean_declaration": "Prosa.Util.Bigcat.mem_bigcat_nat_exists",
+      "source_declaration": "mem_bigcat_nat_exists",
+      "source_file": "util/bigcat.v"
+    },
+    {
+      "guard": "guard_03",
+      "historical_expected_type_sha256": "a40f95cb455a3b45f0bb621dad402ff182190e304d7f484cf5dd319d2fad5313",
+      "lean_declaration": "Prosa.Util.Bigcat.mem_bigcat_ord",
+      "source_declaration": "mem_bigcat_ord",
+      "source_file": "util/bigcat.v"
+    },
+    {
+      "guard": "guard_04",
+      "historical_expected_type_sha256": "a362301401f191a8d0b894811789947999ce0d7f997f700948dbcdefc1704618",
+      "lean_declaration": "Prosa.Util.Bigcat.bigcat_nat_uniq",
+      "source_declaration": "bigcat_nat_uniq",
+      "source_file": "util/bigcat.v"
+    },
+    {
+      "guard": "guard_05",
+      "historical_expected_type_sha256": "5b887b3cb0038d8fbece6dff1d6fb82e0c172d3a148904651cc9214241145e9e",
+      "lean_declaration": "Prosa.Util.Bigcat.bigcat_nat_filter_eq_filter_bigcat_nat",
+      "source_declaration": "bigcat_nat_filter_eq_filter_bigcat_nat",
+      "source_file": "util/bigcat.v"
+    },
+    {
+      "guard": "guard_06",
+      "historical_expected_type_sha256": "3aee3b377ef0d82a282fb742bc20a363fbe0f5c933e746cb04fe1bdda87e953c",
+      "lean_declaration": "Prosa.Util.Bigcat.size_big_nat",
+      "source_declaration": "size_big_nat",
+      "source_file": "util/bigcat.v"
+    },
+    {
+      "guard": "guard_07",
+      "historical_expected_type_sha256": "dad526130b2ff115c3cb857906b217c3b425c22969ee2354a1039bc50e52fe26",
+      "lean_declaration": "Prosa.Util.Bigcat.mem_bigcat",
+      "source_declaration": "mem_bigcat",
+      "source_file": "util/bigcat.v"
+    },
+    {
+      "guard": "guard_08",
+      "historical_expected_type_sha256": "a7814a3c33e1eb61614590ae207be9f44f01e1e1388454bcd43d1174f1eb7598",
+      "lean_declaration": "Prosa.Util.Bigcat.mem_bigcat_exists",
+      "source_declaration": "mem_bigcat_exists",
+      "source_file": "util/bigcat.v"
+    },
+    {
+      "guard": "guard_09",
+      "historical_expected_type_sha256": "08de58834596e9affa4cac23e7e3c4fd9fd3636a98d81c82078fd1da82d553a7",
+      "lean_declaration": "Prosa.Util.Bigcat.bigcat_filter_eq_filter_bigcat",
+      "source_declaration": "bigcat_filter_eq_filter_bigcat",
+      "source_file": "util/bigcat.v"
+    },
+    {
+      "guard": "guard_10",
+      "historical_expected_type_sha256": "9281607e30f57fe65a84d300f523393176eda34d2cda4af89b861a2781a885bf",
+      "lean_declaration": "Prosa.Util.Bigcat.bigcat_uniq",
+      "source_declaration": "bigcat_uniq",
+      "source_file": "util/bigcat.v"
+    },
+    {
+      "guard": "guard_11",
+      "historical_expected_type_sha256": "25f89dab6b353057095b20ef8603ec83e51c040cbe0705a78f6e131528814919",
+      "lean_declaration": "Prosa.Util.Bigcat.seq_different_elements_nil",
+      "source_declaration": "seq_different_elements_nil",
+      "source_file": "util/bigcat.v"
+    },
+    {
+      "guard": "guard_12",
+      "historical_expected_type_sha256": "f6aa626a88994ea2664e8ed11d1b3cdcce26f8308e153fe790f07926e2d3cb22",
+      "lean_declaration": "Prosa.Util.Bigcat.bigcat_seq_uniqK",
+      "source_declaration": "bigcat_seq_uniqK",
+      "source_file": "util/bigcat.v"
+    },
+    {
+      "guard": "guard_13",
+      "historical_expected_type_sha256": "ab51594b53b3d4af661c4996303c580bc51396dee6ce105ca6353c4a9fa05985",
+      "lean_declaration": "Prosa.Util.Bigcat.bigcat_partitions",
+      "source_declaration": "bigcat_partitions",
+      "source_file": "util/bigcat.v"
+    },
+    {
+      "guard": "guard_14",
+      "historical_expected_type_sha256": "6e7f36a8e37700e730633798dcc5c24503b8dcc85f8622bba27ac1ea14047329",
+      "lean_declaration": "Prosa.Util.Bigop.big_pred1_seq",
+      "source_declaration": "big_pred1_seq",
+      "source_file": "util/bigop.v"
+    },
+    {
+      "guard": "guard_15",
+      "historical_expected_type_sha256": "69f8a1f15715d433359046c5d6d247d3d4246677e7749774c00cb95649286929",
+      "lean_declaration": "Prosa.Util.Div_mod.eqdivn_leqmodn",
+      "source_declaration": "eqdivn_leqmodn",
+      "source_file": "util/div_mod.v"
+    },
+    {
+      "guard": "guard_16",
+      "historical_expected_type_sha256": "877e566817e7c86c4becc4ca9b158ac23b0c64c3253756d52d1ab262d62e1fbf",
+      "lean_declaration": "Prosa.Util.Div_mod.ltdivn_dvdn",
+      "source_declaration": "ltdivn_dvdn",
+      "source_file": "util/div_mod.v"
+    },
+    {
+      "guard": "guard_17",
+      "historical_expected_type_sha256": "965ee4a6f325129873668f4a86c8d2a04ffacd895d41a211a6310bae586bf731",
+      "lean_declaration": "Prosa.Util.Div_mod.addn1_modn_commute",
+      "source_declaration": "addn1_modn_commute",
+      "source_file": "util/div_mod.v"
+    },
+    {
+      "guard": "guard_18",
+      "historical_expected_type_sha256": "8ef66bd1735714d052a95c2d4287968bbd11aa2472801de8b5b252844ede4e2d",
+      "lean_declaration": "Prosa.Util.Div_mod.addmod_le_mod",
+      "source_declaration": "addmod_le_mod",
+      "source_file": "util/div_mod.v"
+    },
+    {
+      "guard": "guard_19",
+      "historical_expected_type_sha256": "f7a6f936e1a47c925544b80669cf8e4490b9c3f41609ef847cc06bc8de574fcd",
+      "lean_declaration": "Prosa.Util.Div_mod.divn_leq",
+      "source_declaration": "divn_leq",
+      "source_file": "util/div_mod.v"
+    },
+    {
+      "guard": "guard_20",
+      "historical_expected_type_sha256": "22cca4d25939ecc5492073e288fc3696829bac0f2aad4bcbcfe1473360cbe459",
+      "lean_declaration": "Prosa.Util.Div_mod.div_floor",
+      "source_declaration": "div_floor",
+      "source_file": "util/div_mod.v"
+    },
+    {
+      "guard": "guard_21",
+      "historical_expected_type_sha256": "1acad3373791d58c71ac3c0eed13a230c99b55d6680a6d4f55ea2b3b2f6766c7",
+      "lean_declaration": "Prosa.Util.Div_mod.div_ceil",
+      "source_declaration": "div_ceil",
+      "source_file": "util/div_mod.v"
+    },
+    {
+      "guard": "guard_22",
+      "historical_expected_type_sha256": "ebf88c894963c0c2bb104b4c608d59eea89de0976cd16041fedb0997d298a0ce",
+      "lean_declaration": "Prosa.Util.Div_mod.div_ceil0",
+      "source_declaration": "div_ceil0",
+      "source_file": "util/div_mod.v"
+    },
+    {
+      "guard": "guard_23",
+      "historical_expected_type_sha256": "46cc2f0b53bef84f67ac671e34dd6822fc5d43d2ac7d2ea48f8a73b3f0d25160",
+      "lean_declaration": "Prosa.Util.Div_mod.div_ceil_gt0",
+      "source_declaration": "div_ceil_gt0",
+      "source_file": "util/div_mod.v"
+    },
+    {
+      "guard": "guard_24",
+      "historical_expected_type_sha256": "8ecc9215c0b84150c0b06fa9f97c5e6d959e1680aa96c9846030f29c2ba0bc10",
+      "lean_declaration": "Prosa.Util.Div_mod.div_ceil_monotone1",
+      "source_declaration": "div_ceil_monotone1",
+      "source_file": "util/div_mod.v"
+    },
+    {
+      "guard": "guard_25",
+      "historical_expected_type_sha256": "b1c33ba83fd68bf3e796c5a8a92d09a3a4f5d49b892bd736ef1d18f1012d5321",
+      "lean_declaration": "Prosa.Util.Div_mod.leq_div_ceil_add1",
+      "source_declaration": "leq_div_ceil_add1",
+      "source_file": "util/div_mod.v"
+    },
+    {
+      "guard": "guard_26",
+      "historical_expected_type_sha256": "6307c53a9704b8be338a3ec5d422def0b9a9f5d2f76b08cb4f02b3f9ec4cac08",
+      "lean_declaration": "Prosa.Util.Div_mod.div_ceil_subadditive",
+      "source_declaration": "div_ceil_subadditive",
+      "source_file": "util/div_mod.v"
+    },
+    {
+      "guard": "guard_27",
+      "historical_expected_type_sha256": "cce719c69ea1f5f49b2192b421a7b8491009305cf1355315ce17b86f75825022",
+      "lean_declaration": "Prosa.Util.Div_mod.div_ceil_multiple",
+      "source_declaration": "div_ceil_multiple",
+      "source_file": "util/div_mod.v"
+    },
+    {
+      "guard": "guard_28",
+      "historical_expected_type_sha256": "2a56c562314d9250e186faad864a9321cf6642ee8923a224620185d1a43d76d5",
+      "lean_declaration": "Prosa.Util.Div_mod.div_floor_add_g",
+      "source_declaration": "div_floor_add_g",
+      "source_file": "util/div_mod.v"
+    },
+    {
+      "guard": "guard_29",
+      "historical_expected_type_sha256": "00ac0200c67b4d12319c1c7d069086bcc41e32bd93415636d5eae4173ff26f19",
+      "lean_declaration": "Prosa.Util.Div_mod.mod_elim",
+      "source_declaration": "mod_elim",
+      "source_file": "util/div_mod.v"
+    },
+    {
+      "guard": "guard_30",
+      "historical_expected_type_sha256": "cca58f8cd8c2fcc84721c8a77a13eca18f15712b7ccd26a1ede8656fceb3c048",
+      "lean_declaration": "Prosa.Util.Minmax.leq_bigmax_cond_seq",
+      "source_declaration": "leq_bigmax_cond_seq",
+      "source_file": "util/minmax.v"
+    },
+    {
+      "guard": "guard_31",
+      "historical_expected_type_sha256": "befafe9c61c41759b376fd2023034146f3784c8be190ce01305af324e8156ea7",
+      "lean_declaration": "Prosa.Util.Minmax.leq_bigmax_sup",
+      "source_declaration": "leq_bigmax_sup",
+      "source_file": "util/minmax.v"
+    },
+    {
+      "guard": "guard_32",
+      "historical_expected_type_sha256": "73f64b1c05a1e1f3ae248008b8d61451d900501baafc6ecbc72ba394a251c094",
+      "lean_declaration": "Prosa.Util.Minmax.bigmax_leq_seqP",
+      "source_declaration": "bigmax_leq_seqP",
+      "source_file": "util/minmax.v"
+    },
+    {
+      "guard": "guard_33",
+      "historical_expected_type_sha256": "32ab03281ab609f82af9183294ba6c46ae56a80333ba281e3efb180876e17fc4",
+      "lean_declaration": "Prosa.Util.Minmax.leq_big_max",
+      "source_declaration": "leq_big_max",
+      "source_file": "util/minmax.v"
+    },
+    {
+      "guard": "guard_34",
+      "historical_expected_type_sha256": "313cd23efb820f783ae666bead9789cf74dfb8687b0ea3375e4e7c51d4c16560",
+      "lean_declaration": "Prosa.Util.Minmax.bigmax_ord_ltn_identity",
+      "source_declaration": "bigmax_ord_ltn_identity",
+      "source_file": "util/minmax.v"
+    },
+    {
+      "guard": "guard_35",
+      "historical_expected_type_sha256": "fb7085dc0e5aac4bb3a9f6cea1983df476a7bc217c37c398fcfecb6d16fa167b",
+      "lean_declaration": "Prosa.Util.Minmax.bigmax_ltn_ord",
+      "source_declaration": "bigmax_ltn_ord",
+      "source_file": "util/minmax.v"
+    },
+    {
+      "guard": "guard_36",
+      "historical_expected_type_sha256": "e91d34ae5cd920fa76cfbfbbd983024370264d0751ee99c3187260a59184d1ce",
+      "lean_declaration": "Prosa.Util.Minmax.bigmax_pred",
+      "source_declaration": "bigmax_pred",
+      "source_file": "util/minmax.v"
+    },
+    {
+      "guard": "guard_37",
+      "historical_expected_type_sha256": "b19fdb8cd348096db148c64f683b97469d44d6de7bdc0bae686eea015647c1fe",
+      "lean_declaration": "Prosa.Util.Minmax.bigmax_witness",
+      "source_declaration": "bigmax_witness",
+      "source_file": "util/minmax.v"
+    },
+    {
+      "guard": "guard_38",
+      "historical_expected_type_sha256": "fb4bb5a0579a55f5ede3464cffe814d8857e4b033165974bf24866aed31a0420",
+      "lean_declaration": "Prosa.Util.Minmax.bigmax_witness_diff",
+      "source_declaration": "bigmax_witness_diff",
+      "source_file": "util/minmax.v"
+    },
+    {
+      "guard": "guard_39",
+      "historical_expected_type_sha256": "84661ac4c8b789ad3dc553060de4c23d6a21a029e84716f70755e6b9fde9e9fc",
+      "lean_declaration": "Prosa.Util.Minmax.bigmax_subset",
+      "source_declaration": "bigmax_subset",
+      "source_file": "util/minmax.v"
+    },
+    {
+      "guard": "guard_40",
+      "historical_expected_type_sha256": "190e09e735aba0d4c115fd54b77c0840f5dde57d78b5defb7e3329f49ba7ac3d",
+      "lean_declaration": "Prosa.Util.Poet.forall_exists_implied_by_forall_in_zip",
+      "source_declaration": "forall_exists_implied_by_forall_in_zip",
+      "source_file": "util/poet.v"
+    },
+    {
+      "guard": "guard_41",
+      "historical_expected_type_sha256": "92d2741592d85aba1eedc18e7251502be7222151697a80b92f57965aa82c312e",
+      "lean_declaration": "Prosa.Util.Setoid.leb",
+      "source_declaration": "leb",
+      "source_file": "util/setoid.v"
+    },
+    {
+      "guard": "guard_42",
+      "historical_expected_type_sha256": "b745ac5173486cafd0e7f230a55b1790758dcef0d0d03d03cf1c48822eff5a70",
+      "lean_declaration": "Prosa.Util.Setoid.leb_eq",
+      "source_declaration": "leb_eq",
+      "source_file": "util/setoid.v"
+    },
+    {
+      "guard": "guard_43",
+      "historical_expected_type_sha256": "f3a46b76b7c62dae6c7b550082bffa13b1fe769d7ff2524517cad4d0e4f405e0",
+      "lean_declaration": "Prosa.Util.Setoid.leqRW",
+      "source_declaration": "leqRW",
+      "source_file": "util/setoid.v"
+    },
+    {
+      "guard": "guard_44",
+      "historical_expected_type_sha256": "10e3964a7b77c5e95b7f74ba2345fbf21e00bd2b5cb78d3f4048bf8a07321ace",
+      "lean_declaration": "Prosa.Util.Sum.sum_nat_eq0_nat",
+      "source_declaration": "sum_nat_eq0_nat",
+      "source_file": "util/sum.v"
+    },
+    {
+      "guard": "guard_45",
+      "historical_expected_type_sha256": "a737c35b61ab0d5aa253305078b8e9be73f32b300930d18620b01f036f9e8371",
+      "lean_declaration": "Prosa.Util.Sum.sum_nat_gt0",
+      "source_declaration": "sum_nat_gt0",
+      "source_file": "util/sum.v"
+    },
+    {
+      "guard": "guard_46",
+      "historical_expected_type_sha256": "0f54be08e77b5ce6686b298bad41d436ffc8ad6c2896bea2aa9a82aff25c5126",
+      "lean_declaration": "Prosa.Util.Sum.sum_majorant_constant",
+      "source_declaration": "sum_majorant_constant",
+      "source_file": "util/sum.v"
+    },
+    {
+      "guard": "guard_47",
+      "historical_expected_type_sha256": "e457406f16364dc5af4ce811898089b0c6aeb97f8dc1059383b757c850fa124c",
+      "lean_declaration": "Prosa.Util.Sum.sum_split_exhaustive_mutually_exclusive_preds",
+      "source_declaration": "sum_split_exhaustive_mutually_exclusive_preds",
+      "source_file": "util/sum.v"
+    },
+    {
+      "guard": "guard_48",
+      "historical_expected_type_sha256": "e25dc29efdd20ec11015a3fd7a38588fa8dd37c20f38dc6f2a9c5073f4cc5a1c",
+      "lean_declaration": "Prosa.Util.Sum.bigmax_leq_sum",
+      "source_declaration": "bigmax_leq_sum",
+      "source_file": "util/sum.v"
+    },
+    {
+      "guard": "guard_49",
+      "historical_expected_type_sha256": "adad318163b7119be09fa6a9a67c50c80a86f219c7ef57e1c0502589d611ff7a",
+      "lean_declaration": "Prosa.Util.Sum.sum_le_subseq",
+      "source_declaration": "sum_le_subseq",
+      "source_file": "util/sum.v"
+    },
+    {
+      "guard": "guard_50",
+      "historical_expected_type_sha256": "b2cd9fcf830d38fe8d29e5685561adb97d9d872cf0a659229befb5468569954b",
+      "lean_declaration": "Prosa.Util.Sum.leq_sum_seq",
+      "source_declaration": "leq_sum_seq",
+      "source_file": "util/sum.v"
+    },
+    {
+      "guard": "guard_51",
+      "historical_expected_type_sha256": "0d9e2aa2d2d96933f1daad5acf6858965cd617783a356e97b9ff6ef804e557c5",
+      "lean_declaration": "Prosa.Util.Sum.eq_sum_seq",
+      "source_declaration": "eq_sum_seq",
+      "source_file": "util/sum.v"
+    },
+    {
+      "guard": "guard_52",
+      "historical_expected_type_sha256": "be72d423c195d23f6b2708130f29b4c43b14c214e2d648057672f10d42dcb07b",
+      "lean_declaration": "Prosa.Util.Sum.leq_sum_seq_pred",
+      "source_declaration": "leq_sum_seq_pred",
+      "source_file": "util/sum.v"
+    },
+    {
+      "guard": "guard_53",
+      "historical_expected_type_sha256": "4b3c9967e8e20d81cbdc16546376e18f70b947ed93da7533f6b8ad3501b0b8c4",
+      "lean_declaration": "Prosa.Util.Sum.leq_sum_subseq",
+      "source_declaration": "leq_sum_subseq",
+      "source_file": "util/sum.v"
+    },
+    {
+      "guard": "guard_54",
+      "historical_expected_type_sha256": "641c721f440b25fb64fc09e9232394844bcf95fadae3c5eda76a001c0e2cc967",
+      "lean_declaration": "Prosa.Util.Sum.leq_sum_sub_uniq",
+      "source_declaration": "leq_sum_sub_uniq",
+      "source_file": "util/sum.v"
+    },
+    {
+      "guard": "guard_55",
+      "historical_expected_type_sha256": "24aa0b875c4b8964023c4593eab184ebf21d49d5b88cd5f2bef8030521a418d1",
+      "lean_declaration": "Prosa.Util.Sum.ltn_sum_leq_seq",
+      "source_declaration": "ltn_sum_leq_seq",
+      "source_file": "util/sum.v"
+    },
+    {
+      "guard": "guard_56",
+      "historical_expected_type_sha256": "4c3fd54db0f54b5cb7342e027d92248d1b74d520ed78d4e471c08284895c97fc",
+      "lean_declaration": "Prosa.Util.Sum.eq_sum_leq_seq",
+      "source_declaration": "eq_sum_leq_seq",
+      "source_file": "util/sum.v"
+    },
+    {
+      "guard": "guard_57",
+      "historical_expected_type_sha256": "939c28e1feebc3e2b0c70c7ea36c59873c1e40c568b7de21b3de32f39989448a",
+      "lean_declaration": "Prosa.Util.Sum.sum_of_ones",
+      "source_declaration": "sum_of_ones",
+      "source_file": "util/sum.v"
+    },
+    {
+      "guard": "guard_58",
+      "historical_expected_type_sha256": "026a8ab84e0650f55a7bd682603fd30df0a0f297c6a07f1f0e155ed83a18188b",
+      "lean_declaration": "Prosa.Util.Sum.big_nat_eq0",
+      "source_declaration": "big_nat_eq0",
+      "source_file": "util/sum.v"
+    },
+    {
+      "guard": "guard_59",
+      "historical_expected_type_sha256": "d90798924dbdf176a1191a8d58900b0ac3e923078ac587ff757be66e9cdf210d",
+      "lean_declaration": "Prosa.Util.Sum.sum_le_summation_range",
+      "source_declaration": "sum_le_summation_range",
+      "source_file": "util/sum.v"
+    },
+    {
+      "guard": "guard_60",
+      "historical_expected_type_sha256": "6435e9ecf14f3579b601c0d39b78f7baabd0e43ae971973ae9ac6d564b0870b3",
+      "lean_declaration": "Prosa.Util.Sum.big_sum_eq_in_eq_sized_intervals",
+      "source_declaration": "big_sum_eq_in_eq_sized_intervals",
+      "source_file": "util/sum.v"
+    },
+    {
+      "guard": "guard_61",
+      "historical_expected_type_sha256": "94fbaa377eccb9fecc6131fe810f5721af52f5e84d6a32d2c8737c2fe11e372c",
+      "lean_declaration": "Prosa.Util.Sum.sum_over_partitions_le",
+      "source_declaration": "sum_over_partitions_le",
+      "source_file": "util/sum.v"
+    },
+    {
+      "guard": "guard_62",
+      "historical_expected_type_sha256": "df524e04322b26a4f1ad647818a1d8ccb39b1cb8c09f087be648d4271bad0058",
+      "lean_declaration": "Prosa.Util.Sum.reorder_summation",
+      "source_declaration": "reorder_summation",
+      "source_file": "util/sum.v"
+    },
+    {
+      "guard": "guard_63",
+      "historical_expected_type_sha256": "c59f7e4f5b0fe71e6cbc26b194c6ec44e8c97db8f213f9a3ea5f4e4d11572c80",
+      "lean_declaration": "Prosa.Util.Sum.sum_over_partitions_eq",
+      "source_declaration": "sum_over_partitions_eq",
+      "source_file": "util/sum.v"
+    },
+    {
+      "guard": "guard_64",
+      "historical_expected_type_sha256": "165e9c6bd68812dbb14da4b386d05fe7bc5eca0c507f47868e62bcdda835e87c",
+      "lean_declaration": "Prosa.Util.Sum.sum_leq_mono",
+      "source_declaration": "sum_leq_mono",
+      "source_file": "util/sum.v"
+    },
+    {
+      "guard": "guard_65",
+      "historical_expected_type_sha256": "c6240ad83de61e5fb4f1716dc85028d1a608a6987fe7c0125dac307143a1fb4b",
+      "lean_declaration": "Prosa.Util.Sum.sum_unit1",
+      "source_declaration": "sum_unit1",
+      "source_file": "util/sum.v"
+    },
+    {
+      "guard": "guard_66",
+      "historical_expected_type_sha256": "ca719de501d9d0c97d1b0784c1ff0828c7e5a2cf371b679e10d0bdd21970deea",
+      "lean_declaration": "Prosa.Util.Sum.pigeonhole_on_interval",
+      "source_declaration": "pigeonhole_on_interval",
+      "source_file": "util/sum.v"
+    },
+    {
+      "guard": "guard_67",
+      "historical_expected_type_sha256": "d443728269090e152c4d399680fd4018cba896d5af8d29dc61a0f1036c8c8cfe",
+      "lean_declaration": "Prosa.Util.Sum.sum_ge_2_seq",
+      "source_declaration": "sum_ge_2_seq",
+      "source_file": "util/sum.v"
+    },
+    {
+      "guard": "guard_68",
+      "historical_expected_type_sha256": "2d97a4f9d3caac5af3c6b6db01bf34455fb67afae9d2156a32205ed1fcab3031",
+      "lean_declaration": "Prosa.Util.Sum.sum_ge_2_nat",
+      "source_declaration": "sum_ge_2_nat",
+      "source_file": "util/sum.v"
+    }
+  ],
+  "schema_version": 1
+}
