@@ -138,7 +138,9 @@ Definition ${PREFIX}_mem_head_of_coq_eq {T : Type} (x y : T)
 
 Definition ${PREFIX}_eq_refl_truth (T : eqType) (x : T) :
     SubNatTruth (x == x).
-Proof. rw eqxx. exact sub_nat_truth_intro. Defined.
+Proof.
+  exact (sub_nat_prop_to_truth (x == x) (eqxx x)).
+Defined.
 
 Definition ${PREFIX}_mem_head_truth (a b : bool) :
     SubNatTruth a -> SubNatTruth (a || b) :=

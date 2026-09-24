@@ -13,6 +13,8 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
+import shutil
 import subprocess
 import time
 from pathlib import Path
@@ -231,6 +233,10 @@ def finish_run(args: argparse.Namespace) -> None:
             sum(float(e["duration_seconds"]) for e in events), 6
         ),
     }
+    if args.wall_start_ns is not None:
+        result["wall_clock_seconds"] = round(
+            (time.time_ns() - args.wall_start_ns) / 1_000_000_000, 6
+        )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
 
@@ -240,6 +246,33 @@ def prepared_outputs(descriptor_data: dict[str, Any]) -> dict[str, list[str]]:
     if not groups:
         raise SystemExit("descriptor contains no prepared outputs")
     return groups
+
+
+def checked_relative(root: Path, relative: str) -> Path:
+    if not relative or Path(relative).is_absolute():
+        raise SystemExit(f"invalid prepared artifact path: {relative}")
+    root = root.resolve()
+    path = (root / relative).resolve()
+    try:
+        path.relative_to(root)
+    except ValueError as exc:
+        raise SystemExit(f"prepared artifact escapes root: {relative}") from exc
+    return path
+
+
+def verified_manifest(
+    descriptor_path: Path, prepared: Path
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    require_file(descriptor_path)
+    desc = json.loads(descriptor_path.read_text())
+    manifest_path = prepared / "prepare_manifest.json"
+    require_file(manifest_path)
+    manifest = json.loads(manifest_path.read_text())
+    if manifest.get("snapshot_id") != desc.get("snapshot_id"):
+        raise SystemExit("PREPARED_SNAPSHOT_INPUT_MISMATCH")
+    if manifest.get("input_descriptor") != desc:
+        raise SystemExit("PREPARED_SNAPSHOT_DESCRIPTOR_MISMATCH")
+    return desc, manifest
 
 
 def seal(args: argparse.Namespace) -> None:
@@ -267,14 +300,7 @@ def seal(args: argparse.Namespace) -> None:
 
 
 def verify(args: argparse.Namespace) -> None:
-    desc = json.loads(args.descriptor.read_text())
-    manifest_path = args.prepared / "prepare_manifest.json"
-    require_file(manifest_path)
-    manifest = json.loads(manifest_path.read_text())
-    if manifest.get("snapshot_id") != desc.get("snapshot_id"):
-        raise SystemExit("PREPARED_SNAPSHOT_INPUT_MISMATCH")
-    if manifest.get("input_descriptor") != desc:
-        raise SystemExit("PREPARED_SNAPSHOT_DESCRIPTOR_MISMATCH")
+    desc, manifest = verified_manifest(args.descriptor, args.prepared)
     events: list[dict[str, Any]] = []
     for stage, group in manifest.get("outputs", {}).items():
         started = time.time_ns()
@@ -282,7 +308,7 @@ def verify(args: argparse.Namespace) -> None:
         if not entries or group.get("output_set_sha256") != digest(entries):
             raise SystemExit(f"PREPARED_ARTIFACT_MANIFEST_CORRUPT:{stage}")
         for rel, expected in entries.items():
-            path = args.prepared / rel
+            path = checked_relative(args.prepared, rel)
             require_file(path)
             if sha(path) != expected:
                 raise SystemExit(f"PREPARED_ARTIFACT_HASH_MISMATCH:{stage}:{rel}")
@@ -326,6 +352,69 @@ def verify(args: argparse.Namespace) -> None:
     print(args.prepared)
 
 
+def materialize(args: argparse.Namespace) -> None:
+    """Copy hash-verified prepared groups into an isolated consumer root.
+
+    This is deliberately stricter than a plain ``cp``: the producer input
+    descriptor must still match byte-for-byte, every source artifact must
+    match the sealed manifest, and every copied destination is re-hashed.
+    Consumers must include the emitted evidence file (or its hash) in their
+    own input descriptor so dependency reuse participates in invalidation.
+    """
+
+    desc, manifest = verified_manifest(args.descriptor, args.prepared)
+    available = manifest.get("outputs", {})
+    stages = args.stage or sorted(available)
+    unknown = sorted(set(stages) - set(available))
+    if unknown:
+        raise SystemExit(f"UNKNOWN_PREPARED_STAGE:{','.join(unknown)}")
+
+    destination = args.destination.resolve()
+    destination.mkdir(parents=True, exist_ok=True)
+    copied: dict[str, dict[str, str]] = {}
+    started = time.time_ns()
+    for stage in stages:
+        group = available[stage]
+        entries = group.get("files", {})
+        if not entries or group.get("output_set_sha256") != digest(entries):
+            raise SystemExit(f"PREPARED_ARTIFACT_MANIFEST_CORRUPT:{stage}")
+        copied_entries: dict[str, str] = {}
+        for rel, expected in entries.items():
+            source = checked_relative(args.prepared, rel)
+            require_file(source)
+            if sha(source) != expected:
+                raise SystemExit(f"PREPARED_ARTIFACT_HASH_MISMATCH:{stage}:{rel}")
+            target = checked_relative(destination, rel)
+            target.parent.mkdir(parents=True, exist_ok=True)
+            temporary = target.with_name(f".{target.name}.tmp.{os.getpid()}")
+            shutil.copy2(source, temporary)
+            if sha(temporary) != expected:
+                temporary.unlink(missing_ok=True)
+                raise SystemExit(f"MATERIALIZED_ARTIFACT_HASH_MISMATCH:{stage}:{rel}")
+            os.replace(temporary, target)
+            if sha(target) != expected:
+                raise SystemExit(f"MATERIALIZED_ARTIFACT_HASH_MISMATCH:{stage}:{rel}")
+            copied_entries[rel] = expected
+        copied[stage] = copied_entries
+    ended = time.time_ns()
+    result = {
+        "schema_version": SCHEMA_VERSION,
+        "mode": "VERIFIED_CACHE",
+        "snapshot_id": desc["snapshot_id"],
+        "producer_descriptor_sha256": sha(args.descriptor),
+        "producer_prepare_manifest_sha256": sha(args.prepared / "prepare_manifest.json"),
+        "destination": str(destination),
+        "stages": stages,
+        "files": copied,
+        "duration_seconds": round((ended - started) / 1_000_000_000, 6),
+        "semantic_acceptance_inferred": False,
+        "consumer_must_bind_this_evidence": True,
+    }
+    args.evidence.parent.mkdir(parents=True, exist_ok=True)
+    args.evidence.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
+    print(args.evidence)
+
+
 def attach_publication(args: argparse.Namespace) -> None:
     result = json.loads(args.result.read_text())
     evidence = json.loads(args.evidence.read_text())
@@ -344,6 +433,110 @@ def attach_publication(args: argparse.Namespace) -> None:
         },
     }
     args.result.write_text(json.dumps(result, indent=2) + "\n")
+
+
+def stage_files(prepared: Path, stage: str) -> dict[str, str]:
+    if stage == "lean_build":
+        paths = list((prepared / "olean").rglob("*.olean"))
+        paths += [p for p in prepared.glob("*manifest.json") if p.is_file()]
+        paths += [p for p in prepared.glob("lean*summary.json") if p.is_file()]
+        paths += [p for p in prepared.glob("lean*axioms.log") if p.is_file()]
+    elif stage == "source_acquisition":
+        paths = [p for p in (prepared / "source").rglob("*") if p.is_file()]
+    elif stage == "export":
+        paths = list((prepared / "imported").glob("*.out"))
+        paths += list((prepared / "imported").glob("*export_metadata.json"))
+    elif stage == "rocq_import":
+        paths = [p for p in (prepared / "imported").rglob("*") if p.is_file()]
+    elif stage in ("certificate_compile", "assumption_audit"):
+        paths = [p for p in (prepared / "certificates").rglob("*") if p.is_file()]
+    else:
+        raise SystemExit(f"unsupported prepare checkpoint stage: {stage}")
+    # Rocq emits zero-byte `.vok`/`.vos` sidecars for ordinary `.vo` builds.
+    # They carry no evidence and cannot satisfy `require_file` during restore,
+    # so sealing them would manufacture a cache entry that is impossible to
+    # verify.  Cache only material artifacts; the declared stage outputs still
+    # fail closed independently.
+    result = {
+        p.relative_to(prepared).as_posix(): sha(p)
+        for p in paths if p.stat().st_size > 0
+    }
+    if not result:
+        raise SystemExit(f"no successful stage artifacts to checkpoint: {stage}")
+    return result
+
+
+def seal_stage(args: argparse.Namespace) -> None:
+    if args.cache.exists():
+        raise SystemExit(f"stage checkpoint already exists: {args.cache}")
+    files = stage_files(args.prepared, args.stage)
+    temporary = args.cache.with_name(args.cache.name + f".tmp.{os.getpid()}")
+    temporary.mkdir(parents=True)
+    for relative, expected in files.items():
+        destination = temporary / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(args.prepared / relative, destination)
+        if sha(destination) != expected:
+            raise SystemExit(f"stage checkpoint copy mismatch: {relative}")
+    data = {
+        "schema_version": SCHEMA_VERSION,
+        "snapshot_id": args.snapshot_id,
+        "stage": args.stage,
+        "input_fingerprint": args.input_fingerprint,
+        "files": files,
+        "file_set_sha256": digest(files),
+    }
+    (temporary / "stage_checkpoint.json").write_text(
+        json.dumps(data, indent=2, sort_keys=True) + "\n"
+    )
+    os.rename(temporary, args.cache)
+
+
+def restore_stage(args: argparse.Namespace) -> None:
+    start = time.time_ns()
+    try:
+        data = json.loads((args.cache / "stage_checkpoint.json").read_text())
+    except (OSError, ValueError) as exc:
+        raise SystemExit(f"STAGE_CHECKPOINT_CORRUPT:{exc}") from exc
+    if ((not args.allow_cross_snapshot
+             and data.get("snapshot_id") != args.snapshot_id)
+            or data.get("stage") != args.stage
+            or data.get("input_fingerprint") != args.input_fingerprint):
+        raise SystemExit("STAGE_CHECKPOINT_INPUT_MISMATCH")
+    files = data.get("files", {})
+    if not files or digest(files) != data.get("file_set_sha256"):
+        raise SystemExit("STAGE_CHECKPOINT_MANIFEST_CORRUPT")
+    # Verify every source before modifying the consumer. Missing, modified or
+    # truncated files are corruption, never an ordinary cache miss.
+    for relative, expected in files.items():
+        source = checked_relative(args.cache, relative)
+        require_file(source)
+        if sha(source) != expected:
+            raise SystemExit(f"STAGE_CHECKPOINT_HASH_MISMATCH:{relative}")
+    for relative, expected in files.items():
+        destination = checked_relative(args.prepared, relative)
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        temporary = destination.with_name(f".{destination.name}.tmp.{os.getpid()}")
+        shutil.copy2(args.cache / relative, temporary)
+        if sha(temporary) != expected:
+            raise SystemExit(f"STAGE_CHECKPOINT_COPY_MISMATCH:{relative}")
+        os.replace(temporary, destination)
+    end = time.time_ns()
+    event = {
+        "stage": args.stage,
+        "mode": "VERIFIED_CACHE",
+        "executed": False,
+        "status": "PASS",
+        "duration_seconds": round((end - start) / 1_000_000_000, 6),
+        "start_ns": start,
+        "end_ns": end,
+        "input_fingerprint": args.input_fingerprint,
+        "producer_snapshot_id": data.get("snapshot_id"),
+        "output_hashes": files,
+    }
+    args.events.parent.mkdir(parents=True, exist_ok=True)
+    with args.events.open("a") as stream:
+        stream.write(json.dumps(event, sort_keys=True) + "\n")
 
 
 def parser() -> argparse.ArgumentParser:
@@ -374,6 +567,7 @@ def parser() -> argparse.ArgumentParser:
     f.add_argument("--snapshot-id", required=True)
     f.add_argument("--run-mode", required=True)
     f.add_argument("--output", required=True, type=Path)
+    f.add_argument("--wall-start-ns", type=int)
     f.set_defaults(func=finish_run)
 
     s = sub.add_parser("seal")
@@ -388,11 +582,35 @@ def parser() -> argparse.ArgumentParser:
     v.add_argument("--run-evidence", required=True, type=Path)
     v.set_defaults(func=verify)
 
+    m = sub.add_parser("materialize")
+    m.add_argument("--descriptor", required=True, type=Path)
+    m.add_argument("--prepared", required=True, type=Path)
+    m.add_argument("--destination", required=True, type=Path)
+    m.add_argument("--stage", action="append", choices=STAGES, default=[])
+    m.add_argument("--evidence", required=True, type=Path)
+    m.set_defaults(func=materialize)
+
     a = sub.add_parser("attach-publication")
     a.add_argument("--result", required=True, type=Path)
     a.add_argument("--evidence", required=True, type=Path)
     a.add_argument("--snapshot-id", required=True)
     a.set_defaults(func=attach_publication)
+    checkpoint = sub.add_parser("seal-stage")
+    checkpoint.add_argument("--prepared", required=True, type=Path)
+    checkpoint.add_argument("--cache", required=True, type=Path)
+    checkpoint.add_argument("--snapshot-id", required=True)
+    checkpoint.add_argument("--stage", required=True, choices=STAGES[:6])
+    checkpoint.add_argument("--input-fingerprint", required=True)
+    checkpoint.set_defaults(func=seal_stage)
+    restore = sub.add_parser("restore-stage")
+    restore.add_argument("--prepared", required=True, type=Path)
+    restore.add_argument("--cache", required=True, type=Path)
+    restore.add_argument("--snapshot-id", required=True)
+    restore.add_argument("--stage", required=True, choices=STAGES[:6])
+    restore.add_argument("--input-fingerprint", required=True)
+    restore.add_argument("--events", required=True, type=Path)
+    restore.add_argument("--allow-cross-snapshot", action="store_true")
+    restore.set_defaults(func=restore_stage)
     return parser
 
 

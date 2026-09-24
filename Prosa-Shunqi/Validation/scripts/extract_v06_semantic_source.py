@@ -26,7 +26,7 @@ DECL_RE = re.compile(
     rf"({IDENTIFIER_RE}){IDENTIFIER_BOUNDARY_RE}.*?^[^\n]*(?:Qed|Defined)\.[ \t]*$"
 )
 BODY_RE = re.compile(
-    r"(?ms)^[ \t]*(?:Fixpoint|CoFixpoint|Definition)\s+"
+    r"(?ms)^[ \t]*(?:Fixpoint|CoFixpoint|Definition|Class|Inductive)\s+"
     rf"({IDENTIFIER_RE}){IDENTIFIER_BOUNDARY_RE}.*?\.[ \t]*$"
     r"(?:\n(?:[ \t]*\n)*[ \t]*Proof\.[ \t]*$.*?^[^\n]*Defined\.[ \t]*$)?"
 )
@@ -134,6 +134,11 @@ def main() -> None:
         help=("exact import command to omit when it is irrelevant to every "
               "extracted declaration; the omission is recorded in metadata"),
     )
+    parser.add_argument(
+        "--add-import", action="append", default=[],
+        help=("validation-only import needed by an explicit local binding; "
+              "the addition is recorded in metadata"),
+    )
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--metadata", required=True, type=Path)
     args = parser.parse_args()
@@ -181,7 +186,7 @@ def main() -> None:
         raise SystemExit(
             f"--drop-import commands absent from source: {sorted(unknown_drop_imports)}"
         )
-    output = [*imports, "", f"Module {args.module}.", ""]
+    output = [*imports, *args.add_import, "", f"Module {args.module}.", ""]
     metadata: dict[str, object] = {
         "mode": "proof_independent_semantic_source_signature",
         "source_file": args.source_file,
@@ -202,16 +207,24 @@ def main() -> None:
             ),
             "local_bindings": bindings,
             "dropped_irrelevant_imports": sorted(requested_drop_imports),
+            "added_validation_imports": args.add_import,
         },
         "declarations": {},
     }
     for index, name in enumerate(requested):
         position, kind, block = declarations[name]
-        context = active_context(text, position)
+        source_context = active_context(text, position)
+        # A verified post-Section Check is already a closed type. Replaying the
+        # old open Section context can be ill-typed (for example a closed
+        # two-argument definition was used with one argument inside its source
+        # Section) and would duplicate binders even when it happens to parse.
+        omitted_context = kind == "theorem" and elaborated_evidence is not None
+        context = [] if omitted_context else source_context
         output.extend([f"Section SourceContext_{index}.", *context, ""] if context else [])
         active_bindings = {
             binding_name: term for binding_name, term in bindings.items()
-            if name != binding_name and re.search(rf"\b{re.escape(binding_name)}\b", block)
+            if name != binding_name
+            and re.search(rf"\b{re.escape(binding_name)}\b", block)
         }
         for binding_name, term in active_bindings.items():
             output.append(f"Local Notation {binding_name} := ({term}).")
@@ -269,6 +282,8 @@ def main() -> None:
                 else ("Type" if name in type_valued else "Prop")
             ),
             "context": context,
+            "source_context": source_context,
+            "omitted_context_for_elaborated_theorem": omitted_context,
             "local_bindings": active_bindings,
         }
     output.extend([f"End {args.module}.", ""])

@@ -1,25 +1,43 @@
 import Prosa.Util.Nondecreasing
+import Validation.fixtures.rocq90_batch2.ListComputationInterface
 
 namespace Prosa.Validation.NondecreasingInterface
 
 open Prosa.Util.List
 open Prosa.Util.Nondecreasing
+open Prosa.Validation.Rocq90Batch2ListInterface
 
 universe u v
 
-/-- Public validation spelling of the source's zero-defaulted list lookup. -/
-def nthD (xs : List Nat) (n : Nat) : Nat := xs.getD n 0
+/-- Acc-free validation spelling of the source's zero-defaulted lookup. -/
+def nthD (xs : List Nat) (n : Nat) : Nat := getD xs n 0
+
+/-- Proof-complete semantic boundary for the two predicates whose production
+implementation mentions `List.getD`.  The guards below bind these definitions
+to the fresh compiled production artifact without exporting the irrelevant
+`List.brecOn`/`Acc` implementation closure. -/
+def nondecreasingSequence (xs : List Nat) : Prop :=
+  ∀ n₁ n₂, n₁ ≤ n₂ ∧ n₂ < xs.length → nthD xs n₁ ≤ nthD xs n₂
+
+def increasingSequence (xs : List Nat) : Prop :=
+  ∀ n₁ n₂, n₁ < n₂ ∧ n₂ < xs.length → nthD xs n₁ < nthD xs n₂
+
+theorem nthD_matches_compiled (xs : List Nat) (n : Nat) :
+    nthD xs n = xs.getD n 0 :=
+  getD_matches_compiled xs n 0
 
 /-- Exact body guards for the three production definitions. -/
 theorem production_nondecreasing_sequence_eq (xs : List Nat) :
     nondecreasing_sequence xs ↔
-      ∀ n₁ n₂, n₁ ≤ n₂ ∧ n₂ < xs.length → nthD xs n₁ ≤ nthD xs n₂ :=
-  Iff.rfl
+      nondecreasingSequence xs := by
+  simp only [Prosa.Util.Nondecreasing.nondecreasing_sequence,
+    nondecreasingSequence, nthD, getD_matches_compiled]
 
 theorem production_increasing_sequence_eq (xs : List Nat) :
     increasing_sequence xs ↔
-      ∀ n₁ n₂, n₁ < n₂ ∧ n₂ < xs.length → nthD xs n₁ < nthD xs n₂ :=
-  Iff.rfl
+      increasingSequence xs := by
+  simp only [Prosa.Util.Nondecreasing.increasing_sequence,
+    increasingSequence, nthD, getD_matches_compiled]
 
 theorem production_distances_eq (xs : List Nat) :
     distances xs = (xs.zip (xs.drop 1)).map (fun p => p.2 - p.1) := rfl

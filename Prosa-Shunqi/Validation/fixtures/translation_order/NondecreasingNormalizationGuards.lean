@@ -5,42 +5,23 @@ namespace Prosa.Validation.NondecreasingNormalization
 open Prosa.Util.Nondecreasing
 open Prosa.Validation.NondecreasingInterface
 
-/-- Kernel guards for the exact `Meta.reduceAll` normal forms exported from
-    this compiled snapshot. The only non-conversion step is case analysis on
-    `Option`; changing either production body or normal form invalidates them. -/
-private theorem option_getD_zero_eq_rec (o : Option Nat) :
-    o.getD 0 = @Option.rec Nat (fun _ => Nat) 0 (fun val => val) o := by
-  cases o <;> rfl
+/-!
+Kernel guards for the Rocq-9.0 Acc-free semantic boundary.  The exported
+lookup is structurally recursive, while these non-exported proofs bind it to
+the exact `List.getD` used by the fresh production artifact.
+-/
 
-theorem nthD_guard :
-    nthD = fun (xs : List Nat) (n : Nat) =>
-      @Option.rec Nat (fun _ => Nat) 0 (fun val => val)
-        (List.get?Internal xs n) := by
-  funext xs n
-  simp [nthD, option_getD_zero_eq_rec]
+theorem nthD_guard (xs : List Nat) (n : Nat) :
+    nthD xs n = xs.getD n 0 :=
+  nthD_matches_compiled xs n
 
 theorem nondecreasing_sequence_guard (xs : List Nat) :
-    nondecreasing_sequence xs ↔
-      ∀ n₁ n₂,
-        (n₁ ≤ n₂ ∧ n₂ < xs.length) →
-          Nat.le
-            (@Option.rec Nat (fun _ => Nat) 0 (fun val => val)
-              (List.get?Internal xs n₁))
-            (@Option.rec Nat (fun _ => Nat) 0 (fun val => val)
-              (List.get?Internal xs n₂)) := by
-  simp [nondecreasing_sequence, option_getD_zero_eq_rec]
+    nondecreasing_sequence xs ↔ nondecreasingSequence xs :=
+  production_nondecreasing_sequence_eq xs
 
 theorem increasing_sequence_guard (xs : List Nat) :
-    increasing_sequence xs ↔
-      ∀ n₁ n₂,
-        (n₁ < n₂ ∧ n₂ < xs.length) →
-          Nat.le
-            (Nat.succ
-              (@Option.rec Nat (fun _ => Nat) 0 (fun val => val)
-                (List.get?Internal xs n₁)))
-            (@Option.rec Nat (fun _ => Nat) 0 (fun val => val)
-              (List.get?Internal xs n₂)) := by
-  simp [increasing_sequence, option_getD_zero_eq_rec]
+    increasing_sequence xs ↔ increasingSequence xs :=
+  production_increasing_sequence_eq xs
 
 theorem distances_guard (xs : List Nat) :
     distances xs =
